@@ -39,7 +39,7 @@
                                     <i class='bx bx-edit-alt text-[22px]'></i>
                                 </a>
                                 @if(auth()->user()->role == 1)
-                                    <form action="{{ route('list_exercise.delete', ['list_exercise' => $list_exercise->id])}}" 
+                                    <form action="{{ route('list.exercises.delete', ['list_exercise' => $list_exercise->id])}}" 
                                         method="post">
                                         @csrf
                                         @method('DELETE')

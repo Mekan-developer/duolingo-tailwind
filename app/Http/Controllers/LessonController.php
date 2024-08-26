@@ -11,7 +11,8 @@ use Illuminate\Http\Request;
 class LessonController extends Controller
 {
     public function index(){
-        $lessons = Lesson::orderBy("order")->paginate(10);
+        $lessons = Lesson::orderBy("order")->with('chapter')->get();
+        dd($lessons);
         $locales = Language::where("status",1)->get("locale");
 
         return view("pages.lessons.index", compact("locales","lessons"));

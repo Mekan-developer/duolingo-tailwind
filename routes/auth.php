@@ -43,6 +43,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/list-exercises',[ListExerciseController::class,'index'])->name('list.exercises');
     Route::get('/list-exercises/create',[ListExerciseController::class,'create'])->name('list.exercises.create');
+    Route::post('/list-exercises/store',[ListExerciseController::class,'store'])->name('list.exercises.store');
+    Route::delete('/list-exercises/delete/{list_exercise}',[ListExerciseController::class,'destroy'])->name('list.exercises.delete');
 
     Route::get('/languages',[LanguageController::class,'index'])->name('languages');
     Route::post('/language-store',[LanguageController::class,'store'])->name('language.store');

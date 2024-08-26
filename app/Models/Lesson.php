@@ -13,6 +13,13 @@ class Lesson extends Model
     protected $fillable = ['title','chapter_id','order'];
     public $translatable = ['title'];
 
+
+    public function chapter(){
+        return $this->belongsTo(Chapter::class);
+    }
+
+
+
     protected static function boot()
     {
         parent::boot();
