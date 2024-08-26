@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('langs', function (Blueprint $table) {
+        Schema::create('lessons', function (Blueprint $table) {
             $table->id();
-            $table->string('locale'); //ru
-            $table->string('name'); //Russian
-            $table->string('native'); //Русский
-            $table->boolean('status')->default(0);
+            $table->json('title');
+            $table->unsignedBigInteger('chapter_id');
+            $table->integer('order')->default(0);
             $table->timestamps();
+
+            $table->foreign('chapter_id')->references('id')->on('chapters')->onDelete('cascade');
         });
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('langs');
+        Schema::dropIfExists('lessons');
     }
 };

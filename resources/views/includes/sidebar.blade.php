@@ -4,14 +4,8 @@
         Logo
       </span>
   
-      <ul class="mt-6 space-y-1">
-        <li>
-          <a href="#" class="block rounded-lg bg-[var(--bg-color-non-active)] px-4 py-2 text-sm font-medium text-gray-700">
-            General
-          </a>
-        </li>
-  
-        <li>
+      <ul class="mt-6 space-y-1">  
+        {{-- <li>
           <details class="group [&_summary::-webkit-details-marker]:hidden">
             <summary
               class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-[var(--text-color-active)] hover:bg-gray-100 hover:text-gray-700">
@@ -46,20 +40,31 @@
               </li>
             </ul>
           </details>
-        </li>
-  
+        </li> --}}
+
         <li>
-          <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-[var(--text-color-active)] hover:bg-gray-100 hover:text-gray-700" >
-            Billing
+          <a href="{{route('chapters')}}" class="{{ Request::is('chapters*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-lg px-4 py-2 text-sm font-medium text-[var(--text-color-active)] hover:bg-gray-100 hover:text-gray-700" >
+            Chapters
           </a>
         </li>
   
         <li>
-          <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-[var(--text-color-active)] hover:bg-gray-100 hover:text-gray-700">
-            Invoices
+          <a href="{{route('lessons')}}" class="{{ Request::is('lessons*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-lg px-4 py-2 text-sm font-medium text-[var(--text-color-active)] hover:bg-gray-100 hover:text-gray-700">
+            Lessons
           </a>
         </li>
-  
+
+        <li>
+          <a href="{{route('list.exercises')}}" class="{{ Request::is('list-exercises*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-lg  px-4 py-2 text-sm font-medium text-gray-700">
+            list of exercises
+          </a>
+        </li>
+
+        <li>
+          <a href="{{route('languages')}}" class="{{ Request::is('languages*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-lg px-4 py-2 text-sm font-medium text-[var(--text-color-active)] hover:bg-gray-100 hover:text-gray-700">
+            Languages
+          </a>
+        </li>
         <li>
           <details class="group [&_summary::-webkit-details-marker]:hidden">
             <summary

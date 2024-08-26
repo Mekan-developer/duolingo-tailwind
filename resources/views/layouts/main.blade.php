@@ -16,7 +16,7 @@
         </x-slot>
     </x-admin.header>
 <body>
-    <div class="flex">
+    <div class="flex w-full">
         <div>
             @include("includes.sidebar")
         </div>
