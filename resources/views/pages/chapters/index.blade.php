@@ -38,9 +38,16 @@
                             <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$chapter->order}}</td>
                             {{-- <td class="whitespace-nowrap px-4 py-2 text-gray-700">admin</td> --}}
                             <td class="flex flex-row justify-center gap-2 text-center whitespace-nowrap px-4 py-2">
-                                <a href="#" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
-                                    <i class='bx bx-edit-alt text-[22px]'></i>
-                                </a>
+                                <form action="{{route('chapter.edit',['chapter'=>$chapter->id])}}" 
+                                    method="POST">
+                                    @csrf
+                                    @method('PUT')
+
+                                    <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
+                                        <i class='bx bx-edit-alt text-[22px]'></i>
+                                    </a>
+                                </form>
+
                                 @if(auth()->user()->role == 1)
                                     <form action="{{ route('chapter.delete', ['chapter' => $chapter->id])}}" 
                                         method="post">

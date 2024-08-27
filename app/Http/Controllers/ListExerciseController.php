@@ -13,15 +13,15 @@ class ListExerciseController extends Controller
 {
     public function index(){
         $locales = Language::where("status",1)->get("locale");
-        $list_exercises = List_exercise::orderBy("order")->get();
-        // dd($list_exercises);
+        $list_exercises = List_exercise::orderBy("order")->with('lesson')->get();
+
         return view("pages.listExercises.index",compact("locales","list_exercises"));
     }
 
     public function create(){
-        $chapters = Chapter::orderBy('order')->get(); 
+        $chapters = Chapter::whereHas('lesson')->orderBy('order')->get(); 
         $lessons = Lesson::orderBy('order')->get(); 
-        $locales = Language::where("status",1)->orderBy('order')->get("locale");
+        $locales = Language::where("status",1)->orderBy('order')->get();
 
         return view("pages.listExercises.create",compact("locales","chapters","lessons"));
     }

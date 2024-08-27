@@ -13,7 +13,11 @@ class Chapter extends Model
     protected $fillable = ['title','order'];
     public $translatable  = ['title'];
 
-    
+    public function lesson()
+    {
+        return $this->hasMany(Lesson::class);
+    }
+
 
     protected static function boot()
     {

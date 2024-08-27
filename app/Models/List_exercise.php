@@ -13,6 +13,9 @@ class List_exercise extends Model
     protected $fillable = ['title','lesson_id','order'];
     public $translatable = ['title'];
 
+    public function lesson(){
+        return $this->belongsTo(Lesson::class);
+    }
 
 
     protected static function boot()

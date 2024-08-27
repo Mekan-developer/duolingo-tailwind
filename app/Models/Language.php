@@ -20,7 +20,6 @@ class Language extends Model
         }
     }
 
-
     protected static function boot()
     {
         parent::boot();

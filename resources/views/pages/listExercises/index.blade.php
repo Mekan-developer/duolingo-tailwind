@@ -20,6 +20,7 @@
                                 <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">title {{ $locale->locale }}</th>
                             @endforeach
                             
+                            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">parent lesson</th>
                             <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">order</th>
                             <th class="px-4 py-2">actions</th>
                         </tr>
@@ -33,6 +34,7 @@
                                 </td>
                             @endforeach
                             
+                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$list_exercise->lesson->getTranslation('title',$locales[0]['locale'])}}</td>
                             <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$list_exercise->order}}</td>
                             <td class="flex flex-row justify-center gap-2 text-center whitespace-nowrap px-4 py-2">
                                 <a href="#" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">

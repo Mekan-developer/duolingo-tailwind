@@ -74,7 +74,6 @@
                 <div class="flex justify-end">
                     <button type="submit" class=" items-end text-white bg-[var(--bg-color-active)] hover:bg-[#2bcee4] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
                 </div>
-                
             </form>
         </div>
     </div>
