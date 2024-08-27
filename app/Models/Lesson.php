@@ -10,7 +10,7 @@ class Lesson extends Model
 {
     use HasFactory,HasTranslations;
 
-    protected $fillable = ['title','chapter_id','order'];
+    protected $fillable = ['title','chapter_id','order','dopamine_image_1','dopamine_image_2','dopamine_image_3','dopamine_image_4'];
     public $translatable = ['title'];
 
 
@@ -18,6 +18,13 @@ class Lesson extends Model
         return $this->belongsTo(Chapter::class);
     }
 
+    public function getDopamine($image){
+        if(file_exists(public_path('/storage/uploads/dopamine_images/'.$image)) && !is_null($image)){
+            return asset('/storage/uploads/dopamine_images/'.$image);
+        }else{
+            return null;
+        }
+    }
 
 
     protected static function boot()

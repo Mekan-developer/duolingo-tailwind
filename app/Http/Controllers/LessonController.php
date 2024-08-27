@@ -25,9 +25,35 @@ class LessonController extends Controller
         return view("pages.lessons.create", compact("locales","chapters"));
     }
 
-    public function store(LessonRequest $request){  
-        Lesson::create($request->all());  
+    public function store(LessonRequest $request){ 
 
+        $data = [
+            'title' => $request->title,
+            'chapter_id' => $request->chapter_id,
+        ];
+
+        
+        if ($request->hasFile('dopamine_image_1')) {         
+            $image = $request->dopamine_image_1;
+            $imageName = $this->uploadFile($image,'dopamine_images',true);
+            $data['dopamine_image_1'] = $imageName;
+        }
+        if ($request->hasFile('dopamine_image_2')) {            
+            $image = $request->dopamine_image_2;
+            $imageName = $this->uploadFile($image,'dopamine_images',true);
+            $data['dopamine_image_2'] = $imageName;
+        }
+        if ($request->hasFile('dopamine_image_3')) {            
+            $image = $request->dopamine_image_3;
+            $imageName = $this->uploadFile($image,'dopamine_images',true);
+            $data['dopamine_image_3'] = $imageName;
+        }
+        if ($request->hasFile('dopamine_image_4')) {            
+            $image = $request->dopamine_image_4;
+            $imageName = $this->uploadFile($image,'dopamine_images',true);
+            $data['dopamine_image_4'] = $imageName;
+        }
+        Lesson::create($data);  
         return redirect()->route('lessons');
     }
 
@@ -50,6 +76,18 @@ class LessonController extends Controller
 
 
     public function destroy(Lesson $lesson){
+        if ($lesson->dopamine_image_1) {
+            $this->removeFile($lesson->dopamine_image_1, 'dopamine_images');
+        } 
+        if ($lesson->dopamine_image_2) {
+            $this->removeFile($lesson->dopamine_image_2, 'dopamine_images');
+        } 
+        if ($lesson->dopamine_image_3) {
+            $this->removeFile($lesson->dopamine_image_3, 'dopamine_images');
+        } 
+        if ($lesson->dopamine_image_4) {
+            $this->removeFile($lesson->dopamine_image_4, 'dopamine_images');
+        } 
         $orderDeletedRow = $lesson->order;
         $delete_success = $lesson->delete();
 

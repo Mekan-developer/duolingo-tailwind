@@ -20,6 +20,10 @@
                                 <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">title {{ $locale->locale }}</th>
                             @endforeach
                             
+                            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">dopamine1</th>
+                            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">dopamine2</th>
+                            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">dopamine3</th>
+                            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">dopamine4</th>
                             <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">parent chapter</th>
                             <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">order</th>
                             <th class="px-4 py-2">actions</th>
@@ -34,6 +38,18 @@
                                 </td>
                             @endforeach
                             
+                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">
+                                <img src="{{$lesson->getDopamine($lesson->dopamine_image_1)}}" alt="dopamine 1">
+                            </td>
+                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">
+                                <img src="{{$lesson->getDopamine($lesson->dopamine_image_2)}}" alt="dopamine 1">
+                            </td>
+                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">
+                                <img src="{{$lesson->getDopamine($lesson->dopamine_image_3)}}" alt="dopamine 1">
+                            </td>
+                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">
+                                <img src="{{$lesson->getDopamine($lesson->dopamine_image_4)}}" alt="dopamine 1">
+                            </td>
                             <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{ $lesson->chapter->getTranslation('title',$locales[0]['locale']) }}</td>
                             <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$lesson->order}}</td>
                             <td class="flex flex-row justify-center gap-2 text-center whitespace-nowrap px-4 py-2">

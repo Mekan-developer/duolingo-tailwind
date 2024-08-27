@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('vocabularies', function (Blueprint $table) {
+            $table->id();
+            $table->string('sound');
+            $table->string('image');
+            $table->string('en_text');
+            $table->json('translations');
+            $table->unsignedBigInteger('exercise_id');
+            $table->unsignedBigInteger('type_id');
+            $table->timestamps();
+
+            $table->foreign('exercise_id')->references('id')->on('list_exercises')->onDelete('cascade');
+            $table->foreign('type_id')->references('id')->on('exercise_types');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('vocabularies');
+    }
+};

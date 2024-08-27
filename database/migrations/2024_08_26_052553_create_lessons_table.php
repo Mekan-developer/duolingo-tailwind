@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('lessons', function (Blueprint $table) {
             $table->id();
             $table->json('title');
+            $table->string('dopamine_image_1');//left image
+            $table->string('dopamine_image_2');//right image
+            $table->string('dopamine_image_3');//left bottom
+            $table->string('dopamine_image_4'); //full image or bottom right 
             $table->unsignedBigInteger('chapter_id');
             $table->integer('order')->default(0);
             $table->timestamps();

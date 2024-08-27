@@ -28,12 +28,5 @@ class ListExerciseComponent extends Component
     public function handleOptionChange()
     {
         $this->lessons = Lesson::where('chapter_id',$this->selectedOption)->orderBy('order')->get(); 
-        // if ($this->lessons->isEmpty()) {
-        //     dd('empty');
-        // } else {
-        //     dd('not empty');
-        // }
-        
-        
     }
 }

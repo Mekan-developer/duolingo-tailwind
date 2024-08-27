@@ -34,6 +34,15 @@ class ListExerciseController extends Controller
 
     }
 
+    public function edit(List_exercise $list_exercise){
+        // $chapters = Chapter::whereHas('lesson')->orderBy('order')->get(); 
+        // $lessons = Lesson::orderBy('order')->get(); 
+        // $locales = Language::where("status",1)->orderBy('order')->get();
+
+        // return view("pages.listExercises.edit",compact("locales","list_exercise","chapters","lessons"));
+
+    }
+
     public function destroy(List_exercise $list_exercise){
         $orderDeletedRow = $list_exercise->order;
         $delete_success = $list_exercise->delete();
