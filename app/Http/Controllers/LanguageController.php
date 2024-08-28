@@ -32,6 +32,31 @@ class LanguageController extends Controller
         return redirect()->route('language.index'); 
     }
 
+    public function edit(Language $language){
+        $languages = Language::all();
+        $lang['edit'] = true;
+        $lng = $language;
+        return view('pages.languages.index',compact('languages','lang','lng'));
+    }
+
+    public function update(LanguageRequest $request, Language $language){
+        dd('test');
+        $data = [
+            "name"=> $request->name,
+            "native" => $request->native,
+            "locale" => $request->locale,
+        ];
+
+        if ($request->hasFile('flag')) {            
+            $image = $request->flag;
+            $imageName = $this->uploadFile($image,'lang_icons',true);
+            $data['flag'] = $imageName;
+        }
+
+        $language->update($data);
+        return redirect()->route('language.index'); 
+    }
+
     public function destroy(Language $language){    
         if ($language->flag) {
             $this->removeFile($language->flag, 'lang_icons');

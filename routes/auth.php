@@ -9,9 +9,6 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 // use App\Http\Controllers\Auth\PasswordController;
 // use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
-<<<<<<< HEAD
-// use App\Http\Controllers\Auth\VerifyEmailController;
-=======
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\Exercises\VocabularyController;
@@ -19,7 +16,6 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\ListExerciseController;
 use App\Http\Controllers\Exercises\VideoController;
->>>>>>> 9fa6a0654b6b82e03ce2ee168abd5537e2946a96
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -40,8 +36,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/admin/update/{user}',[AdminController::class,'update'])->name('admin.update');
     Route::post('register', [RegisteredUserController::class, 'store'])->name('register');
 
-<<<<<<< HEAD
-=======
     Route::get('/chapters',[ChapterController::class,'index'])->name('chapters');
     Route::get('/chapters/create',[ChapterController::class,'create'])->name('chapter.create');
     Route::post('/chapters/store',[ChapterController::class,'store'])->name('chapter.store');
@@ -68,6 +62,8 @@ Route::middleware('auth')->group(function () {
     Route::group(['prefix' => 'languages', 'as' => 'language.'], function () {
         Route::get('/', [LanguageController::class, 'index'])->name('index');
         Route::post('/store', [LanguageController::class, 'store'])->name('store');
+        Route::put('/edit/{language}', [LanguageController::class, 'edit'])->name('edit');
+        Route::patch('/update/{language}', [LanguageController::class, 'update'])->name('update');
         Route::put('/active/{language}', [LanguageController::class, 'active'])->name('active');
         Route::delete('/delete/{language}', [LanguageController::class, 'destroy'])->name('delete');
     });
@@ -85,7 +81,6 @@ Route::middleware('auth')->group(function () {
             Route::put('/edit',[VideoController::class,'edit'])->name('edit');
             Route::put('/update',[VideoController::class,'update'])->name('update');
             Route::delete('/delete/{video}',[VideoController::class,'destroy'])->name('delete');
-
         });
     });
     
@@ -101,7 +96,6 @@ Route::middleware('auth')->group(function () {
     // Route::get('/')->name;
 
 
->>>>>>> 9fa6a0654b6b82e03ce2ee168abd5537e2946a96
 
     // Route::get('verify-email', EmailVerificationPromptController::class)->name('verification.notice');
     // Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)

@@ -15,6 +15,8 @@ class Language extends Model
     public function getFlag(){
         if(file_exists(public_path('/storage/uploads/lang_icons/'.$this->flag)) && !is_null($this->flag)){
             return asset('/storage/uploads/lang_icons/'.$this->flag);
+        }else if(file_exists(public_path('/storage/uploads/lang_icons/seeder/'.$this->flag)) && !is_null($this->flag)){
+            return asset('/storage/uploads/lang_icons/seeder'.$this->flag);
         }else{
             return null;
         }

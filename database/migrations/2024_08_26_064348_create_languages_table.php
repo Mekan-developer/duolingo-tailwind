@@ -17,10 +17,14 @@ return new class extends Migration
             $table->string('name')->unique(); //Russian
             $table->string('native')->unique(); //Русский
             $table->string('flag')->unique(); //flag name 
-            $table->boolean('status')->default(0);
+            $table->boolean('status')->default(1);
             $table->integer('order');
             $table->timestamps();
         });
+
+        Artisan::call('db:seed', [
+            '--class' => 'LanguageSeeder',
+        ]);
     }
 
     /**

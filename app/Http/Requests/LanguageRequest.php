@@ -21,11 +21,17 @@ class LanguageRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules =  [
             'name' => "required|string|unique:languages,name",
             'native' => "required|string|unique:languages,native",
             'locale' => "required|string|unique:languages,locale",
-            'flag' => "required|file|unique:languages,flag|mimes:webp,jpeg,png,jpg,gif,svg|max:10240", //10mb
+            'flag' => "nullable|file|unique:languages,flag|mimes:webp,jpeg,png,jpg,gif,svg|max:10240", //10mb
         ];
+
+        if($this->isMethod('post')){
+            $rules['flag'] = "required|file|unique:languages,flag|mimes:webp,jpeg,png,jpg,gif,svg|max:10240";
+        }
+
+        return $rules;
     }
 }
