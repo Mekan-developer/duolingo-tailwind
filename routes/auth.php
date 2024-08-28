@@ -2,18 +2,14 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Auth\ConfirmablePasswordController;
-use App\Http\Controllers\Auth\EmailVerificationNotificationController;
-use App\Http\Controllers\Auth\EmailVerificationPromptController;
-use App\Http\Controllers\Auth\NewPasswordController;
-use App\Http\Controllers\Auth\PasswordController;
-use App\Http\Controllers\Auth\PasswordResetLinkController;
+// use App\Http\Controllers\Auth\ConfirmablePasswordController;
+// use App\Http\Controllers\Auth\EmailVerificationNotificationController;
+// use App\Http\Controllers\Auth\EmailVerificationPromptController;
+// use App\Http\Controllers\Auth\NewPasswordController;
+// use App\Http\Controllers\Auth\PasswordController;
+// use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\Auth\VerifyEmailController;
-use App\Http\Controllers\ChapterController;
-use App\Http\Controllers\LanguageController;
-use App\Http\Controllers\LessonController;
-use App\Http\Controllers\ListExerciseController;
+// use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -28,36 +24,11 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('/admin-controll',[AdminController::class,'index'])->name('admin.controll');
     Route::delete('admin/delete/{user}',[AdminController::class,'destroy'])->name('admin.delete');
+    Route::put('/admin/edit/{user}',[AdminController::class,'edit'])->name('admin.edit');
+    Route::patch('/admin/update/{user}',[AdminController::class,'update'])->name('admin.update');
     Route::post('register', [RegisteredUserController::class, 'store'])->name('register');
-
-    Route::get('/chapters',[ChapterController::class,'index'])->name('chapters');
-    Route::get('/chapters/create',[ChapterController::class,'create'])->name('chapter.create');
-    Route::post('/chapters/store',[ChapterController::class,'store'])->name('chapter.store');
-    Route::put('/chapters/edit/{chapter}',[ChapterController::class,'edit'])->name('chapter.edit');
-    Route::patch('/chapters/update/{chapter}',[ChapterController::class,'update'])->name('chapter.update');
-    Route::delete('/chapters/delete/{chapter}',[ChapterController::class,'destroy'])->name('chapter.delete');
-
-    Route::get('/lessons',[LessonController::class,'index'])->name('lessons');
-    Route::get('/lessons/create',[LessonController::class,'create'])->name('lessons.create');
-    Route::post('/lessons/store',[LessonController::class,'store'])->name('lessons.store');
-    Route::put('/lessons/edit/{lesson}',[LessonController::class,'edit'])->name('lessons.edit');
-    Route::patch('/lessons/update/{lesson}',[LessonController::class,'update'])->name('lessons.update');
-    Route::delete('/lessons/delete/{lesson}',[LessonController::class,'destroy'])->name('lesson.delete');
-
-    Route::get('/list-exercises',[ListExerciseController::class,'index'])->name('list.exercises');
-    Route::get('/list-exercises/create',[ListExerciseController::class,'create'])->name('list.exercises.create');
-    Route::post('/list-exercises/store',[ListExerciseController::class,'store'])->name('list.exercises.store');
-    Route::put('/list-exercises/edit/{exercise}',[ListExerciseController::class,'edit'])->name('list.exercises.edit');
-    Route::delete('/list-exercises/delete/{list_exercise}',[ListExerciseController::class,'destroy'])->name('list.exercises.delete');
-
-    Route::get('/languages',[LanguageController::class,'index'])->name('languages');
-    Route::post('/language-store',[LanguageController::class,'store'])->name('language.store');
-    Route::put('/language-active/{language}',[LanguageController::class,'active'])->name('language.active');
-    Route::delete('/language/delete/{language}',[LanguageController::class,'destroy'])->name('language.delete');
-
-    // Route::get('/')->name;
-
 
 
     // Route::get('verify-email', EmailVerificationPromptController::class)->name('verification.notice');
@@ -67,6 +38,6 @@ Route::middleware('auth')->group(function () {
     //             ->middleware('throttle:6,1')->name('verification.send');
     // Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])->name('password.confirm');
     // Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
-    Route::put('password', [PasswordController::class, 'update'])->name('password.update');
+    // Route::put('password', [PasswordController::class, 'update'])->name('password.update');
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });

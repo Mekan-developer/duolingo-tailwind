@@ -13,34 +13,40 @@
         </div>
     </div>
     <div class="flex gap-4">
-        <div class="overflow-x-auto flex-1" >
-            <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+        <div class="flex-1 overflow-x-auto" >
+            <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>
-                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Name</th>
-                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Email</th>
-                        {{-- <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Role</th> --}}
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">Name</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">Email</th>
+                        {{-- <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">Role</th> --}}
                         <th class="px-4 py-2">actions</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
                     @foreach ($users as $user)
                     <tr>
-                        <td class="text-center whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{ $user->name }}</td>
-                        <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{ $user->email }}</td>
-                        {{-- <td class="whitespace-nowrap px-4 py-2 text-gray-700">admin</td> --}}
-                        <td class="flex flex-row justify-center gap-2 text-center whitespace-nowrap px-4 py-2">
-                            <a href="#" class="inline-block rounded  text-xs font-medium text-white ">
-                                <i class='bx bxs-pencil bg-[var(--bg-color-active)] px-3 py-2 rounded-sm hover:bg-[#125768]'></i>
-                            </a>
+                        <td class="px-4 py-2 font-medium text-center text-gray-900 whitespace-nowrap">{{ $user->name }}</td>
+                        <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $user->email }}</td>
+                        {{-- <td class="px-4 py-2 text-gray-700 whitespace-nowrap">admin</td> --}}
+                        <td class="flex flex-row justify-center gap-2 px-4 py-2 text-center whitespace-nowrap">
+                            <form action="{{ route('admin.edit', ['user' => $user->id])}}" 
+                                method="POST">
+                                @csrf
+                                @method('PUT')
+
+                                <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
+                                    <i class='bx bx-edit-alt text-[22px]'></i>
+                                </a>
+                            </form>
                             @if(auth()->user()->role == 1)
                             <form action="{{ route('admin.delete', ['user' => $user->id])}}" 
                                 method="post">
                                 @csrf
                                 @method('DELETE')
 
-                                <button type="submit" class="inline-block rounded  text-xs font-medium text-white ">
-                                    <i class='bx bx-trash bg-[var(--bg-color-active)] px-3 py-2 rounded-sm hover:bg-[#fa5151]'></i>
+                                <button type="submit" class="inline-block text-lg font-medium text-red-600 rounded hover:text-red-800 ">
+                                    <i class='px-3 py-2 rounded-sm bx bx-trash '></i>
                                 </button>
                             </form>
                         @endif
@@ -53,14 +59,15 @@
         </div>
 
         <div class="bg-[var(--bg-color-non-active)] mx-4 p-4 rounded-sm">
-            <form action="{{ route('register') }}" method="POST" class="w-[240px] mx-auto ">
+            <form action="{{ isset($use->edit_user) ? route('admin.update',['user' => $user->id]) : route('register') }} " method="POST" class="w-[240px] mx-auto ">
                 @csrf
+                 @isset($use->edit_user) @method('patch') @endisset
                 <div class="mb-5">
-                    <input type="text" name="name" value="{{ old('name') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 " placeholder="Tailor" required />
+                    <input type="text" name="name" value="{{ isset($use->edit_user) ? $user->name : old('name') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 " placeholder="Tailor" required />
                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
                 </div>
                 <div class="mb-5">
-                    <input type="email" name="email" value="{{ old('email') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 " placeholder="admin@mail.com" required />
+                    <input type="email" name="email" value="{{ isset($use->edit_user) ? $user->email : old('email') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 " placeholder="admin@mail.com" required />
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 </div>
                 <div class="mb-5">
