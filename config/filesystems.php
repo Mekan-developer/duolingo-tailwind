@@ -55,6 +55,19 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'throw' => false,
         ],
+        'vocabulary_audio' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/uploads/vocabulary/audio'),
+            'url' => env('APP_URL') . '/storage/uploads/vocabulary/audio',
+            'visibility' => 'public',
+        ],
+        'video' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/uploads/video'),
+            'url' => env('APP_URL') . '/storage/uploads/video',
+            'visibility' => 'public',
+        ],
+
 
     ],
 

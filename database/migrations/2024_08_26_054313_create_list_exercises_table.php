@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('list_exercises', function (Blueprint $table) {
             $table->id();
             $table->json('title');
+            // $table->unsignedBigInteger('chapter_id'); //goshmaly bolar
             $table->unsignedBigInteger('lesson_id');
             $table->integer('order')->default(0);
             $table->timestamps();

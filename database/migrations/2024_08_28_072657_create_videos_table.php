@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        $typeId = DB::table('exercise_types')->where('code', 'WORD')->value('id');
+        $typeId = DB::table('exercise_types')->where('code', 'VIDEO')->value('id');
 
-        Schema::create('vocabularies', function (Blueprint $table) use ($typeId) {
+        Schema::create('videos', function (Blueprint $table) use ($typeId) {
             $table->id();
-            $table->string('audio');
-            $table->string('image');
-            $table->string('en_text');
-            $table->json('translations_word');
+            $table->string('video');
             $table->unsignedBigInteger('chapter_id');
             $table->unsignedBigInteger('lesson_id');
             $table->unsignedBigInteger('exercise_id');
@@ -39,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vocabularies');
+        Schema::dropIfExists('videos');
     }
 };

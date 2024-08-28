@@ -4,16 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Translatable\HasTranslations;
 
-class Vocabulary extends Model
+class Video extends Model
 {
-    use HasFactory,HasTranslations;
+    use HasFactory;
 
-    protected $fillable = ['audio','image','en_text','translations_word','chapter_id','lesson_id','exercise_id','status','order'];
-
-    public $translatable = ["translations_word"];
-
+    protected $fillable = ['video','chapter_id','lesson_id','exercise_id','type_id','status','order'];
 
     public function Exercise(){
         return $this->belongsTo(List_exercise::class);
@@ -27,21 +23,14 @@ class Vocabulary extends Model
         return $this->belongsTo(Chapter::class);
     }
 
-    public function getAudio(){
-        if(file_exists(public_path('/storage/uploads/vocabulary/audio/'.$this->audio)) && !is_null($this->audio)){
-            return asset('/storage/uploads/vocabulary/audio/'.$this->audio);
+    public function getVideo(){
+        if(file_exists(public_path('/storage/uploads/video/'.$this->video)) && !is_null($this->video)){
+            return asset('/storage/uploads/video/'.$this->video);
         }else{
             return null;
         }
     }
 
-    public function getImage(){
-        if(file_exists(public_path('/storage/uploads/vocabulary/image/'.$this->image)) && !is_null($this->image)){
-            return asset('/storage/uploads/vocabulary/image/'.$this->image);
-        }else{
-            return null;
-        }
-    }
 
     protected static function boot()
     {

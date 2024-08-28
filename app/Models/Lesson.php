@@ -13,6 +13,11 @@ class Lesson extends Model
     protected $fillable = ['title','chapter_id','order','dopamine_image_1','dopamine_image_2','dopamine_image_3','dopamine_image_4'];
     public $translatable = ['title'];
 
+    public function listExercise()
+    {
+        return $this->hasMany(List_exercise::class);
+    }
+
 
     public function chapter(){
         return $this->belongsTo(Chapter::class);
