@@ -29,7 +29,7 @@ class LanguageController extends Controller
 
         Language::create($data);
 
-        return redirect()->route('languages'); 
+        return redirect()->route('language.index'); 
     }
 
     public function destroy(Language $language){    
@@ -46,7 +46,7 @@ class LanguageController extends Controller
         }
         // end sorting order
 
-        return redirect()->route('languages');
+        return redirect()->route('language.index');
     }
 
 
@@ -59,6 +59,6 @@ class LanguageController extends Controller
         }
             $language->save();
 
-        return redirect()->route('languages');
+        return redirect()->route('language.index');
     }
 }

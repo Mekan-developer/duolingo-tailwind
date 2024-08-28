@@ -11,9 +11,11 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\ChapterController;
+use App\Http\Controllers\Exercises\VocabularyController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\ListExerciseController;
+use App\Http\Controllers\Exercises\VideoController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -45,16 +47,47 @@ Route::middleware('auth')->group(function () {
     Route::patch('/lessons/update/{lesson}',[LessonController::class,'update'])->name('lessons.update');
     Route::delete('/lessons/delete/{lesson}',[LessonController::class,'destroy'])->name('lesson.delete');
 
-    Route::get('/list-exercises',[ListExerciseController::class,'index'])->name('list.exercises');
-    Route::get('/list-exercises/create',[ListExerciseController::class,'create'])->name('list.exercises.create');
-    Route::post('/list-exercises/store',[ListExerciseController::class,'store'])->name('list.exercises.store');
-    Route::put('/list-exercises/edit/{exercise}',[ListExerciseController::class,'edit'])->name('list.exercises.edit');
-    Route::delete('/list-exercises/delete/{list_exercise}',[ListExerciseController::class,'destroy'])->name('list.exercises.delete');
+    Route::group(['prefix' => 'list-exercises', 'as' => 'list.'], function(){
+        Route::get('/',[ListExerciseController::class,'index'])->name('exercises');
+        Route::get('/create',[ListExerciseController::class,'create'])->name('exercises.create');
+        Route::post('/store',[ListExerciseController::class,'store'])->name('exercises.store');
+        Route::put('/edit/{exercise}',[ListExerciseController::class,'edit'])->name('exercises.edit');
+        Route::delete('/delete/{list_exercise}',[ListExerciseController::class,'destroy'])->name('exercises.delete');
+    });
+    
 
-    Route::get('/languages',[LanguageController::class,'index'])->name('languages');
-    Route::post('/language-store',[LanguageController::class,'store'])->name('language.store');
-    Route::put('/language-active/{language}',[LanguageController::class,'active'])->name('language.active');
-    Route::delete('/language/delete/{language}',[LanguageController::class,'destroy'])->name('language.delete');
+    Route::group(['prefix' => 'languages', 'as' => 'language.'], function () {
+        Route::get('/', [LanguageController::class, 'index'])->name('index');
+        Route::post('/store', [LanguageController::class, 'store'])->name('store');
+        Route::put('/active/{language}', [LanguageController::class, 'active'])->name('active');
+        Route::delete('/delete/{language}', [LanguageController::class, 'destroy'])->name('delete');
+    });
+
+    Route::group(['prefix'=> 'exercises/'], function () {   
+        Route::group(['prefix'=> 'vocabulary','as'=> 'vocabulary.'], function () {   
+            Route::get('/',[VocabularyController::class,'index'])->name('index');
+            Route::get('/create',[VocabularyController::class,'create'])->name('create');
+            Route::post('/store',[VocabularyController::class,'store'])->name('store');
+        });
+        Route::group(['prefix' => 'video', 'as' => 'video.'], function () {
+            Route::get('/',[VideoController::class,'index'])->name('index');
+            Route::get('/create',[VideoController::class,'create'])->name('create');
+            Route::post('/store',[VideoController::class,'store'])->name('store');
+            Route::put('/edit',[VideoController::class,'edit'])->name('edit');
+            Route::put('/update',[VideoController::class,'update'])->name('update');
+            Route::delete('/delete/{video}',[VideoController::class,'destroy'])->name('delete');
+
+        });
+    });
+    
+
+    
+    
+
+
+
+
+
 
     // Route::get('/')->name;
 

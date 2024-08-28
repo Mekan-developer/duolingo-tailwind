@@ -15,12 +15,12 @@
             </style>
         </x-slot>
     </x-admin.header>
-<body>
+<body class="w-[100vw]">
     <div class="flex w-full">
         <div>
             @include("includes.sidebar")
         </div>
-        <div class="w-full container p-4">
+        <div class="flex-1 bg-gray-200 w-full  p-4 h-[100vh] overflow-hidden overflow-y-auto">
             @yield("content")
         </div>
     </div>
