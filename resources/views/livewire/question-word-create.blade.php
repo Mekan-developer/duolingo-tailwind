@@ -1,10 +1,10 @@
 <div>
     <div class="flex flex-col gap-6 w-full p-6">
         <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
-            Add vocabulary
+            Add question word
         </div>
 
-        <form action="{{route('vocabulary.store')}}" method="post" enctype="multipart/form-data"  class="w-full mx-auto bg-[var(--bg-color-non-active)] p-6 rounded-md">
+        <form action="{{route('questionWord.store')}}" method="post" enctype="multipart/form-data"  class="w-full mx-auto bg-[var(--bg-color-non-active)] p-6 rounded-md">
             @csrf
             <div class="bg-white px-4 py-6 rounded-sm">
                 <div class="flex flex-row w-full gap-6">
@@ -43,44 +43,26 @@
                         @endif
                     </div>
                 </div>
-    
                 <div class="mb-4">
                     <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900">English word</label>
                     <input type="text" name="en_text" placeholder="word en" id="base-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">                   
                 </div>
-                <div class="flex flex-row gap-10 w-full">
-                    <div class="relative w-full">
-                        <label title="Click to upload" for="fileInput" class="cursor-pointer flex items-center gap-4 px-6 py-2 before:border-gray-400/60 hover:before:border-gray-300 group before:bg-gray-100 before:absolute before:inset-0 before:rounded-3xl before:border before:border-dashed before:transition-transform before:duration-300 hover:before:scale-100 active:duration-75 active:before:scale-95">
-                            <div class="w-max relative">
-                                <img class="w-12" src="https://www.svgrepo.com/show/485545/upload-cicle.svg" alt="file upload icon" width="512" height="212">
-                            </div>
-                            <div class="relative">
-                                <span class="block text-base font-semibold relative text-blue-900 group-hover:text-blue-500">
-                                    Upload image
-                                </span>
-                                <span id="message" class="mt-0.5 block text-sm text-blue-900 h-[20px]"></span>
-                            </div>
-                            </label>
-                        <input hidden="" type="file" name="image" id="fileInput">
-                    </div>
-                    <div class="relative w-full">
-                        <label title="Click to upload" for="fileInput2" class="cursor-pointer flex items-center gap-4 px-6 py-2 before:border-gray-400/60 hover:before:border-gray-300 group before:bg-gray-100 before:absolute before:inset-0 before:rounded-3xl before:border before:border-dashed before:transition-transform before:duration-300 hover:before:scale-100 active:duration-75 active:before:scale-95">
-                            <div class="w-max relative">
-                                <img class="w-12" src="https://www.svgrepo.com/show/485545/upload-cicle.svg" alt="file upload icon" width="512" height="212">
-                            </div>
-                            <div class="relative">
-                                <span class="block text-base font-semibold relative text-blue-900 group-hover:text-blue-500">
-                                    Upload sound
-                                </span>
-                                <span id="message2" class="mt-0.5 block text-sm text-blue-900 h-[20px]"></span>
-                            </div>
-                            </label>
-                        <input hidden="" type="file" name="audio" id="fileInput2">
-                    </div>
+                <div class="relative w-full">
+                    <label title="Click to upload" for="fileInput" class="cursor-pointer flex items-center gap-4 px-6 py-2 before:border-gray-400/60 hover:before:border-gray-300 group before:bg-gray-100 before:absolute before:inset-0 before:rounded-3xl before:border before:border-dashed before:transition-transform before:duration-300 hover:before:scale-100 active:duration-75 active:before:scale-95">
+                        <div class="w-max relative">
+                            <img class="w-12" src="https://www.svgrepo.com/show/485545/upload-cicle.svg" alt="file upload icon" width="512" height="212">
+                        </div>
+                        <div class="relative">
+                            <span class="block text-base font-semibold relative text-blue-900 group-hover:text-blue-500">
+                                Upload sound
+                            </span>
+                            <span id="message" class="mt-0.5 block text-sm text-blue-900 h-[20px]"></span>
+                        </div>
+                        </label>
+                    <input hidden="" type="file" name="audio" id="fileInput">
                 </div>
             </div>
             
-
             @foreach ($locales as $locale)
                 <div class="mb-5">
                     <label for="base-input" class="block  text-sm font-medium text-gray-900">translate {{ $locale->name }}</label>
@@ -102,29 +84,17 @@
         @endif
     </div>
 
-<script>
-document.getElementById('fileInput').addEventListener('change', function(event) {
-    const file = this.files[0];
-    if (!file) {
-        document.getElementById('message').textContent = 'No file chosen.';
-    } else if (file.size === 0) {
-        document.getElementById('message').textContent = 'The chosen file is empty.';
-    } else {
-        document.getElementById('message').textContent = 'File choosen!';
-    }
-});
+    <script>
+    document.getElementById('fileInput').addEventListener('change', function(event) {
+        const file = this.files[0];
+        if (!file) {
+            document.getElementById('message').textContent = 'No file chosen.';
+        } else if (file.size === 0) {
+            document.getElementById('message').textContent = 'The chosen file is empty.';
+        } else {
+            document.getElementById('message').textContent = 'File choosen!';
+        }
+    });
 
-document.getElementById('fileInput2').addEventListener('change', function(event) {
-    const file = this.files[0];
-    if (!file) {
-        document.getElementById('message2').textContent = 'No file chosen.';
-    } else if (file.size === 0) {
-        document.getElementById('message2').textContent = 'The chosen file is empty.';
-    } else {
-        document.getElementById('message2').textContent = 'File choosen!';
-    }
-});
-
-</script>
-    
+    </script>
 </div>

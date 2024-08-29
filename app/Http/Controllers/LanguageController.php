@@ -39,8 +39,8 @@ class LanguageController extends Controller
         return view('pages.languages.index',compact('languages','lang','lng'));
     }
 
-    public function update(LanguageRequest $request, Language $language){
-        dd('test');
+    public function update(LanguageRequest $request){
+        $language = Language::find($request->language);
         $data = [
             "name"=> $request->name,
             "native" => $request->native,
@@ -54,7 +54,8 @@ class LanguageController extends Controller
         }
 
         $language->update($data);
-        return redirect()->route('language.index'); 
+
+        return redirect('/languages');
     }
 
     public function destroy(Language $language){    

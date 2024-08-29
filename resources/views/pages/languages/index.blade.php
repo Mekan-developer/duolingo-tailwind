@@ -50,15 +50,11 @@
                         </td>
                         <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $language->order }}</td>
                         <td class="flex flex-row justify-center gap-2 px-4 py-2 text-center whitespace-nowrap">
-                            <form action="{{ route('language.edit', ['language' => $language->id])}}" 
-                                method="POST">
-                                @csrf
-                                @method('PUT')
-
-                                <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
-                                    <i class='bx bx-edit-alt text-[22px]'></i>
+                                <a href="{{ route('language.edit', ['language' => $language->id])}}">
+                                    <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
+                                        <i class='bx bx-edit-alt text-[22px]'></i>
+                                    </button>
                                 </a>
-                            </form>
                             @if(auth()->user()->role == 1)
                                 <form action="{{ route('language.delete', ['language' => $language->id])}}" 
                                     method="post">
@@ -77,9 +73,13 @@
             </table>
         </div>
         <div class="bg-[var(--bg-color-non-active)] p-4 rounded-sm w-auto">
-            <form  action="{{ isset($lang['edit']) ? route('language.update', ['language' => $lng->id]) : route('language.store') }}" method="POST" class="w-full" enctype="multipart/form-data">
+            <form  action="{{ isset($lang['edit']) ? route('language.update') : route('language.store') }}" method="POST" class="w-full" enctype="multipart/form-data">
                 @csrf
                 @isset($lang['edit']) @method('patch') @endisset
+
+                @isset($lang['edit']) 
+                    <input class="hidden" type="number" name="language" value="{{$lng->id}}">
+                @endisset
                 
                 <div class="mb-4">
                   <label for="name" class="block mb-2 text-sm text-gray-600">name</label>
@@ -98,7 +98,7 @@
                 </div>
                 <div class="mb-4">
                   <label for="flag" class="block mb-2 text-sm text-gray-600">flag</label>
-                  <input type="file" id="flag" name="flag" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500" required>
+                  <input type="file" id="flag" name="flag" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500" {{ isset($lang['edit'])? '' : `required` }} >
                   <x-input-error :messages="$errors->get('flag')" class="mt-2" />
                 </div>
                 <button type="submit" class="bg-[var(--bg-color-active)] w-full bg-gradient-to-r  text-white py-2 rounded-lg mx-auto block focus:outline-none focus:ring-2 focus:ring-offset-2">add language</button>

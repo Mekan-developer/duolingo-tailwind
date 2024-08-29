@@ -11,11 +11,17 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\ChapterController;
+use App\Http\Controllers\Exercises\AudioTranslationController;
+use App\Http\Controllers\Exercises\PronunciationController;
+use App\Http\Controllers\Exercises\QuestionsImageController;
 use App\Http\Controllers\Exercises\VocabularyController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\ListExerciseController;
 use App\Http\Controllers\Exercises\VideoController;
+use App\Http\Controllers\Exercises\QuestionWordController;
+
+
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -62,25 +68,68 @@ Route::middleware('auth')->group(function () {
     Route::group(['prefix' => 'languages', 'as' => 'language.'], function () {
         Route::get('/', [LanguageController::class, 'index'])->name('index');
         Route::post('/store', [LanguageController::class, 'store'])->name('store');
-        Route::put('/edit/{language}', [LanguageController::class, 'edit'])->name('edit');
-        Route::patch('/update/{language}', [LanguageController::class, 'update'])->name('update');
+        Route::get('/edit/{language}', [LanguageController::class, 'edit'])->name('edit');
+        Route::patch('/update', [LanguageController::class, 'update'])->name('update');
         Route::put('/active/{language}', [LanguageController::class, 'active'])->name('active');
         Route::delete('/delete/{language}', [LanguageController::class, 'destroy'])->name('delete');
     });
 
-    Route::group(['prefix'=> 'exercises/'], function () {   
+    
+    Route::group(['prefix'=> 'exercises/'], function () {  
+        //WORD 
         Route::group(['prefix'=> 'vocabulary','as'=> 'vocabulary.'], function () {   
             Route::get('/',[VocabularyController::class,'index'])->name('index');
             Route::get('/create',[VocabularyController::class,'create'])->name('create');
             Route::post('/store',[VocabularyController::class,'store'])->name('store');
+            Route::get('/edit',[VocabularyController::class,'edit'])->name('edit');
+            Route::patch('/update',[VocabularyController::class,'update'])->name('update');
+            Route::delete('/delete/{vocabulary}',[VocabularyController::class,'destroy'])->name('delete');
+
         });
+        //VIDEO
         Route::group(['prefix' => 'video', 'as' => 'video.'], function () {
             Route::get('/',[VideoController::class,'index'])->name('index');
             Route::get('/create',[VideoController::class,'create'])->name('create');
             Route::post('/store',[VideoController::class,'store'])->name('store');
-            Route::put('/edit',[VideoController::class,'edit'])->name('edit');
-            Route::put('/update',[VideoController::class,'update'])->name('update');
+            Route::get('/edit',[VideoController::class,'edit'])->name('edit');
+            Route::patch('/update',[VideoController::class,'update'])->name('update');
             Route::delete('/delete/{video}',[VideoController::class,'destroy'])->name('delete');
+        });
+        //QUESTION_WORD
+        Route::group(['prefix'=> 'question-word','as' => 'questionWord.'], function () {
+            Route::get('/',[QuestionWordController::class,'index'])->name('index');
+            Route::get('/create',[QuestionWordController::class,'create'])->name('create');
+            Route::post('/store',[QuestionWordController::class,'store'])->name('store');
+            Route::get('/edit',[QuestionWordController::class,'edit'])->name('edit');
+            Route::patch('/update',[QuestionWordController::class,'update'])->name('update');
+            Route::delete('/delete/{questionWord}',[QuestionWordController::class,'destroy'])->name('delete');
+        });
+        //AUDIO_TRANSLATIONS
+        Route::group(['prefix'=> 'audio-translation','as' => 'audioTranslation.'], function () {
+            Route::get('/',[AudioTranslationController::class,'index'])->name('index');
+            Route::get('/create',[AudioTranslationController::class,'create'])->name('create');
+            Route::post('/store',[AudioTranslationController::class,'store'])->name('store');
+            Route::get('/edit',[AudioTranslationController::class,'edit'])->name('edit');
+            Route::patch('/update',[AudioTranslationController::class,'update'])->name('update');
+            Route::delete('/delete/{audioTranslation}',[AudioTranslationController::class,'destroy'])->name('delete');
+        });
+        //QUESTION_IMAGE
+        Route::group(['prefix'=> 'question-image','as' => 'questionImage.'], function () {
+            Route::get('/',[QuestionsImageController::class,'index'])->name('index');
+            Route::get('/create',[QuestionsImageController::class,'create'])->name('create');
+            Route::post('/store',[QuestionsImageController::class,'store'])->name('store');
+            Route::get('/edit',[QuestionsImageController::class,'edit'])->name('edit');
+            Route::patch('/update',[QuestionsImageController::class,'update'])->name('update');
+            Route::delete('/delete/{questionImage}',[QuestionsImageController::class,'destroy'])->name('delete');
+        });
+
+        Route::group(['prefix' => 'pronunciation', 'as' => 'pronunciation.'], function() {
+            Route::get('/',[PronunciationController::class,'index'])->name('index');
+            Route::get('/create',[PronunciationController::class,'create'])->name('create');
+            Route::post('/store',[PronunciationController::class,'store'])->name('store');
+            Route::get('/edit',[PronunciationController::class,'edit'])->name('edit');
+            Route::patch('/update',[PronunciationController::class,'update'])->name('update');
+            Route::delete('/delete/{pronunciation}',[PronunciationController::class,'destroy'])->name('delete');
         });
     });
     

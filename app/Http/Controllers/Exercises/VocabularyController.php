@@ -34,7 +34,7 @@ class VocabularyController extends Controller
             'lesson_id' => $request->lesson_id,
             'exercise_id' => $request->exercise_id,
             'en_text' => $request->en_text,
-            'translations' => $request->translations
+            'translations_word' => $request->translations_word
         ];
 
 
@@ -54,7 +54,26 @@ class VocabularyController extends Controller
  
         Vocabulary::create($data);
 
-        return view("pages.allExercises.vocabulary.create");
+        return redirect()->route('vocabulary.index')->with('success','vocabulary created successfully!');
     
     }
+
+    public function destroy(Vocabulary $vocabulary){
+        if ($vocabulary->audio) {
+            $this->removeFile($vocabulary->audio, 'vocabulary/audio');
+        } 
+        if ($vocabulary->image) {
+            $this->removeFile($vocabulary->image, 'vocabulary/image');
+        } 
+        $orderDeletedRow = $vocabulary->order;
+        $delete_success = $vocabulary->delete();
+
+        // sorting order
+        if( $delete_success ){
+            $table = Vocabulary::orderBy('order', 'asc')->get();
+            $this->reorderAfterRemoval($table,$orderDeletedRow);
+        }
+
+        return redirect()->route('vocabulary.index')->with('success','vocabulary deleted successfully');
+     }
 }

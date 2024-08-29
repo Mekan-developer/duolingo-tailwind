@@ -48,13 +48,11 @@
 
                             <td class="gap-2 text-center whitespace-nowrap px-4 py-2 h-full ">
                                 <div class="h-full flex flex-row justify-center gap-2">
-                                    <form action="{{route('video.edit',['video'=>$video->id])}}" 
-                                        method="POST">
-                                        @csrf
-                                        @method('PUT')
+                                    <a href="{{route('video.edit',['video'=>$video->id])}}">
                                         <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
                                             <i class='bx bx-edit-alt text-[22px]'></i>
                                         </button>
+                                    </a>
                                     </form>
                                     @if(auth()->user()->role == 1)
                                         <form action="{{ route('video.delete', ['video' => $video->id])}}" 

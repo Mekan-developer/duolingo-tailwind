@@ -68,6 +68,34 @@ return [
             'visibility' => 'public',
         ],
 
+        'question_word_audio' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/uploads/question_word_audio'),
+            'url' => env('APP_URL') . '/storage/uploads/question_word_audio',
+            'visibility' => 'public',
+        ],
+
+        'audio_translation_audio' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/uploads/audio_translation_audio'),
+            'url' => env('APP_URL') . '/storage/uploads/audio_translation_audio',
+            'visibility' => 'public',
+        ],
+
+        'question_image' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/uploads/question_image/audio'),
+            'url' => env('APP_URL') . '/storage/uploads/question_image/audio',
+            'visibility' => 'public',
+        ],
+
+        'pronunciation' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/uploads/pronunciation'),
+            'url' => env('APP_URL') . '/storage/uploads/pronunciation',
+            'visibility' => 'public',
+        ],
+
 
     ],
 
