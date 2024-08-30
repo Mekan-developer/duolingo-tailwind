@@ -41,60 +41,82 @@
               <li>
                 <a href="{{ route('vocabulary.index') }}" class="{{ Request::is('exercises/vocabulary*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-lg px-4 py-2 text-sm font-medium text-[var(--text-color-active)] hover:bg-gray-100 hover:text-gray-700">
                   1. Vocabulary
+                  <p class="text-[12px] text-gray-300 -mt-2 ml-4 hover:text-gray-500">(vocabulary)</p>
                 </a>
               </li>
   
               <li>
                 <a href="{{ route('video.index') }}" class="{{ Request::is('exercises/video*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-lg px-4 py-2 text-sm font-medium text-[var(--text-color-active)] hover:bg-gray-100 hover:text-gray-700">
                   2. Video
+                  <p class="text-[12px] text-gray-300 -mt-2 ml-4 hover:text-gray-500">(video)</p>
                 </a>
               </li>
 
               <li>
                 <a href="{{route('questionWord.index')}}" class="{{ Request::is('exercises/question-word*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-lg px-4 py-2 text-sm font-medium text-[var(--text-color-active)] hover:bg-gray-100 hover:text-gray-700">
                   3. Question word
+                  <p class="text-[12px] text-gray-300 -mt-2 ml-4 hover:text-gray-500">(vocabulary)</p>
                 </a>
               </li>
 
               <li>
                 <a href="{{route('audioTranslation.index')}}" class="{{ Request::is('exercises/audio-translation*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-lg px-4 py-2 text-sm font-medium text-[var(--text-color-active)] hover:bg-gray-100 hover:text-gray-700">
                   4. Audio translation
+                  <p class="text-[12px] text-gray-300 -mt-2 ml-4 hover:text-gray-500">(translation)</p>
                 </a>
               </li>
 
               <li>
                 <a href="{{route('questionImage.index')}}" class="{{ Request::is('exercises/question-image*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-lg px-4 py-2 text-sm font-medium text-[var(--text-color-active)] hover:bg-gray-100 hover:text-gray-700">
                   5. Question image
+                  <p class="text-[12px] text-gray-300 -mt-2 ml-4 hover:text-gray-500">(vocabulary)</p>
                 </a>
               </li>
 
               <li>
                 <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-[var(--text-color-active)] hover:bg-gray-100 hover:text-gray-700">
-                  6. ----------
+                  6. ----------Proiznosheniye
+                  <p class="text-[12px] text-gray-300 -mt-2 ml-4 hover:text-gray-500">(pronunciation)</p>
                 </a>
               </li>
 
               <li>
                 <a href="{{route('pronunciation.index')}}" class="{{ Request::is('exercises/pronunciation*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-lg px-4 py-2 text-sm font-medium text-[var(--text-color-active)] hover:bg-gray-100 hover:text-gray-700">
                   7. Pronunciation
+                  <p class="text-[12px] text-gray-300 -mt-2 ml-4 hover:text-gray-500">(vocabulary)</p>
                 </a>
               </li>
 
               <li>
                 <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-[var(--text-color-active)] hover:bg-gray-100 hover:text-gray-700">
-                  8. Video
+                  8.  ------------Grammar
+                  <p class="text-[12px] text-gray-300 -mt-2 ml-4 hover:text-gray-500">(grammar)</p>
                 </a>
               </li>
 
               <li>
-                <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-[var(--text-color-active)] hover:bg-gray-100 hover:text-gray-700">
-                 9. Video
+                <a href="{{route('testImage.index')}}" class="{{ Request::is('exercises/test-image*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-lg px-4 py-2 text-sm font-medium text-[var(--text-color-active)] hover:bg-gray-100 hover:text-gray-700">
+                 9. Test Audio Image
+                 <p class="text-[12px] text-gray-300 -mt-2 ml-4 hover:text-gray-500">(vocabulary)</p>
                 </a>
               </li>
 
               <li>
-                <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-[var(--text-color-active)] hover:bg-gray-100 hover:text-gray-700">
-                 10. Video
+                <a href="{{route('testWord.index')}}" class="{{ Request::is('exercises/test-word*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-lg px-4 py-2 text-sm font-medium text-[var(--text-color-active)] hover:bg-gray-100 hover:text-gray-700">
+                 10. Test(Question word reworse) 
+                 <p class="text-[12px] text-gray-300 -mt-2 ml-4 hover:text-gray-500">(vocabulary)</p>
+                </a>
+              </li>
+              <li>
+                <a href="{{route('spelling.index')}}" class="{{ Request::is('exercises/spelling*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-lg px-4 py-2 text-sm font-medium text-[var(--text-color-active)] hover:bg-gray-100 hover:text-gray-700">
+                 11. Spelling
+                 <p class="text-[12px] text-gray-300 -mt-2 ml-4 hover:text-gray-500">(vocabulary)</p>
+                </a>
+              </li>
+              <li>
+                <a href="{{route('listening.index')}}" class="{{ Request::is('exercises/listening*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-lg px-4 py-2 text-sm font-medium text-[var(--text-color-active)] hover:bg-gray-100 hover:text-gray-700">
+                 12. Audio
+                 <p class="text-[12px] text-gray-300 -mt-2 ml-4 hover:text-gray-500">(listening)</p>
                 </a>
               </li>
             </ul>

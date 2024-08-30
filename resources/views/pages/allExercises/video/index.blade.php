@@ -20,6 +20,7 @@
             <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>                        
+                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">id</th>
                         <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">video</th>
                         <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">chapter</th>
                         <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">lesson</th>
@@ -32,7 +33,8 @@
                 <tbody class="divide-y divide-gray-200">
                     @foreach ($videos as $video)
                         <tr>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">
+                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$video->id}}</td>
+                            <td class="flex justify-center whitespace-nowrap px-4 py-2 text-gray-700">
                                 <video width="200" height="150" controls>
                                     <source src="{{$video->getVideo()}}" type="video/mp4">
                                     <source src="{{$video->getVideo()}}" type="video/ogg">

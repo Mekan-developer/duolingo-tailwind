@@ -2,15 +2,15 @@
 @section('content')
 
 <div>
+
     <div class="flex flex-col w-full">
         <div class="flex flex-row justify-between w-full">
             <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
-                Chapters
+                Spelling
             </div>
             <div>
                 <div class="flex flex-row-reverse">
-                    <a href="{{route('vocabulary.create')}}" class="text-white bg-[var(--bg-color-active)] hover:bg-[#46b8c0] focus:ring-4 font-medium rounded-sm px-4 py-2 me-2 mb-2">+</a>
-                    {{-- <button  type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg px-5 py-2.5 me-2 mb-2">add</button> --}}
+                    <a href="{{route('spelling.create')}}" class="text-white bg-[var(--bg-color-active)] hover:bg-[#46b8c0] focus:ring-4 font-medium rounded-sm px-4 py-2 me-2 mb-2">+</a>
                 </div>
             </div>
         </div>
@@ -22,11 +22,7 @@
                     <tr>                        
                         <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">id</th>
                         <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">en text</th>
-                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">audio</th>
                         <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">image</th>
-                        @foreach($locales as $locale)
-                            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">translations {{ $locale->locale }}</th>
-                        @endforeach
                         <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">chapter</th>
                         <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">lesson</th>
                         <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">exercise</th>
@@ -36,65 +32,36 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
-                    @foreach ($vocabularies as $vocabulary)
+                    @foreach ($spellings as $spelling)
                         <tr>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$vocabulary->id}}</td>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$vocabulary->en_text}}</td>
-                            <td  class="px-6 py-4 ">
-                                <div data-audio-src="{{ $vocabulary->getAudio() }}" class="p-1 text-white rounded-lg shadow-lg audio-player w-[200px]" >
-                                    <div class="flex flex-row items-center justify-between pl-1">
-                                            <div class="flex items-center justify-center p-3 text-gray-800 bg-cover rounded-sm playPauseBtn hover:text-[var(--bg-color-active)] focus:outline-none">
-                                               <span class="hidden pauseIcon">
-                                                    <i class='bx bx-pause text-[28px]'></i>
-                                                </span> 
-                                                <span class="playIcon">
-                                                    <i class='bx bx-play-circle text-[28px] opacity-60'></i>
-                                                </span>
-                                            </div>
-                                        <div class="items-start flex-1 pl-4">
-                                            <p class="text-sm text-gray-400 text-nowrap">test</p>
-                                            <div class="relative text-gray-400">
-                                                <input type="range" min="0" max="100" value="0" class="w-full h-2 bg-gray-400 rounded-lg appearance-none cursor-pointer progressBar">
-                                                <span class="currentTime">00:00</span> / <span class="duration">00:00</span> 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$spelling->id}}</td>
+                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$spelling->en_text}}</td>
+                            <td class="flex justify-center whitespace-nowrap px-4 py-2 text-gray-700">
+                                <img src="{{$spelling->getImage()}}" alt="spelling image">
                             </td>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">
-                                <img src="{{$vocabulary->getImage()}}" alt="vocabulary image">
-                            </td>
-                            @foreach($locales as $locale)
-                                <td class="text-center whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                                    {{ $vocabulary->getTranslation('translations_word',$locale->locale) }}
-                                </td>
-                            @endforeach
-
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$vocabulary->Chapter->translate('title',$locales[0]['locale'])}}</td>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$vocabulary->Lesson->translate('title',$locales[0]['locale'])}}</td>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$vocabulary->Exercise->translate('title',$locales[0]['locale'])}}</td>
-                            
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$vocabulary->order}}</td>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$vocabulary->status}}</td>
+                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$spelling->Chapter->translate('title',$locales[0]['locale'])}}</td>
+                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$spelling->Lesson->translate('title',$locales[0]['locale'])}}</td>
+                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$spelling->Exercise->translate('title',$locales[0]['locale'])}}</td>
+                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$spelling->order}}</td>
+                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$spelling->status}}</td>
                             <td class="gap-2 text-center whitespace-nowrap px-4 py-2 h-full ">
                                 <div class="h-full flex flex-row justify-center gap-2">
-                                    <a href="{{route('vocabulary.edit',['vocabulary'=>$vocabulary->id])}}">
+                                    <a href="{{route('spelling.edit',['spelling'=>$spelling->id])}}">
                                         <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
                                             <i class='bx bx-edit-alt text-[22px]'></i>
                                         </button>
                                     </a>
                                     </form>
                                     @if(auth()->user()->role == 1)
-                                    <form action="{{ route('vocabulary.delete', ['vocabulary' => $vocabulary->id])}}" 
-                                        method="post">
-                                        @csrf
-                                        @method('DELETE')
-
-                                        <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-red-600">
-                                            <i class='text-[24px] bx bx-trash'></i>
-                                        </button>
-                                    </form>
-                                @endif  
+                                        <form action="{{ route('spelling.delete', ['spelling' => $spelling->id])}}" 
+                                            method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-red-600">
+                                                <i class='text-[24px] bx bx-trash'></i>
+                                            </button>
+                                        </form>
+                                    @endif  
                                 </div>                                                               
                             </td>
                         </tr> 

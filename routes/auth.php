@@ -12,14 +12,18 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\Exercises\AudioTranslationController;
+use App\Http\Controllers\Exercises\ListeningController;
 use App\Http\Controllers\Exercises\PronunciationController;
 use App\Http\Controllers\Exercises\QuestionsImageController;
+use App\Http\Controllers\Exercises\TestImageController;
 use App\Http\Controllers\Exercises\VocabularyController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\ListExerciseController;
 use App\Http\Controllers\Exercises\VideoController;
 use App\Http\Controllers\Exercises\QuestionWordController;
+use App\Http\Controllers\Exercises\TestWordController;
+use App\Http\Controllers\Exercises\SpellingController;
 
 
 use Illuminate\Support\Facades\Route;
@@ -122,7 +126,7 @@ Route::middleware('auth')->group(function () {
             Route::patch('/update',[QuestionsImageController::class,'update'])->name('update');
             Route::delete('/delete/{questionImage}',[QuestionsImageController::class,'destroy'])->name('delete');
         });
-
+        //PRONUNCIATION
         Route::group(['prefix' => 'pronunciation', 'as' => 'pronunciation.'], function() {
             Route::get('/',[PronunciationController::class,'index'])->name('index');
             Route::get('/create',[PronunciationController::class,'create'])->name('create');
@@ -131,6 +135,46 @@ Route::middleware('auth')->group(function () {
             Route::patch('/update',[PronunciationController::class,'update'])->name('update');
             Route::delete('/delete/{pronunciation}',[PronunciationController::class,'destroy'])->name('delete');
         });
+        //VOCABULARY_AUDIO_IMAGE
+        Route::group(['prefix' => 'test-image', 'as' => 'testImage.'], function() {
+            Route::get('/',[TestImageController::class,'index'])->name('index');
+            Route::get('/create',[TestImageController::class,'create'])->name('create');
+            Route::post('/store',[TestImageController::class,'store'])->name('store');
+            Route::get('/edit',[TestImageController::class,'edit'])->name('edit');
+            Route::patch('/update',[TestImageController::class,'update'])->name('update');
+            Route::delete('/delete/{testImage}',[TestImageController::class,'destroy'])->name('delete');
+        });
+        //VOCABULARY_AUDIO_WORD
+        Route::group(['prefix' => 'test-word', 'as' => 'testWord.'], function() {
+            Route::get('/',[TestWordController::class,'index'])->name('index');
+            Route::get('/create',[TestWordController::class,'create'])->name('create');
+            Route::post('/store',[TestWordController::class,'store'])->name('store');
+            Route::get('/edit',[TestWordController::class,'edit'])->name('edit');
+            Route::patch('/update',[TestWordController::class,'update'])->name('update');
+            Route::delete('/delete/{testWord}',[TestWordController::class,'destroy'])->name('delete');
+        });
+
+        //SPELLING
+        Route::group(['prefix' => 'spelling', 'as' => 'spelling.'], function() {
+            Route::get('/',[SpellingController::class,'index'])->name('index');
+            Route::get('/create',[SpellingController::class,'create'])->name('create');
+            Route::post('/store',[SpellingController::class,'store'])->name('store');
+            Route::get('/edit',[SpellingController::class,'edit'])->name('edit');
+            Route::patch('/update',[SpellingController::class,'update'])->name('update');
+            Route::delete('/delete/{spelling}',[SpellingController::class,'destroy'])->name('delete');
+        });
+
+        //LISTENING
+        Route::group(['prefix' => 'listening', 'as' => 'listening.'], function() {
+            Route::get('/',[ListeningController::class,'index'])->name('index');
+            Route::get('/create',[ListeningController::class,'create'])->name('create');
+            Route::post('/store',[ListeningController::class,'store'])->name('store');
+            Route::get('/edit',[ListeningController::class,'edit'])->name('edit');
+            Route::patch('/update',[ListeningController::class,'update'])->name('update');
+            Route::delete('/delete/{listening}',[ListeningController::class,'destroy'])->name('delete');
+        });
+
+        
     });
     
 

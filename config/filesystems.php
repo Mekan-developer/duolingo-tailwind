@@ -95,6 +95,24 @@ return [
             'url' => env('APP_URL') . '/storage/uploads/pronunciation',
             'visibility' => 'public',
         ],
+        'test_audio_image' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/uploads/test_audio_image/audio'),
+            'url' => env('APP_URL') . '/storage/uploads/test_audio_image/audio',
+            'visibility' => 'public',
+        ],
+        'test_word_audio' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/uploads/test_word_audio'),
+            'url' => env('APP_URL') . '/storage/uploads/test_word_audio',
+            'visibility' => 'public',
+        ],
+        'listening' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/uploads/listening'),
+            'url' => env('APP_URL') . '/storage/uploads/listening',
+            'visibility' => 'public',
+        ],
 
 
     ],
