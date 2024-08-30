@@ -21,13 +21,17 @@ class LessonRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+       
+        $rules = [
             'title.*' => 'required|string|max:255', // Title is required, must be a string, and has a max length of 255 characters
             'chapter_id' => 'required|exists:chapters,id',
-            'dopamine_image_1' => "required|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240",
-            'dopamine_image_2' => "required|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240",
-            'dopamine_image_3' => "required|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240",
-            'dopamine_image_4' => "required|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240",
+            'dopamine_image_*' => "required|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240",
+
         ];
+
+        if(request()->isMethod('PATCH')){
+            $rules['dopamine_image_*'] = "nullable|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240";
+        }   
+        return $rules;
     }
 }

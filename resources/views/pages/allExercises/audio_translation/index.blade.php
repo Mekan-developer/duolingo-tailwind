@@ -1,6 +1,5 @@
 @extends('layouts.main')
 @section('content')
-
 <div>
     <div class="flex flex-col w-full">
         <div class="flex flex-row justify-between w-full">

@@ -10,12 +10,18 @@ use Illuminate\Http\Request;
 
 class LessonController extends Controller
 {
-    public function index(){
-        $lessons = Lesson::orderBy("order")->with('chapter')->get();
+    public function index(Request $request){
+        $chapters = Chapter::orderBy('order')->get(); 
 
         $locales = Language::where("status",1)->get("locale");
 
-        return view("pages.lessons.index", compact("locales","lessons"));
+        if($request->has('sort_by') && $request->sort_by > 0 ){
+            $lessons = Lesson::where('chapter_id',$request->sort_by)->orderBy("order")->with('chapter')->get();
+        }else{
+            $lessons = Lesson::orderBy("order")->with('chapter')->get();
+        }
+
+        return view("pages.lessons.index", compact("locales","lessons","chapters"));
     }
 
     public function create(){ 
@@ -32,7 +38,6 @@ class LessonController extends Controller
             'chapter_id' => $request->chapter_id,
         ];
 
-        
         if ($request->hasFile('dopamine_image_1')) {         
             $image = $request->dopamine_image_1;
             $imageName = $this->uploadFile($image,'dopamine_images',true);
@@ -66,11 +71,11 @@ class LessonController extends Controller
     }
 
     public function update(LessonRequest $request, Lesson $lesson){ 
+        
         $lessons = Lesson::all();
         $this->sortItems($lessons, $lesson->order, $request->order);
 
         $lesson->update($request->all());
-
         return redirect()->route('lessons');
     }
 

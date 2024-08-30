@@ -22,74 +22,10 @@
                 </div>
             @endforeach
 
-            <div class="flex flex-row justify-between my-2">
-                <div>
-                    <div class="relative">
-                        <label title="Click to upload" for="button1" class="cursor-pointer flex items-center gap-4 px-6 py-2 before:border-gray-400/60 hover:before:border-gray-300 group before:bg-gray-100 before:absolute before:inset-0 before:rounded-3xl before:border before:border-dashed before:transition-transform before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95">
-                          <div class="w-max relative">
-                              <img class="w-12" src="https://www.svgrepo.com/show/485545/upload-cicle.svg" alt="file upload icon" width="512" height="212">
-                          </div>
-                          <div class="relative">
-                              <span class="block text-base font-semibold relative text-blue-900 group-hover:text-blue-500">
-                                  Upload dopamine 1
-                              </span>
-                              <span class="mt-0.5 block text-sm text-gray-500">Max 2 MB</span>
-                          </div>
-                         </label>
-                        <input hidden="" type="file" name="dopamine_image_1" id="button1" required>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="relative">
-                        <label title="Click to upload" for="button2" class="cursor-pointer flex items-center gap-4 px-6 py-2 before:border-gray-400/60 hover:before:border-gray-300 group before:bg-gray-100 before:absolute before:inset-0 before:rounded-3xl before:border before:border-dashed before:transition-transform before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95">
-                          <div class="w-max relative">
-                              <img class="w-12" src="https://www.svgrepo.com/show/485545/upload-cicle.svg" alt="file upload icon" width="512" height="212">
-                          </div>
-                          <div class="relative">
-                              <span class="block text-base font-semibold relative text-blue-900 group-hover:text-blue-500">
-                                  Upload dopamine 2 
-                              </span>
-                              <span class="mt-0.5 block text-sm text-gray-500">Max 2 MB</span>
-                          </div>
-                         </label>
-                        <input hidden="" type="file" name="dopamine_image_2" id="button2">
-                    </div>
-                </div>
-
-                <div>
-                    <div class="relative">
-                        <label title="Click to upload" for="button3" class="cursor-pointer flex items-center gap-4 px-6 py-2 before:border-gray-400/60 hover:before:border-gray-300 group before:bg-gray-100 before:absolute before:inset-0 before:rounded-3xl before:border before:border-dashed before:transition-transform before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95">
-                          <div class="w-max relative">
-                              <img class="w-12" src="https://www.svgrepo.com/show/485545/upload-cicle.svg" alt="file upload icon" width="512" height="212">
-                          </div>
-                          <div class="relative">
-                              <span class="block text-base font-semibold relative text-blue-900 group-hover:text-blue-500">
-                                  Upload dopamine 3
-                              </span>
-                              <span class="mt-0.5 block text-sm text-gray-500">Max 2 MB</span>
-                          </div>
-                         </label>
-                        <input hidden="" type="file" name="dopamine_image_3" id="button3">
-                    </div>
-                </div>
-
-                <div>
-                    <div class="relative">
-                        <label title="Click to upload" for="button4" class="cursor-pointer flex items-center gap-4 px-6 py-2 before:border-gray-400/60 hover:before:border-gray-300 group before:bg-gray-100 before:absolute before:inset-0 before:rounded-3xl before:border before:border-dashed before:transition-transform before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95">
-                          <div class="w-max relative">
-                              <img class="w-12" src="https://www.svgrepo.com/show/485545/upload-cicle.svg" alt="file upload icon" width="512" height="212">
-                          </div>
-                          <div class="relative">
-                              <span class="block text-base font-semibold relative text-blue-900 group-hover:text-blue-500">
-                                  Upload dopamine 4
-                              </span>
-                              <span class="mt-0.5 block text-sm text-gray-500">Max 2 MB</span>
-                          </div>
-                         </label>
-                        <input hidden="" type="file" name="dopamine_image_4" id="button4">
-                    </div>
-                </div>
+            <div class="flex flex-row gap-2 justify-between my-2">
+                @for ($i = 1; $i < 5; $i++)
+                    @include('includes.exerciseParts.create.image_file',['label' => 'button'.$i, 'title' => 'Upload dopamine'.$i, 'name' => 'dopamine_image_'.$i,'message' => 'message'.$i ])
+                @endfor
             </div>
             <button type="submit" class="w-full py-4 bg-[var(--bg-color-active)] rounded-md text-white text-[18px]"> save </button>
         </form>

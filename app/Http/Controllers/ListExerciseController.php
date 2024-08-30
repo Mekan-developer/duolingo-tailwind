@@ -11,9 +11,15 @@ use Illuminate\Http\Request;
 
 class ListExerciseController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
         $locales = Language::where("status",1)->get("locale");
-        $list_exercises = List_exercise::orderBy("order")->with('lesson')->get();
+        $list_exercises = List_exercise::orderBy("order")->with('lesson')->paginate(10);
+
+        // if($request->has('sort_by_chapter') && $request->sort_by_chapter > 0 ){
+        //     $lessons = Lesson::where('chapter_id',$request->sort_by)->orderBy("order")->with('chapter')->get();
+        // }else{
+        //     $lessons = Lesson::orderBy("order")->with('chapter')->get();
+        // }
 
         return view("pages.listExercises.index",compact("locales","list_exercises"));
     }

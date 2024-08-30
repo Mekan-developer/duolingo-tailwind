@@ -42,7 +42,7 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/admin-controll',[AdminController::class,'index'])->name('admin.controll');
     Route::delete('admin/delete/{user}',[AdminController::class,'destroy'])->name('admin.delete');
-    Route::put('/admin/edit/{user}',[AdminController::class,'edit'])->name('admin.edit');
+    Route::get('/admin/edit/{user}',[AdminController::class,'edit'])->name('admin.edit');
     Route::patch('/admin/update/{user}',[AdminController::class,'update'])->name('admin.update');
     Route::post('register', [RegisteredUserController::class, 'store'])->name('register');
 
@@ -56,7 +56,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/lessons',[LessonController::class,'index'])->name('lessons');
     Route::get('/lessons/create',[LessonController::class,'create'])->name('lessons.create');
     Route::post('/lessons/store',[LessonController::class,'store'])->name('lessons.store');
-    Route::put('/lessons/edit/{lesson}',[LessonController::class,'edit'])->name('lessons.edit');
+    Route::get('/lessons/edit/{lesson}',[LessonController::class,'edit'])->name('lessons.edit');
     Route::patch('/lessons/update/{lesson}',[LessonController::class,'update'])->name('lessons.update');
     Route::delete('/lessons/delete/{lesson}',[LessonController::class,'destroy'])->name('lesson.delete');
 

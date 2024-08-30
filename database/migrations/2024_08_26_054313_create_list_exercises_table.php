@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('list_exercises', function (Blueprint $table) {
             $table->id();
             $table->json('title');
-            // $table->unsignedBigInteger('chapter_id'); //goshmaly bolar
+            $table->unsignedBigInteger('chapter_id'); //order etmekde gerek bolya
             $table->unsignedBigInteger('lesson_id');
             $table->integer('order')->default(0);
             $table->timestamps();
 
             $table->foreign('lesson_id')->references('id')->on('lessons')->onDelete('cascade');
+            $table->foreign('chapter_id')->references('id')->on('chapters')->onDelete('cascade');
         });
     }
 

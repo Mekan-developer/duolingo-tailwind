@@ -15,20 +15,20 @@ class AdminController extends Controller
         return view("pages.admin.index",compact("users"));
     }
 
-    public function edit(User $use){
+    public function edit(User $user){
         $users = User::all();
 
-        $use["edit_user"] = true;
+        $user_edit["edit_user"] = true;
         
-        return view("pages.admin.index",compact("use","users"));
+        return view("pages.admin.index",compact("user","users","user_edit"));
 
     }
 
     public function update(Request $request, User $user){
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'name' => ['nullable', 'string', 'max:255'],
+            'email' => ['nullable', 'string', 'lowercase', 'email', 'max:255'],
+            'password' => ['required', 'confirmed', Rules\Password::min(5)],
         ]);
 
         $user->update([

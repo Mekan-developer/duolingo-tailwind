@@ -24,23 +24,20 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
-                    @foreach ($users as $user)
+                    @foreach ($users as $use)
                     <tr>
-                        <td class="px-4 py-2 font-medium text-center text-gray-900 whitespace-nowrap">{{ $user->name }}</td>
-                        <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $user->email }}</td>
+                        <td class="px-4 py-2 font-medium text-center text-gray-900 whitespace-nowrap">{{ $use->name }}</td>
+                        <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $use->email }}</td>
                         {{-- <td class="px-4 py-2 text-gray-700 whitespace-nowrap">admin</td> --}}
                         <td class="flex flex-row justify-center gap-2 px-4 py-2 text-center whitespace-nowrap">
-                            <form action="{{ route('admin.edit', ['user' => $user->id])}}" 
-                                method="POST">
-                                @csrf
-                                @method('PUT')
 
+                            <a href="{{ route('admin.edit', ['user' => $use->id])}}" > 
                                 <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
                                     <i class='bx bx-edit-alt text-[22px]'></i>
-                                </a>
-                            </form>
+                                </button>
+                            </a> 
                             @if(auth()->user()->role == 1)
-                            <form action="{{ route('admin.delete', ['user' => $user->id])}}" 
+                            <form action="{{ route('admin.delete', ['user' => $use->id])}}" 
                                 method="post">
                                 @csrf
                                 @method('DELETE')
@@ -59,15 +56,15 @@
         </div>
 
         <div class="bg-[var(--bg-color-non-active)] mx-4 p-4 rounded-sm">
-            <form action="{{ isset($use->edit_user) ? route('admin.update',['user' => $user->id]) : route('register') }} " method="POST" class="w-[240px] mx-auto ">
+            <form action="{{ isset($user_edit['edit_user']) ? route('admin.update',['user' => $user->id]) : route('register') }} " method="POST" class="w-[240px] mx-auto ">
                 @csrf
-                 @isset($use->edit_user) @method('patch') @endisset
+                 @isset($user_edit['edit_user']) @method('patch') @endisset
                 <div class="mb-5">
-                    <input type="text" name="name" value="{{ isset($use->edit_user) ? $user->name : old('name') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 " placeholder="Tailor" required />
+                    <input type="text" name="name" value="{{ isset($user_edit['edit_user']) ? $user->name : old('name') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 " placeholder="Tailor" required />
                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
                 </div>
                 <div class="mb-5">
-                    <input type="email" name="email" value="{{ isset($use->edit_user) ? $user->email : old('email') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 " placeholder="admin@mail.com" required />
+                    <input type="email" name="email" value="{{ isset($user_edit['edit_user']) ? $user->email : old('email') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 " placeholder="admin@mail.com" required />
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 </div>
                 <div class="mb-5">
