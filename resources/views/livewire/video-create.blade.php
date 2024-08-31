@@ -7,7 +7,7 @@
             @csrf
             @include('includes.exerciseParts.create.options')
             
-            @include('includes.exerciseParts.create.image_file')
+            @include('includes.exerciseParts.create.video_file')
 
             <div class="p-2 m-2 rounded-sm bg-gray-200 flex flex-col gap-4">
                 <div class="flex flex-row w-full overflow-hidden overflow-x-auto">

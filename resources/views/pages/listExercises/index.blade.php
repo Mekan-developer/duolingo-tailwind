@@ -11,31 +11,42 @@
                 </div>
             </div>
         </div>
-        {{-- <div class="flex justify-between">
-            <form method="GET" action="{{ route('list.exercises') }}" class="flex items-center space-x-4 mb-2">
-                <select name="sort_by_chapter" id="sort_by_chapter" onchange="this.form.submit()" 
-                        class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="0"  {{ request('sort_by_chapter') == '0' ? 'selected' : '' }}>Select for ordering</option>
-                    @foreach ($chapters as $chapter)
-                        <option value="{{ $chapter->id }}" {{ request('sort_by_chapter') == $chapter->id ? 'selected' : '' }}>
-                            {{ $chapter->getTranslation('title', $locales[0]['locale']) }}
-                        </option>
-                    @endforeach                
-                </select>
-            </form>
 
-            <form method="GET" action="{{ route('list.exercises') }}" class="flex items-center space-x-4 mb-2">
-                <select name="sort_by_lesson" id="sort_by" onchange="this.form.submit()" 
+        <div class="grid grid-cols-3 gap-4">
+            <form method="GET" action="{{ route('list.exercises') }}" class="flex-1 space-x-4 mb-2">
+                <select name="sort_by_chapter" id="sort_by" onchange="this.form.submit()" 
                         class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="0"  {{ request('sort_by') == '0' ? 'selected' : '' }}>Select for ordering</option>
-                    @foreach ($lessons as $lesson)
-                        <option value="{{ $lesson->id }}" {{ request('sort_by') == $lesson->id ? 'selected' : '' }}>
-                            {{ $lesson->getTranslation('title', $locales[0]['locale']) }}
-                        </option>
+                    <option value="0"  {{ request('sort_by_chapter') == '0' ? 'selected' : '' }}>Select for ordering lessons by chapter</option>
+                    @foreach ($chapters as $chapter)
+                        @if($selected_chapter_id !== null)
+                            <option value="{{ $chapter->id }}" {{ $selected_chapter_id == $chapter->id ? 'selected' : '' }}>
+                                {{ $chapter->getTranslation('title', $locales[0]['locale']) }}
+                            </option>
+                        @else
+                            <option value="{{ $chapter->id }}" {{ (request('sort_by_chapter') == $chapter->id || $selected_chapter_id == $chapter->id ) ? 'selected' : '' }}>
+                                {{ $chapter->getTranslation('title', $locales[0]['locale']) }}
+                            </option>
+                        
+                        @endif
+                            
                     @endforeach                
                 </select>
             </form>
-        </div> --}}
+            @if(request('sort_by_chapter') || $selected_chapter_id !== null)
+                <form method="GET" action="{{ route('list.exercises') }}" class="flex-1 space-x-4 mb-2 ">
+                    <select name="sort_by_lesson" id="sort_by" onchange="this.form.submit()" 
+                            class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="0"  {{ request('sort_by_lesson') == '0' ? 'selected' : '' }}>Select for ordering lessons by chapter</option>
+                        @foreach ($lessons as $lesson)
+                            <option value="{{ $lesson->id }}" {{ request('sort_by_lesson') == $lesson->id ? 'selected' : '' }}>
+                                {{ $lesson->getTranslation('title', $locales[0]['locale']) }}
+                            </option>
+                        @endforeach                
+                    </select>
+                </form>
+            @endif
+        </div>
+        
         
         <div class="flex gap-4">
             <div class="overflow-x-auto flex-1 min-h-[700px] relative" >
@@ -46,6 +57,7 @@
                             @foreach($locales as $locale)
                                 <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">title {{ $locale->locale }}</th>
                             @endforeach
+                            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">parent chapter</th>
                             <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">parent lesson</th>
                             <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">order</th>
                             <th class="px-4 py-2">actions</th>
@@ -61,6 +73,7 @@
                                 </td>
                             @endforeach
                             
+                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$list_exercise->chapter->getTranslation('title',$locales[0]['locale'])}}</td>
                             <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$list_exercise->lesson->getTranslation('title',$locales[0]['locale'])}}</td>
                             <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$list_exercise->order}}</td>
                             <td class="flex flex-row justify-center gap-2 text-center whitespace-nowrap px-4 py-2">

@@ -17,6 +17,7 @@
                 <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
                     <thead class="ltr:text-left rtl:text-right">
                         <tr>
+                            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">id</th>
                             @foreach($locales as $locale)
                                 <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">title {{ $locale->locale }}</th>
                             @endforeach
@@ -29,6 +30,7 @@
                     <tbody class="divide-y divide-gray-200">
                         @foreach ($chapters as $chapter)
                         <tr>
+                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$chapter->id}}</td>
                             @foreach($locales as $locale)
                                 <td class="text-center whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                                     {{ $chapter->getTranslation('title', $locale->locale) }}

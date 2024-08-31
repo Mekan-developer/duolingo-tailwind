@@ -10,11 +10,11 @@
             <div>
                 <div class="flex flex-row-reverse">
                     <a href="{{route('questionImage.create')}}" class="text-white bg-[var(--bg-color-active)] hover:bg-[#46b8c0] focus:ring-4 font-medium rounded-sm px-4 py-2 me-2 mb-2">+</a>
-                    {{-- <button  type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg px-5 py-2.5 me-2 mb-2">add</button> --}}
                 </div>
             </div>
         </div>
     </div>
+    @include('includes.exerciseParts.index.orderAllExercise',['route' => 'questionImage.index','title' => ' questionImage Image'])
     <div class="flex gap-4">
         <div class="overflow-x-auto flex-1" >
             <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">

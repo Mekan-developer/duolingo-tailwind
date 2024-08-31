@@ -5,7 +5,7 @@
     <div class="flex flex-col w-full">
         <div class="flex flex-row justify-between w-full">
             <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
-                Chapters
+                10. Question word reverse
             </div>
             <div>
                 <div class="flex flex-row-reverse">
@@ -15,6 +15,7 @@
             </div>
         </div>
     </div>
+    @include('includes.exerciseParts.index.orderAllExercise',['route' => 'testWord.index','title' => 'Question words reverse'])
     <div class="flex gap-4">
         <div class="overflow-x-auto flex-1" >
             <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">

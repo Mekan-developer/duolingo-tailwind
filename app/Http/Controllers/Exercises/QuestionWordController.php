@@ -11,11 +11,11 @@ use Storage;
 
 class QuestionWordController extends Controller
 {
-    public function index(){
-        $locales = Language::where("status",1)->orderBy('order')->get();
-        $questionWords = QuestionWord::with('Exercise')->orderBy('order')->get();
+    public function index(Request $request){
+        $questionWords = QuestionWord::orderBy('order')->get();
+        $data = $this->selectOPtionOrderExercise($request,$questionWords,'questionWords');
 
-        return view("pages.allExercises.question_word.index", compact("locales","questionWords"));
+        return view("pages.allExercises.question_word.index", $data);
     }
 
     public function create() {

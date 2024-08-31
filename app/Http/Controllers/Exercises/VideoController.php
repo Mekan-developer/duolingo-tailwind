@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Exercises;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VideoRequest;
+use App\Models\Chapter;
 use App\Models\Language;
+use App\Models\Lesson;
+use App\Models\List_exercise;
 use App\Models\Video;
 use Illuminate\Http\Request;
 use Storage;
@@ -12,11 +15,10 @@ use Storage;
 class VideoController extends Controller
 {
     
-    public function index(){
-        $locales = Language::where('status',1)->orderBy('order')->get();
-        $videos = Video::orderBy('order')->get();
-       
-        return view("pages.allExercises.video.index", compact("videos","locales"));
+    public function index(Request $request){
+        $videos = Video::orderBy('order')->paginate(10);
+        $data = $this->selectOPtionOrderExercise($request,$videos,'videos');
+        return view("pages.allExercises.video.index",$data);
     }
 
     public function create(){

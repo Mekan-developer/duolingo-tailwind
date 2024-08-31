@@ -11,11 +11,12 @@ use Storage;
 
 class TestWordController extends Controller
 {
-    public function index() {
-        $locales = Language::where("status",1)->orderBy('order')->get();
-        $testWords = TestWord::with('Exercise')->orderBy('order')->get();
+    public function index(Request $request) {
 
-        return view("pages.allExercises.test_word.index", compact("locales","testWords"));
+        $testWords = TestWord::orderBy('order')->get();
+
+        $data = $this->selectOPtionOrderExercise($request,$testWords,'testWords');
+        return view("pages.allExercises.test_word.index", $data);
     }
 
     public function create() {

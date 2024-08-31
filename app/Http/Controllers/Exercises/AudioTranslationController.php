@@ -11,11 +11,11 @@ use Storage;
 
 class AudioTranslationController extends Controller
 {
-    public function index(){
-        $locales = Language::where("status",1)->orderBy('order')->get();
+    public function index(Request $request){
         $audioTranslations = AudioTranslation::with('Exercise')->orderBy('order')->get();
+        $data = $this->selectOPtionOrderExercise($request,$audioTranslations,'audioTranslations');
 
-        return view("pages.allExercises.audio_translation.index",compact("locales","audioTranslations"));
+        return view("pages.allExercises.audio_translation.index",$data);
     }
 
     public function create() {

@@ -12,11 +12,11 @@ use Storage;
 
 class QuestionsImageController extends Controller
 {
-    public function index(){
-        $locales = Language::where("status",1)->orderBy('order')->get();
+    public function index(Request $request){
         $questionImages = QuestionImage::orderBy('order')->get();
+        $data = $this->selectOPtionOrderExercise($request,$questionImages,'questionImages');
 
-        return view("pages.allExercises.question_image.index", compact("locales","questionImages"));
+        return view("pages.allExercises.question_image.index", $data);
     }
 
     public function create() {

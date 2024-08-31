@@ -11,11 +11,11 @@ use Storage;
 
 class PronunciationController extends Controller
 {
-    public function index(){
-        $locales = Language::where('status',1)->orderBy('order')->get();
+    public function index(Request $request){
         $pronunciations = Pronunciation::orderBy('order')->get();
+        $data = $this->selectOPtionOrderExercise($request,$pronunciations,'pronunciations');
        
-        return view("pages.allExercises.pronunciation.index", compact("pronunciations","locales"));
+        return view("pages.allExercises.pronunciation.index", $data);
     }
 
     public function create(){

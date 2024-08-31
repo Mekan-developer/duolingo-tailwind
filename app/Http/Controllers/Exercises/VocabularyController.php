@@ -4,19 +4,21 @@ namespace App\Http\Controllers\Exercises;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VocabularyRequest;
+use App\Models\Chapter;
 use App\Models\Language;
+use App\Models\Lesson;
+use App\Models\List_exercise;
 use App\Models\Vocabulary;
 use Illuminate\Http\Request;
 use Storage;
 
 class VocabularyController extends Controller
 {
-    public function index() {
-        $locales = Language::where("status",1)->orderBy('order')->get();
-        $vocabularies = Vocabulary::with('Exercise')->orderBy('order')->get();
+    public function index(Request $request) {       
+        $vocabularies = Vocabulary::orderBy('order')->paginate(10);
+        $data = $this->selectOPtionOrderExercise($request,$vocabularies,'vocabularies');
 
-
-        return view("pages.allExercises.vocabulary.index", compact("locales","vocabularies"));
+        return view("pages.allExercises.vocabulary.index",$data);
     }
 
 

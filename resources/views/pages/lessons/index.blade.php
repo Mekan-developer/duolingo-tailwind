@@ -11,23 +11,26 @@
                 </div>
             </div>
         </div>
-        <form method="GET" action="{{ route('lessons') }}" class="flex items-center space-x-4 mb-2">
-            <select name="sort_by" id="sort_by" onchange="this.form.submit()" 
-                    class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <option value="0"  {{ request('sort_by') == '0' ? 'selected' : '' }}>Select for ordering</option>
-                @foreach ($chapters as $chapter)
-                    <option value="{{ $chapter->id }}" {{ request('sort_by') == $chapter->id ? 'selected' : '' }}>
-                        {{ $chapter->getTranslation('title', $locales[0]['locale']) }}
-                    </option>
-                @endforeach                
-            </select>
-        </form>
+        <div class="grid grid-cols-3 gap-4">
+            <form method="GET" action="{{ route('lessons') }}" class="flex items-center space-x-4 mb-2">
+                <select name="sort_by" id="sort_by" onchange="this.form.submit()" 
+                        class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="0"  {{ request('sort_by') == '0' ? 'selected' : '' }}>Select for ordering lessons by chapter</option>
+                    @foreach ($chapters as $chapter)
+                        <option value="{{ $chapter->id }}" {{ request('sort_by') == $chapter->id ? 'selected' : '' }}>
+                            {{ $chapter->getTranslation('title', $locales[0]['locale']) }}
+                        </option>
+                    @endforeach                
+                </select>
+            </form>
+        </div>        
         
         <div class="flex gap-4">
             <div class="overflow-x-auto flex-1" >
                 <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
                     <thead class="ltr:text-left rtl:text-right">
                         <tr>
+                            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">id</th>
                             @foreach($locales as $locale)
                                 <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">title {{ $locale->locale }}</th>
                             @endforeach
@@ -43,6 +46,7 @@
                     <tbody class="divide-y divide-gray-200">
                         @foreach ($lessons as $lesson)
                         <tr>
+                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$lesson->id}}</td>
                             @foreach($locales as $locale)
                                 <td class="text-center whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                                     {{ $lesson->getTranslation('title', $locale->locale) }}

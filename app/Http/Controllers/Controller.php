@@ -1,6 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Chapter;
+use App\Models\Language;
+use App\Models\Lesson;
+use App\Models\List_exercise;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
@@ -74,6 +78,51 @@ abstract class Controller
         foreach ($itemsToUpdate as $item) {
             $item->update(['order' => $item->order - 1]);
         }
+    }
+
+
+    //ordering exercises start
+    public function selectOPtionOrderExercise($request, $exercises,$exerciseName){
+        $locales = Language::where("status",1)->orderBy('order')->get();
+          // for ordering
+        $chapters = Chapter::orderBy('order')->get(); 
+        $selected_chapter_id = null; $selected_lesson_id = null;
+        if($request->has('sort_by_chapter') && $request->sort_by_chapter > 0 ){
+            $lessons = Lesson::where('chapter_id',$request->sort_by_chapter)->orderBy("order")->with('chapter')->get();
+            $exercises = $exercises->where('chapter_id',$request->sort_by_chapter);
+        }else{
+            $lessons = Lesson::orderBy("order")->get();
+        }
+
+        if($request->has('sort_by_lesson') && $request->sort_by_lesson > 0 ){
+            $selected_lesson = $lessons->where('id',$request->sort_by_lesson)->first();
+            $selected_chapter_id = $selected_lesson['chapter_id'];//for chapter staying selected
+            
+            $lessons = Lesson::where('chapter_id',$selected_chapter_id)->orderBy("order")->with('chapter')->get();
+            $listExercises = List_exercise::where('lesson_id',$request->sort_by_lesson)->orderBy("order")->get();
+            $exercises = $exercises->where('lesson_id',$request->sort_by_lesson);
+        }else{
+            $listExercises = List_exercise::orderBy("order")->get();
+        }
+
+        if($request->has('sort_by_exercise') && $request->sort_by_exercise > 0 ){
+            $selected_exercise = $listExercises->where('id',$request->sort_by_exercise)->first();
+            $selected_lesson_id = $selected_exercise['lesson_id'];//for chapter staying selected
+            
+            $selected_lesson = $lessons->where('id',$selected_lesson_id)->first();
+            $selected_chapter_id = $selected_lesson['chapter_id'];
+            $exercises = $exercises->where('exercise_id',$request->sort_by_exercise);
+        }
+
+        return [
+                "locales" => $locales,
+                $exerciseName => $exercises,
+                "chapters" => $chapters,
+                "lessons" => $lessons,
+                "listExercises" => $listExercises,
+                "selected_chapter_id" => $selected_chapter_id,
+                "selected_lesson_id" => $selected_lesson_id
+        ];
     }
     
 

@@ -21,7 +21,7 @@ class Video extends Model
 
     public function Chapter(){
         return $this->belongsTo(Chapter::class);
-    }
+    } 
 
     public function getVideo(){
         if(file_exists(public_path('/storage/uploads/video/'.$this->video)) && !is_null($this->video)){

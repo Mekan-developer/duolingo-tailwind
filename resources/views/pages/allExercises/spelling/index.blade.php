@@ -15,6 +15,8 @@
             </div>
         </div>
     </div>
+    @include('includes.exerciseParts.index.orderAllExercise',['route' => 'spelling.index','title' => 'Spelling'])
+    
     <div class="flex gap-4">
         <div class="overflow-x-auto flex-1" >
             <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
