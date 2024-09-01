@@ -11,12 +11,13 @@ use Illuminate\Validation\Rules;
 class AdminController extends Controller
 {
     public function index(){
-        $users = User::all();
+        $users = User::where('role',0)->get();
+
         return view("pages.admin.index",compact("users"));
     }
 
     public function edit(User $user){
-        $users = User::all();
+        $users = User::where('role',0)->get();
 
         $user_edit["edit_user"] = true;
         

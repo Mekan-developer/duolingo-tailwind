@@ -19,30 +19,30 @@
     @include('includes.exerciseParts.index.orderAllExercise',['route' => 'vocabulary.index','title' => 'vocabulary'])
 
     <div class="flex gap-4">
-        <div class="overflow-x-auto flex-1" >
-            <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+        <div class="flex-1 overflow-x-auto" >
+            <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>                        
-                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">id</th>
-                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">en text</th>
-                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">audio</th>
-                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">image</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">id</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">en text</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">audio</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">image</th>
                         @foreach($locales as $locale)
-                            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">translations {{ $locale->locale }}</th>
+                            <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">translations {{ $locale->locale }}</th>
                         @endforeach
-                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">chapter</th>
-                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">lesson</th>
-                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">exercise</th>
-                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">order</th>
-                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">status</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">chapter</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">lesson</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">exercise</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">order</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">status</th>
                         <th class="px-4 py-2">actions</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
                     @foreach ($vocabularies as $vocabulary)
                         <tr>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$vocabulary->id}}</td>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$vocabulary->en_text}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$vocabulary->id}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$vocabulary->en_text}}</td>
                             <td  class="px-6 py-4 ">
                                 <div data-audio-src="{{ $vocabulary->getAudio() }}" class="p-1 text-white rounded-lg shadow-lg audio-player w-[200px]" >
                                     <div class="flex flex-row items-center justify-between pl-1">
@@ -64,23 +64,25 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
                                 <img src="{{$vocabulary->getImage()}}" alt="vocabulary image">
                             </td>
                             @foreach($locales as $locale)
-                                <td class="text-center whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                                <td class="px-4 py-2 font-medium text-center text-gray-900 whitespace-nowrap">
                                     {{ $vocabulary->getTranslation('translations_word',$locale->locale) }}
                                 </td>
                             @endforeach
 
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$vocabulary->Chapter->translate('title',$locales[0]['locale'])}}</td>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$vocabulary->Lesson->translate('title',$locales[0]['locale'])}}</td>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$vocabulary->Exercise->translate('title',$locales[0]['locale'])}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$vocabulary->Chapter->translate('title',$locales[0]['locale'])}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$vocabulary->Lesson->translate('title',$locales[0]['locale'])}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$vocabulary->Exercise->translate('title',$locales[0]['locale'])}}</td>
                             
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$vocabulary->order}}</td>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$vocabulary->status}}</td>
-                            <td class="gap-2 text-center whitespace-nowrap px-4 py-2 h-full ">
-                                <div class="h-full flex flex-row justify-center gap-2">
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$vocabulary->order}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
+                                <x-form.status route="vocabulary.active" modelName="vocabulary" :id="$vocabulary->id" :currentStatus="$vocabulary->status"/>
+                            </td>
+                            <td class="h-full gap-2 px-4 py-2 text-center whitespace-nowrap ">
+                                <div class="flex flex-row justify-center h-full gap-2">
                                     <a href="{{route('vocabulary.edit',['vocabulary'=>$vocabulary->id])}}">
                                         <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
                                             <i class='bx bx-edit-alt text-[22px]'></i>

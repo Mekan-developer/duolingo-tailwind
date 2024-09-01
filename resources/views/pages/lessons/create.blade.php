@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-    <div class="flex flex-col gap-6 w-full p-6">
+    <div class="flex flex-col w-full gap-6 p-6">
         <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
             Add Lesson
         </div>
@@ -8,7 +8,7 @@
             @csrf
                 <label for="chapters" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an chapter</label>
                 <select id="chapters" name="chapter_id" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                    {{-- <option selected>Choose a chapter</option> --}}
+                    <option selected>Choose a chapter</option>
                     @foreach ($chapters as $chapter)
                         <option value="{{$chapter->id}}">{{ $chapter->getTranslation('title',$locales[0]['locale']) }}</option>
                     @endforeach
@@ -22,7 +22,7 @@
                 </div>
             @endforeach
 
-            <div class="flex flex-row gap-2 justify-between my-2">
+            <div class="flex flex-row justify-between gap-2 my-2">
                 @for ($i = 1; $i < 5; $i++)
                     @include('includes.exerciseParts.create.image_file',['label' => 'button'.$i, 'title' => 'Upload dopamine'.$i, 'name' => 'dopamine_image_'.$i,'message' => 'message'.$i ])
                 @endfor

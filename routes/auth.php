@@ -49,7 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/chapters',[ChapterController::class,'index'])->name('chapters');
     Route::get('/chapters/create',[ChapterController::class,'create'])->name('chapter.create');
     Route::post('/chapters/store',[ChapterController::class,'store'])->name('chapter.store');
-    Route::put('/chapters/edit/{chapter}',[ChapterController::class,'edit'])->name('chapter.edit');
+    Route::get('/chapters/edit/{chapter}',[ChapterController::class,'edit'])->name('chapter.edit');
     Route::patch('/chapters/update/{chapter}',[ChapterController::class,'update'])->name('chapter.update');
     Route::delete('/chapters/delete/{chapter}',[ChapterController::class,'destroy'])->name('chapter.delete');
 
@@ -87,6 +87,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/store',[VocabularyController::class,'store'])->name('store');
             Route::get('/edit',[VocabularyController::class,'edit'])->name('edit');
             Route::patch('/update',[VocabularyController::class,'update'])->name('update');
+            Route::put('/active/{vocabulary}', [VocabularyController::class, 'active'])->name('active');
             Route::delete('/delete/{vocabulary}',[VocabularyController::class,'destroy'])->name('delete');
 
         });
@@ -97,6 +98,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/store',[VideoController::class,'store'])->name('store');
             Route::get('/edit',[VideoController::class,'edit'])->name('edit');
             Route::patch('/update',[VideoController::class,'update'])->name('update');
+            Route::put('/active/{video}', [VideoController::class, 'active'])->name('active');
             Route::delete('/delete/{video}',[VideoController::class,'destroy'])->name('delete');
         });
         //QUESTION_WORD
@@ -106,6 +108,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/store',[QuestionWordController::class,'store'])->name('store');
             Route::get('/edit',[QuestionWordController::class,'edit'])->name('edit');
             Route::patch('/update',[QuestionWordController::class,'update'])->name('update');
+            Route::put('/active/{questionWord}', [QuestionWordController::class, 'active'])->name('active');
             Route::delete('/delete/{questionWord}',[QuestionWordController::class,'destroy'])->name('delete');
         });
         //AUDIO_TRANSLATIONS
@@ -115,6 +118,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/store',[AudioTranslationController::class,'store'])->name('store');
             Route::get('/edit',[AudioTranslationController::class,'edit'])->name('edit');
             Route::patch('/update',[AudioTranslationController::class,'update'])->name('update');
+            Route::put('/active/{audioTranslation}', [AudioTranslationController::class, 'active'])->name('active');
             Route::delete('/delete/{audioTranslation}',[AudioTranslationController::class,'destroy'])->name('delete');
         });
         //QUESTION_IMAGE
@@ -124,6 +128,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/store',[QuestionsImageController::class,'store'])->name('store');
             Route::get('/edit',[QuestionsImageController::class,'edit'])->name('edit');
             Route::patch('/update',[QuestionsImageController::class,'update'])->name('update');
+            Route::put('/active/{questionImage}', [QuestionsImageController::class, 'active'])->name('active');
             Route::delete('/delete/{questionImage}',[QuestionsImageController::class,'destroy'])->name('delete');
         });
         //PRONUNCIATION
@@ -133,6 +138,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/store',[PronunciationController::class,'store'])->name('store');
             Route::get('/edit',[PronunciationController::class,'edit'])->name('edit');
             Route::patch('/update',[PronunciationController::class,'update'])->name('update');
+            Route::put('/active/{pronunciation}', [PronunciationController::class, 'active'])->name('active');
             Route::delete('/delete/{pronunciation}',[PronunciationController::class,'destroy'])->name('delete');
         });
         //VOCABULARY_AUDIO_IMAGE
@@ -142,6 +148,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/store',[TestImageController::class,'store'])->name('store');
             Route::get('/edit',[TestImageController::class,'edit'])->name('edit');
             Route::patch('/update',[TestImageController::class,'update'])->name('update');
+            Route::put('/active/{testImage}', [TestImageController::class, 'active'])->name('active');
             Route::delete('/delete/{testImage}',[TestImageController::class,'destroy'])->name('delete');
         });
         //VOCABULARY_AUDIO_WORD
@@ -151,6 +158,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/store',[TestWordController::class,'store'])->name('store');
             Route::get('/edit',[TestWordController::class,'edit'])->name('edit');
             Route::patch('/update',[TestWordController::class,'update'])->name('update');
+            Route::put('/active/{testWord}', [TestWordController::class, 'active'])->name('active');
             Route::delete('/delete/{testWord}',[TestWordController::class,'destroy'])->name('delete');
         });
 
@@ -161,6 +169,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/store',[SpellingController::class,'store'])->name('store');
             Route::get('/edit',[SpellingController::class,'edit'])->name('edit');
             Route::patch('/update',[SpellingController::class,'update'])->name('update');
+            Route::put('/active/{spelling}', [SpellingController::class, 'active'])->name('active');
             Route::delete('/delete/{spelling}',[SpellingController::class,'destroy'])->name('delete');
         });
 
@@ -171,6 +180,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/store',[ListeningController::class,'store'])->name('store');
             Route::get('/edit',[ListeningController::class,'edit'])->name('edit');
             Route::patch('/update',[ListeningController::class,'update'])->name('update');
+            Route::put('/active/{listening}', [ListeningController::class, 'active'])->name('active');
             Route::delete('/delete/{listening}',[ListeningController::class,'destroy'])->name('delete');
         });
 

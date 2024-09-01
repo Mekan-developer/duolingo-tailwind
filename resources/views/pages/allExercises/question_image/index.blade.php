@@ -16,25 +16,25 @@
     </div>
     @include('includes.exerciseParts.index.orderAllExercise',['route' => 'questionImage.index','title' => ' questionImage Image'])
     <div class="flex gap-4">
-        <div class="overflow-x-auto flex-1" >
-            <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+        <div class="flex-1 overflow-x-auto" >
+            <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>                        
-                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">en text</th>
-                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">audio</th>
-                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">image</th>
-                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">chapter</th>
-                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">lesson</th>
-                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">exercise</th>
-                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">order</th>
-                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">status</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">en text</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">audio</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">image</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">chapter</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">lesson</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">exercise</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">order</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">status</th>
                         <th class="px-4 py-2">actions</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
                     @foreach ($questionImages as $questionImage)
                         <tr>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$questionImage->en_text}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$questionImage->en_text}}</td>
                             <td  class="px-6 py-4 ">
                                 <div data-audio-src="{{ $questionImage->getAudio() }}" class="p-1 text-white rounded-lg shadow-lg audio-player w-[200px]" >
                                     <div class="flex flex-row items-center justify-between pl-1">
@@ -56,17 +56,19 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
                                 <img src="{{$questionImage->getImage()}}" alt="vocabulary image">
                             </td>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$questionImage->Chapter->translate('title',$locales[0]['locale'])}}</td>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$questionImage->Lesson->translate('title',$locales[0]['locale'])}}</td>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$questionImage->Exercise->translate('title',$locales[0]['locale'])}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$questionImage->Chapter->translate('title',$locales[0]['locale'])}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$questionImage->Lesson->translate('title',$locales[0]['locale'])}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$questionImage->Exercise->translate('title',$locales[0]['locale'])}}</td>
                             
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$questionImage->order}}</td>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$questionImage->status}}</td>
-                            <td class="gap-2 text-center whitespace-nowrap px-4 py-2 h-full ">
-                                <div class="h-full flex flex-row justify-center gap-2">
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$questionImage->order}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
+                                <x-form.status route="questionImage.active" modelName="questionImage" :id="$questionImage->id" :currentStatus="$questionImage->status"/>
+                            </td>
+                            <td class="h-full gap-2 px-4 py-2 text-center whitespace-nowrap ">
+                                <div class="flex flex-row justify-center h-full gap-2">
                                     <a href="{{route('questionImage.edit',['questionImage'=>$questionImage->id])}}">
                                         <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
                                             <i class='bx bx-edit-alt text-[22px]'></i>

@@ -78,4 +78,16 @@ class VocabularyController extends Controller
 
         return redirect()->route('vocabulary.index')->with('success','vocabulary deleted successfully');
      }
+
+    public function active(Vocabulary $vocabulary){
+
+        if($vocabulary->status == '1'){
+            $vocabulary->status = '0';
+        }else{
+            $vocabulary->status = '1';
+        }
+            $vocabulary->save();
+
+        return redirect()->route('vocabulary.index');
+    }
 }

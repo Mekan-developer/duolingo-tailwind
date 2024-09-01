@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-    <div class="flex flex-col gap-6 w-full p-6">
+    <div class="flex flex-col w-full gap-6 p-6">
         <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
             Edit Chapters
         </div>
@@ -15,16 +15,7 @@
                     <x-input-error :messages="$errors->get('title[{{$locale->locale}}]')" class="mt-2" />
                 </div>
             @endforeach
-            <div class="flex w-full justify-end my-1">
-                <div class="flex gap-2 items-center w-[100px]">
-                    <span>order</span>
-                    <select id="small" name="order" class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500">
-                        @foreach($chapters as $chap)
-                            <option @if($chapter->order == $chap->order) selected @endif>{{$chap->order}}</option>
-                        @endforeach
-                    </select>                    
-                </div>
-            </div>
+            <x-form.order :request="$chapters" :currentOrder="$chapter"></x-form.order>
             <button type="submit" class="w-full py-4 bg-[var(--bg-color-active)] rounded-md text-white text-[18px]"> save </button>
         </form>
     </div>

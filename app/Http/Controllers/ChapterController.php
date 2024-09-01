@@ -58,4 +58,17 @@ class ChapterController extends Controller
 
         return redirect()->route('chapters');
     }
+
+    public function active(Chapter $chapter){
+
+        if($chapter->status == '1'){
+            $chapter->status = '0';
+        }else{
+            $chapter->status = '1';
+        }
+            $chapter->save();
+
+        return redirect()->route('chapter.index');
+    }
+
 }

@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-    <div class="flex flex-col gap-6 w-full p-6">
+    <div class="flex flex-col w-full gap-6 p-6">
         <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
             Add Chapters
         </div>

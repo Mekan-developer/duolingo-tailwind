@@ -61,5 +61,17 @@ class SpellingController extends Controller
         }
 
         return redirect()->route('spelling.index')->with('success','spelling word with image deleted successfully');
-     }
+    }
+
+    public function active(Spelling $spelling){
+
+        if($spelling->status == '1'){
+            $spelling->status = '0';
+        }else{
+            $spelling->status = '1';
+        }
+            $spelling->save();
+
+        return redirect()->route('spelling.index');
+    }
 }

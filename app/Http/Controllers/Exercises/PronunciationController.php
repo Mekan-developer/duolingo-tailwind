@@ -64,5 +64,17 @@ class PronunciationController extends Controller
         }
 
         return redirect()->route('pronunciation.index')->with('success','Pronunciation deleted successfully');
-     }
+    }
+
+    public function active(Pronunciation $pronunciation){
+
+        if($pronunciation->status == '1'){
+            $pronunciation->status = '0';
+        }else{
+            $pronunciation->status = '1';
+        }
+            $pronunciation->save();
+
+        return redirect()->route('pronunciation.index');
+    }
 }

@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class LanguageController extends Controller
 {
     public function index(){
-        $languages = Language::all();
+        $languages = Language::orderBy('order')->get();
 
         return view("pages.languages.index",compact("languages"));
     }
@@ -33,7 +33,7 @@ class LanguageController extends Controller
     }
 
     public function edit(Language $language){
-        $languages = Language::all();
+        $languages = Language::orderBy('order')->get();
         $lang['edit'] = true;
         $lng = $language;
         return view('pages.languages.index',compact('languages','lang','lng'));
@@ -52,6 +52,10 @@ class LanguageController extends Controller
             $imageName = $this->uploadFile($image,'lang_icons',true);
             $data['flag'] = $imageName;
         }
+
+        $languages = Language::all();
+        $this->sortItems($languages, $language->order, $request->order);
+        $data['order'] = $request->order;
 
         $language->update($data);
 

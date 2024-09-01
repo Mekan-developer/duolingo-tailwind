@@ -60,7 +60,19 @@ class QuestionWordController extends Controller
         }
 
         return redirect()->route('questionWord.index')->with('success','questionWords with audio deleted successfully');
-     }
+    }
+
+    public function active(QuestionWord $questionWord){
+
+        if($questionWord->status == '1'){
+            $questionWord->status = '0';
+        }else{
+            $questionWord->status = '1';
+        }
+            $questionWord->save();
+
+        return redirect()->route('questionWord.index');
+    }
 
 
 }

@@ -56,5 +56,17 @@ class ListeningController extends Controller
         }
 
         return redirect()->route('listening.index')->with('success','listening audio deleted successfully');
-     }
+    }
+
+    public function active(Listening $listening){
+
+        if($listening->status == '1'){
+            $listening->status = '0';
+        }else{
+            $listening->status = '1';
+        }
+            $listening->save();
+
+        return redirect()->route('listening.index');
+    }
 }

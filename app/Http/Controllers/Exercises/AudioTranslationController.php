@@ -58,6 +58,18 @@ class AudioTranslationController extends Controller
         }
 
         return redirect()->route('audioTranslation.index')->with('success','audio translation with audio deleted successfully');
-     }
+    }
+
+    public function active(AudioTranslation $audioTranslation){
+
+        if($audioTranslation->status == '1'){
+            $audioTranslation->status = '0';
+        }else{
+            $audioTranslation->status = '1';
+        }
+            $audioTranslation->save();
+
+        return redirect()->route('audioTranslation.index');
+    }
 
 }

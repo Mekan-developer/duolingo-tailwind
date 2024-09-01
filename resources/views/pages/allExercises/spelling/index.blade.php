@@ -18,36 +18,38 @@
     @include('includes.exerciseParts.index.orderAllExercise',['route' => 'spelling.index','title' => 'Spelling'])
     
     <div class="flex gap-4">
-        <div class="overflow-x-auto flex-1" >
-            <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+        <div class="flex-1 overflow-x-auto" >
+            <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>                        
-                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">id</th>
-                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">en text</th>
-                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">image</th>
-                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">chapter</th>
-                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">lesson</th>
-                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">exercise</th>
-                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">order</th>
-                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">status</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">id</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">en text</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">image</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">chapter</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">lesson</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">exercise</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">order</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">status</th>
                         <th class="px-4 py-2">actions</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
                     @foreach ($spellings as $spelling)
                         <tr>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$spelling->id}}</td>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$spelling->en_text}}</td>
-                            <td class="flex justify-center whitespace-nowrap px-4 py-2 text-gray-700">
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$spelling->id}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$spelling->en_text}}</td>
+                            <td class="flex justify-center px-4 py-2 text-gray-700 whitespace-nowrap">
                                 <img src="{{$spelling->getImage()}}" alt="spelling image">
                             </td>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$spelling->Chapter->translate('title',$locales[0]['locale'])}}</td>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$spelling->Lesson->translate('title',$locales[0]['locale'])}}</td>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$spelling->Exercise->translate('title',$locales[0]['locale'])}}</td>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$spelling->order}}</td>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$spelling->status}}</td>
-                            <td class="gap-2 text-center whitespace-nowrap px-4 py-2 h-full ">
-                                <div class="h-full flex flex-row justify-center gap-2">
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$spelling->Chapter->translate('title',$locales[0]['locale'])}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$spelling->Lesson->translate('title',$locales[0]['locale'])}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$spelling->Exercise->translate('title',$locales[0]['locale'])}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$spelling->order}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
+                                <x-form.status route="spelling.active" modelName="spelling" :id="$spelling->id" :currentStatus="$spelling->status"/>
+                            </td>
+                            <td class="h-full gap-2 px-4 py-2 text-center whitespace-nowrap ">
+                                <div class="flex flex-row justify-center h-full gap-2">
                                     <a href="{{route('spelling.edit',['spelling'=>$spelling->id])}}">
                                         <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
                                             <i class='bx bx-edit-alt text-[22px]'></i>

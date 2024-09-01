@@ -13,42 +13,38 @@
             </div>
         </div>
         <div class="flex gap-4">
-            <div class="overflow-x-auto flex-1" >
-                <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+            <div class="flex-1 overflow-x-auto" >
+                <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                     <thead class="ltr:text-left rtl:text-right">
                         <tr>
-                            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">id</th>
+                            <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">id</th>
                             @foreach($locales as $locale)
-                                <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">title {{ $locale->locale }}</th>
+                                <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">title {{ $locale->locale }}</th>
                             @endforeach
                             
-                            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">order</th>
-                            {{-- <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Role</th> --}}
+                            <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">order</th>
+                            {{-- <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">Role</th> --}}
                             <th class="px-4 py-2">actions</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
                         @foreach ($chapters as $chapter)
                         <tr>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$chapter->id}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$chapter->id}}</td>
                             @foreach($locales as $locale)
-                                <td class="text-center whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                                <td class="px-4 py-2 font-medium text-center text-gray-900 whitespace-nowrap">
                                     {{ $chapter->getTranslation('title', $locale->locale) }}
                                 </td>
                             @endforeach
                             
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$chapter->order}}</td>
-                            {{-- <td class="whitespace-nowrap px-4 py-2 text-gray-700">admin</td> --}}
-                            <td class="flex flex-row justify-center gap-2 text-center whitespace-nowrap px-4 py-2">
-                                <form action="{{route('chapter.edit',['chapter'=>$chapter->id])}}" 
-                                    method="POST">
-                                    @csrf
-                                    @method('PUT')
-
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$chapter->order}}</td>
+                            {{-- <td class="px-4 py-2 text-gray-700 whitespace-nowrap">admin</td> --}}
+                            <td class="flex flex-row justify-center gap-2 px-4 py-2 text-center whitespace-nowrap">
+                                <a href="{{route('chapter.edit',['chapter'=>$chapter->id])}}">
                                     <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
                                         <i class='bx bx-edit-alt text-[22px]'></i>
-                                    </a>
-                                </form>
+                                    </button>
+                                </a>
 
                                 @if(auth()->user()->role == 1)
                                     <form action="{{ route('chapter.delete', ['chapter' => $chapter->id])}}" 

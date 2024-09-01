@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="grid grid-cols-3 gap-4">
-            <form method="GET" action="{{ route('lessons') }}" class="flex items-center space-x-4 mb-2">
+            <form method="GET" action="{{ route('lessons') }}" class="flex items-center mb-2 space-x-4">
                 <select name="sort_by" id="sort_by" onchange="this.form.submit()" 
                         class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="0"  {{ request('sort_by') == '0' ? 'selected' : '' }}>Select for ordering lessons by chapter</option>
@@ -26,48 +26,48 @@
         </div>        
         
         <div class="flex gap-4">
-            <div class="overflow-x-auto flex-1" >
-                <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+            <div class="flex-1 overflow-x-auto" >
+                <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                     <thead class="ltr:text-left rtl:text-right">
                         <tr>
-                            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">id</th>
+                            <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">id</th>
                             @foreach($locales as $locale)
-                                <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">title {{ $locale->locale }}</th>
+                                <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">title {{ $locale->locale }}</th>
                             @endforeach
-                            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">dopamine1</th>
-                            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">dopamine2</th>
-                            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">dopamine3</th>
-                            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">dopamine4</th>
-                            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">parent chapter</th>
-                            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">order</th>
+                            <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">dopamine1</th>
+                            <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">dopamine2</th>
+                            <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">dopamine3</th>
+                            <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">dopamine4</th>
+                            <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">parent chapter</th>
+                            <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">order</th>
                             <th class="px-4 py-2">actions</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
                         @foreach ($lessons as $lesson)
                         <tr>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$lesson->id}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$lesson->id}}</td>
                             @foreach($locales as $locale)
-                                <td class="text-center whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                                <td class="px-4 py-2 font-medium text-center text-gray-900 whitespace-nowrap">
                                     {{ $lesson->getTranslation('title', $locale->locale) }}
                                 </td>
                             @endforeach
                             
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
                                 <img src="{{$lesson->getDopamine($lesson->dopamine_image_1)}}" alt="dopamine 1">
                             </td>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
                                 <img src="{{$lesson->getDopamine($lesson->dopamine_image_2)}}" alt="dopamine 1">
                             </td>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
                                 <img src="{{$lesson->getDopamine($lesson->dopamine_image_3)}}" alt="dopamine 1">
                             </td>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
                                 <img src="{{$lesson->getDopamine($lesson->dopamine_image_4)}}" alt="dopamine 1">
                             </td>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{ $lesson->chapter->getTranslation('title',$locales[0]['locale']) }}</td>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$lesson->order}}</td>
-                            <td class="flex flex-row justify-center gap-2 text-center whitespace-nowrap px-4 py-2">
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $lesson->chapter->getTranslation('title',$locales[0]['locale']) }}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$lesson->order}}</td>
+                            <td class="flex flex-row items-center justify-center h-full gap-2 px-4 py-2 whitespace-nowrap">
                                 <a href="{{route('lessons.edit',['lesson'=>$lesson->id])}}">
                                     <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
                                         <i class='bx bx-edit-alt text-[22px]'></i>

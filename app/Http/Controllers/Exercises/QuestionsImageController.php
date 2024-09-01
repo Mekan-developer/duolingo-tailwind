@@ -68,5 +68,17 @@ class QuestionsImageController extends Controller
         }
 
         return redirect()->route('questionImage.index')->with('success','question image with audio deleted successfully');
-     }
+    }
+
+    public function active(QuestionImage $questionImage){
+
+        if($questionImage->status == '1'){
+            $questionImage->status = '0';
+        }else{
+            $questionImage->status = '1';
+        }
+            $questionImage->save();
+
+        return redirect()->route('questionImage.index');
+    }
 }

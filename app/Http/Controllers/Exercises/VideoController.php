@@ -65,5 +65,17 @@ class VideoController extends Controller
         }
 
         return redirect()->route('video.index')->with('success','video deleted successfully');
-     }
+    }
+
+    public function active(Video $video){
+
+        if($video->status == '1'){
+            $video->status = '0';
+        }else{
+            $video->status = '1';
+        }
+            $video->save();
+
+        return redirect()->route('video.index');
+    }
 }

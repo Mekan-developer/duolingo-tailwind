@@ -22,8 +22,9 @@ class ListExerciseRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'lesson_id' => 'required|exists:lessons,id',
+            'chapter_id' => 'required|exists:chapters,id',
             'title.*' => 'required|string|max:255',
-            'lesson_id' => 'required|exists:lessons,id'
         ];
     }
 }

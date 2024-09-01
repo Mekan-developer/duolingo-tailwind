@@ -69,5 +69,16 @@ class TestImageController extends Controller
         }
 
         return redirect()->route('testImage.index')->with('success','test image deleted successfully');
-     }
+    }
+    public function active(TestImage $testImage){
+
+        if($testImage->status == '1'){
+            $testImage->status = '0';
+        }else{
+            $testImage->status = '1';
+        }
+            $testImage->save();
+
+        return redirect()->route('testImage.index');
+    }
 }

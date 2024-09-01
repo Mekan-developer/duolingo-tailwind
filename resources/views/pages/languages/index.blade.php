@@ -39,35 +39,33 @@
                             <img class="bg-cover" src="{{$language->getFlag()}}" alt="">
                         </td>
                         <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
-                            <form action="{{ route('language.active', ['language' => $language->id])}}" 
-                                method="post">
-                                @csrf
-                                @method('PUT')
-                                <label class="relative inline-flex items-center cursor-pointer">
-                                    <input type="checkbox" name="status" @if($language->status) checked @endif class="sr-only peer">
-                                    <div class="relative w-11 h-6 bg-red-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                                    <button type="submit" class="w-[45px] h-[25px] absolute top-0"></button>{{-- image activate and disactivate button --}}
-                                </label>
-                            </form>
+                            <x-form.status route="language.active" modelName="language" :id="$language->id" :currentStatus="$language->status"/>
                         </td>
                         <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $language->order }}</td>
                         <td class="flex flex-row justify-center gap-2 px-4 py-2 text-center whitespace-nowrap">
-                                <a href="{{ route('language.edit', ['language' => $language->id])}}">
-                                    <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
-                                        <i class='bx bx-edit-alt text-[22px]'></i>
-                                    </button>
-                                </a>
-                            @if(auth()->user()->role == 1)
-                                <form action="{{ route('language.delete', ['language' => $language->id])}}" 
-                                    method="post">
-                                    @csrf
-                                    @method('DELETE')
+                            <div class="flex flex-row items-center justify-center h-full">
+                                <div>
+                                    <a href="{{ route('language.edit', ['language' => $language->id])}}">
+                                        <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
+                                            <i class='bx bx-edit-alt text-[22px]'></i>
+                                        </button>
+                                    </a>
+                                </div>
+                                
+                                @if(auth()->user()->role == 1)
+                                <div>
+                                    <form action="{{ route('language.delete', ['language' => $language->id])}}" 
+                                        method= "post">
+                                        @csrf
+                                        @method('DELETE')
 
-                                    <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-red-600">
-                                        <i class='text-[24px] bx bx-trash'></i>
-                                    </button>
-                                </form>
-                            @endif
+                                        <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-red-600">
+                                            <i class='text-[24px] bx bx-trash'></i>
+                                        </button>
+                                    </form>
+                                </div>
+                                @endif
+                            </div>
                         </td>
                     </tr> 
                     @endforeach
@@ -75,7 +73,7 @@
             </table>
         </div>
         <div class="bg-[var(--bg-color-non-active)] p-4 rounded-sm w-auto">
-            <form  action="{{ isset($lang['edit']) ? route('language.update') : route('language.store') }}" method="POST" class="w-full" enctype="multipart/form-data">
+            <form  action="{{ isset($lang['edit']) ? route('language.update') : route('language.store') }}" method= "POST" class="w-full" enctype="multipart/form-data">
                 @csrf
                 @isset($lang['edit']) @method('patch') @endisset
 
@@ -103,6 +101,9 @@
                   <input type="file" id="flag" name="flag" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500" {{ isset($lang['edit'])? '' : `required` }} >
                   <x-input-error :messages="$errors->get('flag')" class="mt-2" />
                 </div>
+                @isset($lang['edit']) 
+                <x-form.order class="order" :request="$languages" :currentOrder="$lng"></x-form.order>
+                @endisset
                 <button type="submit" class="bg-[var(--bg-color-active)] w-full bg-gradient-to-r  text-white py-2 rounded-lg mx-auto block focus:outline-none focus:ring-2 focus:ring-offset-2">add language</button>
             </form>
         </div>

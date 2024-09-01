@@ -45,9 +45,13 @@ class ListExerciseController extends Controller
     }
 
     public function store(ListExerciseRequest $request){
-        
-        List_exercise::create($request->all());
 
+        List_exercise::create([
+            'lesson_id' => $request->lesson_id,
+            'chapter_id' => $request->chapter_id,
+            'title' => $request->title,
+        ]);
+        
         return redirect()->route("list.exercises")->with("success","Lists of exercise successfully added!");
 
     }

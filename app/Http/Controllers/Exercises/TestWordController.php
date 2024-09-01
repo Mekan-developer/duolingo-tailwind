@@ -60,4 +60,15 @@ class TestWordController extends Controller
 
         return redirect()->route('testWord.index')->with('success','test word with audio deleted successfully');
      }
+     public function active(TestWord $testWord){
+
+        if($testWord->status == '1'){
+            $testWord->status = '0';
+        }else{
+            $testWord->status = '1';
+        }
+            $testWord->save();
+
+        return redirect()->route('testWord.index');
+    }
 }
