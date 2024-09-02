@@ -5,24 +5,29 @@
     <div class="flex flex-col w-full">
         <div class="flex flex-row justify-between w-full">
             <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
-                Test audio + image
+                phonetics
             </div>
             <div>
                 <div class="flex flex-row-reverse">
-                    <a href="{{route('testImage.create')}}" class="text-white bg-[var(--bg-color-active)] hover:bg-[#46b8c0] focus:ring-4 font-medium rounded-sm px-4 py-2 me-2 mb-2">+</a>
+                    <a href="{{route('phonetics.create')}}" class="text-white bg-[var(--bg-color-active)] hover:bg-[#46b8c0] focus:ring-4 font-medium rounded-sm px-4 py-2 me-2 mb-2">+</a>
                     {{-- <button  type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg px-5 py-2.5 me-2 mb-2">add</button> --}}
                 </div>
             </div>
         </div>
     </div>
-    @include('includes.exerciseParts.index.orderAllExercise',['route' => 'testImage.index','title' => 'audio image'])
+    {{-- @include('includes.exerciseParts.index.orderAllExercise',['route' => 'phonetics.index','title' => 'phonetics']) --}}
     <div class="flex gap-4">
         <div class="flex-1 overflow-x-auto" >
             <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
-                    <tr>                        
-                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">audio</th>
-                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">image</th>
+                    <tr>         
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">id</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">phonetic_alphabet</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">phonetic_text</th>
+                        @for ($i = 1; $i < 6; $i++)
+                            <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">example{{$i}}</th>
+                            <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">sound{{$i}}</th>
+                        @endfor
                         <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">chapter</th>
                         <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">lesson</th>
                         <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">exercise</th>
@@ -32,10 +37,15 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
-                    @foreach ($testImages as $testImage)
+                    @foreach ($phonetics as $phon)
                         <tr>
-                            <td  class="px-6 py-4 ">
-                                <div data-audio-src="{{ $testImage->getAudio() }}" class="p-1 text-white rounded-lg shadow-lg audio-player w-[200px]" >
+                            <td class="text-center">{{$phon->id}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$phon->phonetic_alphabet}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{!! $phon->translate('phonetic_text',$locales[0]['locale']) !!}</td>
+                            @for ($i = 1; $i < 6; $i++)
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$phon->{'example'.$i} }}</td>
+                            <td class="flex justify-center px-6 py-4">
+                                <div data-audio-src="{{ $phon->getSound($phon->{'sound'.$i}) }}" class="p-1 text-white rounded-lg shadow-lg audio-player w-[200px]" >
                                     <div class="flex flex-row items-center justify-between pl-1">
                                             <div class="flex items-center justify-center p-3 text-gray-800 bg-cover rounded-sm playPauseBtn hover:text-[var(--bg-color-active)] focus:outline-none">
                                                <span class="hidden pauseIcon">
@@ -55,36 +65,32 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
-                                <img src="{{$testImage->getImage()}}" alt="testImage image">
-                            </td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$testImage->Chapter->translate('title',$locales[0]['locale'])}}</td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$testImage->Lesson->translate('title',$locales[0]['locale'])}}</td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$testImage->Exercise->translate('title',$locales[0]['locale'])}}</td>
+                            @endfor
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$phon->Chapter->translate('title',$locales[0]['locale'])}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$phon->Lesson->translate('title',$locales[0]['locale'])}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$phon->Exercise->translate('title',$locales[0]['locale'])}}</td>
                             
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$testImage->order}}</td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
-                                <x-form.status route="testImage.active" modelName="testImage" :id="$testImage->id" :currentStatus="$testImage->status"/>
-                            </td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$phon->order}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$phon->status}}</td>
                             <td class="h-full gap-2 px-4 py-2 text-center whitespace-nowrap ">
                                 <div class="flex flex-row justify-center h-full gap-2">
-                                    <a href="{{route('testImage.edit',['testImage'=>$testImage->id])}}">
+                                    <a href="{{route('phonetics.edit',['phonetic'=>$phon->id])}}">
                                         <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
                                             <i class='bx bx-edit-alt text-[22px]'></i>
                                         </button>
                                     </a>
                                     </form>
                                     @if(auth()->user()->role == 1)
-                                    <form action="{{ route('testImage.delete', ['testImage' => $testImage->id])}}" 
-                                        method="post">
-                                        @csrf
-                                        @method('DELETE')
-
-                                        <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-red-600">
-                                            <i class='text-[24px] bx bx-trash'></i>
-                                        </button>
-                                    </form>
-                                @endif  
+                                        <form action="{{ route('phonetics.delete', ['phonetic' => $phon->id])}}" 
+                                            method="post">
+                                            @csrf
+                                            @method('DELETE')
+    
+                                            <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-red-600">
+                                                <i class='text-[24px] bx bx-trash'></i>
+                                            </button>
+                                        </form>
+                                    @endif 
                                 </div>                                                               
                             </td>
                         </tr> 
@@ -93,7 +99,6 @@
             </table>
         </div>
     </div>
-
 </div>
 
 <script>
@@ -170,4 +175,5 @@
     });
 
 </script>
+
 @endsection

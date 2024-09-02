@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ListExerciseResource extends JsonResource
+class VocabularyResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,9 +16,14 @@ class ListExerciseResource extends JsonResource
     {
         return [
             "id"=> $this->id,
-            "title" => $this->getTranslations('title'),
+            "text" => $this->en_text,
+            "translations" => $this->getTranslations('translations_word'),
+            'image' => $this->getImage(),
+            'audio' => $this->getAudio(),
             "chapter_id" => $this->chapter_id,
-            "lesson_id" => $this->lesson_id
+            "lesson_id" => $this->lesson_id,
+            "exercise_id" => $this->exercise_id,
+            
         ];
     }
 }

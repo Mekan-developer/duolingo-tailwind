@@ -1,6 +1,6 @@
 <div class="flex flex-row w-full gap-6 mb-4">
     <div class="w-full">
-        <label  class="block mb-2 text-sm font-medium text-gray-900" for="mySelect">Select an chapter</label>
+        <label  class="block mb-2 text-sm font-medium @isset($textColor) {{$textColor}} @endisset" for="mySelect">Select an chapter</label>
         <select wire:model="selectedChapter" wire:change="selectedChapterHandle" id="mySelect" name="chapter_id" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
             <option selected>Choose a chapter</option>
             @foreach ($chapters as $chapter)

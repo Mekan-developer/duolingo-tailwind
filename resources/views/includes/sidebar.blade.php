@@ -74,9 +74,9 @@
               </li>
 
               <li>
-                <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-[var(--text-color-active)] hover:bg-gray-100 hover:text-gray-700">
-                  6. ----------Proiznosheniye
-                  <p class="text-[12px] text-gray-300 -mt-2 ml-4 hover:text-gray-500">(pronunciation)</p>
+                <a href="{{route('phonetics.index')}}" class="{{ Request::is('exercises/phonetics*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-lg px-4 py-2 text-sm font-medium text-[var(--text-color-active)] hover:bg-gray-100 hover:text-gray-700">
+                  6. Phonetics
+                  <p class="text-[12px] text-gray-300 -mt-2 ml-4 hover:text-gray-500">(Phonetics)</p>
                 </a>
               </li>
 
@@ -88,8 +88,8 @@
               </li>
 
               <li>
-                <a href="#" class="block rounded-lg px-4 py-2 text-sm font-medium text-[var(--text-color-active)] hover:bg-gray-100 hover:text-gray-700">
-                  8.  ------------Grammar
+                <a href="{{route('grammar.index')}}" class="{{ Request::is('exercises/grammar*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-lg px-4 py-2 text-sm font-medium text-[var(--text-color-active)] hover:bg-gray-100 hover:text-gray-700">
+                  8. Grammar theory
                   <p class="text-[12px] text-gray-300 -mt-2 ml-4 hover:text-gray-500">(grammar)</p>
                 </a>
               </li>

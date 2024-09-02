@@ -4,12 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 
-class Pronunciation extends Model
+class Grammar extends Model
 {
-    use HasFactory;
+    use HasFactory, HasTranslations;
 
-    protected $fillable = ['audio','chapter_id','lesson_id','exercise_id','status','order'];
+    protected $fillable =
+    [
+        'grammar_theory','text','text_correct_parts','text_incorrect_parts','audio','chapter_id','lesson_id','exercise_id','status','order'
+    ];
+
+    public $translatable = ['grammar_theory','text'];
 
     public function Exercise(){
         return $this->belongsTo(List_exercise::class);
@@ -23,14 +29,13 @@ class Pronunciation extends Model
         return $this->belongsTo(Chapter::class);
     }
 
-    public function getAudio(){
-        if(file_exists(public_path('/storage/uploads/pronunciation/'.$this->audio)) && !is_null($this->audio)){
-            return asset('/storage/uploads/pronunciation/'.$this->audio);
+    public function getSound(){
+        if(file_exists(public_path('/storage/uploads/phonetics/'.$this->audio)) && !is_null($this->audio)){
+            return asset('/storage/uploads/phonetics/'.$this->audio);
         }else{
             return null;
         }
     }
-
 
     protected static function boot()
     {

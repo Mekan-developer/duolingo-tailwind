@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\Api\ChapterController;
+use App\Http\Controllers\Api\ExerciseTypeController;
 use App\Http\Controllers\Api\LanguageController;
 use App\Http\Controllers\Api\LessonController;
 use App\Http\Controllers\Api\ListExerciseController;
+use App\Http\Controllers\api\VocabularyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +18,9 @@ Route::get('/langs',[LanguageController::class,'index']);
 Route::get('/chapters',[ChapterController::class,'index']);
 Route::get('/lessons',[LessonController::class,'index']);
 Route::get('/list-exercise',[ListExerciseController::class,'index']);
+Route::get('/exercise-types',[ExerciseTypeController::class,'index']);
+
+Route::group(['prefix' => 'exercises/'],function(){
+    Route::get('vocabulary',[VocabularyController::class,'index']);
+});
 

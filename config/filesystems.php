@@ -113,6 +113,12 @@ return [
             'url' => env('APP_URL') . '/storage/uploads/listening',
             'visibility' => 'public',
         ],
+        'phonetics' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/uploads/phonetics'),
+            'url' => env('APP_URL') . '/storage/uploads/phonetics',
+            'visibility' => 'public',
+        ],
 
 
     ],

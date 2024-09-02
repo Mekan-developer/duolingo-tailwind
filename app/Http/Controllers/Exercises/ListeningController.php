@@ -15,7 +15,7 @@ class ListeningController extends Controller
         $listenings = Listening::orderBy('order')->get();
         $data = $this->selectOPtionOrderExercise($request,$listenings,'listenings');
 
-        return view("pages.allExercises.listening.index",compact("locales","listenings"));
+        return view("pages.allExercises.listening.index",$data);
     }
 
     public function create() {

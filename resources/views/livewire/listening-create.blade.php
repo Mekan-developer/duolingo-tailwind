@@ -8,8 +8,10 @@
             @csrf
             <div class="bg-white px-4 py-6 rounded-sm">
                 @include('includes.exerciseParts.create.options')
-
-                @include('includes.exerciseParts.create.sound_file')
+                <span wire:ignore>
+                    @include('includes.exerciseParts.create.sound_file')
+                </span>
+                
             </div>
             <button type="submit" class="w-full py-4 bg-[var(--bg-color-active)] rounded-md text-white text-[18px]"> save </button>
         </form>

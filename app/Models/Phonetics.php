@@ -4,12 +4,29 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 
-class Pronunciation extends Model
+class Phonetics extends Model
 {
-    use HasFactory;
+    use HasFactory,HasTranslations;
 
-    protected $fillable = ['audio','chapter_id','lesson_id','exercise_id','status','order'];
+    protected $fillable = [
+        'phonetic_alphabet',
+        'phonetic_text',
+        'example1',
+        'sound1',
+        'example2',
+        'sound2',
+        'example3',
+        'sound3',
+        'example4',
+        'sound4',
+        'example5',
+        'sound5',
+        'chapter_id','lesson_id','exercise_id','status','order'
+    ];
+
+    public $translatable = ["phonetic_text"];
 
     public function Exercise(){
         return $this->belongsTo(List_exercise::class);
@@ -23,14 +40,13 @@ class Pronunciation extends Model
         return $this->belongsTo(Chapter::class);
     }
 
-    public function getAudio(){
-        if(file_exists(public_path('/storage/uploads/pronunciation/'.$this->audio)) && !is_null($this->audio)){
-            return asset('/storage/uploads/pronunciation/'.$this->audio);
+    public function getSound($phonetics){
+        if(file_exists(public_path('/storage/uploads/phonetics/'.$phonetics)) && !is_null($phonetics)){
+            return asset('/storage/uploads/phonetics/'.$phonetics);
         }else{
             return null;
         }
     }
-
 
     protected static function boot()
     {

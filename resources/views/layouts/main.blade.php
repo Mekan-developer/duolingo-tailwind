@@ -16,6 +16,7 @@
         </x-slot>
     </x-admin.header>
 <body class="w-[100vw]">
+    
     <div class="flex w-full">
         <div>
             @include("includes.sidebar")
@@ -24,6 +25,18 @@
             @yield("content")
         </div>
     </div>
+
+
+    @livewireScripts
+
+    <script>
+        tinymce.init({
+            selector: 'textarea.letter',
+            license_key: 'glpvuu4bgw2i0d17uizamjpfwjswu59kbeacaefftswsyuty',
+            maxwidth: 600,
+            maxHeight: 250
+        });
+    </script>
 </body>
 </html>
 

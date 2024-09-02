@@ -10,7 +10,7 @@
             <span id="{{ $message ?? 'imageMessage' }}" class="mt-0.5 block text-sm text-blue-900 h-[20px]"></span>
         </div>
         </label>
-    <input hidden="" type="file" name="{{ $name ?? 'image'}}" id="{{ $label ?? 'fileImage'}}">
+    <input hidden="" type="file" name="{{ $name ?? 'image'}}" id="{{ $label ?? 'fileImage'}}" wire:ignore>
 </div>
 
 <script>

@@ -17,6 +17,7 @@
             <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">id</th>
                         <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">Name</th>
                         <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">Email</th>
                         {{-- <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">Role</th> --}}
@@ -26,6 +27,7 @@
                 <tbody class="divide-y divide-gray-200">
                     @foreach ($users as $use)
                     <tr>
+                        <td class="px-4 py-2 font-medium text-center text-gray-900 whitespace-nowrap">{{ $use->id }}</td>
                         <td class="px-4 py-2 font-medium text-center text-gray-900 whitespace-nowrap">{{ $use->name }}</td>
                         <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $use->email }}</td>
                         {{-- <td class="px-4 py-2 text-gray-700 whitespace-nowrap">admin</td> --}}

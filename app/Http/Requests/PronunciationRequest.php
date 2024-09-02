@@ -22,7 +22,10 @@ class PronunciationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'chapter_id' => 'required|exists:chapters,id',
+            'lesson_id' => 'required|exists:lessons,id',
+            'exercise_id' => 'required|exists:list_exercises,id',
+            'audio' => 'required|file|mimes:mp3|max:10240'
         ];
     }
 }

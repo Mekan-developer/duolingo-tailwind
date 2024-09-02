@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\Exercises\AudioTranslationController;
+use App\Http\Controllers\Exercises\GrammarController;
 use App\Http\Controllers\Exercises\ListeningController;
 use App\Http\Controllers\Exercises\PronunciationController;
 use App\Http\Controllers\Exercises\QuestionsImageController;
@@ -26,6 +27,7 @@ use App\Http\Controllers\Exercises\TestWordController;
 use App\Http\Controllers\Exercises\SpellingController;
 
 
+use App\Http\Controllers\Exercises\PhoneticsController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -182,6 +184,28 @@ Route::middleware('auth')->group(function () {
             Route::patch('/update',[ListeningController::class,'update'])->name('update');
             Route::put('/active/{listening}', [ListeningController::class, 'active'])->name('active');
             Route::delete('/delete/{listening}',[ListeningController::class,'destroy'])->name('delete');
+        });
+
+        //PHONETICS
+        Route::group(['prefix' => 'phonetics', 'as' => 'phonetics.'], function() {
+            Route::get('/',[PhoneticsController::class,'index'])->name('index');//+
+            Route::get('/create',[PhoneticsController::class,'create'])->name('create');//+
+            Route::post('/store',[PhoneticsController::class,'store'])->name('store');//+
+            Route::get('/edit',[PhoneticsController::class,'edit'])->name('edit');
+            Route::patch('/update',[PhoneticsController::class,'update'])->name('update');
+            Route::put('/active/{phonetic}', [PhoneticsController::class, 'active'])->name('active');
+            Route::delete('/delete/{phonetic}',[PhoneticsController::class,'destroy'])->name('delete');//+
+        });
+
+        //GRAMMAR_THEORY
+        Route::group(['prefix' => 'grammar', 'as' => 'grammar.'], function() {
+            Route::get('/',[GrammarController::class,'index'])->name('index');//+
+            Route::get('/create',[GrammarController::class,'create'])->name('create');//+
+            Route::post('/store',[GrammarController::class,'store'])->name('store');//+
+            Route::get('/edit',[GrammarController::class,'edit'])->name('edit');
+            Route::patch('/update',[GrammarController::class,'update'])->name('update');
+            Route::put('/active/{phonetic}', [GrammarController::class, 'active'])->name('active');
+            Route::delete('/delete/{phonetic}',[GrammarController::class,'destroy'])->name('delete');//+
         });
 
         

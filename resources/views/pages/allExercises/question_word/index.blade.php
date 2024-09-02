@@ -32,6 +32,7 @@
                         <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">lesson</th>
                         <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">exercise</th>
                         <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">order</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">status</th>
                         <th class="px-4 py-2">actions</th>
                     </tr>
                 </thead>

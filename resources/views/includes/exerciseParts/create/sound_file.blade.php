@@ -10,7 +10,7 @@
             <span id="sound_message" class="mt-0.5 block text-sm text-blue-900 h-[20px]"></span>
         </div>
         </label>
-    <input hidden="" type="file" name="audio" id="sound">
+    <input hidden="" type="file" name="audio" id="sound" wire:ignore>
 </div>
 
 <script>
