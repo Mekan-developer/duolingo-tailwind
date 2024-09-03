@@ -15,7 +15,7 @@ use Storage;
 class VocabularyController extends Controller
 {
     public function index(Request $request) {       
-        $vocabularies = Vocabulary::orderBy('order')->paginate(10);
+        $vocabularies = Vocabulary::orderBy('order');
         $data = $this->selectOPtionOrderExercise($request,$vocabularies,'vocabularies');
 
         return view("pages.allExercises.vocabulary.index",$data);

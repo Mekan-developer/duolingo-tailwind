@@ -12,7 +12,7 @@ use Storage;
 class AudioTranslationController extends Controller
 {
     public function index(Request $request){
-        $audioTranslations = AudioTranslation::with('Exercise')->orderBy('order')->get();
+        $audioTranslations = AudioTranslation::with('Exercise')->orderBy('order');
         $data = $this->selectOPtionOrderExercise($request,$audioTranslations,'audioTranslations');
 
         return view("pages.allExercises.audio_translation.index",$data);

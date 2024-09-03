@@ -16,11 +16,10 @@ class LessonController extends Controller
         $locales = Language::where("status",1)->get("locale");
 
         if($request->has('sort_by') && $request->sort_by > 0 ){
-            $lessons = Lesson::where('chapter_id',$request->sort_by)->orderBy("order")->with('chapter')->get();
+            $lessons = Lesson::where('chapter_id',$request->sort_by)->orderBy("order")->with('chapter')->paginate(10);
         }else{
-            $lessons = Lesson::orderBy("order")->with('chapter')->get();
+            $lessons = Lesson::orderBy("order")->with('chapter')->paginate(10);
         }
-
         return view("pages.lessons.index", compact("locales","lessons","chapters"));
     }
 

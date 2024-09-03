@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class SpellingController extends Controller
 {
     public function index(Request $request) {
-        $spellings = Spelling::orderBy('order')->get();
+        $spellings = Spelling::orderBy('order');
         $data = $this->selectOPtionOrderExercise($request,$spellings,'spellings');
 
         return view("pages.allExercises.spelling.index", $data);

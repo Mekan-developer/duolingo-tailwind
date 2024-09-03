@@ -26,7 +26,7 @@
         </div>        
         
         <div class="flex gap-4">
-            <div class="flex-1 overflow-x-auto" >
+            <div class="flex-1 overflow-x-auto min-h-[700px] relative" >
                 <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                     <thead class="ltr:text-left rtl:text-right">
                         <tr>
@@ -89,6 +89,9 @@
                     @endforeach
                     </tbody>
                 </table>
+                <div class="w-full absolute bottom-0">
+                    {{$lessons->links()}}
+                </div>
             </div>
         </div>
     </div>

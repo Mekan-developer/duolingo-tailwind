@@ -16,17 +16,18 @@ return new class extends Migration
         Schema::create('phonetics', function (Blueprint $table) use ($typeId) {
             $table->id();
             $table->string('phonetic_alphabet');
-            $table->string('example1')->nullanble();
-            $table->string('sound1')->nullanble();
-            $table->string('example2')->nullanble();
-            $table->string('sound2')->nullanble();
-            $table->string('example3')->nullanble();
-            $table->string('sound3')->nullanble();
-            $table->string('example4')->nullanble();
-            $table->string('sound4')->nullanble();
-            $table->string('example5')->nullanble();
-            $table->string('sound5')->nullanble();
             $table->json('phonetic_text');
+            $table->json('examples')->nullanble();
+            $table->json('sounds')->nullanble();
+            // $table->string('example2')->nullanble();
+            // $table->string('sound2')->nullanble();
+            // $table->string('example3')->nullanble();
+            // $table->string('sound3')->nullanble();
+            // $table->string('example4')->nullanble();
+            // $table->string('sound4')->nullanble();
+            // $table->string('example5')->nullanble();
+            // $table->string('sound5')->nullanble();
+            
 
             $table->unsignedBigInteger('chapter_id');
             $table->unsignedBigInteger('lesson_id');

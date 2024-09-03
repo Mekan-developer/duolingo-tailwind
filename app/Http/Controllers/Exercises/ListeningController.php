@@ -12,7 +12,7 @@ use Storage;
 class ListeningController extends Controller
 {
     public function index(Request $request){
-        $listenings = Listening::orderBy('order')->get();
+        $listenings = Listening::orderBy('order');
         $data = $this->selectOPtionOrderExercise($request,$listenings,'listenings');
 
         return view("pages.allExercises.listening.index",$data);

@@ -8,27 +8,29 @@ use App\Models\Lesson;
 use App\Models\List_exercise;
 use Livewire\Component;
 
-class PhoneticsCreate extends Component
+class GrammarTheoryCreate extends Component
 {
-    public $countExamples = 1,$lessons=null,$exercises = null;
+    public $countWordParts = 1, $lessons=null,$exercises = null;
     public $selectedChapter, $selectedLesson;
     public function render()
     {
         $chapters = Chapter::whereHas('lesson')->orderBy('order')->get();
         $locales = Language::where("status",1)->orderBy('order')->get();
 
-        return view('livewire.phonetics-create',[
+        return view('livewire.grammar-theory-create',[
             'chapters' => $chapters,
             'locales' => $locales,
+            'countWordParts' => $this->countWordParts,
         ]);
     }
 
-    public function addExamples(){
-        $this->countExamples++;
+    public function addTextField(){
+        $this->countWordParts++;
     }
-    public function removeExamples(){
-        $this->countExamples--;
+    public function removeTextField(){
+        $this->countWordParts--;
     }
+    
 
     public function selectedChapterHandle()
     {
@@ -39,5 +41,4 @@ class PhoneticsCreate extends Component
     public function selectedLessonHandle(){
         $this->exercises = List_exercise::where('lesson_id',$this->selectedLesson)->orderBy('order')->get(); 
     }
-
 }

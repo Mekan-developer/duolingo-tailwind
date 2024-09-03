@@ -10,23 +10,11 @@ class Phonetics extends Model
 {
     use HasFactory,HasTranslations;
 
-    protected $fillable = [
-        'phonetic_alphabet',
-        'phonetic_text',
-        'example1',
-        'sound1',
-        'example2',
-        'sound2',
-        'example3',
-        'sound3',
-        'example4',
-        'sound4',
-        'example5',
-        'sound5',
+    protected $fillable = ['phonetic_alphabet','phonetic_text','examples','sounds',
         'chapter_id','lesson_id','exercise_id','status','order'
     ];
 
-    public $translatable = ["phonetic_text"];
+    public $translatable = ["phonetic_text","examples","sounds"];
 
     public function Exercise(){
         return $this->belongsTo(List_exercise::class);

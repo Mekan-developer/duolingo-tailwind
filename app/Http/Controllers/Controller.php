@@ -113,6 +113,7 @@ abstract class Controller
             $selected_chapter_id = $selected_lesson['chapter_id'];
             $exercises = $exercises->where('exercise_id',$request->sort_by_exercise);
         }
+        $exercises = $exercises->paginate(10);
 
         return [
                 "locales" => $locales,

@@ -12,7 +12,7 @@ use Storage;
 class QuestionWordController extends Controller
 {
     public function index(Request $request){
-        $questionWords = QuestionWord::orderBy('order')->get();
+        $questionWords = QuestionWord::orderBy('order');
         $data = $this->selectOPtionOrderExercise($request,$questionWords,'questionWords');
 
         return view("pages.allExercises.question_word.index", $data);

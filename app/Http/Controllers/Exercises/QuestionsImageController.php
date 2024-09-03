@@ -13,7 +13,7 @@ use Storage;
 class QuestionsImageController extends Controller
 {
     public function index(Request $request){
-        $questionImages = QuestionImage::orderBy('order')->get();
+        $questionImages = QuestionImage::orderBy('order');
         $data = $this->selectOPtionOrderExercise($request,$questionImages,'questionImages');
 
         return view("pages.allExercises.question_image.index", $data);

@@ -15,7 +15,7 @@ class Grammar extends Model
         'grammar_theory','text','text_correct_parts','text_incorrect_parts','audio','chapter_id','lesson_id','exercise_id','status','order'
     ];
 
-    public $translatable = ['grammar_theory','text'];
+    public $translatable = ['grammar_theory','text','text_correct_parts','text_incorrect_parts'];
 
     public function Exercise(){
         return $this->belongsTo(List_exercise::class);
@@ -30,8 +30,8 @@ class Grammar extends Model
     }
 
     public function getSound(){
-        if(file_exists(public_path('/storage/uploads/phonetics/'.$this->audio)) && !is_null($this->audio)){
-            return asset('/storage/uploads/phonetics/'.$this->audio);
+        if(file_exists(public_path('/storage/uploads/grammars/'.$this->audio)) && !is_null($this->audio)){
+            return asset('/storage/uploads/grammars/'.$this->audio);
         }else{
             return null;
         }

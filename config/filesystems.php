@@ -119,6 +119,12 @@ return [
             'url' => env('APP_URL') . '/storage/uploads/phonetics',
             'visibility' => 'public',
         ],
+        'grammars' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/uploads/grammars'),
+            'url' => env('APP_URL') . '/storage/uploads/grammars',
+            'visibility' => 'public',
+        ],
 
 
     ],

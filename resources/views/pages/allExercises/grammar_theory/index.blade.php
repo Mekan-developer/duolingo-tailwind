@@ -5,28 +5,28 @@
     <div class="flex flex-col w-full">
         <div class="flex flex-row justify-between w-full">
             <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
-                grammaretics
+                Grammar theory and practics
             </div>
             <div>
                 <div class="flex flex-row-reverse">
-                    <a href="{{route('grammaretics.create')}}" class="text-white bg-[var(--bg-color-active)] hover:bg-[#46b8c0] focus:ring-4 font-medium rounded-sm px-4 py-2 me-2 mb-2">+</a>
-                    {{-- <button  type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg px-5 py-2.5 me-2 mb-2">add</button> --}}
+                    <a href="{{route('grammar.create')}}" class="text-white bg-[var(--bg-color-active)] hover:bg-[#46b8c0] focus:ring-4 font-medium rounded-sm px-4 py-2 me-2 mb-2">+</a>
                 </div>
             </div>
         </div>
     </div>
-    {{-- @include('includes.exerciseParts.index.orderAllExercise',['route' => 'grammaretics.index','title' => 'grammaretics']) --}}
-    <div class="flex gap-4">
-        <div class="flex-1 overflow-x-auto" >
+    @include('includes.exerciseParts.index.orderAllExercise',['route' => 'grammar.index','title' => 'grammar'])
+    <div class="flex gap-4 relative">
+        <div class="flex-1 overflow-x-auto overflow-hidden overflow-y-auto h-[700px] " >
             <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>         
                         <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">id</th>
-                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">grammaretic_alphabet</th>
-                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">grammaretic_text</th>
-                        @for ($i = 1; $i < 6; $i++)
-                            <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">example{{$i}}</th>
-                            <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">sound{{$i}}</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">grammar_theory</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">text</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap border-r-2">audio</th>
+                        @for ($i = 1; $i <= $textPartCounts; $i++)
+                            <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">text correct part {{$i}}</th>
+                            <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">text incorrect part {{$i}}</th>
                         @endfor
                         <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">chapter</th>
                         <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">lesson</th>
@@ -42,12 +42,8 @@
                             <td class="text-center">{{$grammar->id}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{!! $grammar->translate('grammar_theory',$locales[0]['locale']) !!}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{!! $grammar->translate('text',$locales[0]['locale']) !!}</td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$grammar->grammaretic_alphabet}}</td>
-                            
-                            @for ($i = 1; $i < 6; $i++)
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$grammar->{'example'.$i} }}</td>
-                            <td class="flex justify-center px-6 py-4">
-                                <div data-audio-src="{{ $grammar->getSound($grammar->{'sound'.$i}) }}" class="p-1 text-white rounded-lg shadow-lg audio-player w-[200px]" >
+                            <td class="flex justify-center px-4 py-2 border-r-2">
+                                <div data-audio-src="{{ $grammar->getSound($grammar->audio) }}" class="p-1 text-white rounded-lg shadow-lg audio-player w-[200px]" >
                                     <div class="flex flex-row items-center justify-between pl-1">
                                             <div class="flex items-center justify-center p-3 text-gray-800 bg-cover rounded-sm playPauseBtn hover:text-[var(--bg-color-active)] focus:outline-none">
                                                <span class="hidden pauseIcon">
@@ -67,6 +63,10 @@
                                     </div>
                                 </div>
                             </td>
+                            @for ($i = 1; $i <= $textPartCounts; $i++)
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$grammar->translate('text_correct_parts',$i)}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$grammar->translate('text_incorrect_parts',$i)}}</td>
+                            
                             @endfor
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$grammar->Chapter->translate('title',$locales[0]['locale'])}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$grammar->Lesson->translate('title',$locales[0]['locale'])}}</td>
@@ -74,16 +74,19 @@
                             
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$grammar->order}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$grammar->status}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
+                                <x-form.status route="grammar.active" modelName="grammar" :id="$grammar->id" :currentStatus="$grammar->status"/>
+                            </td>
                             <td class="h-full gap-2 px-4 py-2 text-center whitespace-nowrap ">
                                 <div class="flex flex-row justify-center h-full gap-2">
-                                    <a href="{{route('grammaretics.edit',['grammaretic'=>$grammar->id])}}">
+                                    <a href="{{route('grammar.edit',['grammar'=>$grammar->id])}}">
                                         <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
                                             <i class='bx bx-edit-alt text-[22px]'></i>
                                         </button>
                                     </a>
                                     </form>
                                     @if(auth()->user()->role == 1)
-                                        <form action="{{ route('grammaretics.delete', ['grammaretic' => $grammar->id])}}" 
+                                        <form action="{{ route('grammar.delete', ['grammar' => $grammar->id])}}" 
                                             method="post">
                                             @csrf
                                             @method('DELETE')
@@ -99,6 +102,9 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
+        <div class="w-full absolute top-full mt-2">
+            {{$grammars->links()}}
         </div>
     </div>
 </div>

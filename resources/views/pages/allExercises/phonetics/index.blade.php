@@ -15,16 +15,16 @@
             </div>
         </div>
     </div>
-    {{-- @include('includes.exerciseParts.index.orderAllExercise',['route' => 'phonetics.index','title' => 'phonetics']) --}}
-    <div class="flex gap-4">
-        <div class="flex-1 overflow-x-auto" >
+    @include('includes.exerciseParts.index.orderAllExercise',['route' => 'phonetics.index','title' => 'phonetics'])
+    <div class="flex gap-4 relative">
+        <div class="flex-1 overflow-x-auto overflow-hidden overflow-y-auto h-[700px] " >
             <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>         
                         <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">id</th>
                         <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">phonetic_alphabet</th>
-                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">phonetic_text</th>
-                        @for ($i = 1; $i < 6; $i++)
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap border-r-2">phonetic_text</th>
+                        @for ($i = 1; $i <= $maxLength; $i++)
                             <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">example{{$i}}</th>
                             <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">sound{{$i}}</th>
                         @endfor
@@ -41,11 +41,11 @@
                         <tr>
                             <td class="text-center">{{$phon->id}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$phon->phonetic_alphabet}}</td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{!! $phon->translate('phonetic_text',$locales[0]['locale']) !!}</td>
-                            @for ($i = 1; $i < 6; $i++)
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$phon->{'example'.$i} }}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap border-r-2">{!! $phon->translate('phonetic_text',$locales[0]['locale']) !!}</td>
+                            @for ($i = 1; $i <= $maxLength; $i++)
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$phon->translate('examples',$i)}}</td>
                             <td class="flex justify-center px-6 py-4">
-                                <div data-audio-src="{{ $phon->getSound($phon->{'sound'.$i}) }}" class="p-1 text-white rounded-lg shadow-lg audio-player w-[200px]" >
+                                <div data-audio-src="{{ $phon->getSound($phon->translate('sounds',$i)) }}" class="p-1 text-white rounded-lg shadow-lg audio-player w-[200px]" >
                                     <div class="flex flex-row items-center justify-between pl-1">
                                             <div class="flex items-center justify-center p-3 text-gray-800 bg-cover rounded-sm playPauseBtn hover:text-[var(--bg-color-active)] focus:outline-none">
                                                <span class="hidden pauseIcon">
@@ -72,6 +72,9 @@
                             
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$phon->order}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$phon->status}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
+                                <x-form.status route="phonetics.active" modelName="phonetics" :id="$phon->id" :currentStatus="$phon->status"/>
+                            </td>
                             <td class="h-full gap-2 px-4 py-2 text-center whitespace-nowrap ">
                                 <div class="flex flex-row justify-center h-full gap-2">
                                     <a href="{{route('phonetics.edit',['phonetic'=>$phon->id])}}">
@@ -81,7 +84,7 @@
                                     </a>
                                     </form>
                                     @if(auth()->user()->role == 1)
-                                        <form action="{{ route('phonetics.delete', ['phonetic' => $phon->id])}}" 
+                                        <form action="{{ route('phonetics.delete', ['phonetics' => $phon->id])}}" 
                                             method="post">
                                             @csrf
                                             @method('DELETE')
@@ -97,6 +100,9 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
+        <div class="w-full absolute top-full mt-2">
+            {{$phonetics->links()}}
         </div>
     </div>
 </div>

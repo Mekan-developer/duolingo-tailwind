@@ -16,8 +16,8 @@
         </div>
     </div>
     @include('includes.exerciseParts.index.orderAllExercise',['route' => 'testWord.index','title' => 'Question words reverse'])
-    <div class="flex gap-4">
-        <div class="flex-1 overflow-x-auto" >
+    <div class="flex gap-4 relative">
+        <div class="flex-1 overflow-x-auto overflow-hidden overflow-y-auto h-[700px] " >
             <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>                        
@@ -98,6 +98,9 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
+        <div class="w-full absolute top-full mt-2">
+            {{$testWords->links()}}
         </div>
     </div>
 

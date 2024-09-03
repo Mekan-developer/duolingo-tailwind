@@ -13,7 +13,7 @@ class TestWordController extends Controller
 {
     public function index(Request $request) {
 
-        $testWords = TestWord::orderBy('order')->get();
+        $testWords = TestWord::orderBy('order');
 
         $data = $this->selectOPtionOrderExercise($request,$testWords,'testWords');
         return view("pages.allExercises.test_word.index", $data);

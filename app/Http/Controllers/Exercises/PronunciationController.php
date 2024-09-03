@@ -12,7 +12,7 @@ use Storage;
 class PronunciationController extends Controller
 {
     public function index(Request $request){
-        $pronunciations = Pronunciation::orderBy('order')->get();
+        $pronunciations = Pronunciation::orderBy('order');
         $data = $this->selectOPtionOrderExercise($request,$pronunciations,'pronunciations');
        
         return view("pages.allExercises.pronunciation.index", $data);

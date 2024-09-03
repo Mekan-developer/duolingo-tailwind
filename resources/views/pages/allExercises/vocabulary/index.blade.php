@@ -10,7 +10,6 @@
             <div>
                 <div class="flex flex-row-reverse">
                     <a href="{{route('vocabulary.create')}}" class="text-white bg-[var(--bg-color-active)] hover:bg-[#46b8c0] focus:ring-4 font-medium rounded-sm px-4 py-2 me-2 mb-2">+</a>
-                    {{-- <button  type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg px-5 py-2.5 me-2 mb-2">add</button> --}}
                 </div>
             </div>
         </div>
@@ -18,8 +17,8 @@
 
     @include('includes.exerciseParts.index.orderAllExercise',['route' => 'vocabulary.index','title' => 'vocabulary'])
 
-    <div class="flex gap-4">
-        <div class="flex-1 overflow-x-auto" >
+    <div class="flex gap-4 relative">
+        <div class="flex-1 overflow-x-auto overflow-hidden overflow-y-auto h-[700px] " >
             <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>                        
@@ -106,6 +105,9 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
+        <div class="w-full absolute top-full mt-2">
+            {{$vocabularies->links()}}
         </div>
     </div>
 

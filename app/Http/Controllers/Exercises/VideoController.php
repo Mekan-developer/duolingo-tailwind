@@ -16,7 +16,7 @@ class VideoController extends Controller
 {
     
     public function index(Request $request){
-        $videos = Video::orderBy('order')->paginate(10);
+        $videos = Video::orderBy('order');
         $data = $this->selectOPtionOrderExercise($request,$videos,'videos');
         return view("pages.allExercises.video.index",$data);
     }

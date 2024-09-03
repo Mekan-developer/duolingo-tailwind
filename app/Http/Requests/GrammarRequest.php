@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PhoneticsRequest extends FormRequest
+class GrammarRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,14 +21,13 @@ class PhoneticsRequest extends FormRequest
      */
     public function rules(): array
     {
-
-
         return [
-            'phonetic_alphabet' => 'required|string|max:255',
-            'phonetic_text.*' => 'required|string',
-            'examples.*' => 'required|string|max:255', 
-            'sounds.*'=> 'required|file|mimes:mp3|max:10240',
-
+            'grammar_theory.*' => 'required|string',
+            'text.*' => 'required|string',
+            'text_correct_parts.*' => 'required|string',
+            'text_incorrect_parts.*' => 'required|string',
+            'audio' => 'required|file|max:10000',
+            
             'chapter_id'=> 'required|exists:chapters,id',
             'lesson_id' => 'required|exists:lessons,id',
             'exercise_id' => 'required|exists:list_exercises,id',

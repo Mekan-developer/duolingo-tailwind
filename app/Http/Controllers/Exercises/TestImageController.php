@@ -12,7 +12,7 @@ use Storage;
 class TestImageController extends Controller
 {
     public function index(Request $request) {;
-        $testImages = TestImage::orderBy('order')->get();
+        $testImages = TestImage::orderBy('order');
 
         $data = $this->selectOPtionOrderExercise($request,$testImages,'testImages');
 
