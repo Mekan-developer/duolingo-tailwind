@@ -25,13 +25,15 @@ class QuestionWordController extends Controller
     }
 
     public function store(QuestionWordRequest $request) {
-        $data = [
-            'chapter_id' => $request->chapter_id,
-            'lesson_id' => $request->lesson_id,
-            'exercise_id' => $request->exercise_id,
-            'en_text' => $request->en_text,
-            'translations_word' => $request->translations_word
-        ];
+        // $data = [
+        //     'chapter_id' => $request->chapter_id,
+        //     'lesson_id' => $request->lesson_id,
+        //     'exercise_id' => $request->exercise_id,
+        //     'en_text' => $request->en_text,
+        //     'translations_word' => $request->translations_word
+        // ];
+
+        $data = $request->all();
 
         if ($request->hasFile('audio')) {
             $random = hexdec(uniqid());

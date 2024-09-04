@@ -40,7 +40,7 @@ class GrammarController extends Controller
         }
         
         Grammar::create($data);
-        return redirect()->route('grammar.index');
+        return redirect()->route('grammar.index')->with('success','grammar successfully created!');
 
     }
 

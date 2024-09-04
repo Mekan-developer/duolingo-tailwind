@@ -1,8 +1,8 @@
 <div class="flex h-screen overflow-hidden overflow-y-scroll flex-col justify-between border-e bg-[var(--bg-color-active)]">
   <div class="px-4 py-6 ">
-    <span class="grid h-10 w-32 place-content-center rounded-lg bg-[var(--bg-color-non-active)] text-xs text-gray-600">
-      Logo
-    </span>
+    <div class="w-full flex ">
+      <img class="w-[120px]" src="{{asset('logo/logo-no-background.png')}}" alt="">
+    </div>
 
     <ul class="mt-6 space-y-1">  
       <li>
@@ -146,7 +146,7 @@
 
           <ul class="px-4 mt-2 space-y-1">
             <li>
-              <a href="{{route('profile')}}" class="{{ Request::is('accounts/profile') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-lg px-4 py-2 text-sm font-medium text-[var(--text-color-active)] hover:bg-gray-100 hover:text-gray-700">
+              <a href="{{route('profile.edit')}}" class="{{ Request::is('accounts/profile') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-lg px-4 py-2 text-sm font-medium text-[var(--text-color-active)] hover:bg-gray-100 hover:text-gray-700">
                 Profile
               </a>
             </li>
@@ -190,7 +190,7 @@
   </div>
 
   <div class="sticky inset-x-0 bottom-0 border-t border-gray-100 ">
-    <a href="#" class="flex items-center gap-2 bg-[var(--bg-color-active)] p-4 hover:bg-gray-50">
+    <div class="flex items-center gap-2 bg-[var(--bg-color-active)] p-4">
       <i class='bx bx-user-circle text-[40px] rounded-full object-cover'></i>  
       <div>
         <p class="text-xs text-white">
@@ -198,6 +198,6 @@
           <span> {{auth()->user()->email}} </span>
         </p>
       </div>
-    </a>
+    </div>
   </div>
 </div>

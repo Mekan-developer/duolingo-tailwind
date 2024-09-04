@@ -26,21 +26,22 @@ class VideoController extends Controller
     }
 
     public function store(VideoRequest $request){
-        $data = [
-            'chapter_id' => $request->chapter_id,
-            'lesson_id' => $request->lesson_id,
-            'exercise_id' => $request->exercise_id,
-        ];
+        // $data = [
+        //     'chapter_id' => $request->chapter_id,
+        //     'lesson_id' => $request->lesson_id,
+        //     'exercise_id' => $request->exercise_id,
+        // ];
+
+        $data = $request->all();
         if ($request->hasFile('video')) {
             $random = hexdec(uniqid());
             $filename = $random . '.' . $request->video->extension();
             Storage::disk('video')->putFileAs('', $request->video,$filename);
             $data['video'] = $filename;
         }
-        $message = 'Images created sccessfully!';
         Video::create($data);
 
-        return redirect()->route('video.index')->with('success',$message);    
+        return redirect()->route('video.index')->with('success','video created successfully!');    
     }
 
     public function edit(Video $video){ 

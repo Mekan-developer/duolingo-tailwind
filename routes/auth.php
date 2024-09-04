@@ -21,23 +21,18 @@ use App\Http\Controllers\Exercises\SpellingController;
 
 
 use App\Http\Controllers\Exercises\PhoneticsController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
-
-    // Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])->name('password.request');
-    // Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
-    // Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
-    // Route::post('reset-password', [NewPasswordController::class, 'store'])->name('password.store');
-    
 });
 
 Route::middleware('auth')->group(function () {
     Route::group(['prefix'=> '/accounts'], function () { 
-        Route::get('/profile',[ProfileController::class,'edit'])->name('profile');
+        Route::get('/profile',[UserProfileController::class,'edit'])->name('profile.edit');
+        Route::post('/profile',[UserProfileController::class,'profileUpdate'])->name('profile.update');
 
         Route::get('/admin-controll',[AdminController::class,'index'])->name('admin.controll');
         Route::delete('admin/delete/{user}',[AdminController::class,'destroy'])->name('admin.delete');
@@ -45,7 +40,6 @@ Route::middleware('auth')->group(function () {
         Route::patch('/admin/update/{user}',[AdminController::class,'update'])->name('admin.update');
         Route::post('register', [RegisteredUserController::class, 'store'])->name('register');
     })->name('accounts');
-    
 
     Route::get('/chapters',[ChapterController::class,'index'])->name('chapters');
     Route::get('/chapters/create',[ChapterController::class,'create'])->name('chapter.create');
@@ -69,7 +63,6 @@ Route::middleware('auth')->group(function () {
         Route::delete('/delete/{list_exercise}',[ListExerciseController::class,'destroy'])->name('exercises.delete');
     });
     
-
     Route::group(['prefix' => 'languages', 'as' => 'language.'], function () {
         Route::get('/', [LanguageController::class, 'index'])->name('index');
         Route::post('/store', [LanguageController::class, 'store'])->name('store');
@@ -81,6 +74,7 @@ Route::middleware('auth')->group(function () {
 
     
     Route::group(['prefix'=> 'exercises/'], function () {  
+
         //WORD 
         Route::group(['prefix'=> 'vocabulary','as'=> 'vocabulary.'], function () {   
             Route::get('/',[VocabularyController::class,'index'])->name('index');
@@ -92,6 +86,7 @@ Route::middleware('auth')->group(function () {
             Route::delete('/delete/{vocabulary}',[VocabularyController::class,'destroy'])->name('delete');
 
         });
+
         //VIDEO
         Route::group(['prefix' => 'video', 'as' => 'video.'], function () {
             Route::get('/',[VideoController::class,'index'])->name('index');
@@ -102,6 +97,7 @@ Route::middleware('auth')->group(function () {
             Route::put('/active/{video}', [VideoController::class, 'active'])->name('active');
             Route::delete('/delete/{video}',[VideoController::class,'destroy'])->name('delete');
         });
+
         //QUESTION_WORD
         Route::group(['prefix'=> 'question-word','as' => 'questionWord.'], function () {
             Route::get('/',[QuestionWordController::class,'index'])->name('index');
@@ -112,6 +108,7 @@ Route::middleware('auth')->group(function () {
             Route::put('/active/{questionWord}', [QuestionWordController::class, 'active'])->name('active');
             Route::delete('/delete/{questionWord}',[QuestionWordController::class,'destroy'])->name('delete');
         });
+
         //AUDIO_TRANSLATIONS
         Route::group(['prefix'=> 'audio-translation','as' => 'audioTranslation.'], function () {
             Route::get('/',[AudioTranslationController::class,'index'])->name('index');
@@ -122,6 +119,7 @@ Route::middleware('auth')->group(function () {
             Route::put('/active/{audioTranslation}', [AudioTranslationController::class, 'active'])->name('active');
             Route::delete('/delete/{audioTranslation}',[AudioTranslationController::class,'destroy'])->name('delete');
         });
+
         //QUESTION_IMAGE
         Route::group(['prefix'=> 'question-image','as' => 'questionImage.'], function () {
             Route::get('/',[QuestionsImageController::class,'index'])->name('index');
@@ -132,6 +130,7 @@ Route::middleware('auth')->group(function () {
             Route::put('/active/{questionImage}', [QuestionsImageController::class, 'active'])->name('active');
             Route::delete('/delete/{questionImage}',[QuestionsImageController::class,'destroy'])->name('delete');
         });
+
         //PRONUNCIATION
         Route::group(['prefix' => 'pronunciation', 'as' => 'pronunciation.'], function() {
             Route::get('/',[PronunciationController::class,'index'])->name('index');
@@ -142,6 +141,7 @@ Route::middleware('auth')->group(function () {
             Route::put('/active/{pronunciation}', [PronunciationController::class, 'active'])->name('active');
             Route::delete('/delete/{pronunciation}',[PronunciationController::class,'destroy'])->name('delete');
         });
+
         //VOCABULARY_AUDIO_IMAGE
         Route::group(['prefix' => 'test-image', 'as' => 'testImage.'], function() {
             Route::get('/',[TestImageController::class,'index'])->name('index');
@@ -152,6 +152,7 @@ Route::middleware('auth')->group(function () {
             Route::put('/active/{testImage}', [TestImageController::class, 'active'])->name('active');
             Route::delete('/delete/{testImage}',[TestImageController::class,'destroy'])->name('delete');
         });
+
         //VOCABULARY_AUDIO_WORD
         Route::group(['prefix' => 'test-word', 'as' => 'testWord.'], function() {
             Route::get('/',[TestWordController::class,'index'])->name('index');
@@ -207,27 +208,5 @@ Route::middleware('auth')->group(function () {
             Route::delete('/delete/{grammar}',[GrammarController::class,'destroy'])->name('delete');//+
         });        
     });
-    
-
-    
-    
-
-
-
-
-
-
-    // Route::get('/')->name;
-
-
-
-    // Route::get('verify-email', EmailVerificationPromptController::class)->name('verification.notice');
-    // Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
-    //             ->middleware(['signed', 'throttle:6,1'])->name('verification.verify');
-    // Route::post('email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
-    //             ->middleware('throttle:6,1')->name('verification.send');
-    // Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])->name('password.confirm');
-    // Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
-    // Route::put('password', [PasswordController::class, 'update'])->name('password.update');
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });

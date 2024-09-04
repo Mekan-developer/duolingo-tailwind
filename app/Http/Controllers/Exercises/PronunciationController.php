@@ -25,21 +25,21 @@ class PronunciationController extends Controller
     }
 
     public function store(PronunciationRequest $request){
-        $data = [
-            'chapter_id' => $request->chapter_id,
-            'lesson_id' => $request->lesson_id,
-            'exercise_id' => $request->exercise_id,
-        ];
+        // $data = [
+        //     'chapter_id' => $request->chapter_id,
+        //     'lesson_id' => $request->lesson_id,
+        //     'exercise_id' => $request->exercise_id,
+        // ];
+        $data = $request->all();
         if ($request->hasFile('audio')) {
             $random = hexdec(uniqid());
             $filename = $random . '.' . $request->audio->extension();
             Storage::disk('pronunciation')->putFileAs('', $request->audio,$filename);
             $data['audio'] = $filename;
         }
-        $message = 'Pronunciation created sccessfully!';
         Pronunciation::create($data);
 
-        return redirect()->route('pronunciation.index')->with('success',$message);    
+        return redirect()->route('pronunciation.index')->with('success','Pronunciation created sccessfully!');    
     }
 
     public function edit(Pronunciation $pronunciation){ 

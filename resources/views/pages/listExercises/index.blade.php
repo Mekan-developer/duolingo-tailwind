@@ -1,6 +1,7 @@
 @extends('layouts.main')
 @section('content')
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full relative">
+        <x-form.success/>
         <div class="flex flex-row justify-between w-full">
             <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
                 Exercises
@@ -11,7 +12,6 @@
                 </div>
             </div>
         </div>
-
         <div class="grid grid-cols-3 gap-4">
             <form method="GET" action="{{ route('list.exercises') }}" class="flex-1 space-x-4 mb-2">
                 <select name="sort_by_chapter" id="sort_by" onchange="this.form.submit()" 
@@ -26,9 +26,7 @@
                             <option value="{{ $chapter->id }}" {{ (request('sort_by_chapter') == $chapter->id || $selected_chapter_id == $chapter->id ) ? 'selected' : '' }}>
                                 {{ $chapter->getTranslation('title', $locales[0]['locale']) }}
                             </option>
-                        
                         @endif
-                            
                     @endforeach                
                 </select>
             </form>
@@ -46,8 +44,6 @@
                 </form>
             @endif
         </div>
-        
-        
         <div class="flex gap-4">
             <div class="overflow-x-auto flex-1 min-h-[700px] relative" >
                 <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
@@ -72,7 +68,6 @@
                                     {{ $list_exercise->getTranslation('title', $locale->locale) }}
                                 </td>
                             @endforeach
-                            
                             <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$list_exercise->chapter->getTranslation('title',$locales[0]['locale'])}}</td>
                             <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$list_exercise->lesson->getTranslation('title',$locales[0]['locale'])}}</td>
                             <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$list_exercise->order}}</td>
@@ -86,17 +81,7 @@
                                         <i class='bx bx-edit-alt text-[22px]'></i>
                                     </a>
                                 </form>
-
-                                @if(auth()->user()->role == 1)
-                                    <form action="{{ route('list.exercises.delete', ['list_exercise' => $list_exercise->id])}}" 
-                                        method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-red-600">
-                                            <i class='text-[24px] bx bx-trash'></i>
-                                        </button>
-                                    </form>
-                                @endif                                
+                                <x-form.delete route="list.exercises.delete" modelName="list_exercise" :dataId="$list_exercise->id" confirmText="are you sure you want to delete?"/>                               
                             </td>
                         </tr> 
                     @endforeach
@@ -107,6 +92,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 @endsection

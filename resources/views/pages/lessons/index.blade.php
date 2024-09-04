@@ -1,6 +1,7 @@
 @extends('layouts.main')
 @section('content')
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full relative">
+        <x-form.success/>
         <div class="flex flex-row justify-between w-full">
             <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
                 Lessons
@@ -24,7 +25,6 @@
                 </select>
             </form>
         </div>        
-        
         <div class="flex gap-4">
             <div class="flex-1 overflow-x-auto min-h-[700px] relative" >
                 <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
@@ -52,38 +52,29 @@
                                     {{ $lesson->getTranslation('title', $locale->locale) }}
                                 </td>
                             @endforeach
-                            
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
-                                <img src="{{$lesson->getDopamine($lesson->dopamine_image_1)}}" alt="dopamine 1">
+                                <img src="{{$lesson->getDopamine($lesson->dopamine_image1)}}" alt="dopamine 1">
                             </td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
-                                <img src="{{$lesson->getDopamine($lesson->dopamine_image_2)}}" alt="dopamine 1">
+                                <img src="{{$lesson->getDopamine($lesson->dopamine_image2)}}" alt="dopamine 1">
                             </td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
-                                <img src="{{$lesson->getDopamine($lesson->dopamine_image_3)}}" alt="dopamine 1">
+                                <img src="{{$lesson->getDopamine($lesson->dopamine_image3)}}" alt="dopamine 1">
                             </td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
-                                <img src="{{$lesson->getDopamine($lesson->dopamine_image_4)}}" alt="dopamine 1">
+                                <img src="{{$lesson->getDopamine($lesson->dopamine_image4)}}" alt="dopamine 1">
                             </td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $lesson->chapter->getTranslation('title',$locales[0]['locale']) }}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$lesson->order}}</td>
-                            <td class="flex flex-row items-center justify-center h-full gap-2 px-4 py-2 whitespace-nowrap">
-                                <a href="{{route('lessons.edit',['lesson'=>$lesson->id])}}">
-                                    <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
-                                        <i class='bx bx-edit-alt text-[22px]'></i>
-                                    </button>
-                                </a>
-                                @if(auth()->user()->role == 1)
-                                    <form action="{{ route('lesson.delete', ['lesson' => $lesson->id])}}" 
-                                        method="post">
-                                        @csrf
-                                        @method('DELETE')
-    
-                                        <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-red-600">
-                                            <i class='text-[24px] bx bx-trash'></i>
+                            <td class="h-full gap-2 px-4 py-2 text-center whitespace-nowrap ">
+                                <div class="flex flex-row justify-center h-full gap-2">
+                                    <a href="{{route('lessons.edit',['lesson'=>$lesson->id])}}">
+                                        <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
+                                            <i class='bx bx-edit-alt text-[22px]'></i>
                                         </button>
-                                    </form>
-                                @endif                                
+                                    </a>
+                                    <x-form.delete route="lesson.delete" modelName="lesson" :dataId="$lesson->id" confirmText="are you sure you want to delete?"/>
+                                </div>                              
                             </td>
                         </tr> 
                     @endforeach

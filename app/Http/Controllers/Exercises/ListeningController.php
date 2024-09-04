@@ -25,12 +25,12 @@ class ListeningController extends Controller
     }
 
     public function store(ListeningRequest $request) {
-        $data = [
-            'chapter_id' => $request->chapter_id,
-            'lesson_id' => $request->lesson_id,
-            'exercise_id' => $request->exercise_id,
-        ];
-
+        // $data = [
+        //     'chapter_id' => $request->chapter_id,
+        //     'lesson_id' => $request->lesson_id,
+        //     'exercise_id' => $request->exercise_id,
+        // ];
+        $data = $request->all();
         if ($request->hasFile('audio')) {
             $random = hexdec(uniqid());
             $filename = $random . '.' . $request->audio->extension();

@@ -1,7 +1,8 @@
 @extends('layouts.main')
 @section('content')
 <div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full relative">
+        <x-form.success/>
         <div class="flex flex-row justify-between w-full">
             <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
                 Listening audio

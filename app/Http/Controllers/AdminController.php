@@ -40,7 +40,7 @@ class AdminController extends Controller
 
         event(new Registered($user));
         
-        return redirect()->route('admin.controll');
+        return redirect()->route('admin.controll')->with('success','User updated successfully!');
     }
 
     public function destroy(User $user){

@@ -1,6 +1,7 @@
 @extends('layouts.main')
 @section('content')
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full relative">
+        <x-form.success/>
         <div class="flex flex-row justify-between w-full">
             <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
                 Chapters
@@ -45,18 +46,7 @@
                                         <i class='bx bx-edit-alt text-[22px]'></i>
                                     </button>
                                 </a>
-
-                                @if(auth()->user()->role == 1)
-                                    <form action="{{ route('chapter.delete', ['chapter' => $chapter->id])}}" 
-                                        method="post">
-                                        @csrf
-                                        @method('DELETE')
-    
-                                        <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-red-600">
-                                            <i class='text-[24px] bx bx-trash'></i>
-                                        </button>
-                                    </form>
-                                @endif                                
+                                <x-form.delete route="chapter.delete" modelName="chapter" :dataId="$chapter->id" confirmText="are you sure, It maybe has lessons!"/>                              
                             </td>
                         </tr> 
                     @endforeach

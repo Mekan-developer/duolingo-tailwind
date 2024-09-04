@@ -26,12 +26,14 @@ class QuestionsImageController extends Controller
     }
 
     public function store(QuestionImageRequest  $request) {
-        $data = [
-            'chapter_id' => $request->chapter_id,
-            'lesson_id' => $request->lesson_id,
-            'exercise_id' => $request->exercise_id,
-            'en_text' => $request->en_text,
-        ];
+        // $data = [
+        //     'chapter_id' => $request->chapter_id,
+        //     'lesson_id' => $request->lesson_id,
+        //     'exercise_id' => $request->exercise_id,
+        //     'en_text' => $request->en_text,
+        // ];
+
+        $data = $request->all();
 
         if ($request->hasFile('audio')) {
             $random = hexdec(uniqid());
@@ -47,7 +49,7 @@ class QuestionsImageController extends Controller
 
         QuestionImage::create($data);
 
-        return redirect()->route('questionImage.index')->with('success','question words with audio successfully created!');
+        return redirect()->route('questionImage.index')->with('success','question with image successfully created!');
     }
 
     public function destroy(QuestionImage $questionImage){
@@ -67,7 +69,7 @@ class QuestionsImageController extends Controller
             $this->reorderAfterRemoval($table,$orderDeletedRow);
         }
 
-        return redirect()->route('questionImage.index')->with('success','question image with audio deleted successfully');
+        return redirect()->route('questionImage.index')->with('success','question with image deleted successfully');
     }
 
     public function active(QuestionImage $questionImage){

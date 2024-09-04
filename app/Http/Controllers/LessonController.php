@@ -37,28 +37,28 @@ class LessonController extends Controller
             'chapter_id' => $request->chapter_id,
         ];
 
-        if ($request->hasFile('dopamine_image_1')) {         
-            $image = $request->dopamine_image_1;
+        if ($request->hasFile('dopamine_image1')) {         
+            $image = $request->dopamine_image1;
             $imageName = $this->uploadFile($image,'dopamine_images',true);
-            $data['dopamine_image_1'] = $imageName;
+            $data['dopamine_image1'] = $imageName;
         }
-        if ($request->hasFile('dopamine_image_2')) {            
-            $image = $request->dopamine_image_2;
+        if ($request->hasFile('dopamine_image2')) {            
+            $image = $request->dopamine_image2;
             $imageName = $this->uploadFile($image,'dopamine_images',true);
-            $data['dopamine_image_2'] = $imageName;
+            $data['dopamine_image2'] = $imageName;
         }
-        if ($request->hasFile('dopamine_image_3')) {            
-            $image = $request->dopamine_image_3;
+        if ($request->hasFile('dopamine_image3')) {            
+            $image = $request->dopamine_image3;
             $imageName = $this->uploadFile($image,'dopamine_images',true);
-            $data['dopamine_image_3'] = $imageName;
+            $data['dopamine_image3'] = $imageName;
         }
-        if ($request->hasFile('dopamine_image_4')) {            
-            $image = $request->dopamine_image_4;
+        if ($request->hasFile('dopamine_image4')) {            
+            $image = $request->dopamine_image4;
             $imageName = $this->uploadFile($image,'dopamine_images',true);
-            $data['dopamine_image_4'] = $imageName;
+            $data['dopamine_image4'] = $imageName;
         }
         Lesson::create($data);  
-        return redirect()->route('lessons');
+        return redirect()->route('lessons')->with('success','Lesson created successfully!');
     }
 
     public function edit(Lesson $lesson){
@@ -75,22 +75,22 @@ class LessonController extends Controller
         $this->sortItems($lessons, $lesson->order, $request->order);
 
         $lesson->update($request->all());
-        return redirect()->route('lessons');
+        return redirect()->route('lessons')->with('success','Lesson updated successfully!');
     }
 
 
     public function destroy(Lesson $lesson){
-        if ($lesson->dopamine_image_1) {
-            $this->removeFile($lesson->dopamine_image_1, 'dopamine_images');
+        if ($lesson->dopamine_image1) {
+            $this->removeFile($lesson->dopamine_image1, 'dopamine_images');
         } 
-        if ($lesson->dopamine_image_2) {
-            $this->removeFile($lesson->dopamine_image_2, 'dopamine_images');
+        if ($lesson->dopamine_image2) {
+            $this->removeFile($lesson->dopamine_image2, 'dopamine_images');
         } 
-        if ($lesson->dopamine_image_3) {
-            $this->removeFile($lesson->dopamine_image_3, 'dopamine_images');
+        if ($lesson->dopamine_image3) {
+            $this->removeFile($lesson->dopamine_image3, 'dopamine_images');
         } 
-        if ($lesson->dopamine_image_4) {
-            $this->removeFile($lesson->dopamine_image_4, 'dopamine_images');
+        if ($lesson->dopamine_image4) {
+            $this->removeFile($lesson->dopamine_image4, 'dopamine_images');
         } 
         $orderDeletedRow = $lesson->order;
         $delete_success = $lesson->delete();
@@ -102,6 +102,6 @@ class LessonController extends Controller
         }
         // end sorting order
 
-        return redirect()->route('lessons');
+        return redirect()->route('lessons')->with('success','Lesson deleted successfully!');
     }
 }

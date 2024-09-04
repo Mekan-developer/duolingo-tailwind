@@ -5,7 +5,7 @@ use App\Http\Controllers\Api\ExerciseTypeController;
 use App\Http\Controllers\Api\LanguageController;
 use App\Http\Controllers\Api\LessonController;
 use App\Http\Controllers\Api\ListExerciseController;
-use App\Http\Controllers\api\VocabularyController;
+use App\Http\Controllers\api\TasksController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +21,17 @@ Route::get('/list-exercise',[ListExerciseController::class,'index']);
 Route::get('/exercise-types',[ExerciseTypeController::class,'index']);
 
 Route::group(['prefix' => 'exercises/'],function(){
-    Route::get('vocabulary',[VocabularyController::class,'index']);
+    Route::get('vocabulary',[TasksController::class,'vocabulary']);//1
+    Route::get('video',[TasksController::class,'video']);//2
+    Route::get('translation-test1',[TasksController::class,'translationTest1']);//3
+    Route::get('translation',[TasksController::class,'translation']);//4
+    Route::get('question-image',[TasksController::class,'questionImage']);//5
+    // Route::get('phonetics',[TasksController::class,'questionImage']);//6
+    Route::get('pronunciation',[TasksController::class,'pronunciation']);//7
+    // Route::get('grammar-theory',[TasksController::class,'pronunciation']);//8
+    Route::get('audio-question',[TasksController::class,'audioQuestion']);//9
+    Route::get('translation-test2',[TasksController::class,'translationTest2']);//10
+    Route::get('vocabulary-spelling',[TasksController::class,'vocabularySpelling']);//11
+    Route::get('listening',[TasksController::class,'listening']);//12
 });
 

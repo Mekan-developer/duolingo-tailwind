@@ -1,6 +1,7 @@
 @extends('layouts.main')
 @section('content')
-<div class="flex flex-col w-full">
+<div class="flex flex-col w-full relative">
+    <x-form.success/>
     <div class="flex flex-row justify-between w-full">
         <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
             Users
@@ -29,17 +30,7 @@
                                     <i class='bx bx-edit-alt text-[22px]'></i>
                                 </button>
                             </a> 
-                            @if(auth()->user()->role == 1)
-                            <form action="{{ route('admin.delete', ['user' => $use->id])}}" 
-                                method="post">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="inline-block text-lg font-medium text-red-600 rounded hover:text-red-800 ">
-                                    <i class='px-3 py-2 rounded-sm bx bx-trash '></i>
-                                </button>
-                            </form>
-                        @endif
-                            
+                            <x-form.delete route="admin.delete" modelName="user" :dataId="$use->id" confirmText="are you sure you want to delete?"/>                       
                         </td>
                     </tr> 
                     @endforeach

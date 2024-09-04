@@ -26,13 +26,15 @@ class TestWordController extends Controller
     }
 
     public function store(TestWordRequest $request) {
-        $data = [
-            'chapter_id' => $request->chapter_id,
-            'lesson_id' => $request->lesson_id,
-            'exercise_id' => $request->exercise_id,
-            'en_text' => $request->en_text,
-            'translations_word' => $request->translations_word
-        ];
+        // $data = [
+        //     'chapter_id' => $request->chapter_id,
+        //     'lesson_id' => $request->lesson_id,
+        //     'exercise_id' => $request->exercise_id,
+        //     'en_text' => $request->en_text,
+        //     'translations_word' => $request->translations_word
+        // ];
+
+        $data = $request->all();
         if ($request->hasFile('audio')) {
             $random = hexdec(uniqid());
             $filename = $random . '.' . $request->audio->extension();

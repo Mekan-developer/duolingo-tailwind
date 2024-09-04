@@ -40,7 +40,7 @@ class PhoneticsController extends Controller
             }
         }
         Phonetics::create($data);
-        return redirect()->route('phonetics.index')->with('success','');      
+        return redirect()->route('phonetics.index')->with('success','Phonetics created successfully');   
         
     }
 
@@ -59,7 +59,7 @@ class PhoneticsController extends Controller
             $this->reorderAfterRemoval($table,$orderDeletedRow);
         }
 
-        return redirect()->route('phonetics.index')->with('success','listening audio deleted successfully');
+        return redirect()->route('phonetics.index')->with('success','Phonetics deleted successfully');
     }
 
 

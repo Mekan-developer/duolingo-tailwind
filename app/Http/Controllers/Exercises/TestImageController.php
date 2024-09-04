@@ -27,12 +27,13 @@ class TestImageController extends Controller
     }
 
     public function store(TestImageRequest $request) {
-        $data = [
-            'chapter_id' => $request->chapter_id,
-            'lesson_id' => $request->lesson_id,
-            'exercise_id' => $request->exercise_id,
-        ];
+        // $data = [
+        //     'chapter_id' => $request->chapter_id,
+        //     'lesson_id' => $request->lesson_id,
+        //     'exercise_id' => $request->exercise_id,
+        // ];
 
+        $data = $request->all();
         if ($request->hasFile('image')) {         
             $image = $request->image;
             $imageName = $this->uploadFile($image,'test_audio_image/image',true);
@@ -48,7 +49,7 @@ class TestImageController extends Controller
 
  
         TestImage::create($data);
-        return redirect()->route('testImage.index')->with('success','vocabulary created successfully!');
+        return redirect()->route('testImage.index')->with('success','test image with audio created successfully!');
     
     }
 
@@ -68,7 +69,7 @@ class TestImageController extends Controller
             $this->reorderAfterRemoval($table,$orderDeletedRow);
         }
 
-        return redirect()->route('testImage.index')->with('success','test image deleted successfully');
+        return redirect()->route('testImage.index')->with('success','test image with audio deleted successfully!');
     }
     public function active(TestImage $testImage){
 

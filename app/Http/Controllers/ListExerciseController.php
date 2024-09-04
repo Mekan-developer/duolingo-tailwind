@@ -52,7 +52,7 @@ class ListExerciseController extends Controller
             'title' => $request->title,
         ]);
         
-        return redirect()->route("list.exercises")->with("success","Lists of exercise successfully added!");
+        return redirect()->route("list.exercises")->with("success","Lists of exercise successfully created!");
 
     }
 
@@ -76,6 +76,6 @@ class ListExerciseController extends Controller
         }
         // end sorting order
 
-        return redirect()->route('lessons');
+        return redirect()->route('lessons')->with('success','Lists of exercise updated successfully!');
     }
 }

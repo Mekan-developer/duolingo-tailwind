@@ -29,7 +29,7 @@ class LanguageController extends Controller
 
         Language::create($data);
 
-        return redirect()->route('language.index'); 
+        return redirect()->route('language.index')->with('success','Language created successfully!'); 
     }
 
     public function edit(Language $language){
@@ -59,7 +59,7 @@ class LanguageController extends Controller
 
         $language->update($data);
 
-        return redirect('/languages');
+        return redirect('/languages')->with('success','Language updated successfully!'); ;
     }
 
     public function destroy(Language $language){    

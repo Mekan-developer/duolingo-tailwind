@@ -2,7 +2,8 @@
 @section('content')
 
 <div>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full relative">
+        <x-form.success/>
         <div class="flex flex-row justify-between w-full">
             <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
                 Test audio + image
@@ -21,6 +22,7 @@
             <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>                        
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">id</th>
                         <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">audio</th>
                         <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">image</th>
                         <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">chapter</th>
@@ -34,7 +36,8 @@
                 <tbody class="divide-y divide-gray-200">
                     @foreach ($testImages as $testImage)
                         <tr>
-                            <td  class="px-6 py-4 ">
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $testImage->id }}</td>
+                            <td  class="px-6 py-4 flex justify-center">
                                 <div data-audio-src="{{ $testImage->getAudio() }}" class="p-1 text-white rounded-lg shadow-lg audio-player w-[200px]" >
                                     <div class="flex flex-row items-center justify-between pl-1">
                                             <div class="flex items-center justify-center p-3 text-gray-800 bg-cover rounded-sm playPauseBtn hover:text-[var(--bg-color-active)] focus:outline-none">

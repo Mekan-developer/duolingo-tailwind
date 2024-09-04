@@ -15,10 +15,10 @@ return new class extends Migration
 
         Schema::create('grammars', function (Blueprint $table) use ($typeId) {
             $table->id();
-            $table->json('grammar_theory');//ulanyjyn dilinde
-            $table->json('text');//ulanyjyn dilinde
-            $table->json('text_correct_parts');//en
-            $table->json('text_incorrect_parts');//en
+            $table->json('grammar_theory');
+            $table->json('text');
+            $table->json('text_correct_parts');
+            $table->json('text_incorrect_parts');
             $table->string('audio');
             $table->unsignedBigInteger('chapter_id');
             $table->unsignedBigInteger('lesson_id');

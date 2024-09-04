@@ -27,14 +27,14 @@ class SpellingController extends Controller
 
     public function store(SpellingRequest $request) {
 
-        $data = [
-            'chapter_id' => $request->chapter_id,
-            'lesson_id' => $request->lesson_id,
-            'exercise_id' => $request->exercise_id,
-            'en_text' => $request->en_text,
-        ];
+        // $data = [
+        //     'chapter_id' => $request->chapter_id,
+        //     'lesson_id' => $request->lesson_id,
+        //     'exercise_id' => $request->exercise_id,
+        //     'en_text' => $request->en_text,
+        // ];
 
-
+        $data = $request->all();
         if ($request->hasFile('image')) {         
             $image = $request->image;
             $imageName = $this->uploadFile($image,'spelling',true);

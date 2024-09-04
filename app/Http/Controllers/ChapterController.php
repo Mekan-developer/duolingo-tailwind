@@ -25,7 +25,7 @@ class ChapterController extends Controller
     public function store(ChapterRequest $request){    
         Chapter::create($request->all());  
 
-        return redirect()->route('chapters');
+        return redirect()->route('chapters')->with('success','chapter created successfully!');
     }
 
     public function edit(Chapter $chapter){
@@ -42,7 +42,7 @@ class ChapterController extends Controller
 
         $chapter->update($request->all());
 
-        return redirect()->route('chapters');
+        return redirect()->route('chapters')->with('success','chapter updated successfully!');
     }
 
     public function destroy(Chapter $chapter){
@@ -56,7 +56,7 @@ class ChapterController extends Controller
         }
         // end sorting order
 
-        return redirect()->route('chapters');
+        return redirect()->route('chapters')->with('success','chapter deleted successfully!');
     }
 
     public function active(Chapter $chapter){
