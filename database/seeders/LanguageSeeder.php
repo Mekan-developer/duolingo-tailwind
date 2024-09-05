@@ -28,15 +28,7 @@ class LanguageSeeder extends Seeder
                 'native' => 'español',
                 'flag' => '1808655636136919.webp',
                 'order' => 2,
-            ],
-            'tm' => [
-                'locale' => 'tm',
-                'name' => 'Turkmen',
-                'native' => 'Türkmen',
-                'flag' => '1808655463089450.webp',
-                'order' => 3,
-            ],
-
+            ]
         ];
 
         foreach ($data as $key => $value) {

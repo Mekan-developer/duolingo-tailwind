@@ -10,7 +10,7 @@ class Phonetics extends Model
 {
     use HasFactory,HasTranslations;
 
-    protected $fillable = ['phonetic_alphabet','phonetic_text','examples','sounds',
+    protected $fillable = ['phonetic_alphabet','phonetic_text','audio','examples','sounds',
         'chapter_id','lesson_id','exercise_id','status','order'
     ];
 

@@ -16,7 +16,7 @@ Route::get('/user', function (Request $request) {
 
 Route::get('/langs',[LanguageController::class,'index']);
 Route::get('/chapters',[ChapterController::class,'index']);
-Route::get('/lessons',[LessonController::class,'index']);
+Route::get('/lessons',[LessonController::class,'index']); 
 Route::get('/list-exercise',[ListExerciseController::class,'index']);
 Route::get('/exercise-types',[ExerciseTypeController::class,'index']);
 
@@ -26,9 +26,9 @@ Route::group(['prefix' => 'exercises/'],function(){
     Route::get('translation-test1',[TasksController::class,'translationTest1']);//3
     Route::get('translation',[TasksController::class,'translation']);//4
     Route::get('question-image',[TasksController::class,'questionImage']);//5
-    // Route::get('phonetics',[TasksController::class,'questionImage']);//6
+    Route::get('phonetics',[TasksController::class,'phonetics']);//6
     Route::get('pronunciation',[TasksController::class,'pronunciation']);//7
-    // Route::get('grammar-theory',[TasksController::class,'pronunciation']);//8
+    Route::get('grammar-theory',[TasksController::class,'grammarTeory']);//8
     Route::get('audio-question',[TasksController::class,'audioQuestion']);//9
     Route::get('translation-test2',[TasksController::class,'translationTest2']);//10
     Route::get('vocabulary-spelling',[TasksController::class,'vocabularySpelling']);//11

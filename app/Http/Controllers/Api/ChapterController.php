@@ -9,6 +9,16 @@ use Illuminate\Http\Request;
 
 class ChapterController extends Controller
 {
+    /**
+     * @OA\Get(
+     *      path="/chapters",
+     *      tags={"Chapters"},
+     *      summary="Get all chapters",
+     *      description="Список глав",
+     *      @OA\Response(response=200,description="Chapters retrived successfully")
+     * )
+     */
+
     public function index(){
         $chapters = ChapterResource::collection(Chapter::orderBy("order")->get());
 

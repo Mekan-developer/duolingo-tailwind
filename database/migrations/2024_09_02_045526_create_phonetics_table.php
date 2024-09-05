@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('phonetic_alphabet');
             $table->json('phonetic_text');
+            $table->string('audio');
+
             $table->json('examples')->nullanble();
             $table->json('sounds')->nullanble();            
 

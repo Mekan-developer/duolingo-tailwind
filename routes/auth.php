@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ChapterController;
+use App\Http\Controllers\BackUpsController;
 use App\Http\Controllers\Exercises\AudioTranslationController;
 use App\Http\Controllers\Exercises\GrammarController;
 use App\Http\Controllers\Exercises\ListeningController;
@@ -30,6 +31,9 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('/download-database', [BackUpsController::class, 'download'])->name('download.database');
+    Route::get('/download-files', [BackUpsController::class, 'downloadFiles'])->name('download.files');
+
     Route::group(['prefix'=> '/accounts'], function () { 
         Route::get('/profile',[UserProfileController::class,'edit'])->name('profile.edit');
         Route::post('/profile',[UserProfileController::class,'profileUpdate'])->name('profile.update');

@@ -1,0 +1,341 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Documentation",
+        "description": "Fusion Center Documentation",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000/api",
+            "description": "local server"
+        }
+    ],
+    "paths": {
+        "/chapters": {
+            "get": {
+                "tags": [
+                    "Chapters"
+                ],
+                "summary": "Get all chapters",
+                "description": "Список глав",
+                "operationId": "018302fa6294cbaa10321a81999d2f2f",
+                "responses": {
+                    "200": {
+                        "description": "Chapters retrived successfully"
+                    }
+                }
+            }
+        },
+        "/exercise-types": {
+            "get": {
+                "tags": [
+                    "exercise-types"
+                ],
+                "summary": "Get all type of exercise",
+                "description": "Получение всех типов кода упражнений",
+                "operationId": "d883cf7befd794a62e13b6cb55eb70b5",
+                "responses": {
+                    "200": {
+                        "description": "type code retrived successfully"
+                    }
+                }
+            }
+        },
+        "/langs": {
+            "get": {
+                "tags": [
+                    "Languages"
+                ],
+                "summary": "Get all languages",
+                "description": "Get list of languages",
+                "operationId": "4e9cba73c394eae2d1bc6a7c62aa293f",
+                "responses": {
+                    "200": {
+                        "description": "Languages retrived successfully"
+                    }
+                }
+            }
+        },
+        "/lessons": {
+            "get": {
+                "tags": [
+                    "lessons"
+                ],
+                "summary": "Get all lessons",
+                "description": "Получение всех уроки",
+                "operationId": "95348a5a00dfcbfb9fd8000414c992f8",
+                "responses": {
+                    "200": {
+                        "description": "lessons retrived successfully"
+                    }
+                }
+            }
+        },
+        "/list-exercise": {
+            "get": {
+                "tags": [
+                    "list-exercise"
+                ],
+                "summary": "Get all list-exercise",
+                "description": "Получение всех список-упражнение",
+                "operationId": "103d6c043e3b328b0c59609979dca16b",
+                "responses": {
+                    "200": {
+                        "description": "list-exercise retrived successfully"
+                    }
+                }
+            }
+        },
+        "/exercises/vocabulary": {
+            "get": {
+                "tags": [
+                    "1.vocabulary (1.Лексика)"
+                ],
+                "summary": "first task of exercise",
+                "description": "первое задание по упражнению",
+                "operationId": "7d360afc4756f39d654c18e878534b71",
+                "responses": {
+                    "200": {
+                        "description": "vocabulary retrived successfully"
+                    }
+                }
+            }
+        },
+        "/exercises/video": {
+            "get": {
+                "tags": [
+                    "3.video (2.Видео)"
+                ],
+                "summary": "second task of exercise",
+                "description": "второе задание упражнения, Видео",
+                "operationId": "bf01c6ec22a668bf7d87269da9c392c4",
+                "responses": {
+                    "200": {
+                        "description": "video retrived successfully"
+                    }
+                }
+            }
+        },
+        "/exercises/translation-test1": {
+            "get": {
+                "tags": [
+                    "3.Vocabulary (3.Лексика)"
+                ],
+                "summary": "third task of exercise",
+                "description": "третье задание упражнения, Лексика",
+                "operationId": "5cfdac85192953659932ef8d9133ad6a",
+                "responses": {
+                    "200": {
+                        "description": "translation-test1 retrived successfully"
+                    }
+                }
+            }
+        },
+        "/exercises/translation": {
+            "get": {
+                "tags": [
+                    "4.translation (4.Перевод)"
+                ],
+                "summary": "fourth task of exercise",
+                "description": "четвертый задание упражнения, Перевод",
+                "operationId": "73c84b80f843e5e56f3e9c7c036ab25f",
+                "responses": {
+                    "200": {
+                        "description": "translation retrived successfully"
+                    }
+                }
+            }
+        },
+        "/exercises/question-image": {
+            "get": {
+                "tags": [
+                    "5.Vocabulary (5.Лексика)"
+                ],
+                "summary": "fifth task of exercise",
+                "description": "пятое задание упражнения, Лексика",
+                "operationId": "f087be0fbdd37a2ee1a213a5f7a547c9",
+                "responses": {
+                    "200": {
+                        "description": "question-image retrived successfully"
+                    }
+                }
+            }
+        },
+        "/exercises/phonetics": {
+            "get": {
+                "tags": [
+                    "6.phonetics (6.Произношение)"
+                ],
+                "summary": "sixth task of exercise",
+                "description": "шестое задание упражнения, phonetics",
+                "operationId": "3bac4ddc5f53e26c93bceb9066edbbf8",
+                "responses": {
+                    "200": {
+                        "description": "phonetics retrived successfully"
+                    }
+                }
+            }
+        },
+        "/exercises/pronunciation": {
+            "get": {
+                "tags": [
+                    "7.Vocabulary with pronunciation, (7. Лексика с произношением)"
+                ],
+                "summary": "seventh task of exercise",
+                "description": "седьмое задание упражнения,Лексика с произношением",
+                "operationId": "a3fd6ee9b3af7ef1faeaf4ce78ad03ba",
+                "responses": {
+                    "200": {
+                        "description": "pronunciation retrived successfully"
+                    }
+                }
+            }
+        },
+        "/exercises/grammar-theory": {
+            "get": {
+                "tags": [
+                    "8.grammar theory with practics, (8. теория грамматики с практикой)"
+                ],
+                "summary": "eighth task of the exercise",
+                "description": "восьмое задание упражнения, теория грамматики с практикой",
+                "operationId": "8eaf4a27565f595c6d57788c4011f29d",
+                "responses": {
+                    "200": {
+                        "description": "grammar-theory retrived successfully"
+                    }
+                }
+            }
+        },
+        "/exercises/audio-question": {
+            "get": {
+                "tags": [
+                    "9.Vocabulary, (9.Лексика)"
+                ],
+                "summary": "ninth task of the exercise",
+                "description": "девятое задание учения, Лексика",
+                "operationId": "6a5dbfe059d739ca7ba727c2cdd5644d",
+                "responses": {
+                    "200": {
+                        "description": "audio-question retrived successfully"
+                    }
+                }
+            }
+        },
+        "/exercises/translation-test2": {
+            "get": {
+                "tags": [
+                    "10.Vocabulary, (10.Лексика)"
+                ],
+                "summary": "tenth task of the exercise",
+                "description": "десятое задание упражнения, Лексика",
+                "operationId": "2ae17dcc2aaacc6a7dd189b02e8a757e",
+                "responses": {
+                    "200": {
+                        "description": "translation-test2 retrived successfully"
+                    }
+                }
+            }
+        },
+        "/exercises/vocabulary-spelling": {
+            "get": {
+                "tags": [
+                    "11.Vocabulary with spelling, (11.Лексика с орфографией)"
+                ],
+                "summary": "eleventh task of the exercise",
+                "description": "одиннадцатое задание учения, Лексика с орфографией",
+                "operationId": "377a945a18e172a6a04f7850308cf758",
+                "responses": {
+                    "200": {
+                        "description": "vocabulary-spelling retrived successfully"
+                    }
+                }
+            }
+        },
+        "/exercises/listening": {
+            "get": {
+                "tags": [
+                    "12.Listening, (12.Аудирование)"
+                ],
+                "summary": "twelfth task of the exercise",
+                "description": "двенадцатое задание упражнения, Аудирование",
+                "operationId": "03efd87ce02a208a5a98152c13972c2a",
+                "responses": {
+                    "200": {
+                        "description": "listening retrived successfully"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Chapters",
+            "description": "Chapters"
+        },
+        {
+            "name": "exercise-types",
+            "description": "exercise-types"
+        },
+        {
+            "name": "Languages",
+            "description": "Languages"
+        },
+        {
+            "name": "lessons",
+            "description": "lessons"
+        },
+        {
+            "name": "list-exercise",
+            "description": "list-exercise"
+        },
+        {
+            "name": "1.vocabulary (1.Лексика)",
+            "description": "1.vocabulary (1.Лексика)"
+        },
+        {
+            "name": "3.video (2.Видео)",
+            "description": "3.video (2.Видео)"
+        },
+        {
+            "name": "3.Vocabulary (3.Лексика)",
+            "description": "3.Vocabulary (3.Лексика)"
+        },
+        {
+            "name": "4.translation (4.Перевод)",
+            "description": "4.translation (4.Перевод)"
+        },
+        {
+            "name": "5.Vocabulary (5.Лексика)",
+            "description": "5.Vocabulary (5.Лексика)"
+        },
+        {
+            "name": "6.phonetics (6.Произношение)",
+            "description": "6.phonetics (6.Произношение)"
+        },
+        {
+            "name": "7.Vocabulary with pronunciation, (7. Лексика с произношением)",
+            "description": "7.Vocabulary with pronunciation, (7. Лексика с произношением)"
+        },
+        {
+            "name": "8.grammar theory with practics, (8. теория грамматики с практикой)",
+            "description": "8.grammar theory with practics, (8. теория грамматики с практикой)"
+        },
+        {
+            "name": "9.Vocabulary, (9.Лексика)",
+            "description": "9.Vocabulary, (9.Лексика)"
+        },
+        {
+            "name": "10.Vocabulary, (10.Лексика)",
+            "description": "10.Vocabulary, (10.Лексика)"
+        },
+        {
+            "name": "11.Vocabulary with spelling, (11.Лексика с орфографией)",
+            "description": "11.Vocabulary with spelling, (11.Лексика с орфографией)"
+        },
+        {
+            "name": "12.Listening, (12.Аудирование)",
+            "description": "12.Listening, (12.Аудирование)"
+        }
+    ]
+}

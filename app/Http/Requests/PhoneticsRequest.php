@@ -26,6 +26,8 @@ class PhoneticsRequest extends FormRequest
         return [
             'phonetic_alphabet' => 'required|string|max:255',
             'phonetic_text.*' => 'required|string',
+            'audio' => 'required|file|mimes:mp3|max:10240',
+
             'examples.*' => 'required|string|max:255', 
             'sounds.*'=> 'required|file|mimes:mp3|max:10240',
 

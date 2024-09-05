@@ -23,8 +23,9 @@
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>         
                         <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">id</th>
-                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">phonetic_alphabet</th>
-                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap border-r-2">phonetic_text</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">phonetic alphabet</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">phonetic text</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap border-r-2">audio</th>
                         @for ($i = 1; $i <= $maxLength; $i++)
                             <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">example{{$i}}</th>
                             <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">sound{{$i}}</th>
@@ -37,16 +38,14 @@
                         <th class="px-4 py-2">actions</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-200">
+                <tbody class="divide-y divide-gray-200"> 
                     @foreach ($phonetics as $phon)
                         <tr>
                             <td class="text-center">{{$phon->id}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$phon->phonetic_alphabet}}</td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap border-r-2">{!! $phon->translate('phonetic_text',$locales[0]['locale']) !!}</td>
-                            @for ($i = 1; $i <= $maxLength; $i++)
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$phon->translate('examples',$i)}}</td>
-                            <td class="flex justify-center px-6 py-4">
-                                <div data-audio-src="{{ $phon->getSound($phon->translate('sounds',$i)) }}" class="p-1 text-white rounded-lg shadow-lg audio-player w-[200px]" >
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap ">{!! $phon->translate('phonetic_text',$locales[0]['locale']) !!}</td>
+                            <td class="flex justify-center px-4 py-2 border-r-2">
+                                <div data-audio-src="{{ $phon->getSound($phon->audio) }}" class="text-white rounded-lg shadow-lg audio-player w-[200px]" >
                                     <div class="flex flex-row items-center justify-between pl-1">
                                             <div class="flex items-center justify-center p-3 text-gray-800 bg-cover rounded-sm playPauseBtn hover:text-[var(--bg-color-active)] focus:outline-none">
                                                <span class="hidden pauseIcon">
@@ -65,18 +64,51 @@
                                         </div>
                                     </div>
                                 </div>
+                                
                             </td>
+                            @for ($i = 1; $i <= $maxLength; $i++)
+                                <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
+                                    @if(!empty($phon->translate('examples',$i)))
+                                        {{$phon->translate('examples',$i)}}
+                                    @else
+                                        <span> --- </span>
+                                    @endif
+                                </td>
+                                <td class="flex justify-center px-6 py-4">
+                                    @if(!empty($phon->translate('sounds',$i)))
+                                    <div data-audio-src="{{ $phon->getSound($phon->translate('sounds',$i)) }}" class="p-1 text-white rounded-lg shadow-lg audio-player w-[200px]" >
+                                        <div class="flex flex-row items-center justify-between pl-1">
+                                                <div class="flex items-center justify-center p-3 text-gray-800 bg-cover rounded-sm playPauseBtn hover:text-[var(--bg-color-active)] focus:outline-none">
+                                                <span class="hidden pauseIcon">
+                                                        <i class='bx bx-pause text-[28px]'></i>
+                                                    </span> 
+                                                    <span class="playIcon">
+                                                        <i class='bx bx-play-circle text-[28px] opacity-60'></i>
+                                                    </span>
+                                                </div>
+                                            <div class="items-start flex-1 pl-4">
+                                                <p class="text-sm text-gray-400 text-nowrap">test</p>
+                                                <div class="relative text-gray-400">
+                                                    <input type="range" min="0" max="100" value="0" class="w-full h-2 bg-gray-400 rounded-lg appearance-none cursor-pointer progressBar">
+                                                    <span class="currentTime">00:00</span> / <span class="duration">00:00</span> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @else
+                                        <span> --- </span>
+                                    @endif
+                                </td>
                             @endfor
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$phon->Chapter->translate('title',$locales[0]['locale'])}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$phon->Lesson->translate('title',$locales[0]['locale'])}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$phon->Exercise->translate('title',$locales[0]['locale'])}}</td>
                             
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$phon->order}}</td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$phon->status}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
                                 <x-form.status route="phonetics.active" modelName="phonetics" :id="$phon->id" :currentStatus="$phon->status"/>
                             </td>
-                            <td class="h-full gap-2 px-4 py-2 text-center whitespace-nowrap ">
+                            <td class="h-full gap-2 px-4  text-center whitespace-nowrap ">
                                 <div class="flex flex-row justify-center h-full gap-2">
                                     <a href="{{route('phonetics.edit',['phonetic'=>$phon->id])}}">
                                         <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">

@@ -18,6 +18,9 @@
                         <textarea class="letter" id="HTML[{{$locale->locale}}]" name="phonetic_text[{{$locale->locale}}]" placeholder="phonetics {{$locale->name}} description"></textarea>
                     @endforeach
                 </div>
+                <div>
+                    @include('includes.exerciseParts.create.sound_file')
+                </div>
             </div>
             <div class="bg-white px-4 py-6 rounded-sm mt-10">
                 <p class="text-black">PHONETICS PART TWO</p>

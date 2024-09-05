@@ -43,9 +43,9 @@
                             <td class="text-center">{{$grammar->id}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{!! $grammar->translate('grammar_theory',$locales[0]['locale']) !!}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{!! $grammar->translate('text',$locales[0]['locale']) !!}</td>
-                            <td class="flex justify-center px-4 py-2 border-r-2">
-                                <div data-audio-src="{{ $grammar->getSound($grammar->audio) }}" class="p-1 text-white rounded-lg shadow-lg audio-player w-[200px]" >
-                                    <div class="flex flex-row items-center justify-between pl-1">
+                            <td class="flex justify-center border-r-2 px-4 py-2">
+                                <div data-audio-src="{{ $grammar->getSound($grammar->audio) }}" class="text-white rounded-lg shadow-lg audio-player w-[200px]" >
+                                    <div class="flex flex-row items-center justify-between ">
                                             <div class="flex items-center justify-center p-3 text-gray-800 bg-cover rounded-sm playPauseBtn hover:text-[var(--bg-color-active)] focus:outline-none">
                                                <span class="hidden pauseIcon">
                                                     <i class='bx bx-pause text-[28px]'></i>

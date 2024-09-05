@@ -17,7 +17,6 @@ class PhoneticsController extends Controller
         $data = $this->selectOPtionOrderExercise($request,$phonetics,'phonetics');
 
         $maxLength = DB::table('phonetics')->selectRaw('MAX(JSON_LENGTH(examples)) as max_length')->value('max_length');
-
         return view("pages.allExercises.phonetics.index",$data ,compact("maxLength"));
     }
 
@@ -36,19 +35,29 @@ class PhoneticsController extends Controller
                 $filename = $random . '.' . $value->getClientOriginalExtension();
                 Storage::disk('phonetics')->putFileAs('', $value, $filename);
                 $data['sounds'][$key] = $filename;
-                
             }
         }
+
+        if ($request->hasFile('audio')) {
+            $random = hexdec(uniqid());
+            $filename = $random . '.' . $request->audio->extension();
+            Storage::disk('phonetics')->putFileAs('', $request->audio,$filename);
+            $data['audio'] = $filename;
+        }
+
         Phonetics::create($data);
         return redirect()->route('phonetics.index')->with('success','Phonetics created successfully');   
-        
     }
 
     public function destroy(Phonetics $phonetics){
         $data = $phonetics->attributesToArray();
         for ($i = 1; $i <= count($data['sounds']); $i++){
             $this->removeFile($data['sounds'][$i], 'phonetics');
-        }        
+        }   
+        
+        if ($phonetics->audio) {
+            $this->removeFile($phonetics->audio, 'phonetics');
+        } 
 
         $orderDeletedRow = $phonetics->order;
         $delete_success = $phonetics->delete();

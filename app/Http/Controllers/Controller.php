@@ -9,10 +9,15 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
 
+//swagger
+use OpenApi\Attributes as OA;
+#[
+    OA\Info(version:"1.0.0", description:"Fusion Center Documentation", title:"Documentation"),
+    OA\Server(url:'http://127.0.0.1:8000/api',description:"local server"),
+]
+// swagger
 abstract class Controller
 {
-    
-    
     protected function uploadFile($file,$path,$icon = false)
     {
         // create image manager with desired driver
@@ -20,25 +25,20 @@ abstract class Controller
         $random = hexdec(uniqid());
         // $filename = $random . '.' . $file->extension();
         $webpFilename = $random . '.webp';
-
         $img = $manager->read($file);
 
-        if($icon){
+        if($icon)
             $web_image_width = 100;
-        }else{
+        else
             $web_image_width = 420;
-        }
         
 
         $height = $img->height();
         $width = $img->width();
         $scale = $height / $width;
-
         $web_image_height = $scale * $web_image_width;
 
-
         create_folder($path);
-
         $web_img = $img->resize($web_image_width, $web_image_height);
         $web_img->toWebp(90)->save(storage_path('app/public/uploads/'. $path .'/' . $webpFilename));
         return $webpFilename;

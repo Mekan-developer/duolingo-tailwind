@@ -18,10 +18,10 @@ class LessonResource extends JsonResource
             'id' => $this->id,
             'title' => $this->getTranslations('title'),
             'chapter_id' => $this->chapter_id,
-            'dopamine1' => $this->getDopamine($this->dopamine_image_1),
-            'dopamine2' => $this->getDopamine($this->dopamine_image_2),
-            'dopamine3' => $this->getDopamine($this->dopamine_image_3),
-            'dopamine4' => $this->getDopamine($this->dopamine_image_4),
+            'dopamine1' => $this->getDopamine($this->dopamine_image1),
+            'dopamine2' => $this->getDopamine($this->dopamine_image2),
+            'dopamine3' => $this->getDopamine($this->dopamine_image3),
+            'dopamine4' => $this->getDopamine($this->dopamine_image4),
 
         ];
     }

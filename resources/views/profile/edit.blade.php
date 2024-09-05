@@ -1,6 +1,20 @@
 @extends('layouts.main')
 @section('content')
 <div class="bg-white p-8 rounded-sm shadow-lg w-full relative">
+    <div class="flex justify-end  gap-4">
+        <a href="{{ route('download.database') }}">
+            <div class="flex items-center gap-1 p-4 hover:p-[14px] hover:m-[2px] bg-[var(--bg-color-active)] text-white rounded-sm cursor-pointer">
+                <span>Backup database</span>
+                <i class='bx bxs-download text-[20px]' ></i>
+            </div>
+        </a>
+        <a href="{{ route('download.files') }}">
+            <div class="flex items-center gap-1 p-4 hover:p-[14px] hover:m-[2px] bg-[var(--bg-color-active)] text-white rounded-sm">
+                <span>Backup files</span>
+                <i class='bx bxs-download text-[20px]' ></i>
+            </div>
+        </a>
+    </div>
     <x-form.success/>
     <h2 class="text-2xl font-bold  mb-6 text-[var(--bg-color-active)]">Edit profile</h2>
     <form action="{{route('profile.update')}}" method="POST" class="w-full">

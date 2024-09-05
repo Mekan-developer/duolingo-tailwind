@@ -29,10 +29,10 @@
                     </div>
                     @for ($i = 1; $i <= $countWordParts; $i++)
                         <div class="grid grid-cols-2 gap-4 my-2 " wire:ignore>
-                            @include('includes.exerciseParts.create.english_text',['name'=>'text_correct_parts[' . $i . ']','title' => 'text correct part '.($i),'placeholder' => 'text parts'])
+                            @include('includes.exerciseParts.create.english_text',['name'=>'text_correct_parts[' . $i . ']','title' => 'text correct part '.($i),'placeholder' => 'text correct parts '.$i])
                             <div class="flex items-end">
                                 <div class="flex-1">
-                                    @include('includes.exerciseParts.create.english_text',['name' => 'text_incorrect_parts[' . $i . ']','title' => 'text incorrect part '.($i),'placeholder' => 'text parts'])   
+                                    @include('includes.exerciseParts.create.english_text',['name' => 'text_incorrect_parts[' . $i . ']','title' => 'text incorrect part '.($i),'placeholder' => 'text incorrect parts '.$i])   
                                 </div>                               
                                 @if($i==1)                           
                                     <a href="{{route('grammar.create')}}" wire:click.prevent="addTextField" class="text-white bg-[var(--bg-color-active)] h-[42px] mb-4 ml-1 focus:ring-4 font-medium rounded-sm px-4 py-2 me-2 ">+</a>

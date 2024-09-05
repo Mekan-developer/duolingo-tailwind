@@ -36,7 +36,7 @@ class LessonController extends Controller
             'title' => $request->title,
             'chapter_id' => $request->chapter_id,
         ];
-
+        
         if ($request->hasFile('dopamine_image1')) {         
             $image = $request->dopamine_image1;
             $imageName = $this->uploadFile($image,'dopamine_images',true);
@@ -57,6 +57,7 @@ class LessonController extends Controller
             $imageName = $this->uploadFile($image,'dopamine_images',true);
             $data['dopamine_image4'] = $imageName;
         }
+
         Lesson::create($data);  
         return redirect()->route('lessons')->with('success','Lesson created successfully!');
     }
