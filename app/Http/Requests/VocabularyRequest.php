@@ -21,14 +21,22 @@ class VocabularyRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $data = [
             'en_text' => 'required|string|max:255',
             'chapter_id' => 'required|exists:chapters,id',
             'lesson_id' => 'required|exists:lessons,id',
             'exercise_id' => 'required|exists:list_exercises,id',
-            'image' => 'required|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240',
-            'audio' => 'required|file|mimes:mp3|max:10240',
             'translations_word.*' => 'required|string|max:255'
         ];
+
+        if(request()->isMethod("POST")) {
+            $data['image'] = 'required|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240';
+            $data['audio'] = 'required|file|mimes:mp3|max:10240';
+        }else{
+            $data['image'] = 'nullable|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240';
+            $data['audio'] = 'nullable|file|mimes:mp3|max:10240';
+        }
+
+        return $data;
     }
 }

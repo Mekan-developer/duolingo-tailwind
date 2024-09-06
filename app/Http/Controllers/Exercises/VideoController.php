@@ -45,11 +45,28 @@ class VideoController extends Controller
     }
 
     public function edit(Video $video){ 
-        dd($video);
+        $lessons = Lesson::where('chapter_id', $video->chapter_id)->orderBy('order')->get();
+        $exercises = List_exercise::where('lesson_id', $video->lesson_id)->orderBy('order')->get();
+        return view("pages.allExercises.video.edit")->with("video",$video)->with("lessons",$lessons)->with("exercises", $exercises);
      }
 
      public function update(VideoRequest $request, Video $video){   
+        $videos = Video::all();
+        $this->sortItems($videos, $video->order, $request->order);
 
+        $data = $request->all();
+        if ($request->hasFile('video')) {
+            if ($video->video) 
+                $this->removeFile($video->audio, 'video');
+            $random = hexdec(uniqid());
+            $filename = $random . '.' . $request->audio->extension();
+            Storage::disk('video')->putFileAs('', $request->audio,$filename);
+            $data['video'] = $filename;
+        }
+
+        $video->update($data);
+
+        return redirect()->route('video.index')->with('success','video updated successfully!');
      }
 
      public function destroy(Video $video){

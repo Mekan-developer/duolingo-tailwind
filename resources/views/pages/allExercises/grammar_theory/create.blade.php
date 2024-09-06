@@ -1,4 +1,4 @@
 @extends('layouts.main')
 @section('content')
-    <livewire:grammar-theory-create>
+    @livewire('create.grammar-theory-create')
 @endsection

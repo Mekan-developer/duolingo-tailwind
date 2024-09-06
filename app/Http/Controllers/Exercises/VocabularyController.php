@@ -29,20 +29,11 @@ class VocabularyController extends Controller
     
     }
 
-    public function store(VocabularyRequest $request) {
-
-        // $data = [
-        //     'chapter_id' => $request->chapter_id,
-        //     'lesson_id' => $request->lesson_id,
-        //     'exercise_id' => $request->exercise_id,
-        //     'en_text' => $request->en_text,
-        //     'translations_word' => $request->translations_word
-        // ];        
-
+    public function store(VocabularyRequest $request) {     
         $data = $request->all();
         if ($request->hasFile('image')) {         
             $image = $request->image;
-            $imageName = $this->uploadFile($image,'vocabulary/image',true);
+            $imageName = $this->uploadFile($image,'vocabulary/image');
             $data['image'] = $imageName;
         }
         if ($request->hasFile('audio')) {
@@ -54,6 +45,38 @@ class VocabularyController extends Controller
         Vocabulary::create($data);
 
         return redirect()->route('vocabulary.index')->with('success','vocabulary created successfully!');
+    }
+
+    public function edit(Vocabulary $vocabulary) {
+        $lessons = Lesson::where('chapter_id', $vocabulary->chapter_id)->orderBy('order')->get();
+        $exercises = List_exercise::where('lesson_id', $vocabulary->lesson_id)->orderBy('order')->get();
+        return view("pages.allExercises.vocabulary.edit")->with("vocabulary",$vocabulary)->with("lessons",$lessons)->with("exercises", $exercises);
+    }
+
+    public function update(VocabularyRequest $request, Vocabulary $vocabulary) {  
+        $vocabularies = Vocabulary::all();
+        $this->sortItems($vocabularies, $vocabulary->order, $request->order);
+
+        $data = $request->all();
+        if ($request->hasFile('image')) { 
+            if ($vocabulary->image) 
+                $this->removeFile($vocabulary->image, 'vocabulary/image');       
+            $image = $request->image;
+            $imageName = $this->uploadFile($image,'vocabulary/image');
+            $data['image'] = $imageName;
+        }
+        if ($request->hasFile('audio')) {
+            if ($vocabulary->audio) 
+                $this->removeFile($vocabulary->audio, 'vocabulary/audio');
+            $random = hexdec(uniqid());
+            $filename = $random . '.' . $request->audio->extension();
+            Storage::disk('vocabulary_audio')->putFileAs('', $request->audio,$filename);
+            $data['audio'] = $filename;
+        }
+
+        $vocabulary->update($data);
+
+        return redirect()->route('vocabulary.index')->with('success','vocabulary updated successfully!');
     }
 
     public function destroy(Vocabulary $vocabulary){

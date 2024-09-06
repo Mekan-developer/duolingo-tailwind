@@ -1,4 +1,4 @@
 @extends('layouts.main')
 @section('content')
-    <livewire:phonetics-create>
+    @livewire('create.phonetics-create')
 @endsection

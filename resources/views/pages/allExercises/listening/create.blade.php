@@ -1,4 +1,4 @@
 @extends('layouts.main')
 @section('content')
-    <livewire:listening-create />
+    @livewire('create.listening-create')
 @endsection

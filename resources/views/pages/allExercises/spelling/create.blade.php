@@ -1,4 +1,4 @@
 @extends('layouts.main')
 @section('content')
-    <livewire:spelling-create />
+    @livewire('create.spelling-create')
 @endsection

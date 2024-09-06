@@ -1,4 +1,4 @@
 @extends('layouts.main')
 @section('content')
-    <livewire:list-exercise-component />
+    @livewire('create.list-exercise-component')
 @endsection

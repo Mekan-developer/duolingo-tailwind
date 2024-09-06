@@ -63,7 +63,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/',[ListExerciseController::class,'index'])->name('exercises');
         Route::get('/create',[ListExerciseController::class,'create'])->name('exercises.create');
         Route::post('/store',[ListExerciseController::class,'store'])->name('exercises.store');
-        Route::put('/edit/{exercise}',[ListExerciseController::class,'edit'])->name('exercises.edit');
+        Route::get('/edit/{list_exercise}',[ListExerciseController::class,'edit'])->name('exercises.edit');
+        Route::patch('/edit/{list_exercise}',[ListExerciseController::class,'update'])->name('exercises.update');
         Route::delete('/delete/{list_exercise}',[ListExerciseController::class,'destroy'])->name('exercises.delete');
     });
     
@@ -84,8 +85,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/',[VocabularyController::class,'index'])->name('index');
             Route::get('/create',[VocabularyController::class,'create'])->name('create');
             Route::post('/store',[VocabularyController::class,'store'])->name('store');
-            Route::get('/edit',[VocabularyController::class,'edit'])->name('edit');
-            Route::patch('/update',[VocabularyController::class,'update'])->name('update');
+            Route::get('/edit/{vocabulary}',[VocabularyController::class,'edit'])->name('edit');
+            Route::patch('/update/{vocabulary}',[VocabularyController::class,'update'])->name('update');
             Route::put('/active/{vocabulary}', [VocabularyController::class, 'active'])->name('active');
             Route::delete('/delete/{vocabulary}',[VocabularyController::class,'destroy'])->name('delete');
 
@@ -96,8 +97,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/',[VideoController::class,'index'])->name('index');
             Route::get('/create',[VideoController::class,'create'])->name('create');
             Route::post('/store',[VideoController::class,'store'])->name('store');
-            Route::get('/edit',[VideoController::class,'edit'])->name('edit');
-            Route::patch('/update',[VideoController::class,'update'])->name('update');
+            Route::get('/edit/{video}',[VideoController::class,'edit'])->name('edit');
+            Route::patch('/update/{video}',[VideoController::class,'update'])->name('update');
             Route::put('/active/{video}', [VideoController::class, 'active'])->name('active');
             Route::delete('/delete/{video}',[VideoController::class,'destroy'])->name('delete');
         });

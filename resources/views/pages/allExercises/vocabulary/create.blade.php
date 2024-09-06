@@ -1,4 +1,4 @@
 @extends('layouts.main')
 @section('content')
-    <livewire:vocabulary-create />
+    @livewire('create.vocabulary-create')
 @endsection

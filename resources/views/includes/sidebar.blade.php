@@ -20,7 +20,7 @@
       </li>
 
       <li>
-        <a href="{{route('list.exercises')}}" class="{{ Request::is('list-exercises*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-sm  px-4 py-2 text-sm font-medium">
+        <a href="{{route('list.exercises')}}" class="{{ Request::is('list-exercises*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-sm  px-4 py-2 text-sm font-medium hover:bg-gray-100 hover:text-gray-700">
           list of exercises
         </a>
       </li>
@@ -178,7 +178,6 @@
       @endif
     </ul>
   </div>
-
   <div class="sticky inset-x-0 bottom-0 border-t border-gray-100 ">
     <div class="flex items-center gap-2 bg-[var(--bg-color-active)] p-4">
       <i class='bx bx-user-circle text-[40px] rounded-full object-cover'></i>  

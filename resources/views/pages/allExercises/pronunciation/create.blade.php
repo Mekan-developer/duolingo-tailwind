@@ -1,4 +1,4 @@
 @extends('layouts.main')
 @section('content')
-    <livewire:pronunciation-create>
+    @livewire('create.pronunciation-create')
 @endsection

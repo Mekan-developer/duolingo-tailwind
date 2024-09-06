@@ -1,4 +1,4 @@
 @extends('layouts.main')
 @section('content')
-    <livewire:question-word-create />
+    @livewire('create.question-word-create')
 @endsection

@@ -1,4 +1,4 @@
 @extends('layouts.main')
 @section('content')
-    <livewire:audio-translation-create />
+    @livewire('create.audio-translation-create')
 @endsection

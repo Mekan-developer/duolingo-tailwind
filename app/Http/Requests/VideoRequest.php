@@ -21,11 +21,19 @@ class VideoRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+
+        $data = [
             'chapter_id' => 'required|exists:chapters,id',
             'lesson_id' => 'required|exists:lessons,id',
             'exercise_id' => 'required|exists:list_exercises,id',
-            'video' => 'required|file|mimetypes:video/mp4|max:15240',//10mb
         ];
+
+        if(request()->isMethod("POST")){
+            $data['video'] = 'required|file|mimetypes:video/mp4|max:15240';
+        }else{
+            $data['video'] = 'nullable|file|mimetypes:video/mp4|max:15240';
+        }
+
+        return $data;
     }
 }

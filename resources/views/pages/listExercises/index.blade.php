@@ -72,15 +72,11 @@
                             <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$list_exercise->lesson->getTranslation('title',$locales[0]['locale'])}}</td>
                             <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$list_exercise->order}}</td>
                             <td class="flex flex-row justify-center gap-2 text-center whitespace-nowrap px-4 py-2">
-                                <form action="{{route('list.exercises.edit',['exercise'=>$list_exercise->id])}}" 
-                                    method="POST">
-                                    @csrf
-                                    @method('PUT')
-
+                                <a href="{{route('list.exercises.edit',['list_exercise'=>$list_exercise->id])}}">
                                     <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
                                         <i class='bx bx-edit-alt text-[22px]'></i>
-                                    </a>
-                                </form>
+                                    </button>
+                                </a>
                                 <x-form.delete route="list.exercises.delete" modelName="list_exercise" :dataId="$list_exercise->id" confirmText="are you sure you want to delete?"/>                               
                             </td>
                         </tr> 

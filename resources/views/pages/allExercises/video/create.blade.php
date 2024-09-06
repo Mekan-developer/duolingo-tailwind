@@ -1,4 +1,4 @@
 @extends('layouts.main')
 @section('content')
-    <livewire:video-create>
+    @livewire('create.video-create')
 @endsection

@@ -57,12 +57,19 @@ class ListExerciseController extends Controller
     }
 
     public function edit(List_exercise $list_exercise){
-        // $chapters = Chapter::whereHas('lesson')->orderBy('order')->get(); 
-        // $lessons = Lesson::orderBy('order')->get(); 
-        // $locales = Language::where("status",1)->orderBy('order')->get();
+        $lessons = Lesson::orderBy('order')->get(); 
 
-        // return view("pages.listExercises.edit",compact("locales","list_exercise","chapters","lessons"));
+        
+        return view("pages.listExercises.edit")->with('list_exercise',$list_exercise)->with('lessons',$lessons);
 
+    }
+
+    public function update(ListExerciseRequest $request,List_exercise $list_exercise){
+        $List_exercises = List_exercise::all();
+        $this->sortItems($List_exercises, $list_exercise->order, $request->order);
+        $list_exercise->update($request->all());
+
+        return redirect()->route('list.exercises')->with('success','Exercise updated successfully!');
     }
 
     public function destroy(List_exercise $list_exercise){

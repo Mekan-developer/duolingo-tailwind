@@ -1,4 +1,4 @@
 @extends('layouts.main')
 @section('content')
-    <livewire:test-image-create />
+    @livewire('create.test-image-create')
 @endsection
