@@ -6,7 +6,7 @@
 
         <form action="{{route('spelling.store')}}" method="post" enctype="multipart/form-data"  class="w-full mx-auto bg-[var(--bg-color-non-active)] p-6 rounded-md">
             @csrf
-            <div class="bg-white px-4 py-6 rounded-sm">
+            <div class="bg-white px-4 py-6 rounded-sm mb-2">
                 @include('includes.exerciseParts.create.options')
                 @include('includes.exerciseParts.create.english_text',['name'=>'en_text','title' => 'English word','placeholder' => 'english word']) 
 

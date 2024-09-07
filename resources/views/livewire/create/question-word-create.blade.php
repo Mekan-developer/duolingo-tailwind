@@ -12,11 +12,12 @@
 
                 @include('includes.exerciseParts.create.sound_file')
             </div>
-            
-            @foreach ($locales as $locale)
-                <x-form.input :name="'translations_word['.$locale->locale.']'" :placeholder="'Translate '. $locale->locale" :labelText="'Translate '. $locale->name" :errorMessage="$errors->get('translations_word.' . $locale->locale)" />
-            @endforeach
-            <x-form.btn-submit/>
+            <div class="px-4 mt-2">
+                @foreach ($locales as $locale)
+                    <x-form.input :name="'translations_word['.$locale->locale.']'" :placeholder="'Translate '. $locale->locale" :labelText="'Translate '. $locale->name" :errorMessage="$errors->get('translations_word.' . $locale->locale)" />
+                @endforeach
+                <x-form.btn-submit/>
+            </div>
         </form>
     </div>
 </div>

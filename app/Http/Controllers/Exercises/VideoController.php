@@ -26,11 +26,6 @@ class VideoController extends Controller
     }
 
     public function store(VideoRequest $request){
-        // $data = [
-        //     'chapter_id' => $request->chapter_id,
-        //     'lesson_id' => $request->lesson_id,
-        //     'exercise_id' => $request->exercise_id,
-        // ];
 
         $data = $request->all();
         if ($request->hasFile('video')) {
@@ -57,10 +52,10 @@ class VideoController extends Controller
         $data = $request->all();
         if ($request->hasFile('video')) {
             if ($video->video) 
-                $this->removeFile($video->audio, 'video');
+                $this->removeFile($video->video, 'video');
             $random = hexdec(uniqid());
-            $filename = $random . '.' . $request->audio->extension();
-            Storage::disk('video')->putFileAs('', $request->audio,$filename);
+            $filename = $random . '.' . $request->video->extension();
+            Storage::disk('video')->putFileAs('', $request->video,$filename);
             $data['video'] = $filename;
         }
 

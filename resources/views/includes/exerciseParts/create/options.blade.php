@@ -11,7 +11,7 @@
     </div>
     <div class="w-full">
         @if($lessons != null && !$lessons->isEmpty())
-            <label for="chapters" class="block mb-2 text-sm font-medium text-gray-900">Select an lesson</label>
+            <label for="chapters" class="block mb-2 text-sm font-medium @isset($textColor) {{$textColor}} @endisset">Select an lesson</label>
             <select wire:model="selectedLesson" wire:change="selectedLessonHandle" id="chapters" name="lesson_id" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                 <option selected>Choose a lesson</option>
                 @foreach ($lessons as $lesson)
@@ -23,7 +23,7 @@
     </div>
     <div class="w-full">
         @if($exercises != null && !$this->exercises->isEmpty())
-            <label for="chapters" class="block mb-2 text-sm font-medium text-gray-900">Select an exercise</label>
+            <label for="chapters" class="block mb-2 text-sm font-medium @isset($textColor) {{$textColor}} @endisset">Select an exercise</label>
             <select id="chapters" name="exercise_id" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                 <option selected>Choose a exercise</option>
                 @foreach ($exercises as $exercise)

@@ -108,8 +108,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/',[QuestionWordController::class,'index'])->name('index');
             Route::get('/create',[QuestionWordController::class,'create'])->name('create');
             Route::post('/store',[QuestionWordController::class,'store'])->name('store');
-            Route::get('/edit',[QuestionWordController::class,'edit'])->name('edit');
-            Route::patch('/update',[QuestionWordController::class,'update'])->name('update');
+            Route::get('/edit/{questionWord}',[QuestionWordController::class,'edit'])->name('edit');
+            Route::patch('/update/{questionWord}',[QuestionWordController::class,'update'])->name('update');
             Route::put('/active/{questionWord}', [QuestionWordController::class, 'active'])->name('active');
             Route::delete('/delete/{questionWord}',[QuestionWordController::class,'destroy'])->name('delete');
         });
@@ -119,8 +119,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/',[AudioTranslationController::class,'index'])->name('index');
             Route::get('/create',[AudioTranslationController::class,'create'])->name('create');
             Route::post('/store',[AudioTranslationController::class,'store'])->name('store');
-            Route::get('/edit',[AudioTranslationController::class,'edit'])->name('edit');
-            Route::patch('/update',[AudioTranslationController::class,'update'])->name('update');
+            Route::get('/edit/{audioTranslation}',[AudioTranslationController::class,'edit'])->name('edit');
+            Route::patch('/update/{audioTranslation}',[AudioTranslationController::class,'update'])->name('update');
             Route::put('/active/{audioTranslation}', [AudioTranslationController::class, 'active'])->name('active');
             Route::delete('/delete/{audioTranslation}',[AudioTranslationController::class,'destroy'])->name('delete');
         });
@@ -130,10 +130,21 @@ Route::middleware('auth')->group(function () {
             Route::get('/',[QuestionsImageController::class,'index'])->name('index');
             Route::get('/create',[QuestionsImageController::class,'create'])->name('create');
             Route::post('/store',[QuestionsImageController::class,'store'])->name('store');
-            Route::get('/edit',[QuestionsImageController::class,'edit'])->name('edit');
-            Route::patch('/update',[QuestionsImageController::class,'update'])->name('update');
+            Route::get('/edit/{questionImage}',[QuestionsImageController::class,'edit'])->name('edit');
+            Route::patch('/update/{questionImage}',[QuestionsImageController::class,'update'])->name('update');
             Route::put('/active/{questionImage}', [QuestionsImageController::class, 'active'])->name('active');
             Route::delete('/delete/{questionImage}',[QuestionsImageController::class,'destroy'])->name('delete');
+        });
+
+        //PHONETICS
+        Route::group(['prefix' => 'phonetics', 'as' => 'phonetics.'], function() {
+            Route::get('/',[PhoneticsController::class,'index'])->name('index');//+
+            Route::get('/create',[PhoneticsController::class,'create'])->name('create');//+
+            Route::post('/store',[PhoneticsController::class,'store'])->name('store');//+
+            Route::get('/edit/{phonetics}',[PhoneticsController::class,'edit'])->name('edit');
+            Route::patch('/update/{phonetics}',[PhoneticsController::class,'update'])->name('update');
+            Route::put('/active/{phonetics}', [PhoneticsController::class, 'active'])->name('active');
+            Route::delete('/delete/{phonetics}',[PhoneticsController::class,'destroy'])->name('delete');//+
         });
 
         //PRONUNCIATION
@@ -146,6 +157,17 @@ Route::middleware('auth')->group(function () {
             Route::put('/active/{pronunciation}', [PronunciationController::class, 'active'])->name('active');
             Route::delete('/delete/{pronunciation}',[PronunciationController::class,'destroy'])->name('delete');
         });
+
+        //GRAMMAR_THEORY
+        Route::group(['prefix' => 'grammar', 'as' => 'grammar.'], function() {
+            Route::get('/',[GrammarController::class,'index'])->name('index');
+            Route::get('/create',[GrammarController::class,'create'])->name('create');
+            Route::post('/store',[GrammarController::class,'store'])->name('store');
+            Route::get('/edit',[GrammarController::class,'edit'])->name('edit');
+            Route::patch('/update',[GrammarController::class,'update'])->name('update');
+            Route::put('/active/{grammar}', [GrammarController::class, 'active'])->name('active');
+            Route::delete('/delete/{grammar}',[GrammarController::class,'destroy'])->name('delete');//+
+        }); 
 
         //VOCABULARY_AUDIO_IMAGE
         Route::group(['prefix' => 'test-image', 'as' => 'testImage.'], function() {
@@ -191,27 +213,9 @@ Route::middleware('auth')->group(function () {
             Route::delete('/delete/{listening}',[ListeningController::class,'destroy'])->name('delete');
         });
 
-        //PHONETICS
-        Route::group(['prefix' => 'phonetics', 'as' => 'phonetics.'], function() {
-            Route::get('/',[PhoneticsController::class,'index'])->name('index');//+
-            Route::get('/create',[PhoneticsController::class,'create'])->name('create');//+
-            Route::post('/store',[PhoneticsController::class,'store'])->name('store');//+
-            Route::get('/edit',[PhoneticsController::class,'edit'])->name('edit');
-            Route::patch('/update',[PhoneticsController::class,'update'])->name('update');
-            Route::put('/active/{phonetics}', [PhoneticsController::class, 'active'])->name('active');
-            Route::delete('/delete/{phonetics}',[PhoneticsController::class,'destroy'])->name('delete');//+
-        });
+        
 
-        //GRAMMAR_THEORY
-        Route::group(['prefix' => 'grammar', 'as' => 'grammar.'], function() {
-            Route::get('/',[GrammarController::class,'index'])->name('index');
-            Route::get('/create',[GrammarController::class,'create'])->name('create');
-            Route::post('/store',[GrammarController::class,'store'])->name('store');
-            Route::get('/edit',[GrammarController::class,'edit'])->name('edit');
-            Route::patch('/update',[GrammarController::class,'update'])->name('update');
-            Route::put('/active/{grammar}', [GrammarController::class, 'active'])->name('active');
-            Route::delete('/delete/{grammar}',[GrammarController::class,'destroy'])->name('delete');//+
-        });        
+               
     });
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });

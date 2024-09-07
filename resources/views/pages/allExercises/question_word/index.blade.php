@@ -79,7 +79,7 @@
                             </td>
                             <td class="h-full gap-2 px-4 py-2 text-center whitespace-nowrap ">
                                 <div class="flex flex-row justify-center h-full gap-2">
-                                    <a href="{{route('questionWord.edit',['question'=>$question->id])}}">
+                                    <a href="{{route('questionWord.edit',['questionWord' => $question->id])}}">
                                         <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
                                             <i class='bx bx-edit-alt text-[22px]'></i>
                                         </button>

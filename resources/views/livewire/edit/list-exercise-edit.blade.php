@@ -27,7 +27,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="px-4 mt-1">
+                <div class="mt-1">
                     @foreach ($locales as $locale)
                         <x-form.edit-input :name="'title['.$locale->locale.']'" :value="$list_exercise->getTranslation('title',$locale->locale)" :labelText="'lesson '. $locale->name" :errorMessage="$errors->get('title.' . $locale->locale)" />
                     @endforeach

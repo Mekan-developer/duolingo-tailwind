@@ -6,21 +6,21 @@ use App\Models\Chapter;
 use App\Models\Language;
 use App\Models\Lesson;
 use App\Models\List_exercise;
-use App\Models\Vocabulary;
+use App\Models\Phonetics;
 use Livewire\Component;
 
-class VocabularyEdit extends Component
+class PhoneticsEdit extends Component
 {
-    public $vocabulary,$lessons,$exercises,$lesson_id,$exercise_id;
+    public $countExamples = 1,$phonetics,$lessons,$exercises,$lesson_id,$exercise_id;
     public $selectedChapter = null,$selectedLesson = null;
     public $switch_lesson = false, $switch_exercise = false;
 
-    public function mount($vocabulary,$lessons,$exercises)
+    public function mount($phonetics,$lessons,$exercises)
     {
-        $this->vocabulary = $vocabulary;
-        $this->selectedLesson = $vocabulary->lesson_id;
-        $this->exercise_id = $vocabulary->exercise_id;
-        $this->selectedChapter = $vocabulary->chapter_id;
+        $this->phonetics = $phonetics;
+        $this->selectedLesson = $phonetics->lesson_id;
+        $this->exercise_id = $phonetics->exercise_id;
+        $this->selectedChapter = $phonetics->chapter_id;
         $this->lessons = $lessons;
         $this->exercises = $exercises;
     }
@@ -29,14 +29,21 @@ class VocabularyEdit extends Component
         $chapters = Chapter::whereHas('lessonOption')->orderBy("order")->get();
         $locales = Language::orderBy("order")->get();
 
-        $vocabularies = Vocabulary::orderBy("order")->get();
-        return view('livewire.edit.vocabulary-edit',[
-            "vocabularies" => $vocabularies,
+        $phoneticss = Phonetics::orderBy("order")->get();
+        return view('livewire.edit.phonetics-edit',[
+            "phoneticss" => $phoneticss,
             "chapters" => $chapters,
             "lessons" => $this->lessons,
             "exercises" =>$this->exercises,
             "locales" => $locales
         ]);
+    }
+
+    public function addExamples(){
+        $this->countExamples++;
+    }
+    public function removeExamples(){
+        $this->countExamples--;
     }
 
     public function selectedChapterHandle()

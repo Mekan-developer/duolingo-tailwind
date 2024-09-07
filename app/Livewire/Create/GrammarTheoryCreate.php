@@ -14,7 +14,7 @@ class GrammarTheoryCreate extends Component
     public $selectedChapter, $selectedLesson;
     public function render()
     {
-        $chapters = Chapter::whereHas('lesson')->orderBy('order')->get();
+        $chapters = Chapter::whereHas('lessonOption')->orderBy('order')->get();
         $locales = Language::where("status",1)->orderBy('order')->get();
 
         return view('livewire.create.grammar-theory-create',[

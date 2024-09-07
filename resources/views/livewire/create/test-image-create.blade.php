@@ -8,7 +8,7 @@
             @csrf
             <div class="bg-white px-4 py-6 rounded-sm">
                 @include('includes.exerciseParts.create.options')
-                <div class="flex flex-row gap-10 w-full">
+                <div class="flex flex-row gap-10 w-full mb-2">
                     @include('includes.exerciseParts.create.image_file')
                     @include('includes.exerciseParts.create.sound_file')
                 </div>

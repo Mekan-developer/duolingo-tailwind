@@ -22,20 +22,26 @@ class PhoneticsRequest extends FormRequest
     public function rules(): array
     {
 
-
-        return [
-            'phonetic_alphabet' => 'required|string|max:255',
-            'phonetic_text.*' => 'required|string',
-            'audio' => 'required|file|mimes:mp3|max:10240',
-
-            'examples.*' => 'required|string|max:255', 
-            'sounds.*'=> 'required|file|mimes:mp3|max:10240',
-
-            'chapter_id'=> 'required|exists:chapters,id',
+        $data = [
+            'chapter_id' => 'required|exists:chapters,id',
             'lesson_id' => 'required|exists:lessons,id',
             'exercise_id' => 'required|exists:list_exercises,id',
             'status' => 'nullable',
             'order' => 'nullable|integer'
         ];
+
+        if(request()->isMethod("POST")) {
+            $data['audio'] = 'required|file|mimes:mp3|max:10240';
+            $data['sounds.*'] = 'required|file|mimes:mp3|max:10240';
+            $data['examples.*'] = 'required|string|max:255';
+            
+        }else{
+            $data['audio'] = 'nullable|file|mimes:mp3|max:10240';
+            $data['sounds.*'] = 'nullable|file|mimes:mp3|max:10240';
+            $data['examples.*'] = 'nullable|string|max:255';
+            
+        }
+
+        return $data;
     }
 }

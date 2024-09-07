@@ -20,6 +20,7 @@
             <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>                        
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">id</th>
                         <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">en text</th>
                         <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">audio</th>
                         @foreach($locales as $locale)
@@ -36,6 +37,7 @@
                 <tbody class="divide-y divide-gray-200">
                     @foreach ($audioTranslations as $audioTranslation)
                         <tr>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$audioTranslation->id}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$audioTranslation->en_text}}</td>
                             <td  class="px-6 py-4 ">
                                 <div data-audio-src="{{ $audioTranslation->getAudio() }}" class="p-1 text-white rounded-lg shadow-lg audio-player w-[200px]" >

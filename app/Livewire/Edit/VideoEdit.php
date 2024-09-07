@@ -19,7 +19,8 @@ class VideoEdit extends Component
     public function mount($video,$lessons,$exercises)
     {
         $this->video = $video;
-        $this->lesson_id = $video->lesson_id;
+        $this->selectedChapter = $video->chapter_id;
+        $this->selectedLesson = $video->lesson_id;
         $this->exercise_id = $video->exercise_id;
         $this->lessons = $lessons;
         $this->exercises = $exercises;

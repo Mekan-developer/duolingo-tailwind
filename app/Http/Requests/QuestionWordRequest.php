@@ -21,15 +21,23 @@ class QuestionWordRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'audio' => 'required|file|mimes:mp3|max:10240',
+
+        $data = [
             'en_text' => 'required|string|max:255',
-            'translations_word.*' => 'required|string|max:255',
             'chapter_id'=> 'required|exists:chapters,id',
             'lesson_id' => 'required|exists:lessons,id',
             'exercise_id' => 'required|exists:list_exercises,id',
+            'translations_word.*' => 'required|string|max:255',
             'status' => 'nullable',
             'order' => 'nullable|integer'
         ];
+
+        if(request()->isMethod("POST")) {
+            $data['audio'] = 'required|file|mimes:mp3|max:10240';
+        }else{
+            $data['audio'] = 'nullable|file|mimes:mp3|max:10240';
+        }
+
+        return $data;
     }
 }

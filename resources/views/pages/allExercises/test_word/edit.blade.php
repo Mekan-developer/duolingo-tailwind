@@ -1,4 +1,4 @@
 @extends('layouts.main')
 @section('content')
-    @livewire('create.question-image-create')
+    @livewire('create.test-word-create')
 @endsection

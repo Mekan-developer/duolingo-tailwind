@@ -19,7 +19,7 @@ class ListExerciseComponent extends Component
 
     public function render()
     {
-        $this->chapters = Chapter::whereHas('lesson')->orderBy('order')->get(); 
+        $this->chapters = Chapter::whereHas('lessonOption')->orderBy('order')->get(); 
         $this->locales = Language::where("status",1)->orderBy('order')->get();
 
         return view('livewire.create.list-exercise-component');
