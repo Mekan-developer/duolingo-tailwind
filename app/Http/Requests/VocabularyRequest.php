@@ -26,7 +26,9 @@ class VocabularyRequest extends FormRequest
             'chapter_id' => 'required|exists:chapters,id',
             'lesson_id' => 'required|exists:lessons,id',
             'exercise_id' => 'required|exists:list_exercises,id',
-            'translations_word.*' => 'required|string|max:255'
+            'translations_word.*' => 'required|string|max:255',
+            'status' => 'nullable',
+            'order' => 'nullable|integer'
         ];
 
         if(request()->isMethod("POST")) {

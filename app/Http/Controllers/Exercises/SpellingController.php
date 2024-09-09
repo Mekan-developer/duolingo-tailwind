@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Exercises;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SpellingRequest;
 use App\Models\Language;
+use App\Models\Lesson;
+use App\Models\List_exercise;
 use App\Models\Spelling;
 use Illuminate\Http\Request;
 
@@ -26,25 +28,38 @@ class SpellingController extends Controller
     }
 
     public function store(SpellingRequest $request) {
-
-        // $data = [
-        //     'chapter_id' => $request->chapter_id,
-        //     'lesson_id' => $request->lesson_id,
-        //     'exercise_id' => $request->exercise_id,
-        //     'en_text' => $request->en_text,
-        // ];
-
         $data = $request->all();
         if ($request->hasFile('image')) {         
             $image = $request->image;
             $imageName = $this->uploadFile($image,'spelling',true);
             $data['image'] = $imageName;
         }
- 
         Spelling::create($data);
 
         return redirect()->route('spelling.index')->with('success','spelling word with image created successfully!');
-    
+    }
+
+    public function edit(Spelling $spelling){
+        $lessons = Lesson::where('chapter_id', $spelling->chapter_id)->orderBy('order')->get();
+        $exercises = List_exercise::where('lesson_id', $spelling->lesson_id)->orderBy('order')->get();
+        return view("pages.allExercises.spelling.edit")->with("spelling",$spelling)->with("lessons",$lessons)->with("exercises", $exercises);
+    }
+
+    public function update(SpellingRequest $request, Spelling $spelling) {
+        $spellings = Spelling::all();
+        $this->sortItems($spellings, $spelling->order, $request->order);
+
+        $data = $request->all();
+        if ($request->hasFile('image')) {
+            if ($spelling->image) {
+                $this->removeFile($spelling->image, 'spelling');
+            }         
+            $image = $request->image;
+            $imageName = $this->uploadFile($image,'spelling',true);
+            $data['image'] = $imageName;
+        }
+        $spelling->update($data);
+        return redirect()->route('spelling.index')->with('success','spelling word with image updated successfully!');
     }
 
     public function destroy(Spelling $spelling){ 

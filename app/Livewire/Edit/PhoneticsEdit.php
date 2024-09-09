@@ -11,13 +11,20 @@ use Livewire\Component;
 
 class PhoneticsEdit extends Component
 {
-    public $countExamples = 1,$phonetics,$lessons,$exercises,$lesson_id,$exercise_id;
+    public $countExamples = 1,$phonetics,$lessons,$exercises,$phoneticsExamples,$lesson_id,$exercise_id,$maxSoundKey;
     public $selectedChapter = null,$selectedLesson = null;
     public $switch_lesson = false, $switch_exercise = false;
 
     public function mount($phonetics,$lessons,$exercises)
     {
         $this->phonetics = $phonetics;
+        $this->phoneticsExamples = json_decode($phonetics);
+        
+        $decode = (array) $this->phoneticsExamples->examples;
+        $maxKey = max(array_keys($decode));
+        $this->maxSoundKey = $maxKey;
+        
+
         $this->selectedLesson = $phonetics->lesson_id;
         $this->exercise_id = $phonetics->exercise_id;
         $this->selectedChapter = $phonetics->chapter_id;
@@ -40,10 +47,17 @@ class PhoneticsEdit extends Component
     }
 
     public function addExamples(){
-        $this->countExamples++;
+        $decode = (array) $this->phoneticsExamples->examples;
+        $maxKey = max(array_keys($decode));
+        $decode[$maxKey+1] = '';
+        $this->maxSoundKey = $maxKey + 1;
+        $this->phoneticsExamples->examples = (object) $decode;
     }
-    public function removeExamples(){
-        $this->countExamples--;
+    public function removeExamples($index){
+        $decode = (array) $this->phoneticsExamples->examples;
+        unset($decode[$index]); // Remove the element by index
+        $this->phoneticsExamples->examples = (object) $decode;
+        $this->maxSoundKey--;
     }
 
     public function selectedChapterHandle()

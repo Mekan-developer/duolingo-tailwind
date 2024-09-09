@@ -16,7 +16,7 @@
     </div>
     <div>
         @error('audio')
-            <span class="text-red-600 text-xs">{{ $message }}</span>
+            <span class="text-red-600 text-xs">{{ $message }}</span> 
         @enderror
     </div>
 </div>

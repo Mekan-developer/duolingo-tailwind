@@ -13,6 +13,8 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+// http://127.0.0.1:8000/api/documentation
+
 
 Route::get('/langs',[LanguageController::class,'index']);
 Route::get('/chapters',[ChapterController::class,'index']);

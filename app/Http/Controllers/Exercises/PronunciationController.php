@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Exercises;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PronunciationRequest;
 use App\Models\Language;
+use App\Models\Lesson;
+use App\Models\List_exercise;
 use App\Models\Pronunciation;
 use Illuminate\Http\Request;
 use Storage;
@@ -25,11 +27,7 @@ class PronunciationController extends Controller
     }
 
     public function store(PronunciationRequest $request){
-        // $data = [
-        //     'chapter_id' => $request->chapter_id,
-        //     'lesson_id' => $request->lesson_id,
-        //     'exercise_id' => $request->exercise_id,
-        // ];
+
         $data = $request->all();
         if ($request->hasFile('audio')) {
             $random = hexdec(uniqid());
@@ -43,11 +41,31 @@ class PronunciationController extends Controller
     }
 
     public function edit(Pronunciation $pronunciation){ 
-        dd('edit not created yet');
+
+        $lessons = Lesson::where('chapter_id', $pronunciation->chapter_id)->orderBy('order')->get();
+        $exercises = List_exercise::where('lesson_id', $pronunciation->lesson_id)->orderBy('order')->get();
+
+        return view("pages.allExercises.pronunciation.edit")->with("pronunciation",$pronunciation)->with("lessons",$lessons)->with("exercises", $exercises);
      }
 
-     public function update(PronunciationRequest $request, Pronunciation $pronunciation){   
+     public function update(PronunciationRequest $request, Pronunciation $pronunciation){ 
 
+        $pronunciations = Pronunciation::all();
+        $this->sortItems($pronunciations, $pronunciation->order, $request->order);
+
+        $data = $request->all();
+        if ($request->hasFile('audio')) {
+            if ($pronunciation->audio) {
+                $this->removeFile($pronunciation->audio, 'pronunciation');
+            } 
+            $random = hexdec(uniqid());
+            $filename = $random . '.' . $request->audio->extension();
+            Storage::disk('pronunciation')->putFileAs('', $request->audio,$filename);
+            $data['audio'] = $filename;
+        }
+
+        $pronunciation->update($data);
+        return redirect()->route('pronunciation.index')->with('success','Pronunciation updated sccessfully!'); 
      }
 
      public function destroy(Pronunciation $pronunciation){

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Exercises;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ListeningRequest;
 use App\Models\Language;
+use App\Models\Lesson;
+use App\Models\List_exercise;
 use App\Models\Listening;
 use Illuminate\Http\Request;
 use Storage;
@@ -25,11 +27,6 @@ class ListeningController extends Controller
     }
 
     public function store(ListeningRequest $request) {
-        // $data = [
-        //     'chapter_id' => $request->chapter_id,
-        //     'lesson_id' => $request->lesson_id,
-        //     'exercise_id' => $request->exercise_id,
-        // ];
         $data = $request->all();
         if ($request->hasFile('audio')) {
             $random = hexdec(uniqid());
@@ -39,6 +36,31 @@ class ListeningController extends Controller
         }
         Listening::create($data);
         return redirect()->route('listening.index')->with('success','listening audio successfully created!');
+    }
+
+    public function edit(Listening $listening){
+        $lessons = Lesson::where('chapter_id', $listening->chapter_id)->orderBy('order')->get();
+        $exercises = List_exercise::where('lesson_id', $listening->lesson_id)->orderBy('order')->get();
+        return view("pages.allExercises.listening.edit")->with("listening",$listening)->with("lessons",$lessons)->with("exercises", $exercises);
+    }
+
+    public function update(ListeningRequest $request, Listening $listening) {
+        $listenings = Listening::all();
+        $this->sortItems($listenings, $listening->order, $request->order);
+
+        $data = $request->all();
+        if ($request->hasFile('audio')) {
+            if ($listening->audio) {
+                $this->removeFile($listening->audio, 'listening');
+            } 
+            $random = hexdec(uniqid());
+            $filename = $random . '.' . $request->audio->extension();
+            Storage::disk('listening')->putFileAs('', $request->audio,$filename);
+            $data['audio'] = $filename;
+        }
+        $listening->update($data);
+        return redirect()->route('listening.index')->with('success','listening audio successfully updated!');
+
     }
 
     public function destroy(Listening $listening){

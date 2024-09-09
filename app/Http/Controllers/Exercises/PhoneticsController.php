@@ -54,33 +54,45 @@ class PhoneticsController extends Controller
     public function edit(Phonetics $phonetics){
         $lessons = Lesson::where('chapter_id', $phonetics->chapter_id)->orderBy('order')->get();
         $exercises = List_exercise::where('lesson_id', $phonetics->lesson_id)->orderBy('order')->get();
-        
+
         return view("pages.allExercises.phonetics.edit")->with("phonetics",$phonetics)->with("lessons",$lessons)->with("exercises", $exercises);
     }
 
     public function update(PhoneticsRequest $request,Phonetics $phonetics){
-        dd('test3');
+        
 
-        $sounds = $request->files->get('sounds');
+        $soundsJson = $phonetics->getAttributes()['sounds'];
+        $soundsArray = json_decode($soundsJson, true);
+        // $phonetics->update(['examples' => null]);
+
+        
         $data = $request->all();
-        foreach ($sounds as $key => $value) {
-            if ($value instanceof \Symfony\Component\HttpFoundation\File\UploadedFile) {
-                $random = hexdec(uniqid());
-                $filename = $random . '.' . $value->getClientOriginalExtension();
-                Storage::disk('phonetics')->putFileAs('', $value, $filename);
-                $data['sounds'][$key] = $filename;
+        $sounds = $request->files->get('sounds');
+        if($sounds){
+            foreach ($sounds as $key => $value) {
+                $data = $phonetics->attributesToArray();
+                $this->removeFile($data['sounds'][$key], 'phonetics');
+                if ($value instanceof \Symfony\Component\HttpFoundation\File\UploadedFile) {
+                    $random = hexdec(uniqid());
+                    $filename = $random . '.' . $value->getClientOriginalExtension();
+                    Storage::disk('phonetics')->putFileAs('', $value, $filename);
+                    $data['sounds'][$key] = $filename;
+                }
             }
         }
+        
 
         if ($request->hasFile('audio')) {
+            if ($phonetics->audio) {
+                $this->removeFile($phonetics->audio, 'phonetics');
+            } 
             $random = hexdec(uniqid());
             $filename = $random . '.' . $request->audio->extension();
             Storage::disk('phonetics')->putFileAs('', $request->audio,$filename);
             $data['audio'] = $filename;
         }
-
-        Phonetics::create($data);
-        return redirect()->route('phonetics.index')->with('success','Phonetics created successfully');   
+        $phonetics->update($data);
+        return redirect()->route('phonetics.index')->with('success','Phonetics updated successfully');   
 
     }
 

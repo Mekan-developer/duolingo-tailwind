@@ -4,8 +4,9 @@
             Add audio image for testing
         </div>
 
-        <form action="{{route('phonetics.store')}}" method="post" enctype="multipart/form-data"  class="w-full mx-auto bg-[var(--bg-color-non-active)] p-6 rounded-md">
+        <form action="{{route('phonetics.update',['phonetics' => $phonetics->id])}}" onsubmit="return validateForm()" method="post" enctype="multipart/form-data"  class="w-full mx-auto bg-[var(--bg-color-non-active)] p-6 rounded-md">
             @csrf
+            @method('PATCH')
             <div class="flex flex-col gap-4 px-4 py-6 bg-gray-400 rounded-sm">
                 <p class="text-white">PHONETICS PART ONE</p>
                 <div class="flex flex-row w-full gap-6 mb-4">
@@ -27,28 +28,28 @@
             </div>
             <div class="bg-white px-4 py-6 rounded-sm mt-10">
                 <p class="text-black">PHONETICS PART TWO</p>
-                <div id="test" class="my-2">
-                    @for($i = 1; $i <= $countExamples; $i++)
-                        <div class="grid grid-cols-2 gap-4 my-2 " wire:ignore>
-                            @include('includes.exerciseParts.create.english_text',['name'=>'examples['.$i.']','title' => 'examples','placeholder' => 'english character'])
-                            <div class="flex flex-row items-center m-0 p-0">
-                                <div class="flex-1 pt-1">
-                                    @include('includes.exerciseParts.create.phonetics_sound',['name' => 'sounds['.$i.']', 'uniqueId' => $i])
+                <div id="test" class="my-2">   
+                    @foreach ($phoneticsExamples->examples as $key => $example)
+                        <div class="grid grid-cols-2 gap-4 my-4">
+                            @include('includes.exerciseParts.edit.english_text',['name'=>'examples['.$loop->iteration.']','title' => 'examples','placeholder' => 'english character','value' => $example])
+                            <div class="flex flex-row items-end ">
+                                <div class="flex-1 ">
+                                    @include('includes.exerciseParts.create.phonetics_sound',['name' => 'sounds['.$loop->iteration.']', 'uniqueId' => $loop->iteration])
                                 </div>
-                                @if($i==1)                           
-                                    <a wire:click.prevent="addExamples" class=" cursor-pointer text-white text-center leading-[42px] bg-[var(--bg-color-active)] h-[42px] aspect-square ml-1 focus:ring-4 font-medium rounded-sm me-2 ">+</a>
-                                @else 
-                                    <a wire:click.prevent="removeExamples" class=" cursor-pointer text-white text-center leading-[42px] bg-[var(--bg-color-active)] h-[42px] aspect-square ml-1 focus:ring-4 font-medium rounded-sm me-2 ">-</a>
-                                @endif   
+                                <div class="flex ">
+                                    @if($loop->iteration==1)                           
+                                        <a wire:click.prevent="addExamples" class="cursor-pointer text-white text-center leading-[42px] bg-[var(--bg-color-active)] h-[42px] aspect-square ml-1 focus:ring-4 font-medium rounded-sm  ">+</a>
+                                    @else 
+                                        <a @if($maxSoundKey <= $key) wire:click.prevent="removeExamples({{$key}})" @endif class=" cursor-pointer text-white text-center leading-[42px] bg-[var(--bg-color-active)] h-[42px] aspect-square ml-1 focus:ring-4 font-medium rounded-sm">-</a>
+                                    @endif  
+                                </div>
                             </div>                                                    
                         </div>
-                    @endfor
+
+                    @endforeach
                 </div>
                 <x-form.btn-submit/>
             </div>
         </form>
     </div> 
 </div>
-
-
-

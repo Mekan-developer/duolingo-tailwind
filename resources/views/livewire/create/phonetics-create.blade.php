@@ -24,19 +24,21 @@
             </div>
             <div class="bg-white px-4 py-6 rounded-sm mt-10">
                 <p class="text-black">PHONETICS PART TWO</p>
-                <div id="test" class="my-2">
+                <div id="test" class="my-2">@php $loop=0 @endphp
                     @for($i = 1; $i <= $countExamples; $i++)
-                        <div class="grid grid-cols-2 gap-4 my-2 " wire:ignore>
+                        <div class="grid grid-cols-2 gap-4 my-4">
                             @include('includes.exerciseParts.create.english_text',['name'=>'examples['.$i.']','title' => 'examples','placeholder' => 'english character'])
-                            <div class="flex flex-row items-center m-0 p-0">
+                            <div class="flex flex-row items-end ">
                                 <div class="flex-1 pt-1">
-                                    @include('includes.exerciseParts.create.phonetics_sound',['name' => 'sounds['.$i.']', 'uniqueId' => $i])
+                                    @include('includes.exerciseParts.create.phonetics_sound',['name' => 'sounds['.$i.']', 'uniqueId' => $i ])
                                 </div>
-                                @if($i==1)                           
-                                    <a wire:click.prevent="addExamples" class=" cursor-pointer text-white text-center leading-[42px] bg-[var(--bg-color-active)] h-[42px] aspect-square ml-1 focus:ring-4 font-medium rounded-sm me-2 ">+</a>
-                                @else 
-                                    <a wire:click.prevent="removeExamples" class=" cursor-pointer text-white text-center leading-[42px] bg-[var(--bg-color-active)] h-[42px] aspect-square ml-1 focus:ring-4 font-medium rounded-sm me-2 ">-</a>
-                                @endif   
+                                <div class="flex ">
+                                    @if($i==1)                           
+                                        <a wire:click.prevent="addExamples" class=" cursor-pointer text-white text-center leading-[42px] bg-[var(--bg-color-active)] h-[42px] aspect-square ml-1 focus:ring-4 font-medium rounded-sm me-2 ">+</a>
+                                    @else 
+                                        <a wire:click.prevent="removeExamples" class=" cursor-pointer text-white text-center leading-[42px] bg-[var(--bg-color-active)] h-[42px] aspect-square ml-1 focus:ring-4 font-medium rounded-sm me-2 ">-</a>
+                                    @endif 
+                                </div>  
                             </div>                                                    
                         </div>
                     @endfor

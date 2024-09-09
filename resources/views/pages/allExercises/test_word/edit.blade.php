@@ -1,4 +1,4 @@
 @extends('layouts.main')
 @section('content')
-    @livewire('create.test-word-create')
+    @livewire('edit.test-word-edit',['testWord' => $testWord,'lessons' => $lessons, "exercises" => $exercises])
 @endsection

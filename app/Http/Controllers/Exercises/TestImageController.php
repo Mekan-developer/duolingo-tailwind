@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Exercises;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TestImageRequest;
 use App\Models\Language;
+use App\Models\Lesson;
+use App\Models\List_exercise;
 use App\Models\TestImage;
 use Illuminate\Http\Request;
 use Storage;
@@ -27,12 +29,6 @@ class TestImageController extends Controller
     }
 
     public function store(TestImageRequest $request) {
-        // $data = [
-        //     'chapter_id' => $request->chapter_id,
-        //     'lesson_id' => $request->lesson_id,
-        //     'exercise_id' => $request->exercise_id,
-        // ];
-
         $data = $request->all();
         if ($request->hasFile('image')) {         
             $image = $request->image;
@@ -47,10 +43,43 @@ class TestImageController extends Controller
             $data['audio'] = $filename;
         }
 
- 
         TestImage::create($data);
         return redirect()->route('testImage.index')->with('success','test image with audio created successfully!');
     
+    }
+
+    public function edit(TestImage $testImage){
+        $lessons = Lesson::where('chapter_id', $testImage->chapter_id)->orderBy('order')->get();
+        $exercises = List_exercise::where('lesson_id', $testImage->lesson_id)->orderBy('order')->get();
+        return view("pages.allExercises.test_image.edit")->with("testImage",$testImage)->with("lessons",$lessons)->with("exercises", $exercises);
+    }
+
+    public function update(TestImageRequest $request, TestImage $testImage) {
+        $testImages = TestImage::all();
+        $this->sortItems($testImages, $testImage->order, $request->order);
+
+        $data = $request->all();
+        if ($request->hasFile('image')) {  
+            if ($testImage->image) {
+                $this->removeFile($testImage->image, 'test_audio_image/image');
+            }        
+            $image = $request->image;
+            $imageName = $this->uploadFile($image,'test_audio_image/image',true);
+            $data['image'] = $imageName;
+        }
+
+        if ($request->hasFile('audio')) {
+            if ($testImage->audio) {
+                $this->removeFile($testImage->audio, 'test_audio_image/audio');
+            } 
+            $random = hexdec(uniqid());
+            $filename = $random . '.' . $request->audio->extension();
+            Storage::disk('test_audio_image')->putFileAs('', $request->audio,$filename);
+            $data['audio'] = $filename;
+        }
+
+        $testImage->update($data);
+        return redirect()->route('testImage.index')->with('success','test image with audio updated successfully!');
     }
 
     public function destroy(TestImage $testImage){

@@ -14,8 +14,11 @@ class Phonetics extends Model
         'chapter_id','lesson_id','exercise_id','status','order'
     ];
 
+    protected $casts = ['examples' => 'array'];
+    
     public $translatable = ["phonetic_text","examples","sounds"];
 
+    
     public function Exercise(){
         return $this->belongsTo(List_exercise::class);
     }

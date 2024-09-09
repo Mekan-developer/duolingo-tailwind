@@ -26,6 +26,15 @@
       </li>
 
       <li>
+        <a href="{{route('informations.index')}}" class="block rounded-sm  px-4 py-2 text-sm font-medium hover:bg-gray-100 hover:text-gray-700">
+          <div class="flex gap-[2px]">
+            <i class='bx bx-info-circle'></i>
+              <span class=" font-normal">informations</span>
+          </div>
+        </a>
+      </li>
+
+      <li>
         <details class="group [&_summary::-webkit-details-marker]:hidden" {{ Request::is('exercises*') ? 'open' : '' }}>
           <summary
             class="flex cursor-pointer {{ Request::is('exercises*') ? 'bg-[var(--bg-color-non-active)]' : '' }} items-center justify-between rounded-sm px-4 py-2  hover:bg-gray-100 hover:text-gray-700">

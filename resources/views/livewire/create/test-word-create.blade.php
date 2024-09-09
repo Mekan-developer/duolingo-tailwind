@@ -9,7 +9,10 @@
             <div class="bg-white px-4 py-6 rounded-sm">
                 @include('includes.exerciseParts.create.options')
                 @include('includes.exerciseParts.create.english_text',['name'=>'en_text','title' => 'English word','placeholder' => 'english word']) 
-                @include('includes.exerciseParts.create.sound_file')
+                <div class="mt-2">
+                    @include('includes.exerciseParts.create.sound_file')
+                </div>
+                
             </div>
         
             <div class="mt-2">
