@@ -1,10 +1,11 @@
 <div>
-    <div class="flex flex-col gap-6 w-full p-6">
+    <div class="flex flex-col w-full gap-6 p-6">
         <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
             Add audio image for testing
         </div>
 
-        <form action="{{route('phonetics.store')}}" method="post" enctype="multipart/form-data"  class="w-full mx-auto bg-[var(--bg-color-non-active)] p-6 rounded-md">
+        <form action="{{route('phonetics.store')}}" method="post" enctype="multipart/form-data"  
+        lass="w-full mx-auto bg-[var(--bg-color-non-active)] p-6 rounded-md" onsubmit="disableButton()">
             @csrf
             <div class="flex flex-col gap-4 px-4 py-6 bg-gray-400 rounded-sm">
                 <p class="text-white">PHONETICS PART ONE</p>
@@ -22,7 +23,7 @@
                     @include('includes.exerciseParts.create.sound_file')
                 </div>
             </div>
-            <div class="bg-white px-4 py-6 rounded-sm mt-10">
+            <div class="px-4 py-6 mt-10 bg-white rounded-sm">
                 <p class="text-black">PHONETICS PART TWO</p>
                 <div id="test" class="my-2">@php $loop=0 @endphp
                     @for($i = 1; $i <= $countExamples; $i++)

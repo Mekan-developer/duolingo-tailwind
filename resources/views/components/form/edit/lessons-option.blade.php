@@ -11,7 +11,7 @@
                 @endif
                 @foreach ($lessons as $lesson)
                     <option value="{{$lesson->id}}" >
-                        {{ $lesson->getTranslation('title',$locales[0]['locale']) }}
+                        {{ $lesson->name }}
                     </option>
                 @endforeach
             </select>

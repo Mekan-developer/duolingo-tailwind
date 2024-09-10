@@ -5,12 +5,10 @@
             Add Chapters
         </div>
 
-        <form action="{{route('chapter.store')}}" method="post" class="w-full mx-auto bg-[var(--bg-color-non-active)] p-6 rounded-md">
+        <form action="{{route('chapter.store')}}" method="post" 
+        class="w-full mx-auto bg-[var(--bg-color-non-active)] p-6 rounded-md" onsubmit="disableButton()">
             @csrf
             <x-form.input name="name" placeholder="chapter name" labelText="chapter name" :errorMessage="$errors->get('name')" />
-            {{-- @foreach ($locales as $locale)
-                <x-form.input :name="'title['.$locale->locale.']'" :placeholder="'chapter '. $locale->locale" :labelText="'chapter '. $locale->name" :errorMessage="$errors->get('title.' . $locale->locale)" />
-            @endforeach --}}
             <x-form.btn-submit/>
         </form>
     </div>

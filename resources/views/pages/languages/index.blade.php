@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-<div class="flex flex-col w-full relative">
+<div class="relative flex flex-col w-full">
     <x-form.success/>
     <div class="flex flex-row justify-between w-full">
         <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
@@ -54,7 +54,8 @@
             </table>
         </div>
         <div class="bg-[var(--bg-color-non-active)] p-4 rounded-sm w-auto">
-            <form  action="{{ isset($lang['edit']) ? route('language.update') : route('language.store') }}" method= "POST" class="w-full" enctype="multipart/form-data">
+            <form  action="{{ isset($lang['edit']) ? route('language.update') : route('language.store') }}" 
+            method= "POST" class="w-full" enctype="multipart/form-data" onsubmit="disableButton()">
                 @csrf
                 @isset($lang['edit']) @method('patch') @endisset
                 @isset($lang['edit']) 
@@ -83,9 +84,15 @@
                 @isset($lang['edit']) 
                     <x-form.order class="order" :request="$languages" :currentOrder="$lng"></x-form.order>
                 @endisset
-                <button type="submit" class="bg-[var(--bg-color-active)] w-full bg-gradient-to-r  text-white py-2 rounded-lg mx-auto block focus:outline-none focus:ring-2 focus:ring-offset-2">add language</button>
+                <button type="submit" id="submitBtn" class="bg-[var(--bg-color-active)] w-full bg-gradient-to-r  text-white py-2 rounded-lg mx-auto block focus:outline-none focus:ring-2 focus:ring-offset-2">add language</button>
             </form>
         </div>
     </div>
 </div>
 @endsection
+
+<script>
+    function disableButton() {
+        document.getElementById('submitBtn').disabled = true;
+    }
+</script>

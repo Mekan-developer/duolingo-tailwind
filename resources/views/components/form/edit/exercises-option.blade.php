@@ -12,7 +12,7 @@
                 @endif
                 @foreach ($exercises as $exercise)
                 
-                    <option @if($exercise->id == $exerciseId) selected @endif value="{{$exercise->id}}">{{ $exercise->getTranslation('title',$locales[0]['locale']) }}</option>
+                    <option @if($exercise->id == $exerciseId) selected @endif value="{{$exercise->id}}">{{ $exercise->name }}</option>
                 @endforeach
             </select>
             <x-input-error :messages="$errors->get('exercise_id')" class="mt-2" />

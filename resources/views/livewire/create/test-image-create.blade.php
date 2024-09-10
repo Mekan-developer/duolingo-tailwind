@@ -1,14 +1,15 @@
 <div>
-    <div class="flex flex-col gap-6 w-full p-6">
+    <div class="flex flex-col w-full gap-6 p-6">
         <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
             Add audio image for testing
         </div>
 
-        <form action="{{route('testImage.store')}}" method="post" enctype="multipart/form-data"  class="w-full mx-auto bg-[var(--bg-color-non-active)] p-6 rounded-md">
+        <form action="{{route('testImage.store')}}" method="post" enctype="multipart/form-data"  
+        class="w-full mx-auto bg-[var(--bg-color-non-active)] p-6 rounded-md" onsubmit="disableButton()">
             @csrf
-            <div class="bg-white px-4 py-6 rounded-sm">
+            <div class="px-4 py-6 bg-white rounded-sm">
                 @include('includes.exerciseParts.create.options')
-                <div class="flex flex-row gap-10 w-full mb-2">
+                <div class="flex flex-row w-full gap-10 mb-2">
                     @include('includes.exerciseParts.create.image_file')
                     @include('includes.exerciseParts.create.sound_file')
                 </div>

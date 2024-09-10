@@ -1,5 +1,5 @@
 <div>
-    <div class="flex flex-col gap-6 w-full p-6">
+    <div class="flex flex-col w-full gap-6 p-6">
         <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
             Add audio image for testing
         </div>
@@ -26,7 +26,7 @@
                     @include('includes.exerciseParts.create.sound_file')
                 </div>
             </div>
-            <div class="bg-white px-4 py-6 rounded-sm mt-10">
+            <div class="px-4 py-6 mt-10 bg-white rounded-sm">
                 <p class="text-black">PHONETICS PART TWO</p>
                 <div id="test" class="my-2">   
                     @foreach ($phoneticsExamples->examples as $key => $example)
@@ -35,12 +35,13 @@
                             <div class="flex flex-row items-end ">
                                 <div class="flex-1 ">
                                     @include('includes.exerciseParts.create.phonetics_sound',['name' => 'sounds['.$loop->iteration.']', 'uniqueId' => $loop->iteration])
+                                    <input type="number"  value="{{$removeSoundNumber}}"  name="removeSoundNumber" hidden>
                                 </div>
                                 <div class="flex ">
                                     @if($loop->iteration==1)                           
                                         <a wire:click.prevent="addExamples" class="cursor-pointer text-white text-center leading-[42px] bg-[var(--bg-color-active)] h-[42px] aspect-square ml-1 focus:ring-4 font-medium rounded-sm  ">+</a>
                                     @else 
-                                        <a @if($maxSoundKey <= $key) wire:click.prevent="removeExamples({{$key}})" @endif class=" cursor-pointer text-white text-center leading-[42px] bg-[var(--bg-color-active)] h-[42px] aspect-square ml-1 focus:ring-4 font-medium rounded-sm">-</a>
+                                        <a @if($maxSoundKey <= $key) wire:click.prevent="removeExamples({{$key}})" wire:click="removeSoundCount" @endif class=" cursor-pointer text-white text-center leading-[42px] bg-[var(--bg-color-active)] h-[42px] aspect-square ml-1 focus:ring-4 font-medium rounded-sm">-</a>
                                     @endif  
                                 </div>
                             </div>                                                    
@@ -48,7 +49,10 @@
 
                     @endforeach
                 </div>
-                <x-form.btn-submit/>
+                <div class="flex w-full gap-4">
+                    <x-form.btn-submit name="update" class="flex-1"/>
+                    {{-- <x-form.btn-cancel class="flex-1 w-full" /> --}}
+                </div>
             </div>
         </form>
     </div> 

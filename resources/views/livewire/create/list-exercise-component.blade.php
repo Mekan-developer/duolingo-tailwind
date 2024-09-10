@@ -3,7 +3,8 @@
         <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
             Add Lesson
         </div>
-        <form action="{{route('list.exercises.store')}}" method="post" class="w-full mx-auto bg-[var(--bg-color-non-active)] p-6">
+        <form action="{{route('list.exercises.store')}}" method="post" 
+        class="w-full mx-auto bg-[var(--bg-color-non-active)] p-6" onsubmit="disableButton()">
             @csrf
             <div class="px-4 rounded-sm">
                 <div class="flex flex-row w-full gap-6 px-2 py-6 bg-white">

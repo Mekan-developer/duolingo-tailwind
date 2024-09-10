@@ -15,6 +15,8 @@ class PhoneticsEdit extends Component
     public $selectedChapter = null,$selectedLesson = null;
     public $switch_lesson = false, $switch_exercise = false;
 
+    public $removeSoundNumber=0;
+
     public function mount($phonetics,$lessons,$exercises)
     {
         $this->phonetics = $phonetics;
@@ -71,5 +73,9 @@ class PhoneticsEdit extends Component
     public function selectedLessonHandle(){
         $this->exercise_id = null;$this->switch_exercise = true;$this->exercises = null;
         $this->exercises = List_exercise::where('lesson_id',$this->selectedLesson)->orderBy('order')->get(); 
+    }
+
+    public function removeSoundCount(){
+        $this->removeSoundNumber++;
     }
 }

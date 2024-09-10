@@ -1,8 +1,8 @@
 @extends('layouts.main')
 @section('content')
 
-<div>
-    <div class="flex flex-col w-full relative">
+<div class="h-full">
+    <div class="relative flex flex-col w-full">
         <x-form.success/>
         <div class="flex flex-row justify-between w-full">
             <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
@@ -11,21 +11,20 @@
             <div>
                 <div class="flex flex-row-reverse">
                     <a href="{{route('phonetics.create')}}" class="text-white bg-[var(--bg-color-active)] hover:bg-[#46b8c0] focus:ring-4 font-medium rounded-sm px-4 py-2 me-2 mb-2">+</a>
-                    {{-- <button  type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg px-5 py-2.5 me-2 mb-2">add</button> --}}
                 </div>
             </div>
         </div>
     </div>
     @include('includes.exerciseParts.index.orderAllExercise',['route' => 'phonetics.index','title' => 'phonetics'])
-    <div class="flex gap-4 relative">
-        <div class="flex-1 overflow-x-auto overflow-hidden overflow-y-auto h-[700px] " >
+    <div class="relative flex h-full gap-4">
+        <div class="flex-1 h-full overflow-hidden overflow-x-auto overflow-y-auto" >
             <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>         
                         <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">id</th>
                         <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">phonetic alphabet</th>
                         <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">phonetic text</th>
-                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap border-r-2">audio</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 border-r-2 whitespace-nowrap">audio</th>
                         @for ($i = 1; $i <= $maxLength; $i++)
                             <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">example{{$i}}</th>
                             <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">sound{{$i}}</th>
@@ -100,15 +99,15 @@
                                     @endif
                                 </td>
                             @endfor
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$phon->Chapter->translate('title',$locales[0]['locale'])}}</td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$phon->Lesson->translate('title',$locales[0]['locale'])}}</td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$phon->Exercise->translate('title',$locales[0]['locale'])}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$phon->Chapter->name}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$phon->Lesson->name}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$phon->Exercise->name}}</td>
                             
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$phon->order}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
                                 <x-form.status route="phonetics.active" modelName="phonetics" :id="$phon->id" :currentStatus="$phon->status"/>
                             </td>
-                            <td class="h-full gap-2 px-4  text-center whitespace-nowrap ">
+                            <td class="h-full gap-2 px-4 text-center whitespace-nowrap ">
                                 <div class="flex flex-row justify-center h-full gap-2">
                                     <a href="{{ route('phonetics.edit',['phonetics'=>$phon->id]) }}">
                                         <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
@@ -134,7 +133,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="w-full absolute top-full mt-2">
+        <div class="absolute w-full mt-2 top-full">
             {{$phonetics->links()}}
         </div>
     </div>

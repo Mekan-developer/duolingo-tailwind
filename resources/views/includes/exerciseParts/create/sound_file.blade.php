@@ -1,12 +1,12 @@
-<div class=" w-full mt-4">
+<div class="w-full mt-4 " wire:ignore>
     <div class="relative text-blue-900 hover:text-[var(--bg-color-active)]">
-        <label title="Click to upload" for="sound" class="cursor-pointer flex items-center gap-4 px-6 py-2 before:border-gray-400/60 hover:before:border-gray-300 group before:bg-gray-100 before:absolute before:inset-0 before:rounded-sm before:border before:border-dashed before:transition-transform before:duration-300 hover:before:scale-100 active:duration-75 active:before:scale-95">
-            <div class="w-max relative">
+        <label title="Click to upload" for="sound" class="flex items-center gap-4 px-6 py-2 cursor-pointer before:border-gray-400/60 hover:before:border-gray-300 group before:bg-gray-100 before:absolute before:inset-0 before:rounded-sm before:border before:border-dashed before:transition-transform before:duration-300 hover:before:scale-100 active:duration-75 active:before:scale-95">
+            <div class="relative w-max">
                 {{-- <img class="w-12" src="https://www.svgrepo.com/show/485545/upload-cicle.svg" alt="file upload icon" width="512" height="212"> --}}
                 <i class='bx bx-user-voice text-[32px]'></i>
             </div>
             <div class="relative">
-                <span class="block text-base font-semibold relative ">
+                <span class="relative block text-base font-semibold ">
                     {{ $title ?? 'Upload sound' }}
                 </span>
                 <span id="sound_message" class="mt-0.5 block text-sm  h-[20px]"></span>
@@ -16,7 +16,7 @@
     </div>
     <div>
         @error('audio')
-            <span class="text-red-600 text-xs">{{ $message }}</span> 
+            <span class="text-xs text-red-600">{{ $message }}</span> 
         @enderror
     </div>
 </div>

@@ -11,11 +11,15 @@
                     font-family: "Libre+Baskerville", sans-serif;
                     font-weight: 600;
                     font-style: normal;
+                },
+                html, body{
+                    width:100%;
+                    height:100%;
                 }
             </style>
         </x-slot>
     </x-admin.header>
-<body class="w-[100vw]">
+<body >
     
     <div class="flex w-full">
         <div>

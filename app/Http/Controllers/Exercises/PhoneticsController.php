@@ -59,28 +59,55 @@ class PhoneticsController extends Controller
     }
 
     public function update(PhoneticsRequest $request,Phonetics $phonetics){
-        
-
-        $soundsJson = $phonetics->getAttributes()['sounds'];
-        $soundsArray = json_decode($soundsJson, true);
-        // $phonetics->update(['examples' => null]);
-
-        
         $data = $request->all();
+
+        //adding sound if admin additional add sound start
+
+        $sounds = $phonetics->sounds;
+
+ 
+
+        // Get the last 2 keys
+        $keys = array_keys($sounds);
+        
+        dd($keys);
+        // dd($soundsArray);
+        
+        if($request->removeSoundNumber > 0){
+            $keep_count = count($soundKeys) - $request->removeSoundNumber;
+            dd($keep_count);
+            $new_array = array_slice($soundsArray, 0, $keep_count, true);
+            // $numberRemoveElement = $request->removeSoundNumber;
+            // array_splice($soundsArray, 0, -1 * $numberRemoveElement);
+            // $phonetics->sounds = $soundsArray;
+            // dd($new_array);
+
+            $phonetics->save();
+        }
         $sounds = $request->files->get('sounds');
         if($sounds){
+            $soundsJson = $phonetics->getAttributes()['sounds'];
+            $soundsArray = json_decode($soundsJson, true); 
+            // $sound = $phonetics->sounds;
             foreach ($sounds as $key => $value) {
                 $data = $phonetics->attributesToArray();
-                $this->removeFile($data['sounds'][$key], 'phonetics');
+                if(isset($data['sounds'][$key]))
+                    $this->removeFile($data['sounds'][$key], 'phonetics');
                 if ($value instanceof \Symfony\Component\HttpFoundation\File\UploadedFile) {
                     $random = hexdec(uniqid());
                     $filename = $random . '.' . $value->getClientOriginalExtension();
                     Storage::disk('phonetics')->putFileAs('', $value, $filename);
-                    $data['sounds'][$key] = $filename;
+                    $soundsArray[$key] = $filename;
                 }
             }
+            $phonetics->sounds = $soundsArray;
+            $phonetics->save();
         }
         
+        //adding sound if admin additional add sound end
+
+
+
 
         if ($request->hasFile('audio')) {
             if ($phonetics->audio) {

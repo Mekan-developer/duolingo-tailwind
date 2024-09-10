@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-<div class="flex flex-col w-full relative">
+<div class="relative flex flex-col w-full">
     <x-form.success/>
     <div class="flex flex-row justify-between w-full">
         <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
@@ -39,41 +39,42 @@
         </div>
 
         <div class="mx-2 p-4 pt-0 rounded-lg flex  justify-center w-[400px]">
-            <form action="{{ isset($user_edit['edit_user']) ? route('admin.update',['user' => $user->id]) : route('register') }}" method="POST" class="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
+            <form action="{{ isset($user_edit['edit_user']) ? route('admin.update',['user' => $user->id]) : route('register') }}" 
+                method="POST" class="w-full max-w-md p-8 bg-white rounded-lg shadow-lg" onsubmit="disableButton()">
                 @csrf
                 @isset($user_edit['edit_user']) @method('patch') @endisset
         
-                <h2 class="text-2xl font-bold text-center mb-6 text-black">
+                <h2 class="mb-6 text-2xl font-bold text-center text-black">
                     {{ isset($user_edit['edit_user']) ? 'Edit User' : 'Register User' }}
                 </h2>
         
                 <!-- Username -->
                 <div class="mb-5">
-                    <input type="text" name="name" value="{{ isset($user_edit['edit_user']) ? $user->name : old('name') }}" class="w-full p-3 bg-white text-black border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Username" required />
+                    <input type="text" name="name" value="{{ isset($user_edit['edit_user']) ? $user->name : old('name') }}" class="w-full p-3 text-black bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Username" required />
                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
                 </div>
         
                 <!-- Email -->
                 <div class="mb-5">
-                    <input type="email" name="email" value="{{ isset($user_edit['edit_user']) ? $user->email : old('email') }}" class="w-full p-3 bg-white text-black border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Email" required />
+                    <input type="email" name="email" value="{{ isset($user_edit['edit_user']) ? $user->email : old('email') }}" class="w-full p-3 text-black bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Email" required />
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 </div>
         
                 <!-- Password -->
                 <div class="mb-5">
-                    <input type="password" name="password" placeholder="Password" class="w-full p-3 bg-white text-black border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+                    <input type="password" name="password" placeholder="Password" class="w-full p-3 text-black bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required />
                     <x-input-error :messages="$errors->get('password')" class="mt-2" />
                 </div>
         
                 <!-- Confirm Password -->
                 <div class="mb-6">
-                    <input type="password" name="password_confirmation" placeholder="Confirm Password" class="w-full p-3 bg-white text-black border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+                    <input type="password" name="password_confirmation" placeholder="Confirm Password" class="w-full p-3 text-black bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required />
                     <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                 </div>
         
                 <!-- Submit Button -->
                 <div class="flex justify-end">
-                    <button type="submit" class="bg-[var(--bg-color-active)] text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <button type="submit" id="submitBtn" class="bg-[var(--bg-color-active)] text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                         {{ isset($user_edit['edit_user']) ? 'Update' : 'Submit' }}
                     </button>
                 </div>
@@ -83,4 +84,9 @@
     </div>
 </div>
 @endsection
+<script>
+    function disableButton() {
+        document.getElementById('submitBtn').disabled = true;
+    }
+</script>
 
