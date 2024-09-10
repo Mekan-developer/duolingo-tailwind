@@ -10,7 +10,7 @@ class Lesson extends Model
 {
     use HasFactory,HasTranslations;
 
-    protected $fillable = ['title','chapter_id','order','dopamine_image1','dopamine_image2','dopamine_image3','dopamine_image4'];
+    protected $fillable = ['title','name','chapter_id','order','dopamine_image1','dopamine_image2','dopamine_image3','dopamine_image4'];
     public $translatable = ['title'];
 
     public function listExercise()

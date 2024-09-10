@@ -69,10 +69,10 @@ Route::middleware('auth')->group(function () {
         Route::delete('/delete/{list_exercise}',[ListExerciseController::class,'destroy'])->name('exercises.delete');
     });
 
-    Route::group(['prefix' => 'informations', 'as' => 'informations.'], function(){
+    Route::group(['prefix' => 'informations', 'as' => 'information.'], function(){
         Route::get('/',[InformationController::class,'index'])->name('index');
-        // Route::get('/create',[ListExerciseController::class,'create'])->name('exercises.create');
-        // Route::post('/store',[ListExerciseController::class,'store'])->name('exercises.store');
+        Route::get('/create',[InformationController::class,'create'])->name('create');
+        Route::post('/store',[InformationController::class,'store'])->name('store');
         // Route::get('/edit/{list_exercise}',[ListExerciseController::class,'edit'])->name('exercises.edit');
         // Route::patch('/edit/{list_exercise}',[ListExerciseController::class,'update'])->name('exercises.update');
         // Route::delete('/delete/{list_exercise}',[ListExerciseController::class,'destroy'])->name('exercises.delete');

@@ -10,12 +10,14 @@
             <select id="chapters" name="chapter_id" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                 <option selected>Choose a chapter</option>
                 @foreach ($chapters as $chapter)
-                    <option value="{{$chapter->id}}">{{ $chapter->getTranslation('title',$locales[0]['locale']) }}</option>
+                    <option value="{{$chapter->id}}">{{ $chapter->name }}</option>
+                    {{-- <option value="{{$chapter->id}}">{{ $chapter->getTranslation('title',$locales[0]['locale']) }}</option> --}}
                 @endforeach
             </select>
-            @foreach ($locales as $locale)
+            <x-form.input name="name" placeholder="Lesson name" labelText="Lesson name" :errorMessage="$errors->get('name')" />
+            {{-- @foreach ($locales as $locale)
                 <x-form.input :name="'title['.$locale->locale.']'" :placeholder="'Lesson '. $locale->locale" :labelText="'Lesson '. $locale->name" :errorMessage="$errors->get('title.' . $locale->locale)" />
-            @endforeach
+            @endforeach --}}
             <div class="flex flex-row justify-between gap-2 my-2">
                 @for ($i = 1; $i < 5; $i++)
                     <div class="flex-1">

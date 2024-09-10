@@ -33,7 +33,8 @@ class LessonController extends Controller
     public function store(LessonRequest $request){ 
 
         $data = [
-            'title' => $request->title,
+            // 'title' => $request->title,
+            'name' => $request->name,
             'chapter_id' => $request->chapter_id,
         ];
         
@@ -75,7 +76,8 @@ class LessonController extends Controller
         
         $data = [
             'chapter_id' => $request->chapter_id,
-            'title' => $request->title,
+            'name' => $request->name,
+            // 'title' => $request->title,
             'order' => $request->order
         ];
         if ($request->hasFile('dopamine_image1')) { 

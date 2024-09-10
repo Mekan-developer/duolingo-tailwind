@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('chapters', function (Blueprint $table) {
             $table->id();
-            $table->json('title');
+            $table->string('name');
+            $table->json('title')->nullable();
             $table->integer('order')->default(0);
             $table->timestamps();
         });

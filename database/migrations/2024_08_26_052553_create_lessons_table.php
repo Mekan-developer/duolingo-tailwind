@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('lessons', function (Blueprint $table) {
             $table->id();
-            $table->json('title');
+            $table->string('name');
+            $table->json('title')->nullable();
             $table->string('dopamine_image1');//left image
             $table->string('dopamine_image2');//right image
             $table->string('dopamine_image3');//left bottom

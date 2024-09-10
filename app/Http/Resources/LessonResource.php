@@ -16,12 +16,13 @@ class LessonResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'title' => $this->getTranslations('title'),
-            'chapter_id' => $this->chapter_id,
+            'name' => $this->name,
+            // 'title' => $this->getTranslations('title'),
             'dopamine1' => $this->getDopamine($this->dopamine_image1),
             'dopamine2' => $this->getDopamine($this->dopamine_image2),
             'dopamine3' => $this->getDopamine($this->dopamine_image3),
             'dopamine4' => $this->getDopamine($this->dopamine_image4),
+            'chapter_id' => $this->chapter_id,
 
         ];
     }

@@ -26,6 +26,7 @@ class PhoneticsRequest extends FormRequest
             'chapter_id' => 'required|exists:chapters,id',
             'lesson_id' => 'required|exists:lessons,id',
             'exercise_id' => 'required|exists:list_exercises,id',
+            'phonetic_alphabet' => 'required',
             'status' => 'nullable',
             'order' => 'nullable|integer'
         ];

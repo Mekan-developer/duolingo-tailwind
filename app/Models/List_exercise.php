@@ -10,7 +10,7 @@ class List_exercise extends Model
 {
     use HasFactory, HasTranslations;
 
-    protected $fillable = ['title','chapter_id','lesson_id','order'];
+    protected $fillable = ['title','name','chapter_id','lesson_id','order'];
     public $translatable = ['title'];
 
     public function chapter(){

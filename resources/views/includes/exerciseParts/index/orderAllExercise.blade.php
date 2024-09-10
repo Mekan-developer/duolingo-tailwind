@@ -6,11 +6,13 @@
             @foreach ($chapters as $chapter)
                 @if($selected_chapter_id !== null)
                     <option value="{{ $chapter->id }}" {{ $selected_chapter_id == $chapter->id ? 'selected' : '' }}>
-                        {{ $chapter->getTranslation('title', $locales[0]['locale']) }}
+                        {{ $chapter->name }}
+                        {{-- {{ $chapter->getTranslation('title', $locales[0]['locale']) }} --}}
                     </option>
                 @else
                     <option value="{{ $chapter->id }}" {{ (request('sort_by_chapter') == $chapter->id || $selected_chapter_id == $chapter->id ) ? 'selected' : '' }}>
-                        {{ $chapter->getTranslation('title', $locales[0]['locale']) }}
+                        {{ $chapter->name }}
+                        {{-- {{ $chapter->getTranslation('title', $locales[0]['locale']) }} --}}
                     </option>
                 @endif
             @endforeach                
@@ -25,11 +27,13 @@
                 @foreach ($lessons as $lesson)
                     @if($selected_lesson_id !== null)
                         <option value="{{ $lesson->id }}" {{ $selected_lesson_id == $lesson->id ? 'selected' : '' }}>
-                            {{ $lesson->getTranslation('title', $locales[0]['locale']) }}
+                            {{ $lesson->name }}
+                            {{-- {{ $lesson->getTranslation('title', $locales[0]['locale']) }} --}}
                         </option>
                     @else
                         <option value="{{ $lesson->id }}" {{ (request('sort_by_lesson') == $lesson->id || $selected_lesson_id == $lesson->id ) ? 'selected' : '' }}>
-                            {{ $lesson->getTranslation('title', $locales[0]['locale']) }}
+                            {{ $lesson->name }}
+                            {{-- {{ $lesson->getTranslation('title', $locales[0]['locale']) }} --}}
                         </option>
                     
                     @endif
@@ -45,7 +49,8 @@
                 <option value="0"  {{ request('sort_by_exercise') == '0' ? 'selected' : '' }}>Select for ordering {{ $title }} by exercise</option>
                 @foreach ($listExercises as $listExercise)
                     <option value="{{ $listExercise->id }}" {{ request('sort_by_exercise') == $listExercise->id ? 'selected' : '' }}>
-                        {{ $listExercise->getTranslation('title', $locales[0]['locale']) }}
+                        {{ $listExercise->name }}
+                        {{-- {{ $listExercise->getTranslation('title', $locales[0]['locale']) }} --}}
                     </option>
                 @endforeach                
             </select>

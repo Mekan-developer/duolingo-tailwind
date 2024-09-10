@@ -49,7 +49,8 @@ class ListExerciseController extends Controller
         List_exercise::create([
             'lesson_id' => $request->lesson_id,
             'chapter_id' => $request->chapter_id,
-            'title' => $request->title,
+            'name' => $request->name,
+            // 'title' => $request->title,
         ]);
         
         return redirect()->route("list.exercises")->with("success","Lists of exercise successfully created!");

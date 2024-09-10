@@ -16,7 +16,8 @@ class ListExerciseResource extends JsonResource
     {
         return [
             "id"=> $this->id,
-            "title" => $this->getTranslations('title'),
+            "name" => $this->name,
+            // "title" => $this->getTranslations('title'),
             "chapter_id" => $this->chapter_id,
             "lesson_id" => $this->lesson_id
         ];

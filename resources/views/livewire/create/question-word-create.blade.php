@@ -8,11 +8,11 @@
             @csrf
             <div class="bg-white px-4 py-6 rounded-sm">
                 @include('includes.exerciseParts.create.options')
+
                 @include('includes.exerciseParts.create.english_text',['name'=>'en_text','title' => 'English word','placeholder' => 'english word']) 
-                
                 @include('includes.exerciseParts.create.sound_file')
             </div>
-            <div class="px-4 mt-2">
+            <div class="mt-2">
                 @foreach ($locales as $locale)
                     <x-form.input :name="'translations_word['.$locale->locale.']'" :placeholder="'Translate '. $locale->locale" :labelText="'Translate '. $locale->name" :errorMessage="$errors->get('translations_word.' . $locale->locale)" />
                 @endforeach

@@ -19,7 +19,8 @@
                     <option value="0"  {{ request('sort_by') == '0' ? 'selected' : '' }}>Select for ordering lessons by chapter</option>
                     @foreach ($chapters as $chapter)
                         <option value="{{ $chapter->id }}" {{ request('sort_by') == $chapter->id ? 'selected' : '' }}>
-                            {{ $chapter->getTranslation('title', $locales[0]['locale']) }}
+                            {{ $chapter->name }}
+                            {{-- {{ $chapter->getTranslation('title', $locales[0]['locale']) }} --}}
                         </option>
                     @endforeach                
                 </select>
@@ -31,9 +32,10 @@
                     <thead class="ltr:text-left rtl:text-right">
                         <tr>
                             <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">id</th>
-                            @foreach($locales as $locale)
+                            <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">name</th>
+                            {{-- @foreach($locales as $locale)
                                 <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">title {{ $locale->locale }}</th>
-                            @endforeach
+                            @endforeach --}}
                             <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">dopamine1</th>
                             <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">dopamine2</th>
                             <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">dopamine3</th>
@@ -47,11 +49,12 @@
                         @foreach ($lessons as $lesson)
                         <tr>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$lesson->id}}</td>
-                            @foreach($locales as $locale)
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$lesson->name}}</td>
+                            {{-- @foreach($locales as $locale)
                                 <td class="px-4 py-2 font-medium text-center text-gray-900 whitespace-nowrap">
                                     {{ $lesson->getTranslation('title', $locale->locale) }}
                                 </td>
-                            @endforeach
+                            @endforeach --}}
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
                                 <img src="{{$lesson->getDopamine($lesson->dopamine_image1)}}" alt="dopamine 1">
                             </td>
@@ -64,7 +67,8 @@
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
                                 <img src="{{$lesson->getDopamine($lesson->dopamine_image4)}}" alt="dopamine 1">
                             </td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $lesson->chapter->getTranslation('title',$locales[0]['locale']) }}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $lesson->chapter->name }}</td>
+                            {{-- <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $lesson->chapter->getTranslation('title',$locales[0]['locale']) }}</td> --}}
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$lesson->order}}</td>
                             <td class="h-full gap-2 px-4 py-2 text-center whitespace-nowrap ">
                                 <div class="flex flex-row justify-center h-full gap-2">

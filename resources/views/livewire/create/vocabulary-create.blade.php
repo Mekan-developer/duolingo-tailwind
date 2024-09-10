@@ -10,7 +10,7 @@
                 @include('includes.exerciseParts.create.options') 
                 @include('includes.exerciseParts.create.english_text',['name'=>'en_text','title' => 'English word','placeholder' => 'english word']) 
 
-                <div class="flex flex-row gap-10 w-full">
+                <div class="flex flex-row gap-10 w-full mt-2">
                     @include('includes.exerciseParts.create.image_file')
                     @include('includes.exerciseParts.create.sound_file')
                 </div>

@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('information', function (Blueprint $table) {
             $table->id();
+            $table->json('lessons'); 
+            $table->json('exercises'); 
+            $table->json('information');
             $table->timestamps();
         });
     }

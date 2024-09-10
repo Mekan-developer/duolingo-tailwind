@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('list_exercises', function (Blueprint $table) {
             $table->id();
-            $table->json('title');
+            $table->string('name');
+            $table->json('title')->nullable();
             $table->unsignedBigInteger('chapter_id'); //order etmekde gerek bolya
             $table->unsignedBigInteger('lesson_id');
             $table->integer('order')->default(0);
@@ -21,7 +22,6 @@ return new class extends Migration
 
             $table->foreign('chapter_id')->references('id')->on('chapters')->onDelete('cascade');
             $table->foreign('lesson_id')->references('id')->on('lessons')->onDelete('cascade');
-           
         });
     }
 

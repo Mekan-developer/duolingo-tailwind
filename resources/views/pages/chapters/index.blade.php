@@ -19,9 +19,11 @@
                     <thead class="ltr:text-left rtl:text-right">
                         <tr>
                             <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">id</th>
-                            @foreach($locales as $locale)
+                            <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">name</th>
+
+                            {{-- @foreach($locales as $locale)
                                 <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">title {{ $locale->locale }}</th>
-                            @endforeach
+                            @endforeach --}}
                             
                             <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">order</th>
                             {{-- <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">Role</th> --}}
@@ -32,11 +34,12 @@
                         @foreach ($chapters as $chapter)
                         <tr>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$chapter->id}}</td>
-                            @foreach($locales as $locale)
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$chapter->name}}</td>
+                            {{-- @foreach($locales as $locale)
                                 <td class="px-4 py-2 font-medium text-center text-gray-900 whitespace-nowrap">
                                     {{ $chapter->getTranslation('title', $locale->locale) }}
                                 </td>
-                            @endforeach
+                            @endforeach --}}
                             
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$chapter->order}}</td>
                             {{-- <td class="px-4 py-2 text-gray-700 whitespace-nowrap">admin</td> --}}

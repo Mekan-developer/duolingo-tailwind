@@ -8,9 +8,11 @@
         <form action="{{route('chapter.update',['chapter'=> $chapter->id])}}" method="post" class="w-full mx-auto bg-[var(--bg-color-non-active)] p-6 rounded-md">
             @csrf
             @method("PATCH")
-            @foreach ($locales as $locale)
+            <x-form.edit-input name="name" :value="$chapter->name" labelText="chapter name" :errorMessage="$errors->get('name')" />
+
+            {{-- @foreach ($locales as $locale)
                 <x-form.edit-input :name="'title['.$locale->locale.']'" :value="$chapter->getTranslation('title',$locale->locale)" :labelText="'chapter '. $locale->name" :errorMessage="$errors->get('title.' . $locale->locale)" />
-            @endforeach
+            @endforeach --}}
             <x-form.order :request="$chapters" :currentOrder="$chapter"></x-form.order>
             <x-form.btn-submit/>
         </form>

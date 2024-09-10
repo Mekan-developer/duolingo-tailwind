@@ -10,7 +10,7 @@ class Chapter extends Model
 {
     use HasFactory, HasTranslations;
 
-    protected $fillable = ['title','order'];
+    protected $fillable = ['title','order','name'];
     public $translatable  = ['title'];
 
     public function lesson()

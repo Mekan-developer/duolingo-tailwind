@@ -65,7 +65,7 @@
                                 </div>
                             </td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
-                                <img src="{{$vocabulary->getImage()}}" alt="vocabulary image">
+                                <img class="w-[75px] h-auto" src="{{$vocabulary->getImage()}}" alt="vocabulary image">
                             </td>
                             @foreach($locales as $locale)
                                 <td class="px-4 py-2 font-medium text-center text-gray-900 whitespace-nowrap">
@@ -73,9 +73,10 @@
                                 </td>
                             @endforeach
 
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$vocabulary->Chapter->translate('title',$locales[0]['locale'])}}</td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$vocabulary->Lesson->translate('title',$locales[0]['locale'])}}</td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$vocabulary->Exercise->translate('title',$locales[0]['locale'])}}</td>
+                            {{-- <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$vocabulary->Chapter->translate('title',$locales[0]['locale'])}}</td> --}}
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$vocabulary->Chapter->name}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$vocabulary->Lesson->name }}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$vocabulary->Exercise->name }}</td>
                             
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$vocabulary->order}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
