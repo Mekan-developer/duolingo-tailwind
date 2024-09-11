@@ -11,7 +11,7 @@ class Information extends Model
     use HasFactory,HasTranslations;
 
     protected $fillable = [
-        "lessons","exercises","information",
+        "lessons","exercises","information","active"
     ];
 
     public $translatable = ["information"];

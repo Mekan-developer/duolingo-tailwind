@@ -89,7 +89,6 @@ class LanguageController extends Controller
             $language->status = '1';
         }
             $language->save();
-
         return redirect()->route('language.index');
     }
 }

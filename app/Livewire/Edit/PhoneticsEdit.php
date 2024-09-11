@@ -19,17 +19,17 @@ class PhoneticsEdit extends Component
 
     public function mount($phonetics,$lessons,$exercises)
     {
-        $this->phonetics = $phonetics;
-        $this->phoneticsExamples = json_decode($phonetics);
+        $this->phonetics = $phonetics;        
+        $this->phoneticsExamples = json_decode($this->phonetics);
         
         $decode = (array) $this->phoneticsExamples->examples;
         $maxKey = max(array_keys($decode));
         $this->maxSoundKey = $maxKey;
-        
+
 
         $this->selectedLesson = $phonetics->lesson_id;
         $this->exercise_id = $phonetics->exercise_id;
-        $this->selectedChapter = $phonetics->chapter_id;
+        $this->selectedChapter = $phonetics->chapter_id; 
         $this->lessons = $lessons;
         $this->exercises = $exercises;
     }
@@ -47,6 +47,16 @@ class PhoneticsEdit extends Component
             "locales" => $locales
         ]);
     }
+
+//     public function updated()
+// {
+//     $this->phoneticsExamples = json_decode($this->phonetics);
+        
+//     $decode = (array) $this->phoneticsExamples->examples;
+//     $maxKey = max(array_keys($decode));
+//     $this->maxSoundKey = $maxKey;
+
+// }
 
     public function addExamples(){
         $decode = (array) $this->phoneticsExamples->examples;

@@ -9,9 +9,6 @@ use Illuminate\Http\Request;
 
 class InformationController extends Controller
 {
-    
-
-
     public function index(){
         $informations = Information::all();
         $locales = Language::all();
@@ -19,20 +16,34 @@ class InformationController extends Controller
     }
 
     public function create(){
-
         return view("pages.informations.create");
     }
 
     public function store(InformationRequest $request){
-
         $request->merge([
             'lessons' => json_encode($request->lesson_ids),
             'exercises' => json_encode($request->exercise_ids),
         ]);
 
         Information::create($request->all());
-
-            return redirect()->route('information.index')->with('success','Information created successfully!');
+        return redirect()->route('information.index')->with('success','Information created successfully!');
     }
 
+
+
+
+    public function destroy(Information $information){    
+        $information->delete();
+        return redirect()->route('information.index');
+    }
+    
+    public function active(Information $information){
+        if($information->status == '1'){
+            $information->status = '0';
+        }else{
+            $information->status = '1';
+        }
+            $information->save();
+        return redirect()->route('information.index');
+    }
 }

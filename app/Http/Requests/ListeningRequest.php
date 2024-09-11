@@ -21,7 +21,7 @@ class ListeningRequest extends FormRequest
      */
     public function rules(): array
     {
-        $data = [
+        $rules = [
             'chapter_id'=> 'required|exists:chapters,id',
             'lesson_id' => 'required|exists:lessons,id',
             'exercise_id' => 'required|exists:list_exercises,id',
@@ -30,10 +30,10 @@ class ListeningRequest extends FormRequest
         ];
 
         if(request()->isMethod("POST")) {
-            $data['audio'] = 'required|file|mimes:mp3|max:10240';
+            $rules['audio'] = 'required|file|mimes:mp3|max:10240';
         }else{
-            $data['audio'] = 'nullable|file|mimes:mp3|max:10240';
+            $rules['audio'] = 'nullable|file|mimes:mp3|max:10240';
         }
-        return $data;
+        return $rules;
     }
 }

@@ -21,7 +21,7 @@ class SpellingRequest extends FormRequest
      */
     public function rules(): array
     {
-        $data = [
+        $rules = [
             'en_text' => 'required|string|max:255',
             'chapter_id' => 'required|exists:chapters,id',
             'lesson_id' => 'required|exists:lessons,id',
@@ -30,11 +30,11 @@ class SpellingRequest extends FormRequest
             'order' => 'nullable|integer'
         ];
         if(request()->isMethod("POST")) {
-            $data['image'] = 'required|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240';
+            $rules['image'] = 'required|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240';
         }else{
-            $data['image'] = 'nullable|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240';
+            $rules['image'] = 'nullable|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240';
         }
 
-        return $data;
+        return $rules;
     }
 }

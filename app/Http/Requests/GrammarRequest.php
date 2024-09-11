@@ -21,18 +21,24 @@ class GrammarRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'grammar_theory.*' => 'required|string',
             'text.*' => 'required|string',
             'text_correct_parts.*' => 'required|string',
-            'text_incorrect_parts.*' => 'required|string',
-            'audio' => 'required|file|max:10000',
-            
+            'text_incorrect_parts.*' => 'required|string',            
             'chapter_id'=> 'required|exists:chapters,id',
             'lesson_id' => 'required|exists:lessons,id',
             'exercise_id' => 'required|exists:list_exercises,id',
             'status' => 'nullable',
             'order' => 'nullable|integer'
         ];
+
+        if($this->isMethod('post')){
+            $rules['audio'] = 'required|file|max:10000';
+        }else{
+            $rules['audio'] = 'nullable|file|max:10000';
+        }
+
+        return $rules;
     }
 }

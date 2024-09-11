@@ -19,7 +19,7 @@
     @include('includes.exerciseParts.index.orderAllExercise',['route' => 'vocabulary.index','title' => 'vocabulary'])
 
     <div class="flex gap-4 relative">
-        <div class="flex-1 overflow-x-auto overflow-hidden overflow-y-auto h-[700px] " >
+        <div class="flex-1 overflow-x-auto overflow-hidden overflow-y-auto" >
             <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>                        
@@ -83,36 +83,17 @@
                                 <x-form.status route="vocabulary.active" modelName="vocabulary" :id="$vocabulary->id" :currentStatus="$vocabulary->status"/>
                             </td>
                             <td class="h-full gap-2 px-4 py-2 text-center whitespace-nowrap ">
-                                <div class="flex flex-row justify-center h-full gap-2">
-                                    <a href="{{route('vocabulary.edit',['vocabulary' => $vocabulary->id])}}">
-                                        <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
-                                            <i class='bx bx-edit-alt text-[22px]'></i>
-                                        </button>
-                                    </a>
-                                    </form>
-                                    @if(auth()->user()->role == 1)
-                                    <form action="{{ route('vocabulary.delete', ['vocabulary' => $vocabulary->id])}}" 
-                                        method="post">
-                                        @csrf
-                                        @method('DELETE')
-
-                                        <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-red-600">
-                                            <i class='text-[24px] bx bx-trash'></i>
-                                        </button>
-                                    </form>
-                                @endif  
-                                </div>                                                               
+                                <x-form.edit-delete-exercises :editRoute="route('vocabulary.edit',['vocabulary' => $vocabulary->id])" :deleteRoute="route('vocabulary.delete', ['vocabulary' => $vocabulary->id])" />
                             </td>
                         </tr> 
                     @endforeach
                 </tbody>
             </table>
         </div>
-        <div class="w-full absolute top-full mt-2">
-            {{$vocabularies->links()}}
-        </div>
     </div>
-
+    <div class="w-full absolute top-full mt-2">
+        {{$vocabularies->links()}}
+    </div>
 </div>
 
 <script>

@@ -34,12 +34,12 @@
                             @include('includes.exerciseParts.edit.english_text',['name'=>'examples['.$loop->iteration.']','title' => 'examples','placeholder' => 'english character','value' => $example])
                             <div class="flex flex-row items-end ">
                                 <div class="flex-1 ">
-                                    @include('includes.exerciseParts.create.phonetics_sound',['name' => 'sounds['.$loop->iteration.']', 'uniqueId' => $loop->iteration])
+                                    <x-form.include.phonetics-sound :name="'sounds['.$loop->iteration.']'"  :uniqueId="$loop->iteration" />
                                     <input type="number"  value="{{$removeSoundNumber}}"  name="removeSoundNumber" hidden>
                                 </div>
                                 <div class="flex ">
                                     @if($loop->iteration==1)                           
-                                        <a wire:click.prevent="addExamples" class="cursor-pointer text-white text-center leading-[42px] bg-[var(--bg-color-active)] h-[42px] aspect-square ml-1 focus:ring-4 font-medium rounded-sm  ">+</a>
+                                        <a wire:click.prevent="addExamples" onclick="fileChoosenOrNo(456)" class="cursor-pointer text-white text-center leading-[42px] bg-[var(--bg-color-active)] h-[42px] aspect-square ml-1 focus:ring-4 font-medium rounded-sm">+</a>
                                     @else 
                                         <a @if($maxSoundKey <= $key) wire:click.prevent="removeExamples({{$key}})" wire:click="removeSoundCount" @endif class=" cursor-pointer text-white text-center leading-[42px] bg-[var(--bg-color-active)] h-[42px] aspect-square ml-1 focus:ring-4 font-medium rounded-sm">-</a>
                                     @endif  
@@ -49,6 +49,7 @@
 
                     @endforeach
                 </div>
+                <x-form.order :request="$phoneticss" :currentOrder="$phonetics"></x-form.order>
                 <div class="flex w-full gap-4">
                     <x-form.btn-submit name="update" class="flex-1"/>
                     {{-- <x-form.btn-cancel class="flex-1 w-full" /> --}}

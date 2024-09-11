@@ -13,14 +13,19 @@ class InformationCreate extends Component
     public $exercise_ids = [],$lesson_ids = [];
     public $exercises;
 
+    public $queryExercise, $queryLesson; 
+
 
 
     public function render()
     {
-       
-        $lessons = Lesson::orderBy('order')->get();
-        
 
+       if(isset($this->queryLesson)){
+            $lessons = Lesson::where('name', 'like', '%' . $this->queryLesson . '%')->orderBy('order')->get();
+       }else{
+            $lessons = Lesson::orderBy('order')->get();
+       }
+        
         $locales = Language::where("status",1)->orderBy('order')->get();
         return view('livewire.create.information-create',[
             "locales" => $locales,
@@ -29,22 +34,15 @@ class InformationCreate extends Component
         ]);
     }
 
-    public function checkBoxToggle(){
+    public function updated(){
         if(!empty($this->lesson_ids)){
-            $this->exercises = List_exercise::whereIn('lesson_id',$this->lesson_ids)->with('lesson')->orderBy('order')->get();
+            if(isset($this->queryExercise)){
+                $this->exercises = List_exercise::whereIn('lesson_id',$this->lesson_ids)->where('name', 'like', '%' . $this->queryExercise . '%')->with('lesson')->orderBy('order')->get();
+           }else{
+                $this->exercises = List_exercise::whereIn('lesson_id',$this->lesson_ids)->with('lesson')->orderBy('order')->get();
+           }
         }else{
             $this->exercises = [];
         }
     }
-   
-    // public function create(){
-    //     // $this->validate();
-
-    //     dd($this->exercise_ids);
-    //     Information::create([
-    //         'exercises' => $this->exercise_ids,
-    //         'lessons' => $this->lesson_ids,
-    //         'information' => $this->information,
-    //     ]);
-    // }
 }

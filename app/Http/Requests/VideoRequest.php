@@ -22,7 +22,7 @@ class VideoRequest extends FormRequest
     public function rules(): array
     {
 
-        $data = [
+        $rules = [
             'chapter_id' => 'required|exists:chapters,id',
             'lesson_id' => 'required|exists:lessons,id',
             'exercise_id' => 'required|exists:list_exercises,id',
@@ -31,11 +31,11 @@ class VideoRequest extends FormRequest
         ];
 
         if(request()->isMethod("POST")){
-            $data['video'] = 'required|file|mimetypes:video/mp4|max:15240';
+            $rules['video'] = 'required|file|mimetypes:video/mp4|max:15240';
         }else{
-            $data['video'] = 'nullable|file|mimetypes:video/mp4|max:15240';
+            $rules['video'] = 'nullable|file|mimetypes:video/mp4|max:15240';
         }
 
-        return $data;
+        return $rules;
     }
 }

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->json('lessons'); 
             $table->json('exercises'); 
             $table->json('information');
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('content')
 
-<div>
+<div class="h-[88%]">
     <div class="flex flex-col w-full relative">
         <x-form.success/>
         <div class="flex flex-row justify-between w-full">
@@ -45,9 +45,9 @@
                                     Your browser does not support the video tag.
                                 </video>
                             </td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$video->Chapter->translate('title',$locales[0]['locale'])}}</td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$video->Lesson->translate('title',$locales[0]['locale'])}}</td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$video->Exercise->translate('title',$locales[0]['locale'])}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$video->Chapter->name}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$video->Lesson->name}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$video->Exercise->name}}</td>
                             
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$video->order}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
@@ -55,25 +55,7 @@
                             </td>
 
                             <td class="h-full gap-2 px-4 py-2 text-center whitespace-nowrap ">
-                                <div class="flex flex-row justify-center h-full gap-2">
-                                    <a href="{{route('video.edit',['video' => $video->id])}}">
-                                        <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
-                                            <i class='bx bx-edit-alt text-[22px]'></i>
-                                        </button>
-                                    </a>
-                                    </form>
-                                    @if(auth()->user()->role == 1)
-                                        <form action="{{ route('video.delete', ['video' => $video->id])}}" 
-                                            method="post">
-                                            @csrf
-                                            @method('DELETE')
-    
-                                            <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-red-600">
-                                                <i class='text-[24px] bx bx-trash'></i>
-                                            </button>
-                                        </form>
-                                    @endif 
-                                </div>                                                               
+                                <x-form.edit-delete-exercises :editRoute="route('video.edit',['video' => $video->id])" :deleteRoute="route('video.delete', ['video' => $video->id])" />                                                              
                             </td>
                         </tr> 
                     @endforeach

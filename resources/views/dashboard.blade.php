@@ -12,7 +12,6 @@
         <x-admin.card route="chapters" title=" Chapters" text="Go to this step by step guideline process on how to certify for your weekly benefits:" />
         <x-admin.card route="chapters" title=" Chapters" text="Go to this step by step guideline process on how to certify for your weekly benefits:" />
         <x-admin.card route="chapters" title=" Chapters" text="Go to this step by step guideline process on how to certify for your weekly benefits:" />
-
     </div> 
 </div>
     

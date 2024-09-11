@@ -31,7 +31,7 @@
                             @include('includes.exerciseParts.create.english_text',['name'=>'examples['.$i.']','title' => 'examples','placeholder' => 'english character'])
                             <div class="flex flex-row items-end ">
                                 <div class="flex-1 pt-1">
-                                    @include('includes.exerciseParts.create.phonetics_sound',['name' => 'sounds['.$i.']', 'uniqueId' => $i ])
+                                    <x-form.include.phonetics-sound :name="'sounds['.$i.']'"  :uniqueId="$i" />
                                 </div>
                                 <div class="flex ">
                                     @if($i==1)                           

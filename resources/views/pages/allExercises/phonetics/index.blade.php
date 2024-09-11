@@ -1,9 +1,10 @@
 @extends('layouts.main')
 @section('content')
 
-<div class="h-full">
+<div>
     <div class="relative flex flex-col w-full">
         <x-form.success/>
+        <x-form.error/>
         <div class="flex flex-row justify-between w-full">
             <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
                 phonetics
@@ -108,25 +109,7 @@
                                 <x-form.status route="phonetics.active" modelName="phonetics" :id="$phon->id" :currentStatus="$phon->status"/>
                             </td>
                             <td class="h-full gap-2 px-4 text-center whitespace-nowrap ">
-                                <div class="flex flex-row justify-center h-full gap-2">
-                                    <a href="{{ route('phonetics.edit',['phonetics'=>$phon->id]) }}">
-                                        <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
-                                            <i class='bx bx-edit-alt text-[22px]'></i>
-                                        </button>
-                                    </a>
-                                    </form>
-                                    @if(auth()->user()->role == 1)
-                                        <form action="{{ route('phonetics.delete', ['phonetics' => $phon->id])}}" 
-                                            method="post">
-                                            @csrf
-                                            @method('DELETE')
-    
-                                            <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-red-600">
-                                                <i class='text-[24px] bx bx-trash'></i>
-                                            </button>
-                                        </form>
-                                    @endif 
-                                </div>                                                               
+                                <x-form.edit-delete-exercises :editRoute="route('phonetics.edit',['phonetics'=>$phon->id])" :deleteRoute="route('phonetics.delete', ['phonetics' => $phon->id])" />                                                             
                             </td>
                         </tr> 
                     @endforeach

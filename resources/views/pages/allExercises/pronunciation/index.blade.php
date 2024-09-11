@@ -18,7 +18,7 @@
     </div>
     @include('includes.exerciseParts.index.orderAllExercise',['route' => 'pronunciation.index','title' => 'Pronunciation'])
     <div class="flex gap-4 relative">
-        <div class="flex-1 overflow-x-auto overflow-hidden overflow-y-auto h-[700px] " >
+        <div class="flex-1 overflow-x-auto overflow-hidden overflow-y-auto" >
             <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>                        
@@ -57,34 +57,16 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$pronunciation->Chapter->translate('title',$locales[0]['locale'])}}</td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$pronunciation->Lesson->translate('title',$locales[0]['locale'])}}</td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$pronunciation->Exercise->translate('title',$locales[0]['locale'])}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$pronunciation->Chapter->name}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$pronunciation->Lesson->name}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$pronunciation->Exercise->name}}</td>
                             
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$pronunciation->order}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
                                 <x-form.status route="pronunciation.active" modelName="pronunciation" :id="$pronunciation->id" :currentStatus="$pronunciation->status"/>
                             </td>
                             <td class="h-full gap-2 px-4 py-2 text-center whitespace-nowrap ">
-                                <div class="flex flex-row justify-center h-full gap-2">
-                                    <a href="{{route('pronunciation.edit',['pronunciation'=>$pronunciation->id])}}">
-                                        <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
-                                            <i class='bx bx-edit-alt text-[22px]'></i>
-                                        </button>
-                                    </a>
-                                    </form>
-                                    @if(auth()->user()->role == 1)
-                                        <form action="{{ route('pronunciation.delete', ['pronunciation' => $pronunciation->id])}}" 
-                                            method="post">
-                                            @csrf
-                                            @method('DELETE')
-    
-                                            <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-red-600">
-                                                <i class='text-[24px] bx bx-trash'></i>
-                                            </button>
-                                        </form>
-                                    @endif 
-                                </div>                                                               
+                                <x-form.edit-delete-exercises :editRoute="route('pronunciation.edit',['pronunciation'=>$pronunciation->id])" :deleteRoute="route('pronunciation.delete', ['pronunciation' => $pronunciation->id])" />                                                             
                             </td>
                         </tr> 
                     @endforeach

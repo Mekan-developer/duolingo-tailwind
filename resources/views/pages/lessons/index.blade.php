@@ -33,9 +33,6 @@
                         <tr>
                             <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">id</th>
                             <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">name</th>
-                            {{-- @foreach($locales as $locale)
-                                <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">title {{ $locale->locale }}</th>
-                            @endforeach --}}
                             <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">dopamine1</th>
                             <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">dopamine2</th>
                             <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">dopamine3</th>

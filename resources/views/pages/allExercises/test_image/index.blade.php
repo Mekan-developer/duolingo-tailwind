@@ -18,7 +18,7 @@
     </div>
     @include('includes.exerciseParts.index.orderAllExercise',['route' => 'testImage.index','title' => 'audio image'])
     <div class="flex gap-4 relative">
-        <div class="flex-1 overflow-x-auto overflow-hidden overflow-y-auto h-[700px] " >
+        <div class="flex-1 overflow-x-auto overflow-hidden overflow-y-auto" >
             <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>                        
@@ -61,34 +61,16 @@
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
                                 <img src="{{$testImage->getImage()}}" alt="testImage image">
                             </td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$testImage->Chapter->translate('title',$locales[0]['locale'])}}</td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$testImage->Lesson->translate('title',$locales[0]['locale'])}}</td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$testImage->Exercise->translate('title',$locales[0]['locale'])}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$testImage->Chapter->name}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$testImage->Lesson->name}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$testImage->Exercise->name}}</td>
                             
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$testImage->order}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
                                 <x-form.status route="testImage.active" modelName="testImage" :id="$testImage->id" :currentStatus="$testImage->status"/>
                             </td>
                             <td class="h-full gap-2 px-4 py-2 text-center whitespace-nowrap ">
-                                <div class="flex flex-row justify-center h-full gap-2">
-                                    <a href="{{route('testImage.edit',['testImage'=>$testImage->id])}}">
-                                        <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
-                                            <i class='bx bx-edit-alt text-[22px]'></i>
-                                        </button>
-                                    </a>
-                                    </form>
-                                    @if(auth()->user()->role == 1)
-                                    <form action="{{ route('testImage.delete', ['testImage' => $testImage->id])}}" 
-                                        method="post">
-                                        @csrf
-                                        @method('DELETE')
-
-                                        <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-red-600">
-                                            <i class='text-[24px] bx bx-trash'></i>
-                                        </button>
-                                    </form>
-                                @endif  
-                                </div>                                                               
+                                <x-form.edit-delete-exercises :editRoute="route('testImage.edit',['testImage'=>$testImage->id])" :deleteRoute="route('testImage.delete', ['testImage' => $testImage->id])" />                                                              
                             </td>
                         </tr> 
                     @endforeach

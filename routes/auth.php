@@ -65,7 +65,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/create',[ListExerciseController::class,'create'])->name('exercises.create');
         Route::post('/store',[ListExerciseController::class,'store'])->name('exercises.store');
         Route::get('/edit/{list_exercise}',[ListExerciseController::class,'edit'])->name('exercises.edit');
-        Route::patch('/edit/{list_exercise}',[ListExerciseController::class,'update'])->name('exercises.update');
+        Route::patch('/update/{list_exercise}',[ListExerciseController::class,'update'])->name('exercises.update');
         Route::delete('/delete/{list_exercise}',[ListExerciseController::class,'destroy'])->name('exercises.delete');
     });
 
@@ -73,9 +73,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/',[InformationController::class,'index'])->name('index');
         Route::get('/create',[InformationController::class,'create'])->name('create');
         Route::post('/store',[InformationController::class,'store'])->name('store');
-        // Route::get('/edit/{list_exercise}',[ListExerciseController::class,'edit'])->name('exercises.edit');
-        // Route::patch('/edit/{list_exercise}',[ListExerciseController::class,'update'])->name('exercises.update');
-        // Route::delete('/delete/{list_exercise}',[ListExerciseController::class,'destroy'])->name('exercises.delete');
+        Route::get('/edit/{information}',[InformationController::class,'edit'])->name('edit');
+        // Route::patch('/update/{information}',[InformationController::class,'update'])->name('update');
+        Route::put('/active/{information}', [InformationController::class, 'active'])->name('active');
+        Route::delete('/delete/{information}',[InformationController::class,'destroy'])->name('delete');
     });
     
     Route::group(['prefix' => 'languages', 'as' => 'language.'], function () {
@@ -173,8 +174,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/',[GrammarController::class,'index'])->name('index');
             Route::get('/create',[GrammarController::class,'create'])->name('create');
             Route::post('/store',[GrammarController::class,'store'])->name('store');
-            Route::get('/edit',[GrammarController::class,'edit'])->name('edit');
-            Route::patch('/update',[GrammarController::class,'update'])->name('update');
+            Route::get('/edit/{grammar}',[GrammarController::class,'edit'])->name('edit');
+            Route::patch('/update/{grammar}',[GrammarController::class,'update'])->name('update');
             Route::put('/active/{grammar}', [GrammarController::class, 'active'])->name('active');
             Route::delete('/delete/{grammar}',[GrammarController::class,'destroy'])->name('delete');//+
         }); 

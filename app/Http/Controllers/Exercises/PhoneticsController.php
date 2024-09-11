@@ -24,7 +24,6 @@ class PhoneticsController extends Controller
 
     public function create(){
         $locales = Language::where("status",1)->orderBy('order')->get();
-
         return view("pages.allExercises.phonetics.create",compact("locales"));
     }
 
@@ -54,42 +53,33 @@ class PhoneticsController extends Controller
     public function edit(Phonetics $phonetics){
         $lessons = Lesson::where('chapter_id', $phonetics->chapter_id)->orderBy('order')->get();
         $exercises = List_exercise::where('lesson_id', $phonetics->lesson_id)->orderBy('order')->get();
-
         return view("pages.allExercises.phonetics.edit")->with("phonetics",$phonetics)->with("lessons",$lessons)->with("exercises", $exercises);
     }
 
-    public function update(PhoneticsRequest $request,Phonetics $phonetics){
+    public function update(Request $request,Phonetics $phonetics){
+        $phoneticss = Phonetics::all();
+        $this->sortItems($phoneticss, $phonetics->order, $request->order);//for ordering elements
+
         $data = $request->all();
-
-        //adding sound if admin additional add sound start
-
-        $sounds = $phonetics->sounds;
-
- 
-
-        // Get the last 2 keys
-        $keys = array_keys($sounds);
-        
-        dd($keys);
-        // dd($soundsArray);
+        // start remove json specific item 
+        $sounds = $phonetics->getAttributes()['sounds']; 
+        $soundsArray = json_decode($sounds, true); 
+        $countSoundElement = count(array_keys($soundsArray));
         
         if($request->removeSoundNumber > 0){
-            $keep_count = count($soundKeys) - $request->removeSoundNumber;
-            dd($keep_count);
-            $new_array = array_slice($soundsArray, 0, $keep_count, true);
-            // $numberRemoveElement = $request->removeSoundNumber;
-            // array_splice($soundsArray, 0, -1 * $numberRemoveElement);
-            // $phonetics->sounds = $soundsArray;
-            // dd($new_array);
-
-            $phonetics->save();
+            $removeLastItem = $request->removeSoundNumber;
+            while($removeLastItem > 0){
+                $phonetics->forgetTranslation('sounds', $countSoundElement);
+                $phonetics->forgetTranslation('examples', $countSoundElement);
+                $phonetics->save();
+                $removeLastItem--; $countSoundElement--;
+            }
         }
-        $sounds = $request->files->get('sounds');
-        if($sounds){
+        $requestSounds = $request->files->get('sounds');
+        if($requestSounds){
             $soundsJson = $phonetics->getAttributes()['sounds'];
             $soundsArray = json_decode($soundsJson, true); 
-            // $sound = $phonetics->sounds;
-            foreach ($sounds as $key => $value) {
+            foreach ($requestSounds as $key => $value) {
                 $data = $phonetics->attributesToArray();
                 if(isset($data['sounds'][$key]))
                     $this->removeFile($data['sounds'][$key], 'phonetics');
@@ -101,13 +91,25 @@ class PhoneticsController extends Controller
                 }
             }
             $phonetics->sounds = $soundsArray;
+            try {
+                $phonetics->save(); 
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error','There was a problem saving the phonetics.');
+            }
+        }
+        // end removing 
+
+        $requestExamples = $request->get('examples');
+        if($requestExamples){
+            $examplesJson = $phonetics->getAttributes()['examples'];
+            $examplesArray = json_decode($examplesJson, true); 
+            foreach ($requestExamples as $key => $value) {
+                $examplesArray[$key] = $value;
+            }
+            $phonetics->examples = $examplesArray;
             $phonetics->save();
         }
-        
         //adding sound if admin additional add sound end
-
-
-
 
         if ($request->hasFile('audio')) {
             if ($phonetics->audio) {
@@ -119,6 +121,7 @@ class PhoneticsController extends Controller
             $data['audio'] = $filename;
         }
         $phonetics->update($data);
+
         return redirect()->route('phonetics.index')->with('success','Phonetics updated successfully');   
 
     }
@@ -141,13 +144,10 @@ class PhoneticsController extends Controller
             $table = Phonetics::orderBy('order', 'asc')->get();
             $this->reorderAfterRemoval($table,$orderDeletedRow);
         }
-
         return redirect()->route('phonetics.index')->with('success','Phonetics deleted successfully');
     }
 
-
     public function active(Phonetics $phonetics){
-
         if($phonetics->status == '1'){
             $phonetics->status = '0';
         }else{

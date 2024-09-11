@@ -23,9 +23,9 @@
                         @foreach($locales as $locale)
                             <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">Information {{ $locale->locale }}</th>
                         @endforeach
-                        
                         <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">lesson ids</th>
                         <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">exercise ids</th>
+                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">status</th>
                         <th class="px-4 py-2">actions</th>
                     </tr>
                 </thead>
@@ -35,19 +35,16 @@
                         <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$information->id}}</td>
                         @foreach($locales as $locale)
                             <td class="px-4 py-2 font-medium text-center text-gray-900 whitespace-nowrap">
-                                {!! $information->getTranslation('information', $locale->locale) !!}
+                                {!! $information->translate('information', $locale->locale) !!}
                             </td>
                         @endforeach
                         <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ implode(',',json_decode($information->lessons)) }}</td>
                         <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ implode(',',json_decode($information->exercises)) }}</td>
-
+                        <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
+                            <x-form.status route="information.active" modelName="information" :id="$information->id" :currentStatus="$information->status"/>
+                        </td>
                         <td class="flex flex-row justify-center gap-2 px-4 py-2 text-center whitespace-nowrap">
-                            {{-- <a href="{{route('information.edit',['information' => $information->id])}}">
-                                <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
-                                    <i class='bx bx-edit-alt text-[22px]'></i>
-                                </button>
-                            </a> --}}
-                            {{-- <x-form.delete route="information.delete" modelName="information" :dataId="$information->id" confirmText="are you sure, It maybe has lessons!"/>                               --}}
+                            <x-form.edit-delete-exercises :editRoute="route('information.edit',['information'=>$information->id])" :deleteRoute="route('information.delete', ['information' => $information->id])" />                                                              
                         </td>
                     </tr> 
                 @endforeach

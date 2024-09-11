@@ -22,27 +22,28 @@ class PhoneticsRequest extends FormRequest
     public function rules(): array
     {
 
-        $data = [
+        $rules = [
             'chapter_id' => 'required|exists:chapters,id',
             'lesson_id' => 'required|exists:lessons,id',
             'exercise_id' => 'required|exists:list_exercises,id',
             'phonetic_alphabet' => 'required',
+            'examples.*' => 'required|string|max:255',
             'status' => 'nullable',
             'order' => 'nullable|integer'
         ];
 
         if(request()->isMethod("POST")) {
-            $data['audio'] = 'required|file|mimes:mp3|max:10240';
-            $data['sounds.*'] = 'required|file|mimes:mp3|max:10240';
-            $data['examples.*'] = 'required|string|max:255';
+            $rules['audio'] = 'required|file|mimes:mp3|max:10240';
+            $rules['sounds.*'] = 'required|file|mimes:mp3|max:10240';
+            // $rules['examples.*'] = 'required|string|max:255';
             
         }else{
-            $data['audio'] = 'nullable|file|mimes:mp3|max:10240';
-            $data['sounds.*'] = 'nullable|file|mimes:mp3|max:10240';
-            $data['examples.*'] = 'nullable|string|max:255';
+            $rules['audio'] = 'nullable|file|mimes:mp3|max:10240';
+            $rules['sounds.*'] = 'nullable|file|mimes:mp3|max:10240';
+            // $rules['examples.*'] = 'nullable|string|max:255';
             
         }
 
-        return $data;
+        return $rules;
     }
 }

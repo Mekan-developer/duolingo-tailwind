@@ -2,7 +2,7 @@
 @section('content')
 <div>
     <div class="flex flex-col w-full relative">
-        <x-form.success/>
+        <x-form.success/> <x-form.error/>
         <div class="flex flex-row justify-between w-full">
             <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
                 Audio translations
@@ -16,7 +16,7 @@
     </div>
     @include('includes.exerciseParts.index.orderAllExercise',['route' => 'audioTranslation.index','title' => 'Audio translations'])
     <div class="flex gap-4 relative">
-        <div class="flex-1 overflow-x-auto overflow-hidden overflow-y-auto h-[700px] " >
+        <div class="flex-1 overflow-x-auto overflow-hidden overflow-y-auto" >
             <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>                        
@@ -65,35 +65,15 @@
                                     {{ $audioTranslation->getTranslation('translations_word',$locale->locale) }}
                                 </td>
                             @endforeach
-
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$audioTranslation->Chapter->translate('title',$locales[0]['locale'])}}</td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$audioTranslation->Lesson->translate('title',$locales[0]['locale'])}}</td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$audioTranslation->Exercise->translate('title',$locales[0]['locale'])}}</td>
-                            
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$audioTranslation->order}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $audioTranslation->Chapter->name }}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $audioTranslation->Lesson->name }}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $audioTranslation->Exercise->name }}</td> 
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $audioTranslation->order }}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
                                 <x-form.status route="audioTranslation.active" modelName="audioTranslation" :id="$audioTranslation->id" :currentStatus="$audioTranslation->status"/>
                             </td>
                             <td class="h-full gap-2 px-4 py-2 text-center whitespace-nowrap ">
-                                <div class="flex flex-row justify-center h-full gap-2">
-                                    <a href="{{route('audioTranslation.edit',['audioTranslation'=>$audioTranslation->id])}}">
-                                        <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
-                                            <i class='bx bx-edit-alt text-[22px]'></i>
-                                        </button>
-                                    </a>
-                                    </form>
-                                    @if(auth()->user()->role == 1)
-                                    <form action="{{ route('audioTranslation.delete', ['audioTranslation' => $audioTranslation->id])}}" 
-                                        method="post">
-                                        @csrf
-                                        @method('DELETE')
-
-                                        <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-red-600">
-                                            <i class='text-[24px] bx bx-trash'></i>
-                                        </button>
-                                    </form>
-                                @endif  
-                                </div>                                                               
+                                <x-form.edit-delete-exercises :editRoute="route('audioTranslation.edit',['audioTranslation'=>$audioTranslation->id])" :deleteRoute="route('audioTranslation.delete', ['audioTranslation' => $audioTranslation->id])" />                                                          
                             </td>
                         </tr> 
                     @endforeach

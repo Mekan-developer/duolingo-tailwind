@@ -14,7 +14,7 @@ class Phonetics extends Model
         'chapter_id','lesson_id','exercise_id','status','order'
     ];
 
-    protected $casts = ['examples' => 'array',"sounds" => 'array'];
+    // protected $casts = ['examples' => 'array',"sounds" => 'array'];
     
     public $translatable = ["phonetic_text","examples","sounds"];
 

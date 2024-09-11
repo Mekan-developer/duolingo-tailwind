@@ -17,7 +17,7 @@
     </div>
     @include('includes.exerciseParts.index.orderAllExercise',['route' => 'grammar.index','title' => 'grammar'])
     <div class="flex gap-4 relative">
-        <div class="flex-1 overflow-x-auto overflow-hidden overflow-y-auto h-[700px] " >
+        <div class="flex-1 overflow-x-auto overflow-hidden overflow-y-auto">
             <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>         
@@ -43,7 +43,7 @@
                             <td class="text-center">{{$grammar->id}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{!! $grammar->translate('grammar_theory',$locales[0]['locale']) !!}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{!! $grammar->translate('text',$locales[0]['locale']) !!}</td>
-                            <td class="flex justify-center border-r-2 px-4 py-2">
+                            <td class="flex justify-center  px-4 py-2 border-r-2">
                                 <div data-audio-src="{{ $grammar->getSound($grammar->audio) }}" class="text-white rounded-lg shadow-lg audio-player w-[200px]" >
                                     <div class="flex flex-row items-center justify-between ">
                                             <div class="flex items-center justify-center p-3 text-gray-800 bg-cover rounded-sm playPauseBtn hover:text-[var(--bg-color-active)] focus:outline-none">
@@ -65,39 +65,32 @@
                                 </div>
                             </td>
                             @for ($i = 1; $i <= $textPartCounts; $i++)
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$grammar->translate('text_correct_parts',$i)}}</td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$grammar->translate('text_incorrect_parts',$i)}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
+                                @if(!empty($grammar->translate('text_correct_parts',$i)))
+                                    {{$grammar->translate('text_correct_parts',$i)}}
+                                @else 
+                                    ---
+                                @endif
+                            </td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
+                                @if(!empty($grammar->translate('text_incorrect_parts',$i)))
+                                    {{$grammar->translate('text_incorrect_parts',$i)}}
+                                @else 
+                                    ---
+                                @endif
+                            </td>
                             
                             @endfor
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$grammar->Chapter->translate('title',$locales[0]['locale'])}}</td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$grammar->Lesson->translate('title',$locales[0]['locale'])}}</td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$grammar->Exercise->translate('title',$locales[0]['locale'])}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$grammar->Chapter->name}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$grammar->Lesson->name}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$grammar->Exercise->name}}</td>
                             
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$grammar->order}}</td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$grammar->status}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
                                 <x-form.status route="grammar.active" modelName="grammar" :id="$grammar->id" :currentStatus="$grammar->status"/>
                             </td>
                             <td class="h-full gap-2 px-4 py-2 text-center whitespace-nowrap ">
-                                <div class="flex flex-row justify-center h-full gap-2">
-                                    <a href="{{route('grammar.edit',['grammar'=>$grammar->id])}}">
-                                        <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
-                                            <i class='bx bx-edit-alt text-[22px]'></i>
-                                        </button>
-                                    </a>
-                                    </form>
-                                    @if(auth()->user()->role == 1)
-                                        <form action="{{ route('grammar.delete', ['grammar' => $grammar->id])}}" 
-                                            method="post">
-                                            @csrf
-                                            @method('DELETE')
-    
-                                            <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-red-600">
-                                                <i class='text-[24px] bx bx-trash'></i>
-                                            </button>
-                                        </form>
-                                    @endif 
-                                </div>                                                               
+                                <x-form.edit-delete-exercises :editRoute="route('grammar.edit',['grammar'=>$grammar->id])" :deleteRoute="route('grammar.delete', ['grammar' => $grammar->id])" />                                                              
                             </td>
                         </tr> 
                     @endforeach
