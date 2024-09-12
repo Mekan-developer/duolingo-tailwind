@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\ChapterController;
 use App\Http\Controllers\Api\ExerciseTypeController;
+use App\Http\Controllers\Api\InformationController;
 use App\Http\Controllers\Api\LanguageController;
 use App\Http\Controllers\Api\LessonController;
 use App\Http\Controllers\Api\ListExerciseController;
@@ -21,6 +22,7 @@ Route::get('/chapters',[ChapterController::class,'index']);
 Route::get('/lessons',[LessonController::class,'index']); 
 Route::get('/list-exercise',[ListExerciseController::class,'index']);
 Route::get('/exercise-types',[ExerciseTypeController::class,'index']);
+Route::get('/informations',[InformationController::class,'index']);
 
 Route::group(['prefix' => 'exercises/'],function(){
     Route::get('vocabulary',[TasksController::class,'vocabulary']);//1

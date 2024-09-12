@@ -13,6 +13,11 @@
         </label>
     <input hidden="" type="file" name="video" id="sound" >
 </div>
+<div>
+    @error('video')
+        <span class="text-xs text-red-600">{{ $message }}</span> 
+    @enderror
+</div>
 
 <script>
     document.getElementById('sound').addEventListener('change', function(event) {

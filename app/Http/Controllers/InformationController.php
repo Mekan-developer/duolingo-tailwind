@@ -29,8 +29,20 @@ class InformationController extends Controller
         return redirect()->route('information.index')->with('success','Information created successfully!');
     }
 
+    public function edit(Information $information){
+        return view("pages.informations.edit")->with('information', $information);
+    }
 
+    public function update(InformationRequest $request, Information $information){
+        $request->merge([
+            'lessons' => json_encode($request->lesson_ids),
+            'exercises' => json_encode($request->exercise_ids),
+        ]);
 
+        $information->update($request->all());
+
+        return redirect()->route('information.index')->with('success','Information updated successfully');
+    }
 
     public function destroy(Information $information){    
         $information->delete();

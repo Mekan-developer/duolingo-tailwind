@@ -150,11 +150,6 @@
               </a>
             </li>
             <li>
-                <a href="{{route('admin.controll')}}" class="{{ Request::is('accounts/admin-controll') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-sm px-4 py-2 text-sm font-medium  hover:bg-gray-100 hover:text-gray-700">
-                admins
-                </a>
-            </li>
-            <li>
               <form method="POST" action="{{ route('logout') }}">
                   @csrf
                 <button

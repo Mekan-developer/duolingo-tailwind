@@ -42,6 +42,21 @@
                 }
             }
         },
+        "/informations": {
+            "get": {
+                "tags": [
+                    "Informations"
+                ],
+                "summary": "Get all screen informations",
+                "description": "",
+                "operationId": "2a655fdfbd9c72d518b467835311509a",
+                "responses": {
+                    "200": {
+                        "description": "Information retrived successfully"
+                    }
+                }
+            }
+        },
         "/langs": {
             "get": {
                 "tags": [
@@ -276,6 +291,10 @@
         {
             "name": "exercise-types",
             "description": "exercise-types"
+        },
+        {
+            "name": "Informations",
+            "description": "Informations"
         },
         {
             "name": "Languages",

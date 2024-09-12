@@ -27,6 +27,7 @@ class PhoneticsRequest extends FormRequest
             'lesson_id' => 'required|exists:lessons,id',
             'exercise_id' => 'required|exists:list_exercises,id',
             'phonetic_alphabet' => 'required',
+            'phonetic_text.*' => 'required',
             'examples.*' => 'required|string|max:255',
             'status' => 'nullable',
             'order' => 'nullable|integer'
@@ -34,15 +35,12 @@ class PhoneticsRequest extends FormRequest
 
         if(request()->isMethod("POST")) {
             $rules['audio'] = 'required|file|mimes:mp3|max:10240';
-            $rules['sounds.*'] = 'required|file|mimes:mp3|max:10240';
-            // $rules['examples.*'] = 'required|string|max:255';
-            
+            $rules['sounds'] = 'required|file|mimes:mp3|max:10240';            
         }else{
             $rules['audio'] = 'nullable|file|mimes:mp3|max:10240';
-            $rules['sounds.*'] = 'nullable|file|mimes:mp3|max:10240';
-            // $rules['examples.*'] = 'nullable|string|max:255';
-            
+            $rules['sounds'] = 'nullable|file|mimes:mp3|max:10240';            
         }
+
 
         return $rules;
     }

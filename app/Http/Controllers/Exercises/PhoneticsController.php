@@ -28,17 +28,20 @@ class PhoneticsController extends Controller
     }
 
     public function store(PhoneticsRequest $request){
-        $sounds = $request->files->get('sounds');
+
         $data = $request->all();
-        foreach ($sounds as $key => $value) {
-            if ($value instanceof \Symfony\Component\HttpFoundation\File\UploadedFile) {
-                $random = hexdec(uniqid());
-                $filename = $random . '.' . $value->getClientOriginalExtension();
-                Storage::disk('phonetics')->putFileAs('', $value, $filename);
-                $data['sounds'][$key] = $filename;
+        $sounds = $request->files->get('sounds');
+        if($sounds){
+            foreach ($sounds as $key => $value) {
+                if ($value instanceof \Symfony\Component\HttpFoundation\File\UploadedFile) {
+                    $random = hexdec(uniqid());
+                    $filename = $random . '.' . $value->getClientOriginalExtension();
+                    Storage::disk('phonetics')->putFileAs('', $value, $filename);
+                    $data['sounds'][$key] = $filename;
+                }
             }
         }
-
+    
         if ($request->hasFile('audio')) {
             $random = hexdec(uniqid());
             $filename = $random . '.' . $request->audio->extension();

@@ -18,9 +18,8 @@ return new class extends Migration
             $table->string('phonetic_alphabet');
             $table->json('phonetic_text');
             $table->string('audio');
-
-            $table->json('examples')->nullanble();
-            $table->json('sounds')->nullanble();            
+            $table->json('examples');
+            $table->json('sounds');            
 
             $table->unsignedBigInteger('chapter_id');
             $table->unsignedBigInteger('lesson_id');

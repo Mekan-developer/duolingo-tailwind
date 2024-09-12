@@ -16,7 +16,15 @@
                 </div>
                 <div class="grid grid-cols-2 gap-4" wire:ignore>
                     @foreach ($locales as $locale)
-                        <textarea class="letter" id="HTML[{{$locale->locale}}]" name="phonetic_text[{{$locale->locale}}]" placeholder="phonetics {{$locale->name}} description"></textarea>
+                    <div class="flex flex-col">
+                        <textarea class="letter" id="HTML[{{$locale->locale}}]" name="phonetic_text[{{$locale->locale}}]" placeholder="phonetics {{$locale->name}} description">{{old('phonetic_text.'.$locale->locale)}}</textarea>
+                        <div>
+                            @error('phonetic_text.'.$locale->locale)
+                                <span class="text-xs text-red-600">{{$message}}</span> 
+                            @enderror
+                        </div>
+                    </div>
+                        
                     @endforeach
                 </div>
                 <div>
@@ -28,7 +36,9 @@
                 <div id="test" class="my-2">@php $loop=0 @endphp
                     @for($i = 1; $i <= $countExamples; $i++)
                         <div class="grid grid-cols-2 gap-4 my-4">
-                            @include('includes.exerciseParts.create.english_text',['name'=>'examples['.$i.']','title' => 'examples','placeholder' => 'english character'])
+                            <div class="flex flex-col">
+                                @include('includes.exerciseParts.create.english_text_edit',['name'=>'examples['.$i.']','value' => 'examples.'.$i ,'title' => 'examples','placeholder' => 'english character'])
+                            </div>
                             <div class="flex flex-row items-end ">
                                 <div class="flex-1 pt-1">
                                     <x-form.include.phonetics-sound :name="'sounds['.$i.']'"  :uniqueId="$i" />
@@ -42,6 +52,24 @@
                                 </div>  
                             </div>                                                    
                         </div>
+                        @if($errors->has('sounds'))
+                            <div class="grid grid-cols-2 gap-4 my-4">
+                                <div class="flex-1">
+                                    @error('examples.'.$i)
+                                        <span class="text-xs text-red-600">{{$message}}</span> 
+                                    @enderror
+                                </div>
+                                <div class="flex-1">
+                                    @error('sounds')
+                                        <span class="text-xs text-red-600">{{$message}}</span> 
+                                    @enderror
+                                </div>
+                            </div>
+                        @else 
+                            @error('examples.'.$i)
+                                <span class="text-xs text-red-600">{{$message}}</span> 
+                            @enderror
+                        @endif                        
                     @endfor
                 </div>
                 <x-form.btn-submit/>

@@ -40,17 +40,11 @@
                         <div class="grid grid-cols-2 gap-4 my-2 " wire:ignore>
                             <div class="flex flex-col w-full mb-2">
                                 @include('includes.exerciseParts.create.english_text',['name'=>'text_correct_parts[' . $i . ']','title' => 'text correct part '.($i),'placeholder' => 'text correct parts '.$i])
-                                @error("text_correct_parts.".$i)
-                                    <span class="-mt-4 text-xs text-red-600">text for correct words field is required</span>
-                                @enderror
                             </div>
                             
                             <div class="flex flex-row items-end mb-2 ">
                                 <div class="flex flex-col flex-1">
                                         @include('includes.exerciseParts.create.english_text',['name' => 'text_incorrect_parts[' . $i . ']','title' => 'text incorrect part '.($i),'placeholder' => 'text incorrect parts '.$i])     
-                                    @error("text_incorrect_parts.".$i)
-                                        <span class="-mt-4 text-xs text-red-600">text for incorrect words field is required</span>
-                                    @enderror
                                 </div>  
                                 <div class="flex flex-col justify-end">
                                     @if($i==1)                           
@@ -60,7 +54,19 @@
                                     @endif
                                 </div>                          
                                 
-                            </div>                            
+                            </div>                           
+                        </div> 
+                        <div class="grid grid-cols-2 gap-4 my-2 " wire:ignore>
+                            <div>
+                                @error("text_correct_parts.".$i)
+                                    <span class="-mt-4 text-xs text-red-600">text for correct words field is required</span>
+                                @enderror
+                            </div>
+                            <div>
+                                @error("text_incorrect_parts.".$i)
+                                    <span class="-mt-4 text-xs text-red-600">text for incorrect words field is required</span>
+                                @enderror
+                            </div>
                         </div> 
                     @endfor
                     @include('includes.exerciseParts.create.sound_file',['name' => 'audio','label' => 'label' ,'message' => 'message'])

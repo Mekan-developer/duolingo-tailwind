@@ -37,8 +37,8 @@
                             </td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $language->order }}</td>
                             <td class="flex flex-row justify-center gap-2 px-4 py-2 text-center whitespace-nowrap">
-                                <div class="flex flex-row items-center justify-center h-full">
-                                    <div>
+                                <div class="flex flex-row items-center justify-center">
+                                    <div >
                                         <a href="{{ route('language.edit', ['language' => $language->id])}}">
                                             <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
                                                 <i class='bx bx-edit-alt text-[22px]'></i>
@@ -84,7 +84,7 @@
                 @isset($lang['edit']) 
                     <x-form.order class="order" :request="$languages" :currentOrder="$lng"></x-form.order>
                 @endisset
-                <button type="submit" id="submitBtn" class="bg-[var(--bg-color-active)] w-full bg-gradient-to-r  text-white py-2 rounded-lg mx-auto block focus:outline-none focus:ring-2 focus:ring-offset-2">add language</button>
+                <x-form.btn-submit name="{{ isset($lang['edit']) ? 'update language' : 'add language' }}" />
             </form>
         </div>
     </div>

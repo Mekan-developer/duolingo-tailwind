@@ -9,10 +9,10 @@
             $formId = 'form-' . $dataId; // Unique form ID based on the dataId
         @endphp
         <form id="{{$formId}}" action="{{ route($route,  $dataId)}}" 
-            method="post">
+            method="post" class="flex justify-center items-center">
             @csrf
             @method('DELETE')
-            <button type="submit" onclick="confirmSave(event,'{{$formId}}')" class="flex p-2.5 rounded-xl transition-all duration-300 text-red-600">
+            <button type="submit" onclick="confirmSave(event,'{{$formId}}')" class="flex mt-2 p-2.5 rounded-xl transition-all duration-300 text-red-600">
                 <i class='text-[24px] bx bx-trash'></i>
             </button>
         </form>
