@@ -1,6 +1,6 @@
 <div class="flex h-screen overflow-hidden overflow-y-scroll flex-col justify-between border-e bg-[var(--bg-color-active)]">
   <div class="px-4 py-6 ">
-    <div class="w-full flex justify-center">
+    <div class="flex justify-center w-full">
       <a href="/">
         <img class="w-[120px]" src="{{asset('logo/logo-no-background.png')}}" alt="">
       </a>
@@ -29,7 +29,7 @@
         <a href="{{route('information.index')}}" class="{{ Request::is('information*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-sm  px-4 py-2 text-sm font-medium hover:bg-gray-100 hover:text-gray-700">
           <div class="flex gap-[2px]">
             <i class='bx bx-info-circle'></i>
-              <span class=" font-normal">informations</span>
+              <span class="font-normal ">informations</span>
           </div>
         </a>
       </li>
@@ -147,6 +147,11 @@
             <li>
               <a href="{{route('profile.edit')}}" class="{{ Request::is('accounts/profile') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-sm px-4 py-2 text-sm font-medium  hover:bg-gray-100 hover:text-gray-700">
                 Profile
+              </a>
+            </li>
+            <li>
+              <a href="{{route('admin.controll')}}" class="{{ Request::is('accounts/admin*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-sm px-4 py-2 text-sm font-medium  hover:bg-gray-100 hover:text-gray-700">
+                admins
               </a>
             </li>
             <li>

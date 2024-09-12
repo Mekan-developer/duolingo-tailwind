@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-    <div class="flex flex-col w-full relative">
+    <div class="relative flex flex-col w-full">
         <x-form.success/>
         <div class="flex flex-row justify-between w-full">
             <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
