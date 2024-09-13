@@ -8,15 +8,14 @@ use App\Http\Controllers\Api\LanguageController;
 use App\Http\Controllers\Api\LessonController;
 use App\Http\Controllers\Api\ListExerciseController;
 use App\Http\Controllers\api\TasksController;
+use App\Http\Middleware\AuthenticateOnceWithBasicAuth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('login', 'login');
-    Route::post('register', 'register');
-    Route::post('logout', 'logout');
-    Route::post('refresh', 'refresh');
+    Route::post('register', 'register');    
 });
 
 // http://127.0.0.1:8000/api/documentation
@@ -24,7 +23,7 @@ Route::controller(AuthController::class)->group(function () {
 
 Route::get('/langs',[LanguageController::class,'index']);
 
-Route::middleware('auth:api')->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
     Route::get('/chapters',[ChapterController::class,'index']);
     Route::get('/lessons',[LessonController::class,'index']); 
     Route::get('/list-exercise',[ListExerciseController::class,'index']);
@@ -45,7 +44,7 @@ Route::middleware('auth:api')->group(function () {
         Route::get('vocabulary-spelling',[TasksController::class,'vocabularySpelling']);//11
         Route::get('listening',[TasksController::class,'listening']);//12
     });
-});
+})->middleware(AuthenticateOnceWithBasicAuth::class);
 
 
 

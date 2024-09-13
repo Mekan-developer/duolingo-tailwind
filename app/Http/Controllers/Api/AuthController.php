@@ -10,27 +10,27 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
-class AuthController extends Controller implements HasMiddleware
+class AuthController extends Controller
 {
-    public static function middleware(): array
-    {
+    // public static function middleware(): array
+    // {
         
-        return [
-            new Middleware(middleware: 'auth:api', except: ['login', 'register']),
-        ];
-    }
+        // return [
+        //     new Middleware(middleware: 'auth:api', except: ['login', 'register']),
+        // ];
+    // }
 
     public function login(Request $request)
     {
-        Auth::guard('api')->check();
+
+        
         $request->validate([
             'email' => 'required|string|email',
             'password' => 'required|string',
         ]);
         $credentials = $request->only('email', 'password');
 
-        $token = Auth::attempt($credentials);
-        if (!$token) {
+        if (!Auth::attempt($credentials)) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Unauthorized',
@@ -42,14 +42,13 @@ class AuthController extends Controller implements HasMiddleware
                 'status' => 'success',
                 'user' => $user,
                 'authorisation' => [
-                    'token' => $token,
+                    'token' => $user->createToken('token')->plainTextToken,
                     'type' => 'bearer',
                 ]
             ]);
     }
 
     public function register(Request $request){
-        Auth::guard('api')->check();
         
         $request->validate([
             'name' => 'required|string|max:255',
@@ -61,40 +60,40 @@ class AuthController extends Controller implements HasMiddleware
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'is_app_user' => 1,
         ]);
 
-        $token = Auth::login($user);
         return response()->json([
             'status' => 'success',
             'message' => 'User created successfully',
             'user' => $user,
             'authorisation' => [
-                'token' => $token,
+                'token' =>  $user->createToken('token')->plainTextToken,
                 'type' => 'bearer',
             ]
         ]);
     }
 
-    public function logout()
-    {
-        Auth::logout();
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Successfully logged out',
-        ]);
-    }
+    // public function logout()
+    // {
+    //     Auth::logout();
+    //     return response()->json([
+    //         'status' => 'success',
+    //         'message' => 'Successfully logged out',
+    //     ]);
+    // }
 
-    public function refresh()
-    {
-        return response()->json([
-            'status' => 'success',
-            'user' => Auth::user(),
-            'authorisation' => [
-                'token' => Auth::refresh(),
-                'type' => 'bearer',
-            ]
-        ]);
-    }
+    // public function refresh()
+    // {
+    //     return response()->json([
+    //         'status' => 'success',
+    //         'user' => Auth::user(),
+    //         'authorisation' => [
+    //             'token' => Auth::refresh(),
+    //             'type' => 'bearer',
+    //         ]
+    //     ]);
+    // }
 
 
 }

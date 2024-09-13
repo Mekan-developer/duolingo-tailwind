@@ -1,6 +1,6 @@
 <div>
     @if(session('error'))
-        <div id="myDiv" class="w-full h-auto absolute top-2 right-0 p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50 ">
+        <div id="myDiv" class="absolute right-0 w-full h-auto p-4 mb-4 text-red-800 border border-red-300 rounded-lg top-2 bg-red-50 ">
             <div class="flex flex-row">
                 <div>
                     <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">

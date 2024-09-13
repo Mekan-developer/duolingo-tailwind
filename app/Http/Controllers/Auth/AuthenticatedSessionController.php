@@ -6,11 +6,25 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
+// class AuthenticatedSessionController extends Controller implements HasMiddleware
 class AuthenticatedSessionController extends Controller
 {
+//  public static function middleware(): array
+//     {
+        
+//         return [
+//             new Middleware(middleware: 'checkIsAdmin'),
+//         ];
+//     }
+
+
+
+
+
     /**
      * Display the login view.
      */

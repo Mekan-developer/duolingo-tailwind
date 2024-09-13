@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\AuthGuardMiddleware;
+use App\Http\Middleware\CheckIsAdminMiddleware;
 use App\Http\Middleware\SuperAdminMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -16,7 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'super-admin' => SuperAdminMiddleware::class,
-            // 'auth' => AuthGuardMiddleware::class
+            'checkIsAdmin' => CheckIsAdminMiddleware::class
         ]);
 
         $middleware->group('web', [

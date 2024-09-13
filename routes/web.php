@@ -23,19 +23,12 @@ use App\Http\Controllers\Exercises\VideoController;
 use App\Http\Controllers\Exercises\QuestionWordController;
 use App\Http\Controllers\Exercises\TestWordController;
 use App\Http\Controllers\Exercises\SpellingController;
-
-
 use App\Http\Controllers\Exercises\PhoneticsController;
 use App\Http\Controllers\UserProfileController;
 
+ 
 
-
-Route::middleware('auth:web')->group(function () {
-    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-
+Route::middleware(['auth:web','checkIsAdmin'])->group(function () {
     Route::get('/',[DashboardController::class,'index'])->name('dashboard');
     
     // backUp for database and files which stored in folder "storage/app/public/uploads ^ONLY FOR SUPER ADMIN
