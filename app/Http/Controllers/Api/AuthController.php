@@ -4,22 +4,25 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
-class AuthController extends Controller
+class AuthController extends Controller implements HasMiddleware
 {
-
-    public function __construct()
+    public static function middleware(): array
     {
-
-
-        // $this->middleware('auth:api', ['except' => ['login','register']]);
+        
+        return [
+            new Middleware(middleware: 'auth:api', except: ['login', 'register']),
+        ];
     }
 
     public function login(Request $request)
     {
+        Auth::guard('api')->check();
         $request->validate([
             'email' => 'required|string|email',
             'password' => 'required|string',
@@ -43,10 +46,11 @@ class AuthController extends Controller
                     'type' => 'bearer',
                 ]
             ]);
-
     }
 
     public function register(Request $request){
+        Auth::guard('api')->check();
+        
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
