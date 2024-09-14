@@ -20,7 +20,7 @@
                 </span>
             </div>
             <x-form.order :request="$listenings" :currentOrder="$listening"></x-form.order>
-            <x-form.btn-submit/>
+            <x-form.btn-submit name="update" />
         </form>
     </div>
 </div>

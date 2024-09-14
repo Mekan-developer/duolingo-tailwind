@@ -39,7 +39,7 @@ class QuestionWordController extends Controller
     }
 
     public function edit(QuestionWord $questionWord) { 
-        $lessons = Lesson::where('chapter_id', $questionWord->chapter_id)->orderBy('order')->get();
+        $lessons = Lesson::where('chapter_id', $questionWord->chapter_id)->whereHas('listExercise')->orderBy('order')->get();
         $exercises = List_exercise::where('lesson_id', $questionWord->lesson_id)->orderBy('order')->get();
 
         return view("pages.allExercises.question_word.edit")->with("questionWord",$questionWord)->with("lessons",$lessons)->with("exercises", $exercises);

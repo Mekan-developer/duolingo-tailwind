@@ -9,7 +9,7 @@
         </div>
         <div>
             <div class="flex flex-row-reverse">
-                <a href="{{route('information.create')}}" class="text-white bg-[var(--bg-color-active)] hover:bg-[#46b8c0] focus:ring-4 font-medium rounded-sm px-4 py-2 me-2 mb-2">+</a>
+                <a href="{{route('information.create')}}" class="text-white bg-[var(--bg-color-active)] hover:bg-[#46b8c0] focus:ring-4 rounded-sm px-4 py-2 me-2 mb-2">+</a>
             </div>
         </div>
     </div>
@@ -19,14 +19,14 @@
             <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>
-                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">id</th>
+                        <th class="px-4 py-2 text-gray-900 whitespace-nowrap">id</th>
                         @foreach($locales as $locale)
-                            <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">Information {{ $locale->locale }}</th>
+                            <th class="px-4 py-2 text-gray-900 whitespace-nowrap">Information {{ $locale->locale }}</th>
                         @endforeach
-                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">lesson ids</th>
-                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">exercise ids</th>
-                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">status</th>
-                        <th class="px-4 py-2">actions</th>
+                        <th class="px-4 py-2 text-gray-900 whitespace-nowrap">lesson ids</th>
+                        <th class="px-4 py-2 text-gray-900 whitespace-nowrap">exercise ids</th>
+                        <th class="px-4 py-2 text-gray-900 whitespace-nowrap">status</th>
+                        <th class="px-4 py-2 text-gray-900 whitespace-nowrap">actions</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
@@ -34,7 +34,7 @@
                     <tr>
                         <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$information->id}}</td>
                         @foreach($locales as $locale)
-                            <td class="px-4 py-2 font-medium text-center text-gray-900 whitespace-nowrap">
+                            <td class="px-4 py-2 text-center text-gray-900 whitespace-nowrap">
                                 {!! $information->translate('information', $locale->locale) !!}
                             </td>
                         @endforeach

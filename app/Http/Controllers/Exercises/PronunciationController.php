@@ -42,7 +42,7 @@ class PronunciationController extends Controller
 
     public function edit(Pronunciation $pronunciation){ 
 
-        $lessons = Lesson::where('chapter_id', $pronunciation->chapter_id)->orderBy('order')->get();
+        $lessons = Lesson::where('chapter_id', $pronunciation->chapter_id)->whereHas('listExercise')->orderBy('order')->get();
         $exercises = List_exercise::where('lesson_id', $pronunciation->lesson_id)->orderBy('order')->get();
 
         return view("pages.allExercises.pronunciation.edit")->with("pronunciation",$pronunciation)->with("lessons",$lessons)->with("exercises", $exercises);

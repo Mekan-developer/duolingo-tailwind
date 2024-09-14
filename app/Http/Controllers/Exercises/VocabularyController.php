@@ -48,7 +48,7 @@ class VocabularyController extends Controller
     }
 
     public function edit(Vocabulary $vocabulary) {
-        $lessons = Lesson::where('chapter_id', $vocabulary->chapter_id)->orderBy('order')->get();
+        $lessons = Lesson::where('chapter_id', $vocabulary->chapter_id)->whereHas('listExercise')->orderBy('order')->get();
         $exercises = List_exercise::where('lesson_id', $vocabulary->lesson_id)->orderBy('order')->get();
         return view("pages.allExercises.vocabulary.edit")->with("vocabulary",$vocabulary)->with("lessons",$lessons)->with("exercises", $exercises);
     }

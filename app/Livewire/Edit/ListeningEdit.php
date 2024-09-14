@@ -42,14 +42,23 @@ class ListeningEdit extends Component
 
     public function selectedChapterHandle()
     {
-        $this->switch_lesson = true;$this->lesson_id = null;$this->exercise_id = null;
-        $this->exercises = null;$this->lessons = null;
+        $this->selectedLesson = null;
+        $this->switch_lesson = true;
+        $this->lesson_id = null;
+        $this->exercise_id = null;
+        $this->exercises = null;
         $this->lessons = Lesson::whereHas('listExercise')->where('chapter_id',$this->selectedChapter)->orderBy('order')->get();
 
     }
  
     public function selectedLessonHandle(){
-        $this->exercise_id = null;$this->switch_exercise = true;$this->exercises = null;
+        $this->switch_exercise = true;
+        $this->switch_lesson = false;
+        $this->exercise_id = null;
+        $this->exercises = null;
         $this->exercises = List_exercise::where('lesson_id',$this->selectedLesson)->orderBy('order')->get(); 
+    }
+    public function switchExerciseChange(){
+        $this->switch_exercise = false;
     }
 }

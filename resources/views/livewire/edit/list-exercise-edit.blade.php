@@ -31,12 +31,8 @@
                 </div>
                 <div class="mt-1">
                     <x-form.edit-input name="name" :value="$list_exercise->name" labelText="Exercise name" :errorMessage="$errors->get('name')" />
-                    
-                    {{-- @foreach ($locales as $locale)
-                        <x-form.edit-input :name="'title['.$locale->locale.']'" :value="$list_exercise->getTranslation('title',$locale->locale)" :labelText="'lesson '. $locale->name" :errorMessage="$errors->get('title.' . $locale->locale)" />
-                    @endforeach --}}
                     <x-form.order :request="$list_exercises" :currentOrder="$list_exercise"></x-form.order>
-                    <x-form.btn-submit/>
+                    <x-form.btn-submit name="update" />
                 </div>
             </form>
         </div>

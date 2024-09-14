@@ -25,7 +25,6 @@ class ListExerciseEdit extends Component
         $locales = Language::where("status",1)->orderBy('order')->get();
         $list_exercises = List_exercise::orderBy('order')->get();
 
-
         return view('livewire.edit.list-exercise-edit',[
             "chapters" => $chapters,
             "lessons" => $this->lessons,

@@ -58,7 +58,7 @@ class ListExerciseController extends Controller
     }
 
     public function edit(List_exercise $list_exercise){
-        $lessons = Lesson::orderBy('order')->get(); 
+        $lessons = Lesson::where('chapter_id',$list_exercise->chapter_id)->orderBy('order')->get(); 
 
         
         return view("pages.listExercises.edit")->with('list_exercise',$list_exercise)->with('lessons',$lessons);

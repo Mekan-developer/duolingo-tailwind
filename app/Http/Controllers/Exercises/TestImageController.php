@@ -49,7 +49,7 @@ class TestImageController extends Controller
     }
 
     public function edit(TestImage $testImage){
-        $lessons = Lesson::where('chapter_id', $testImage->chapter_id)->orderBy('order')->get();
+        $lessons = Lesson::where('chapter_id', $testImage->chapter_id)->whereHas('listExercise')->orderBy('order')->get();
         $exercises = List_exercise::where('lesson_id', $testImage->lesson_id)->orderBy('order')->get();
         return view("pages.allExercises.test_image.edit")->with("testImage",$testImage)->with("lessons",$lessons)->with("exercises", $exercises);
     }

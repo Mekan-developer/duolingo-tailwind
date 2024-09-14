@@ -39,7 +39,7 @@ class AudioTranslationController extends Controller
     }
 
     public function edit(AudioTranslation $audioTranslation){
-        $lessons = Lesson::where('chapter_id', $audioTranslation->chapter_id)->orderBy('order')->get();
+        $lessons = Lesson::where('chapter_id', $audioTranslation->chapter_id)->whereHas('listExercise')->orderBy('order')->get();
         $exercises = List_exercise::where('lesson_id', $audioTranslation->lesson_id)->orderBy('order')->get();
         return view("pages.allExercises.audio_translation.edit")->with("audioTranslation",$audioTranslation)->with("lessons",$lessons)->with("exercises", $exercises);
     }

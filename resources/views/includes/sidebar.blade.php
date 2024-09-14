@@ -1,5 +1,5 @@
-<div class="flex h-screen overflow-hidden overflow-y-scroll flex-col justify-between border-e bg-[var(--bg-color-active)]">
-  <div class="px-4 py-6 ">
+<div class="flex h-screen overflow-hidden overflow-y-scroll scroll-container flex-col justify-between border-e bg-[var(--bg-color-active)]">
+  <div class="px-4 py-6 w-[250px]">
     <div class="flex justify-center w-full">
       <a href="/">
         <img class="w-[120px]" src="{{asset('logo/logo-no-background.png')}}" alt="">
@@ -46,7 +46,7 @@
             </span>
           </summary>
 
-          <ul class="px-4 mt-2 space-y-1 text-nowrap">
+          <ul class="px-4 mt-2 space-y-1 text-nowrap ">
             <li>
               <a href="{{ route('vocabulary.index') }}" class="{{ Request::is('exercises/vocabulary*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-sm px-4 py-2 text-sm font-medium  hover:bg-gray-100 hover:text-gray-700">
                 1. Vocabulary
@@ -132,49 +132,25 @@
         </details>
       </li>
       <li>
-        @if (auth()->user()->role == 1)
-        <details class="group [&_summary::-webkit-details-marker]:hidden" {{ Request::is('accounts*') ? 'open' : ''}}>
-          <summary class="{{ Request::is('accounts*') ? 'bg-[var(--bg-color-non-active)]' : '' }} flex cursor-pointer items-center justify-between rounded-sm px-4 py-2  hover:bg-gray-100 hover:text-gray-700">
-            <span class="text-sm font-medium"> Account </span>
-            <span class="transition duration-300 shrink-0 group-open:-rotate-180">
-              <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 20 20" fill="currentColor" >
-                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-              </svg>
-            </span>
-          </summary>
-
-          <ul class="px-4 mt-2 space-y-1">
-            <li>
-              <a href="{{route('profile.edit')}}" class="{{ Request::is('accounts/profile') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-sm px-4 py-2 text-sm font-medium  hover:bg-gray-100 hover:text-gray-700">
-                Profile
-              </a>
-            </li>
-            <li>
-              <a href="{{route('admin.controll')}}" class="{{ Request::is('accounts/admin*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-sm px-4 py-2 text-sm font-medium  hover:bg-gray-100 hover:text-gray-700">
-                admins
-              </a>
-            </li>
-            <li>
-              <form method="POST" action="{{ route('logout') }}">
-                  @csrf
-                <button
-                  type="submit"
-                  class="w-full rounded-sm px-4 py-2 text-sm font-medium  [text-align:_inherit] hover:bg-gray-100 hover:text-gray-700">
-                  Logout
-                </button>
-              </form>
-            </li>
-          </ul>
-        </details>
-        @endif
       </li>
       <li>
         <a href="{{route('language.index')}}" class="{{ Request::is('languages*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-sm px-4 py-2 text-sm font-medium  hover:bg-gray-100 hover:text-gray-700">
           Languages
         </a>
       </li>
-      @if(auth()->user()->role == 0)
+      @if (auth()->user()->role == 1)
       <li>
+        <a href="{{route('profile.edit')}}" class="{{ Request::is('accounts/profile') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-sm px-4 py-2 text-sm font-medium  hover:bg-gray-100 hover:text-gray-700">
+          Profile
+        </a>
+      </li>
+      <li>
+        <a href="{{route('admin.controll')}}" class="{{ Request::is('accounts/admin*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-sm px-4 py-2 text-sm font-medium  hover:bg-gray-100 hover:text-gray-700">
+          admins
+        </a>
+      </li>
+      <li>
+        @endif
         <form method="POST" action="{{ route('logout') }}">
             @csrf
           <button
@@ -184,7 +160,6 @@
           </button>
         </form>
       </li>
-      @endif
     </ul>
   </div>
   <div class="sticky inset-x-0 bottom-0 border-t border-gray-100 ">

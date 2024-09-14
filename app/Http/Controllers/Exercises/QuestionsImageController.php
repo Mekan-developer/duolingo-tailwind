@@ -47,7 +47,7 @@ class QuestionsImageController extends Controller
     }
 
     public function edit(QuestionImage $questionImage){
-        $lessons = Lesson::where('chapter_id', $questionImage->chapter_id)->orderBy('order')->get();
+        $lessons = Lesson::where('chapter_id', $questionImage->chapter_id)->whereHas('listExercise')->orderBy('order')->get();
         $exercises = List_exercise::where('lesson_id', $questionImage->lesson_id)->orderBy('order')->get();
 
         return view("pages.allExercises.question_image.edit")->with("questionImage",$questionImage)->with("lessons",$lessons)->with("exercises", $exercises);

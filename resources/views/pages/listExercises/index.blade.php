@@ -3,12 +3,12 @@
     <div class="flex flex-col w-full relative">
         <x-form.success/>
         <div class="flex flex-row justify-between w-full">
-            <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
+            <div class="m-4 text-[var(--bg-color-active)] text-[22px]">
                 Exercises
             </div>
             <div>
                 <div class="flex flex-row-reverse">
-                    <a href="{{route('list.exercises.create')}}" class="text-white bg-[var(--bg-color-active)] hover:bg-[#46b8c0] focus:ring-4 font-medium rounded-sm px-4 py-2 me-2 mb-2">+</a>
+                    <a href="{{route('list.exercises.create')}}" class="text-white bg-[var(--bg-color-active)] hover:bg-[#46b8c0] focus:ring-4 rounded-sm px-4 py-2 me-2 mb-2">+</a>
                 </div>
             </div>
         </div>
@@ -21,12 +21,10 @@
                         @if($selected_chapter_id !== null)
                             <option value="{{ $chapter->id }}" {{ $selected_chapter_id == $chapter->id ? 'selected' : '' }}>
                                 {{ $chapter->name }}
-                                {{-- {{ $chapter->getTranslation('title', $locales[0]['locale']) }} --}}
                             </option>
                         @else
                             <option value="{{ $chapter->id }}" {{ (request('sort_by_chapter') == $chapter->id || $selected_chapter_id == $chapter->id ) ? 'selected' : '' }}>
                                 {{ $chapter->name }}
-                                {{-- {{ $chapter->getTranslation('title', $locales[0]['locale']) }} --}}
                             </option>
                         @endif
                     @endforeach                
@@ -40,7 +38,6 @@
                         @foreach ($lessons as $lesson)
                             <option value="{{ $lesson->id }}" {{ request('sort_by_lesson') == $lesson->id ? 'selected' : '' }}>
                                 {{ $lesson->name }}
-                                {{-- {{ $lesson->getTranslation('title', $locales[0]['locale']) }} --}}
                             </option>
                         @endforeach                
                     </select>
@@ -52,15 +49,12 @@
                 <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
                     <thead class="ltr:text-left rtl:text-right">
                         <tr>
-                            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">id</th>
-                            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">name</th>
-                            {{-- @foreach($locales as $locale)
-                                <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">title {{ $locale->locale }}</th>
-                            @endforeach --}}
-                            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">parent chapter</th>
-                            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">parent lesson</th>
-                            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">order</th>
-                            <th class="px-4 py-2">actions</th>
+                            <th class="whitespace-nowrap px-4 py-2 text-gray-900">id</th>
+                            <th class="whitespace-nowrap px-4 py-2 text-gray-900">name</th>
+                            <th class="whitespace-nowrap px-4 py-2 text-gray-900">parent chapter</th>
+                            <th class="whitespace-nowrap px-4 py-2 text-gray-900">parent lesson</th>
+                            <th class="whitespace-nowrap px-4 py-2 text-gray-900">order</th>
+                            <th class="whitespace-nowrap px-4 py-2 text-gray-900">actions</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
@@ -68,15 +62,8 @@
                         <tr>
                             <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$list_exercise->id}}</td>
                             <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$list_exercise->name}}</td>
-                            {{-- @foreach($locales as $locale)
-                                <td class="text-center whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                                    {{ $list_exercise->getTranslation('title', $locale->locale) }}
-                                </td>
-                            @endforeach --}}
                             <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{ $list_exercise->chapter->name }}</td>
                             <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{ $list_exercise->lesson->name }}</td>
-                            {{-- <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$list_exercise->chapter->getTranslation('title',$locales[0]['locale'])}}</td>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$list_exercise->lesson->getTranslation('title',$locales[0]['locale'])}}</td> --}}
                             <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$list_exercise->order}}</td>
                             <td class="flex flex-row justify-center gap-2 text-center whitespace-nowrap px-4 py-2">
                                 <a href="{{route('list.exercises.edit',['list_exercise'=>$list_exercise->id])}}">

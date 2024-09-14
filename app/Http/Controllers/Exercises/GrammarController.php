@@ -43,7 +43,7 @@ class GrammarController extends Controller
     }
 
     public function edit(Grammar $grammar){
-        $lessons = Lesson::where('chapter_id', $grammar->chapter_id)->orderBy('order')->get();
+        $lessons = Lesson::where('chapter_id', $grammar->chapter_id)->whereHas('listExercise')->orderBy('order')->get();
         $exercises = List_exercise::where('lesson_id', $grammar->lesson_id)->orderBy('order')->get();
 
         return view("pages.allExercises.grammar_theory.edit")->with("grammar",$grammar)->with("lessons",$lessons)->with("exercises", $exercises);

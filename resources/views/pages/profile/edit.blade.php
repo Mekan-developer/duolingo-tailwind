@@ -21,29 +21,29 @@
         @csrf
         <div class="grid grid-cols-2 gap-2 w-full">
             <div class="mb-4 ">
-                <label for="username" class="block text-black font-medium mb-2">Username</label>
-                <input type="text" id="username" name="name" value="{{auth()->user()->name}}" class="w-full h-[80px] pl-6 p-3 bg-white text-black rounded-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <label for="username" class="block text-black mb-2">Username</label>
+                <input type="text" id="username" name="name" value="{{auth()->user()->name}}" class="w-full h-[80px] pl-6 p-3 font-normal bg-white text-black rounded-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 @error('name')
                     <span class="text-xs text-red-600"> {{ $message }}</span>
                 @enderror
             </div>
             <div class="mb-4">
-                <label for="email" class="block text-black font-medium mb-2">Email</label>
-                <input type="email" id="email" name="email" value="{{auth()->user()->email}}" class="h-[80px] pl-6  w-full p-3 bg-white text-black rounded-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <label for="email" class="block text-black mb-2">Email</label>
+                <input type="email" id="email" name="email" value="{{auth()->user()->email}}" class="h-[80px] pl-6  w-full p-3 font-normal bg-white text-black rounded-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 @error('email')
                     <span class="text-xs text-red-600"> {{ $message }}</span>
                 @enderror
             </div>
             <div class="mb-4">
-                <label for="password" class="block text-black font-medium mb-2">Password</label>
-                <input type="password" id="password" name="password" placeholder="******" class="h-[80px] pl-6 w-full p-3 bg-white text-black rounded-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <label for="password" class="block text-black mb-2">Password</label>
+                <input type="password" id="password" name="password" placeholder="******" class="h-[80px] pl-6 w-full p-3 font-normal bg-white text-black rounded-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 @error('password')
                     <span class="text-xs text-red-600"> {{ $message }}</span>
                 @enderror
             </div>
             <div class="mb-6">
-                <label for="confirm_password" class="block text-black font-medium mb-2 text-nowrap">Confirm Password</label>
-                <input type="password" id="confirm_password" name="password_confirmation" placeholder="******" class="h-[80px] pl-6 w-full p-3 bg-white text-black rounded-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <label for="confirm_password" class="block text-black mb-2 text-nowrap">Confirm Password</label>
+                <input type="password" id="confirm_password" name="password_confirmation" placeholder="******" class="h-[80px] pl-6 w-full p-3 font-normal bg-white text-black rounded-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 @error('password_confirmation')
                     <span class="text-xs text-red-600"> {{ $message }}</span>
                 @enderror

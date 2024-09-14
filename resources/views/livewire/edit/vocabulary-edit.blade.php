@@ -19,13 +19,12 @@
                     @include('includes.exerciseParts.create.sound_file')
                 </div>
             </div>
-            
             <div class="mt-4">
                 @foreach ($locales as $locale)
                     <x-form.edit-input :name="'translations_word['.$locale->locale.']'" :value="$vocabulary->getTranslation('translations_word',$locale->locale)" :labelText="'Vocabulary '. $locale->name" :errorMessage="$errors->get('translations_word.' . $locale->locale)" />
                 @endforeach
                 <x-form.order :request="$vocabularies" :currentOrder="$vocabulary"></x-form.order>
-                <x-form.btn-submit/>
+                <x-form.btn-submit name="update" />
             </div>
         </form>
     </div>    

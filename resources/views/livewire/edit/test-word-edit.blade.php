@@ -25,8 +25,7 @@
                     <x-form.edit-input :name="'translations_word['.$locale->locale.']'" :value="$testWord->getTranslation('translations_word',$locale->locale)" :labelText="'Test word '. $locale->name" :errorMessage="$errors->get('translations_word.' . $locale->locale)" />
                 @endforeach
                 <x-form.order :request="$testWords" :currentOrder="$testWord"></x-form.order>
-
-                <x-form.btn-submit/>
+                <x-form.btn-submit name="update" />
             </div>
         </form>
     </div> 

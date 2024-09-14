@@ -2,7 +2,7 @@
 @props([
     'title','text','route','count','icon'
 ])
-    <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow">
+    <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-lg shadow-[var(--bg-color-active)] hover:shadow-2xl">
         <i class='{{$icon}} text-[44px] text-[var(--bg-color-active)]'></i>
         <a href="#">
             <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-700 capitalize">{{ $title }}</h5>

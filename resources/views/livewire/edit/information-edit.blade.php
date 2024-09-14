@@ -36,7 +36,7 @@
                         <span class="text-xs text-red-600">Insert text</span>
                     @enderror
                 </div>
-                <x-form.btn-submit />
+                <x-form.btn-submit name="update" />
             </div>
         </form>
     </div>

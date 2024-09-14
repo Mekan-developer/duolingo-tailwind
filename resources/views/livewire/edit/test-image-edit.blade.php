@@ -19,7 +19,7 @@
                     @include('includes.exerciseParts.create.sound_file')
                 </div>
                 <x-form.order :request="$testImages" :currentOrder="$testImage"></x-form.order>
-                <x-form.btn-submit/>
+                <x-form.btn-submit name="update" />
             </div>
         </form>
     </div>    

@@ -7,12 +7,10 @@
                 @if($selected_chapter_id !== null)
                     <option value="{{ $chapter->id }}" {{ $selected_chapter_id == $chapter->id ? 'selected' : '' }}>
                         {{ $chapter->name }}
-                        {{-- {{ $chapter->getTranslation('title', $locales[0]['locale']) }} --}}
                     </option>
                 @else
                     <option value="{{ $chapter->id }}" {{ (request('sort_by_chapter') == $chapter->id || $selected_chapter_id == $chapter->id ) ? 'selected' : '' }}>
                         {{ $chapter->name }}
-                        {{-- {{ $chapter->getTranslation('title', $locales[0]['locale']) }} --}}
                     </option>
                 @endif
             @endforeach                
@@ -28,12 +26,10 @@
                     @if($selected_lesson_id !== null)
                         <option value="{{ $lesson->id }}" {{ $selected_lesson_id == $lesson->id ? 'selected' : '' }}>
                             {{ $lesson->name }}
-                            {{-- {{ $lesson->getTranslation('title', $locales[0]['locale']) }} --}}
                         </option>
                     @else
                         <option value="{{ $lesson->id }}" {{ (request('sort_by_lesson') == $lesson->id || $selected_lesson_id == $lesson->id ) ? 'selected' : '' }}>
                             {{ $lesson->name }}
-                            {{-- {{ $lesson->getTranslation('title', $locales[0]['locale']) }} --}}
                         </option>
                     
                     @endif
@@ -42,7 +38,7 @@
         </form>
     @endif
 
-    @if((request('sort_by_lesson') || $selected_lesson_id !== null) && $lessons->isNotEmpty())
+    @if((request('sort_by_lesson') || $selected_lesson_id !== null) && $listExercises->isNotEmpty())
         <form method="GET" action="{{ route($route) }}" class="flex-1 space-x-4 mb-2 ">
             <select name="sort_by_exercise" id="sort_by_exercise" onchange="this.form.submit()" 
                     class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -50,7 +46,6 @@
                 @foreach ($listExercises as $listExercise)
                     <option value="{{ $listExercise->id }}" {{ request('sort_by_exercise') == $listExercise->id ? 'selected' : '' }}>
                         {{ $listExercise->name }}
-                        {{-- {{ $listExercise->getTranslation('title', $locales[0]['locale']) }} --}}
                     </option>
                 @endforeach                
             </select>

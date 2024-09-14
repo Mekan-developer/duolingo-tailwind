@@ -19,7 +19,7 @@
                 </div>
             </div> 
             <x-form.order :request="$videos" :currentOrder="$video"></x-form.order>           
-            <x-form.btn-submit/>
+            <x-form.btn-submit name="update" />
         </form>
     </div>
 </div>

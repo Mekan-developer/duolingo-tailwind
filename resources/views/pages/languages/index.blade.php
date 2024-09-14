@@ -12,21 +12,21 @@
             <table class="w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>
-                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">id</th>
-                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">Name</th>
-                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">native</th>
-                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">locale</th>
-                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">flag</th>
-                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">status</th>
-                        <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">order</th>
-                        <th class="px-4 py-2">actions</th>
+                        <th class="px-4 py-2 text-gray-900 whitespace-nowrap">id</th>
+                        <th class="px-4 py-2 text-gray-900 whitespace-nowrap">Name</th>
+                        <th class="px-4 py-2 text-gray-900 whitespace-nowrap">native</th>
+                        <th class="px-4 py-2 text-gray-900 whitespace-nowrap">locale</th>
+                        <th class="px-4 py-2 text-gray-900 whitespace-nowrap">flag</th>
+                        <th class="px-4 py-2 text-gray-900 whitespace-nowrap">status</th>
+                        <th class="px-4 py-2 text-gray-900 whitespace-nowrap">order</th>
+                        <th class="px-4 py-2 text-gray-900 whitespace-nowrap">actions</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
                     @foreach ($languages as $language)
                         <tr>
-                            <td class="px-4 py-2 font-medium text-center text-gray-900 whitespace-nowrap">{{ $language->id }}</td>
-                            <td class="px-4 py-2 font-medium text-center text-gray-900 whitespace-nowrap">{{ $language->name }}</td>
+                            <td class="px-4 py-2 text-center text-gray-900 whitespace-nowrap">{{ $language->id }}</td>
+                            <td class="px-4 py-2 text-center text-gray-900 whitespace-nowrap">{{ $language->name }}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $language->native }}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $language->locale }}</td>
                             <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700 w-[100px] h-auto">

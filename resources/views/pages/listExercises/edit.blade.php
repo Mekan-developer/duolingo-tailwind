@@ -3,6 +3,6 @@
     @livewire("edit.list-exercise-edit",
     [
         "list_exercise" => $list_exercise,
-        "lessons" => $lessons
+        "lessons" => $lessons 
     ])
 @endsection

@@ -15,8 +15,7 @@
             <div class="mt-2">
                 <x-form.order :request="$pronunciations" :currentOrder="$pronunciation"></x-form.order>
             </div>
-            
-            <x-form.btn-submit class="mt-4"/>
+            <x-form.btn-submit name="update" class="mt-4"/>
         </form>
     </div>
 </div>

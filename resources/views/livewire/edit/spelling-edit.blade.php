@@ -19,7 +19,7 @@
                 
             </div>
             <x-form.order :request="$spellings" :currentOrder="$spelling"></x-form.order>
-            <x-form.btn-submit/>
+            <x-form.btn-submit name="update" />
         </form>
     </div>   
 </div>

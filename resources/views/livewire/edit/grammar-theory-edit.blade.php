@@ -72,7 +72,7 @@
                     @include('includes.exerciseParts.create.sound_file',['name' => 'audio','label' => 'label' ,'message' => 'message'])
                 </div>
                 <x-form.order :request="$grammars" :currentOrder="$grammar"></x-form.order>
-                <x-form.btn-submit/>
+                <x-form.btn-submit name="update" />
             </div>
         </form>
     </div> 

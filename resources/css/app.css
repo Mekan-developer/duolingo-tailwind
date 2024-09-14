@@ -2,9 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg-color-active: #57BE99;
+  --text-color-active: #4a5568;
+  --bg-color-non-active: #F0F0F0;
+  --text-color-non-active: #929292;
+  /* --primary-color: #3490dc;
+  --secondary-color: #ffed4a; */
+}
+
 *{
   font-family: "Libre+Baskerville", sans-serif;
-  font-weight: 600;
+  font-weight: 400;
   font-style: normal;
 }
 html, body{

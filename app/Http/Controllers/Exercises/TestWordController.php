@@ -41,7 +41,7 @@ class TestWordController extends Controller
     }
 
     public function edit(TestWord $testWord) {
-        $lessons = Lesson::where('chapter_id', $testWord->chapter_id)->orderBy('order')->get();
+        $lessons = Lesson::where('chapter_id', $testWord->chapter_id)->whereHas('listExercise')->orderBy('order')->get();
         $exercises = List_exercise::where('lesson_id', $testWord->lesson_id)->orderBy('order')->get();
         return view("pages.allExercises.test_word.edit")->with("testWord",$testWord)->with("lessons",$lessons)->with("exercises", $exercises);
     }

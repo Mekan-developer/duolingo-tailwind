@@ -6,7 +6,7 @@
         </div>
         <form action="{{route('lessons.store')}}" method="post" enctype="multipart/form-data" class="w-full mx-auto bg-[var(--bg-color-non-active)] p-6 rounded-md">
             @csrf
-            <label for="chapters" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an chapter</label>
+            <label for="chapters" class="block mb-2 text-sm text-gray-900 dark:text-white">Select an chapter</label>
             <select id="chapters" name="chapter_id" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                 <option selected>Choose a chapter</option>
                 @foreach ($chapters as $chapter)

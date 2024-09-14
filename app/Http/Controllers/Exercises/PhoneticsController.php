@@ -54,7 +54,7 @@ class PhoneticsController extends Controller
     }
 
     public function edit(Phonetics $phonetics){
-        $lessons = Lesson::where('chapter_id', $phonetics->chapter_id)->orderBy('order')->get();
+        $lessons = Lesson::where('chapter_id', $phonetics->chapter_id)->whereHas('listExercise')->orderBy('order')->get();
         $exercises = List_exercise::where('lesson_id', $phonetics->lesson_id)->orderBy('order')->get();
         return view("pages.allExercises.phonetics.edit")->with("phonetics",$phonetics)->with("lessons",$lessons)->with("exercises", $exercises);
     }

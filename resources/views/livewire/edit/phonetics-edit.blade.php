@@ -52,7 +52,6 @@
                 <x-form.order :request="$phoneticss" :currentOrder="$phonetics"></x-form.order>
                 <div class="flex w-full gap-4">
                     <x-form.btn-submit name="update" class="flex-1"/>
-                    {{-- <x-form.btn-cancel class="flex-1 w-full" /> --}}
                 </div>
             </div>
         </form>
