@@ -2,6 +2,7 @@
 @section('content')
     <div class="relative flex flex-col w-full">
         <x-form.success/>
+        <x-alert/>
         <div class="flex flex-row justify-between w-full">
             <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
                 Chapters

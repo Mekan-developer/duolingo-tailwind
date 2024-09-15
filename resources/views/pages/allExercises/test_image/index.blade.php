@@ -2,7 +2,7 @@
 @section('content')
 
 <div>
-    <div class="flex flex-col w-full relative">
+    <div class="relative flex flex-col w-full">
         <x-form.success/>
         <div class="flex flex-row justify-between w-full">
             <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
@@ -15,9 +15,10 @@
             </div>
         </div>
     </div>
+    
     @include('includes.exerciseParts.index.orderAllExercise',['route' => 'testImage.index','title' => 'audio image'])
-    <div class="flex gap-4 relative">
-        <div class="flex-1 overflow-x-auto overflow-hidden overflow-y-auto" >
+    <div class="relative flex gap-4">
+        <div class="flex-1 overflow-hidden overflow-x-auto overflow-y-auto" >
             <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>                        
@@ -36,7 +37,7 @@
                     @foreach ($testImages as $testImage)
                         <tr>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $testImage->id }}</td>
-                            <td  class="px-6 py-4 flex justify-center">
+                            <td  class="flex justify-center px-6 py-4">
                                 <div data-audio-src="{{ $testImage->getAudio() }}" class="p-1 text-white rounded-lg shadow-lg audio-player w-[200px]" >
                                     <div class="flex flex-row items-center justify-between pl-1">
                                             <div class="flex items-center justify-center p-3 text-gray-800 bg-cover rounded-sm playPauseBtn hover:text-[var(--bg-color-active)] focus:outline-none">
@@ -76,7 +77,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="w-full absolute top-full mt-2">
+        <div class="absolute w-full mt-2 top-full">
             {{$testImages->links()}}
         </div>
     </div>

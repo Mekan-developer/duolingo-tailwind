@@ -18,6 +18,7 @@ class TestWordController extends Controller
         $testWords = TestWord::orderBy('order');
 
         $data = $this->selectOPtionOrderExercise($request,$testWords,'testWords');
+        
         return view("pages.allExercises.test_word.index", $data);
     }
 

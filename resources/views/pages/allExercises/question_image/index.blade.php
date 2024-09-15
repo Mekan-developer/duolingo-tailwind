@@ -2,7 +2,7 @@
 @section('content')
 
 <div>
-    <div class="flex flex-col w-full relative">
+    <div class="relative flex flex-col w-full">
         <x-form.success/>
         <div class="flex flex-row justify-between w-full">
             <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
@@ -16,8 +16,8 @@
         </div>
     </div>
     @include('includes.exerciseParts.index.orderAllExercise',['route' => 'questionImage.index','title' => ' questionImage Image'])
-    <div class="flex gap-4 relative">
-        <div class="flex-1 overflow-x-auto overflow-hidden overflow-y-auto" >
+    <div class="relative flex gap-4">
+        <div class="flex-1 overflow-hidden overflow-x-auto overflow-y-auto" >
             <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>                        
@@ -78,7 +78,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="w-full absolute top-full mt-2">
+        <div class="absolute w-full mt-2 top-full">
             {{$questionImages->links()}}
         </div>
     </div>

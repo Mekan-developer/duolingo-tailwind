@@ -10,13 +10,31 @@ use Livewire\Component;
 
 class InformationCreate extends Component
 {
-    public $exercise_ids = [],$lesson_ids = [];
+    public $lesson_ids = [],$exercise_ids = [];
     public $exercises;
 
     public $queryExercise, $queryLesson; 
 
 
 
+    public function mount(){
+        if(session()->hasOldInput('exercise_ids')){
+            foreach(old('exercise_ids') as $key => $value){
+                $this->exercise_ids[$key] = $value;
+            }
+        }
+            
+
+        if(session()->hasOldInput('lesson_ids')){
+            foreach(old('lesson_ids') as $key => $value){
+                $this->lesson_ids[$key] = $value;
+            }
+            $this->exercises = List_exercise::whereIn('lesson_id',$this->lesson_ids)->with('lesson')->orderBy('order')->get();
+        }
+            
+        // $lesson_ids[]=old('lesson_ids');
+
+    }
     public function render()
     {
 

@@ -11,18 +11,16 @@
                 <option selected>Choose a chapter</option>
                 @foreach ($chapters as $chapter)
                     <option value="{{$chapter->id}}">{{ $chapter->name }}</option>
-                    {{-- <option value="{{$chapter->id}}">{{ $chapter->getTranslation('title',$locales[0]['locale']) }}</option> --}}
                 @endforeach
             </select>
+            @error('chapter_id')
+                <span class="text-xs text-red-600">{{ $message }}</span>
+            @enderror
             <x-form.input name="name" placeholder="Lesson name" labelText="Lesson name" :errorMessage="$errors->get('name')" />
-            {{-- @foreach ($locales as $locale)
-                <x-form.input :name="'title['.$locale->locale.']'" :placeholder="'Lesson '. $locale->locale" :labelText="'Lesson '. $locale->name" :errorMessage="$errors->get('title.' . $locale->locale)" />
-            @endforeach --}}
             <div class="flex flex-row justify-between gap-2 my-2">
                 @for ($i = 1; $i < 5; $i++)
                     <div class="flex-1">
                         @include('includes.exerciseParts.create.image_file',['label' => 'button'.$i, 'title' => 'Upload dopamine'.$i, 'name' => 'dopamine_image'.$i,'message' => 'message'.$i ])
-                        <x-input-error :messages="$errors->get('dopamine_image'.$i)" class="mt-2" />
                     </div>
                 @endfor
             </div>

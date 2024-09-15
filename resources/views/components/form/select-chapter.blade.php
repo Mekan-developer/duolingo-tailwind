@@ -12,4 +12,5 @@
         @endforeach
     </select>
     <x-input-error :messages="$errors->get('chapter_id')" class="mt-2" />
+        <x-input-error :messages="$errors->get('lesson_id')" class="mt-2" />
 </div>

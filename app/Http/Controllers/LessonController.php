@@ -122,6 +122,11 @@ class LessonController extends Controller
 
 
     public function destroy(Lesson $lesson){
+        if($lesson->listExercise()->exists()){
+            return redirect()->route('lessons')->with('alert','Lesson has exercise and cannot be deleted.');
+        }
+
+
         if ($lesson->dopamine_image1) {
             $this->removeFile($lesson->dopamine_image1, 'dopamine_images');
         } 

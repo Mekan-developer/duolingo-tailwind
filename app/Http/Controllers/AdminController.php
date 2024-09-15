@@ -12,7 +12,6 @@ class AdminController extends Controller
 {
     public function index(){
         $users = User::where('role',0)->get();
-
         return view("pages.admin.index",compact("users"));
     }
 

@@ -24,7 +24,7 @@ class InformationRequest extends FormRequest
         return [
             'exercise_ids' => 'required',
             'lesson_ids' => 'required',
-            'information' => 'required',
+            'information.*' => 'required',
         ];
     }
 }

@@ -2,7 +2,7 @@
 @section('content')
 
 <div>
-    <div class="flex flex-col w-full relative">
+    <div class="relative flex flex-col w-full">
         <x-form.success/>
         <div class="flex flex-row justify-between w-full">
             <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
@@ -16,15 +16,15 @@
         </div>
     </div>
     @include('includes.exerciseParts.index.orderAllExercise',['route' => 'grammar.index','title' => 'grammar'])
-    <div class="flex gap-4 relative">
-        <div class="flex-1 overflow-x-auto overflow-hidden overflow-y-auto">
+    <div class="relative flex gap-4">
+        <div class="flex-1 overflow-hidden overflow-x-auto overflow-y-auto">
             <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>         
                         <th class="px-4 py-2 text-gray-900 whitespace-nowrap">id</th>
                         <th class="px-4 py-2 text-gray-900 whitespace-nowrap">grammar_theory</th>
                         <th class="px-4 py-2 text-gray-900 whitespace-nowrap">text</th>
-                        <th class="px-4 py-2 text-gray-900 whitespace-nowrap border-r-2">audio</th>
+                        <th class="px-4 py-2 text-gray-900 border-r-2 whitespace-nowrap">audio</th>
                         @for ($i = 1; $i <= $textPartCounts; $i++)
                             <th class="px-4 py-2 text-gray-900 whitespace-nowrap">text correct part {{$i}}</th>
                             <th class="px-4 py-2 text-gray-900 whitespace-nowrap">text incorrect part {{$i}}</th>
@@ -43,7 +43,7 @@
                             <td class="text-center">{{$grammar->id}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{!! $grammar->translate('grammar_theory',$locales[0]['locale']) !!}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{!! $grammar->translate('text',$locales[0]['locale']) !!}</td>
-                            <td class="flex justify-center  px-4 py-2 border-r-2">
+                            <td class="flex justify-center px-4 py-2 border-r-2">
                                 <div data-audio-src="{{ $grammar->getSound($grammar->audio) }}" class="text-white rounded-lg shadow-lg audio-player w-[200px]" >
                                     <div class="flex flex-row items-center justify-between ">
                                             <div class="flex items-center justify-center p-3 text-gray-800 bg-cover rounded-sm playPauseBtn hover:text-[var(--bg-color-active)] focus:outline-none">
@@ -96,7 +96,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="w-full absolute top-full mt-2">
+        <div class="absolute w-full mt-2 top-full">
             {{$grammars->links()}}
         </div>
     </div>

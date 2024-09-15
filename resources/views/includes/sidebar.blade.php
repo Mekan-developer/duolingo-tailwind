@@ -68,63 +68,63 @@
               </a>
             </li>
 
-            <li>
+            <li id="audioTranslation">
               <a href="{{route('audioTranslation.index')}}" class="{{ Request::is('exercises/audio-translation*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-sm px-4 py-2 text-sm font-medium  hover:bg-gray-100 hover:text-gray-700">
                 4. Audio translation
                 <p class="text-[12px] text-gray-300 -mt-2 ml-4 hover:text-gray-500">(translation)</p>
               </a>
             </li>
 
-            <li>
+            <li id="questionImage">
               <a href="{{route('questionImage.index')}}" class="{{ Request::is('exercises/question-image*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-sm px-4 py-2 text-sm font-medium  hover:bg-gray-100 hover:text-gray-700">
                 5. Question image
                 <p class="text-[12px] text-gray-300 -mt-2 ml-4 hover:text-gray-500">(vocabulary)</p>
               </a>
             </li>
 
-            <li>
+            <li id="phonetics">
               <a href="{{route('phonetics.index')}}" class="{{ Request::is('exercises/phonetics*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-sm px-4 py-2 text-sm font-medium  hover:bg-gray-100 hover:text-gray-700">
                 6. Phonetics
                 <p class="text-[12px] text-gray-300 -mt-2 ml-4 hover:text-gray-500">(Phonetics)</p>
               </a>
             </li>
 
-            <li>
+            <li id="pronunciation">
               <a href="{{route('pronunciation.index')}}" class="{{ Request::is('exercises/pronunciation*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-sm px-4 py-2 text-sm font-medium  hover:bg-gray-100 hover:text-gray-700">
                 7. Pronunciation
                 <p class="text-[12px] text-gray-300 -mt-2 ml-4 hover:text-gray-500">(vocabulary)</p>
               </a>
             </li>
 
-            <li>
+            <li id="grammar">
               <a href="{{route('grammar.index')}}" class="{{ Request::is('exercises/grammar*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-sm px-4 py-2 text-sm font-medium  hover:bg-gray-100 hover:text-gray-700">
                 8. Grammar theory
                 <p class="text-[12px] text-gray-300 -mt-2 ml-4 hover:text-gray-500">(grammar)</p>
               </a>
             </li>
 
-            <li>
+            <li id="testImage">
               <a href="{{route('testImage.index')}}" class="{{ Request::is('exercises/test-image*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-sm px-4 py-2 text-sm font-medium  hover:bg-gray-100 hover:text-gray-700">
                 9. Test Audio Image
                 <p class="text-[12px] text-gray-300 -mt-2 ml-4 hover:text-gray-500">(vocabulary)</p>
               </a>
             </li>
 
-            <li>
+            <li id="testWord">
               <a href="{{route('testWord.index')}}" class="{{ Request::is('exercises/test-word*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-sm px-4 py-2 text-sm font-medium  hover:bg-gray-100 hover:text-gray-700">
-                10. Test(Question word reworse) 
+                10. Test(reworse of 3rd) 
                 <p class="text-[12px] text-gray-300 -mt-2 ml-4 hover:text-gray-500">(vocabulary)</p>
               </a>
             </li>
-            <li>
+            <li id="spelling">
               <a href="{{route('spelling.index')}}" class="{{ Request::is('exercises/spelling*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-sm px-4 py-2 text-sm font-medium  hover:bg-gray-100 hover:text-gray-700">
                 11. Spelling
                 <p class="text-[12px] text-gray-300 -mt-2 ml-4 hover:text-gray-500">(vocabulary)</p>
               </a>
             </li>
-            <li>
+            <li id="listening">
               <a href="{{route('listening.index')}}" class="{{ Request::is('exercises/listening*') ? 'bg-[var(--bg-color-non-active)]' : '' }} block rounded-sm px-4 py-2 text-sm font-medium  hover:bg-gray-100 hover:text-gray-700">
-                12. Audio
+                12. Listening
                 <p class="text-[12px] text-gray-300 -mt-2 ml-4 hover:text-gray-500">(listening)</p>
               </a>
             </li>

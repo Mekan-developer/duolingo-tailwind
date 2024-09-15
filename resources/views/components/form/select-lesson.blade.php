@@ -9,7 +9,6 @@
             <option selected>Choose a lesson</option>
             @foreach ($lessons as $lesson)
                 <option value="{{$lesson->id}}">{{ $lesson->name }}</option>
-                {{-- <option value="{{$lesson->id}}">{{ $lesson->getTranslation('title',$locales[0]['locale']) }}</option> --}}
             @endforeach
         </select>
         <x-input-error :messages="$errors->get('lesson_id')" class="mt-2" />

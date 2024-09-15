@@ -18,9 +18,6 @@
             </div>
             <div class="px-4">
                 <x-form.input name="name" placeholder="exercise name" labelText="exercise name" :errorMessage="$errors->get('name')" />
-                {{-- @foreach ($locales as $locale)
-                    <x-form.input :name="'title['.$locale->locale.']'" :placeholder="'Exercise '. $locale->locale" :labelText="'Exercise '. $locale->name" :errorMessage="$errors->get('title.' . $locale->locale)" />
-                @endforeach --}}
                 <x-form.btn-submit/>
             </div>
         </form>

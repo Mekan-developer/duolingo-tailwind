@@ -1,7 +1,8 @@
 @extends('layouts.main')
 @section('content')
-    <div class="flex flex-col w-full relative">
+    <div class="relative flex flex-col w-full">
         <x-form.success/>
+        <x-alert/>
         <div class="flex flex-row justify-between w-full">
             <div class="m-4 text-[var(--bg-color-active)] text-[22px]">
                 Exercises
@@ -13,10 +14,10 @@
             </div>
         </div>
         <div class="grid grid-cols-3 gap-4">
-            <form method="GET" action="{{ route('list.exercises') }}" class="flex-1 space-x-4 mb-2">
+            <form method="GET" action="{{ route('list.exercises') }}" class="flex-1 mb-2 space-x-4">
                 <select name="sort_by_chapter" id="sort_by" onchange="this.form.submit()" 
                         class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="0"  {{ request('sort_by_chapter') == '0' ? 'selected' : '' }}>Select for ordering lessons by chapter</option>
+                    <option value="0"  {{ request('sort_by_chapter') == '0' ? 'selected' : '' }}>Select for ordering exercises by chapter</option>
                     @foreach ($chapters as $chapter)
                         @if($selected_chapter_id !== null)
                             <option value="{{ $chapter->id }}" {{ $selected_chapter_id == $chapter->id ? 'selected' : '' }}>
@@ -30,11 +31,12 @@
                     @endforeach                
                 </select>
             </form>
-            @if(request('sort_by_chapter') || $selected_chapter_id !== null)
-                <form method="GET" action="{{ route('list.exercises') }}" class="flex-1 space-x-4 mb-2 ">
+
+            @if(count($lessons)>0 and (request('sort_by_chapter') || $selected_chapter_id !== null))
+                <form method="GET" action="{{ route('list.exercises') }}" class="flex-1 mb-2 space-x-4 ">
                     <select name="sort_by_lesson" id="sort_by" onchange="this.form.submit()" 
                             class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <option value="0"  {{ request('sort_by_lesson') == '0' ? 'selected' : '' }}>Select for ordering lessons by chapter</option>
+                        <option value="0"  {{ request('sort_by_lesson') == '0' ? 'selected' : '' }}>Select for ordering exercises by lessons</option>
                         @foreach ($lessons as $lesson)
                             <option value="{{ $lesson->id }}" {{ request('sort_by_lesson') == $lesson->id ? 'selected' : '' }}>
                                 {{ $lesson->name }}
@@ -46,26 +48,26 @@
         </div>
         <div class="flex gap-4">
             <div class="overflow-x-auto flex-1 min-h-[700px] relative" >
-                <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+                <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                     <thead class="ltr:text-left rtl:text-right">
                         <tr>
-                            <th class="whitespace-nowrap px-4 py-2 text-gray-900">id</th>
-                            <th class="whitespace-nowrap px-4 py-2 text-gray-900">name</th>
-                            <th class="whitespace-nowrap px-4 py-2 text-gray-900">parent chapter</th>
-                            <th class="whitespace-nowrap px-4 py-2 text-gray-900">parent lesson</th>
-                            <th class="whitespace-nowrap px-4 py-2 text-gray-900">order</th>
-                            <th class="whitespace-nowrap px-4 py-2 text-gray-900">actions</th>
+                            <th class="px-4 py-2 text-gray-900 whitespace-nowrap">id</th>
+                            <th class="px-4 py-2 text-gray-900 whitespace-nowrap">name</th>
+                            <th class="px-4 py-2 text-gray-900 whitespace-nowrap">parent chapter</th>
+                            <th class="px-4 py-2 text-gray-900 whitespace-nowrap">parent lesson</th>
+                            <th class="px-4 py-2 text-gray-900 whitespace-nowrap">order</th>
+                            <th class="px-4 py-2 text-gray-900 whitespace-nowrap">actions</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
                         @foreach ($list_exercises as $list_exercise)
                         <tr>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$list_exercise->id}}</td>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$list_exercise->name}}</td>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{ $list_exercise->chapter->name }}</td>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{ $list_exercise->lesson->name }}</td>
-                            <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700">{{$list_exercise->order}}</td>
-                            <td class="flex flex-row justify-center gap-2 text-center whitespace-nowrap px-4 py-2">
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$list_exercise->id}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$list_exercise->name}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $list_exercise->chapter->name }}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $list_exercise->lesson->name }}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$list_exercise->order}}</td>
+                            <td class="flex flex-row justify-center gap-2 px-4 py-2 text-center whitespace-nowrap">
                                 <a href="{{route('list.exercises.edit',['list_exercise'=>$list_exercise->id])}}">
                                     <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
                                         <i class='bx bx-edit-alt text-[22px]'></i>
@@ -77,7 +79,7 @@
                     @endforeach
                     </tbody>
                 </table>
-                <div class="w-full absolute bottom-0">
+                <div class="absolute bottom-0 w-full">
                     {{$list_exercises->links()}}
                 </div>
             </div>

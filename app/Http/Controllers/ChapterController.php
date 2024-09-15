@@ -42,10 +42,14 @@ class ChapterController extends Controller
 
         $chapter->update($request->all());
 
-        return redirect()->route('chapters')->with('success','chapter updated successfully!');
+        return redirect()->route('chapters')->with('alert','chapter updated successfully!');
     }
 
     public function destroy(Chapter $chapter){
+        if($chapter->lesson()->exists()){
+            return redirect()->route('chapters')->with('alert','Chapter has lessons and cannot be deleted.');
+        }
+
         $orderDeletedRow = $chapter->order;
         $delete_success = $chapter->delete();
 

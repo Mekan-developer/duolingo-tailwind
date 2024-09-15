@@ -20,7 +20,6 @@ class List_exercise extends Model
         return $this->belongsTo(Lesson::class);
     }
 
-
     protected static function boot()
     {
         parent::boot();
@@ -31,4 +30,46 @@ class List_exercise extends Model
             $model->order = $maxOrder + 1;
         });
     }
+
+    // 12 exercise type below relation
+    public function exerciseType1(){
+        return $this->hasMany(Vocabulary::class,'exercise_id','id');
+    }
+    public function exerciseType2(){
+        return $this->hasMany(Video::class,'exercise_id','id');
+    }
+    public function exerciseType3(){
+        return $this->hasMany(QuestionWord::class,'exercise_id','id');
+    }
+    public function exerciseType4(){
+        return $this->hasMany(AudioTranslation::class,'exercise_id','id');
+    }
+    public function exerciseType5(){
+        return $this->hasMany(QuestionImage::class,'exercise_id','id');
+    }
+  
+    public function exerciseType6(){
+        return $this->hasMany(Phonetics::class,'exercise_id','id');
+    }
+    public function exerciseType7(){
+        return $this->hasMany(Pronunciation::class,'exercise_id','id');
+    }
+
+    public function exerciseType8(){
+        return $this->hasMany(Grammar::class,'exercise_id','id');
+    }
+    public function exerciseType9(){
+        return $this->hasMany(TestImage::class,'exercise_id','id');
+    }
+    public function exerciseType10(){
+        return $this->hasMany(TestWord::class,'exercise_id','id');
+    }
+    public function exerciseType11(){
+        return $this->hasMany(Spelling::class,'exercise_id','id');
+    }
+
+    public function exerciseType12(){
+        return $this->hasMany(Listening::class,'exercise_id','id');
+    }
+    
 }

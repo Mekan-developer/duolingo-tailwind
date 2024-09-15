@@ -26,15 +26,17 @@
                 <div>
                     <div class="grid grid-cols-2 gap-10" wire:ignore>
                         @foreach ($locales as $locale)
-                            <div class="flex flex-col text-[var(--bg-color-active)] my-1 py-2">
-                                <span>{{$locale->name}} Information</span>
-                                <textarea  class="letter h-[300px]" id="HTML[{{$locale->locale}}]" name="information[{{ $locale->locale }}]"  placeholder="Informations {{$locale->name}}"></textarea>
+                            <div class="flex-flex-col">
+                                <div class="flex flex-col text-[var(--bg-color-active)] my-1 py-2">
+                                    <span>{{$locale->name}} Information</span>
+                                    <textarea  class="letter h-[300px]" id="HTML[{{$locale->locale}}]" name="information[{{ $locale->locale }}]"  placeholder="Informations {{$locale->name}}"></textarea>
+                                </div>
+                                @error('information.'.$locale->locale)
+                                    <span class="-mt-4 text-xs text-red-600">Enter the information on {{$locale->name}} language</span>
+                                @enderror
                             </div>
                         @endforeach
                     </div>
-                    @error('information[{{ $locale->locale }}]')
-                        <span class="text-xs text-red-600">Insert text</span>
-                    @enderror
                 </div>
                 <x-form.btn-submit />
             </div>
