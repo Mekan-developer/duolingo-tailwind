@@ -21,14 +21,13 @@
                     @foreach ($chapters as $chapter)
                         <option value="{{ $chapter->id }}" {{ request('sort_by') == $chapter->id ? 'selected' : '' }}>
                             {{ $chapter->name }}
-                            {{-- {{ $chapter->getTranslation('title', $locales[0]['locale']) }} --}}
                         </option>
                     @endforeach                
                 </select>
             </form>
         </div>        
         <div class="flex gap-4">
-            <div class="flex-1 overflow-x-auto min-h-[700px] relative" >
+            <div class="flex-1 overflow-x-auto  min-h-[700px] relative" >
                 <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                     <thead class="ltr:text-left rtl:text-right">
                         <tr>
@@ -45,25 +44,20 @@
                     </thead>
                     <tbody class="divide-y divide-gray-200">
                         @foreach ($lessons as $lesson)
-                        <tr>
+                        <tr >
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$lesson->id}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$lesson->name}}</td>
-                            {{-- @foreach($locales as $locale)
-                                <td class="px-4 py-2 text-center text-gray-900 whitespace-nowrap">
-                                    {{ $lesson->getTranslation('title', $locale->locale) }}
-                                </td>
-                            @endforeach --}}
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
-                                <img src="{{$lesson->getDopamine($lesson->dopamine_image1)}}" alt="dopamine 1">
+                            <td class="px-4 py-2 text-gray-700 whitespace-nowrap">
+                                <img class="w-auto h-[36px] mx-auto" src="{{$lesson->getDopamine($lesson->dopamine_image1)}}" alt="dopamine 1">
                             </td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
-                                <img src="{{$lesson->getDopamine($lesson->dopamine_image2)}}" alt="dopamine 1">
+                            <td class="px-4 py-2 text-gray-700 whitespace-nowrap">
+                                <img class="w-auto h-[36px] mx-auto" src="{{$lesson->getDopamine($lesson->dopamine_image2)}}" alt="dopamine 1">
                             </td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
-                                <img src="{{$lesson->getDopamine($lesson->dopamine_image3)}}" alt="dopamine 1">
+                            <td class="px-4 py-2 text-gray-700 whitespace-nowrap">
+                                <img class="w-auto h-[36px] mx-auto" src="{{$lesson->getDopamine($lesson->dopamine_image3)}}" alt="dopamine 1">
                             </td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
-                                <img src="{{$lesson->getDopamine($lesson->dopamine_image4)}}" alt="dopamine 1">
+                            <td class="px-4 py-2 text-gray-700 whitespace-nowrap">
+                                <img class="w-auto h-[36px] mx-auto" src="{{$lesson->getDopamine($lesson->dopamine_image4)}}" alt="dopamine 1">
                             </td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $lesson->chapter->name }}</td>
                             {{-- <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $lesson->chapter->getTranslation('title',$locales[0]['locale']) }}</td> --}}

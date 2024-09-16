@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="flex w-full gap-4">
-        <div class="flex-1 overflow-x-auto" >
+        <div class="flex-1 overflow-x-auto " >
             <table class="w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>
@@ -30,23 +30,27 @@
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $language->native }}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $language->locale }}</td>
                             <td class="text-center whitespace-nowrap px-4 py-2 text-gray-700 w-[100px] h-auto">
-                                <img class="bg-cover" src="{{$language->getFlag()}}" alt="">
+                                <img class="bg-cover w-[60px]" src="{{$language->getFlag()}}" alt="">
                             </td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
                                 <x-form.status route="language.active" modelName="language" :id="$language->id" :currentStatus="$language->status"/>
                             </td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $language->order }}</td>
                             <td class="flex flex-row justify-center gap-2 px-4 py-2 text-center whitespace-nowrap">
-                                <div class="flex flex-row items-center justify-center">
-                                    <div >
-                                        <a href="{{ route('language.edit', ['language' => $language->id])}}">
-                                            <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
-                                                <i class='bx bx-edit-alt text-[22px]'></i>
-                                            </button>
-                                        </a>
-                                    </div>
-                                    <x-form.delete route="language.delete" modelName="language" :dataId="$language->id" confirmText="are you sure you want to delete?"/>
-                                </div>
+                                <a href="{{ route('language.edit', ['language' => $language->id])}}">
+                                    <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
+                                        <i class='bx bx-edit-alt text-[22px]'></i>
+                                    </button>
+                                </a>
+                                <x-form.delete route="language.delete" modelName="language" :dataId="$language->id" confirmText="are you sure you want to delete?"/>
+                                {{-- <td class="flex flex-row justify-center gap-2 px-4 py-2 text-center whitespace-nowrap">
+                                    <a href="{{route('list.exercises.edit',['list_exercise'=>$list_exercise->id])}}">
+                                        <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
+                                            <i class='bx bx-edit-alt text-[22px]'></i>
+                                        </button>
+                                    </a>
+                                    <x-form.delete route="list.exercises.delete" modelName="list_exercise" :dataId="$list_exercise->id" confirmText="are you sure you want to delete?"/>                               
+                                </td> --}}
                             </td>
                         </tr> 
                     @endforeach

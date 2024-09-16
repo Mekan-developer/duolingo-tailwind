@@ -18,13 +18,14 @@
     
     @include('includes.exerciseParts.index.orderAllExercise',['route' => 'testImage.index','title' => 'audio image'])
     <div class="relative flex gap-4">
-        <div class="flex-1 overflow-hidden overflow-x-auto overflow-y-auto" >
+        <div class="flex-1 overflow-hidden overflow-x-auto overflow-y-auto " >
             <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>                        
                         <th class="px-4 py-2 text-gray-900 whitespace-nowrap">id</th>
                         <th class="px-4 py-2 text-gray-900 whitespace-nowrap">audio</th>
-                        <th class="px-4 py-2 text-gray-900 whitespace-nowrap">image</th>
+                        <th class="px-4 py-2 text-gray-900 whitespace-nowrap">correct image</th>
+                        <th class="px-4 py-2 text-gray-900 whitespace-nowrap">incorrect image</th>
                         <th class="px-4 py-2 text-gray-900 whitespace-nowrap">chapter</th>
                         <th class="px-4 py-2 text-gray-900 whitespace-nowrap">lesson</th>
                         <th class="px-4 py-2 text-gray-900 whitespace-nowrap">exercise</th>
@@ -59,7 +60,10 @@
                                 </div>
                             </td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
-                                <img src="{{$testImage->getImage()}}" alt="testImage image">
+                                <img src="{{$testImage->getCorrectImage()}}" alt="testImage image">
+                            </td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
+                                <img src="{{$testImage->getIncorrectImage()}}" alt="testImage image">
                             </td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$testImage->Chapter->name}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$testImage->Lesson->name}}</td>

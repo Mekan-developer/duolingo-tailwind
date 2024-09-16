@@ -10,7 +10,7 @@ class TestImage extends Model
     use HasFactory;
 
     
-    protected $fillable = ['audio','image','chapter_id','lesson_id','exercise_id','status','order'];
+    protected $fillable = ['audio','correct_image','incorrect_image','chapter_id','lesson_id','exercise_id','status','order'];
 
 
     public function Exercise(){
@@ -33,14 +33,23 @@ class TestImage extends Model
         }
     }
 
-    public function getImage(){
-        if(file_exists(public_path('/storage/uploads/test_audio_image/image/'.$this->image)) && !is_null($this->image)){
-            return asset('/storage/uploads/test_audio_image/image/'.$this->image);
+    public function getCorrectImage(){
+        if(file_exists(public_path('/storage/uploads/test_audio_image/image/'.$this->correct_image)) && !is_null($this->correct_image)){
+            return asset('/storage/uploads/test_audio_image/image/'.$this->correct_image);
         }else{
             return null;
         }
     }
 
+    public function getIncorrectImage(){
+        if(file_exists(public_path('/storage/uploads/test_audio_image/image/'.$this->incorrect_image)) && !is_null($this->incorrect_image)){
+            return asset('/storage/uploads/test_audio_image/image/'.$this->incorrect_image);
+        }else{
+            return null;
+        }
+    }
+
+    
     protected static function boot()
     {
         parent::boot();

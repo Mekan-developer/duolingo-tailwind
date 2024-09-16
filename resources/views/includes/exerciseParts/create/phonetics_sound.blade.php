@@ -10,7 +10,7 @@
             <span id="message_{{ $uniqueId }}" class="-mt-1 block text-sm h-[20px]"></span>
         </div>
     </label>
-    <input hidden type="file" class="myHiddenInput" name="{{ $name }}" id="input_{{ $uniqueId }}" >
+    <input accept="audio/mp3" hidden type="file" class="myHiddenInput" name="{{ $name }}" id="input_{{ $uniqueId }}" >
 </div>
 <script>
     

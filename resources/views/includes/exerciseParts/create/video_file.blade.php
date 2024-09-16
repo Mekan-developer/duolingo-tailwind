@@ -11,7 +11,7 @@
             <span id="sound_message" class="mt-0.5 block text-sm h-[20px]"></span>
         </div>
         </label>
-    <input hidden="" type="file" name="video" id="sound" >
+    <input accept="video/mp4, video/x-msvideo, video/quicktime" hidden="" type="file" name="video" id="sound" >
 </div>
 <div>
     @error('video')

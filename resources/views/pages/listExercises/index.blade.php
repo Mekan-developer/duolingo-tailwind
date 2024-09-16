@@ -18,7 +18,7 @@
                 <select name="sort_by_chapter" id="sort_by" onchange="this.form.submit()" 
                         class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="0"  {{ request('sort_by_chapter') == '0' ? 'selected' : '' }}>Select for ordering exercises by chapter</option>
-                    @foreach ($chapters as $chapter)
+                    @foreach ($chapters as $chapter) 
                         @if($selected_chapter_id !== null)
                             <option value="{{ $chapter->id }}" {{ $selected_chapter_id == $chapter->id ? 'selected' : '' }}>
                                 {{ $chapter->name }}
@@ -47,7 +47,7 @@
             @endif
         </div>
         <div class="flex gap-4">
-            <div class="overflow-x-auto flex-1 min-h-[700px] relative" >
+            <div class="overflow-x-auto  flex-1 min-h-[700px] relative" >
                 <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                     <thead class="ltr:text-left rtl:text-right">
                         <tr>

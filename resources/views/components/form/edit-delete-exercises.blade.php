@@ -2,7 +2,7 @@
     @props([
         'editRoute','deleteRoute'
     ])
-    <div class="flex flex-row justify-center h-full gap-2">
+    <div class="flex flex-row justify-center items-center h-full gap-2">
         <a href="{{$editRoute}}">
             <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
                 <i class='bx bx-edit-alt text-[22px]'></i>

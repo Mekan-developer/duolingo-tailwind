@@ -10,7 +10,7 @@ class TestWord extends Model
 {
     use HasFactory,HasTranslations;
 
-    protected $fillable = ['audio','en_text','translations_word','chapter_id','lesson_id','exercise_id','status','order'];
+    protected $fillable = ['audio','en_correct_text','en_incorrect_text','translations_word','chapter_id','lesson_id','exercise_id','status','order'];
 
     public $translatable = ["translations_word"];
 

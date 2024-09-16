@@ -17,7 +17,7 @@
     </div>
     @include('includes.exerciseParts.index.orderAllExercise',['route' => 'audioTranslation.index','title' => 'Audio translations'])
     <div class="relative flex gap-4">
-        <div class="flex-1 overflow-hidden overflow-x-auto overflow-y-auto" >
+        <div class="flex-1 overflow-hidden overflow-x-auto overflow-y-auto " >
             <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>                        

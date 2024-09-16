@@ -17,12 +17,13 @@
     </div>
     @include('includes.exerciseParts.index.orderAllExercise',['route' => 'questionImage.index','title' => ' questionImage Image'])
     <div class="relative flex gap-4">
-        <div class="flex-1 overflow-hidden overflow-x-auto overflow-y-auto" >
+        <div class="flex-1 overflow-hidden overflow-x-auto overflow-y-auto " >
             <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>                        
                         <th class="px-4 py-2 text-gray-900 whitespace-nowrap">id</th>
-                        <th class="px-4 py-2 text-gray-900 whitespace-nowrap">en text</th>
+                        <th class="px-4 py-2 text-gray-900 whitespace-nowrap">correct text</th>
+                        <th class="px-4 py-2 text-gray-900 whitespace-nowrap">incorrect text</th>
                         <th class="px-4 py-2 text-gray-900 whitespace-nowrap">audio</th>
                         <th class="px-4 py-2 text-gray-900 whitespace-nowrap">image</th>
                         <th class="px-4 py-2 text-gray-900 whitespace-nowrap">chapter</th>
@@ -36,8 +37,9 @@
                 <tbody class="divide-y divide-gray-200">
                     @foreach ($questionImages as $questionImage)
                         <tr>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$questionImage->id}}</td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$questionImage->en_text}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $questionImage->id }}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $questionImage->correct_text }}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $questionImage->incorrect_text }}</td>
                             <td  class="px-6 py-4 ">
                                 <div data-audio-src="{{ $questionImage->getAudio() }}" class="p-1 text-white rounded-lg shadow-lg audio-player w-[200px]" >
                                     <div class="flex flex-row items-center justify-between pl-1">

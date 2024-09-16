@@ -107,7 +107,13 @@ abstract class Controller
 
         if($request->has('sort_by_exercise') && $request->sort_by_exercise > 0 ){
             $selected_exercise = $listExercises->where('id',$request->sort_by_exercise)->first();
+            $selected_chapter_id = $selected_exercise['chapter_id'];
+             $lessons = Lesson::where('chapter_id',$selected_chapter_id)->orderBy("order")->with('chapter')->get();
+
             $selected_lesson_id = $selected_exercise['lesson_id'];//for chapter staying selected
+            $listExercises = List_exercise::where('lesson_id',$selected_lesson_id)->orderBy("order")->get();
+
+           
             
             $selected_lesson = $lessons->where('id',$selected_lesson_id)->first();
             $selected_chapter_id = $selected_lesson['chapter_id'];

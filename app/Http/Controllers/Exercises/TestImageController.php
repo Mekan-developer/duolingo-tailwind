@@ -15,25 +15,27 @@ class TestImageController extends Controller
 {
     public function index(Request $request) {;
         $testImages = TestImage::orderBy('order');
-
         $data = $this->selectOPtionOrderExercise($request,$testImages,'testImages');
-
 
         return view("pages.allExercises.test_image.index", $data);
     }
 
 
     public function create() {
-
         return view("pages.allExercises.test_image.create");
     }
 
     public function store(TestImageRequest $request) {
         $data = $request->all();
-        if ($request->hasFile('image')) {         
-            $image = $request->image;
+        if ($request->hasFile('correct_image')) {         
+            $image = $request->correct_image;
             $imageName = $this->uploadFile($image,'test_audio_image/image',true);
-            $data['image'] = $imageName;
+            $data['correct_image'] = $imageName;
+        }
+        if ($request->hasFile('incorrect_image')) {         
+            $image = $request->incorrect_image;
+            $imageName = $this->uploadFile($image,'test_audio_image/image',true);
+            $data['incorrect_image'] = $imageName;
         }
 
         if ($request->hasFile('audio')) {
@@ -59,13 +61,22 @@ class TestImageController extends Controller
         $this->sortItems($testImages, $testImage->order, $request->order);
 
         $data = $request->all();
-        if ($request->hasFile('image')) {  
-            if ($testImage->image) {
-                $this->removeFile($testImage->image, 'test_audio_image/image');
+        if ($request->hasFile('correct_image')) {  
+            if ($testImage->correct_image) {
+                $this->removeFile($testImage->correct_image, 'test_audio_image/image');
             }        
-            $image = $request->image;
+            $image = $request->correct_image;
             $imageName = $this->uploadFile($image,'test_audio_image/image',true);
-            $data['image'] = $imageName;
+            $data['correct_image'] = $imageName;
+        }
+
+        if ($request->hasFile('incorrect_image')) {  
+            if ($testImage->incorrect_image) {
+                $this->removeFile($testImage->incorrect_image, 'test_audio_image/image');
+            }        
+            $image = $request->incorrect_image;
+            $imageName = $this->uploadFile($image,'test_audio_image/image',true);
+            $data['incorrect_image'] = $imageName;
         }
 
         if ($request->hasFile('audio')) {
@@ -86,8 +97,11 @@ class TestImageController extends Controller
         if ($testImage->audio) {
             $this->removeFile($testImage->audio, 'test_audio_image/audio');
         } 
-        if ($testImage->image) {
-            $this->removeFile($testImage->image, 'test_audio_image/image');
+        if ($testImage->correct_image) {
+            $this->removeFile($testImage->correct_image, 'test_audio_image/image');
+        }
+        if ($testImage->incorrect_image) {
+            $this->removeFile($testImage->incorrect_image, 'test_audio_image/image');
         } 
         $orderDeletedRow = $testImage->order;
         $delete_success = $testImage->delete();

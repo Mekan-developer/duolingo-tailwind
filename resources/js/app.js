@@ -12,9 +12,12 @@ tinymce.init({
     license_key: 'glpvuu4bgw2i0d17uizamjpfwjswu59kbeacaefftswsyuty',
     plugins: "emoticons autoresize",
     toolbar: "emoticons",
-    maxwidth: 600,
-    maxHeight: 250
+    height: 300,  // Set the initial height of the editor
+    max_height: 320,  // Restrict the maximum height (requires autoresize plugin)
+    autoresize_min_height: 300,  // Minimum height with autoresize
+    autoresize_max_height: 320,  // Maximum height with autoresize
 });
+
 
 // CONFIRM DELETE
 function disableButton() {

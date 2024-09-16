@@ -18,7 +18,7 @@
     </div>
     @include('includes.exerciseParts.index.orderAllExercise',['route' => 'phonetics.index','title' => 'phonetics'])
     <div class="relative flex h-full gap-4">
-        <div class="flex-1 h-full overflow-hidden overflow-x-auto overflow-y-auto" >
+        <div class="flex-1 h-full overflow-hidden overflow-x-auto overflow-y-auto " >
             <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>         
@@ -75,8 +75,8 @@
                                     @endif
                                 </td>
                                 <td class="flex justify-center px-6 py-4">
-                                    @if(!empty($phon->translate('sounds',$i)))
-                                    <div data-audio-src="{{ $phon->getSound($phon->translate('sounds',$i)) }}" class="p-1 text-white rounded-lg shadow-lg audio-player w-[200px]" >
+                                    @if(!empty($phon->{'sound'.$i}))
+                                    <div data-audio-src="{{ $phon->getSound($phon->{'sound'.$i}) }}" class="p-1 text-white rounded-lg shadow-lg audio-player w-[200px]" >
                                         <div class="flex flex-row items-center justify-between pl-1">
                                                 <div class="flex items-center justify-center p-3 text-gray-800 bg-cover rounded-sm playPauseBtn hover:text-[var(--bg-color-active)] focus:outline-none">
                                                 <span class="hidden pauseIcon">

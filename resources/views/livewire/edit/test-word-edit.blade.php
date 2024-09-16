@@ -13,7 +13,9 @@
                     <x-form.edit.lessons-option :lessons="$lessons" :locales="$locales" :switch_lesson="$switch_lesson"/>
                     <x-form.edit.exercises-option :exercises="$exercises" :exerciseId="$exercise_id" :locales="$locales" :switch_exercise="$switch_exercise" />
                 </div>
-                <x-form.edit-input name="en_text" :value="$testWord->en_text" labelText="English word" :errorMessage="$errors->get('en_text')" />
+                @foreach ($locales as $locale)
+                    <x-form.edit-input :name="'translations_word['.$locale->locale.']'" :value="$testWord->getTranslation('translations_word',$locale->locale)" :labelText="'Test word '. $locale->name" :errorMessage="$errors->get('translations_word.' . $locale->locale)" />
+                @endforeach
 
                 <div class="mt-2">
                     @include('includes.exerciseParts.create.sound_file')
@@ -21,9 +23,8 @@
             </div>
         
             <div class="mt-2">
-                @foreach ($locales as $locale)
-                    <x-form.edit-input :name="'translations_word['.$locale->locale.']'" :value="$testWord->getTranslation('translations_word',$locale->locale)" :labelText="'Test word '. $locale->name" :errorMessage="$errors->get('translations_word.' . $locale->locale)" />
-                @endforeach
+                <x-form.edit-input name="en_correct_text" :value="$testWord->en_correct_text" labelText="English correct text" :errorMessage="$errors->get('en_correct_text')" />
+                <x-form.edit-input name="en_incorrect_text" :value="$testWord->en_incorrect_text" labelText="English incorrect text" :errorMessage="$errors->get('en_incorrect_text')" />
                 <x-form.order :request="$testWords" :currentOrder="$testWord"></x-form.order>
                 <x-form.btn-submit name="update" />
             </div>

@@ -31,9 +31,9 @@ class VideoRequest extends FormRequest
         ];
 
         if(request()->isMethod("POST")){
-            $rules['video'] = 'required|file|mimes:mp4|max:15240';
+            $rules['video'] = 'required|file|mimes:mp4,avi,mov,mkv|max:15240';
         }else{
-            $rules['video'] = 'nullable|file|mimes:mp4|max:15240';
+            $rules['video'] = 'nullable|file|mimes:mp4,avi,mov,mkv|max:15240';
         }
 
         return $rules;

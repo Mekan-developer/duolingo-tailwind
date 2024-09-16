@@ -19,7 +19,7 @@
     @include('includes.exerciseParts.index.orderAllExercise',['route' => 'video.index','title' => 'video'])
 
     <div class="flex gap-4 relative">
-        <div class="flex-1 overflow-x-auto overflow-hidden overflow-y-auto h-[700px] " >
+        <div class="flex-1 overflow-x-auto overflow-hidden overflow-y-auto  h-[700px] " >
             <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>                        
@@ -38,7 +38,7 @@
                         <tr>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$video->id}}</td>
                             <td class="flex justify-center px-4 py-2 text-gray-700 whitespace-nowrap">
-                                <video width="200" height="150" controls>
+                                <video width="130" controls>
                                     <source src="{{$video->getVideo()}}" type="video/mp4">
                                     <source src="{{$video->getVideo()}}" type="video/ogg">
                                     Your browser does not support the video tag.

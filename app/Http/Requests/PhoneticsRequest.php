@@ -34,11 +34,19 @@ class PhoneticsRequest extends FormRequest
         ];
 
         if(request()->isMethod("POST")) {
-            $rules['audio'] = 'required|file|mimes:mp3|max:10240';
-            $rules['sounds'] = 'required|file|mimes:mp3|max:10240';            
+            $rules['sound1'] = 'required|file|mimes:mp3,wav,aac,ogg|max:10240';            
+            $rules['sound2'] = 'required|file|mimes:mp3,wav,aac,ogg|max:10240';            
+            $rules['sound3'] = 'required|file|mimes:mp3,wav,aac,ogg|max:10240';            
+            $rules['sound4'] = 'required|file|mimes:mp3,wav,aac,ogg|max:10240';            
+            $rules['sound5'] = 'required|file|mimes:mp3,wav,aac,ogg|max:10240';
+            $rules['audio'] = 'required|file|mimes:mp3,wav,aac,ogg|max:10240';            
         }else{
-            $rules['audio'] = 'nullable|file|mimes:mp3|max:10240';
-            $rules['sounds'] = 'nullable|file|mimes:mp3|max:10240';            
+            $rules['sound1'] = 'nullable|file|mimes:mp3,wav,aac,ogg|max:10240';            
+            $rules['sound2'] = 'nullable|file|mimes:mp3,wav,aac,ogg|max:10240';            
+            $rules['sound3'] = 'nullable|file|mimes:mp3,wav,aac,ogg|max:10240';            
+            $rules['sound4'] = 'nullable|file|mimes:mp3,wav,aac,ogg|max:10240';            
+            $rules['sound5'] = 'nullable|file|mimes:mp3,wav,aac,ogg|max:10240';  
+            $rules['audio'] = 'nullable|file|mimes:mp3,wav,aac,ogg|max:10240';          
         }
 
 

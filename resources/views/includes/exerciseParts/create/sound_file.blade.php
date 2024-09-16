@@ -12,7 +12,7 @@
                 <span id="sound_message" class="mt-0.5 block text-sm  h-[20px]"></span>
             </div>
             </label>
-        <input hidden="" type="file" name="audio" id="sound" wire:ignore>
+        <input accept="audio/mp3, audio/wav, audio/ogg, audio/aac" hidden="" type="file" name="audio" id="sound" wire:ignore>
     </div>
     <div>
         @error('audio')

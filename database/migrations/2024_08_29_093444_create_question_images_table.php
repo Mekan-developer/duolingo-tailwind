@@ -15,7 +15,8 @@ return new class extends Migration
 
         Schema::create('question_images', function (Blueprint $table) use ( $typeId) {
             $table->id();
-            $table->string('en_text');
+            $table->string('correct_text');
+            $table->string('incorrect_text');
             $table->string('image');
             $table->string('audio');
             $table->unsignedBigInteger('chapter_id');

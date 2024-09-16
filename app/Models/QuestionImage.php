@@ -9,7 +9,7 @@ class QuestionImage extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['audio','image','en_text','chapter_id','lesson_id','exercise_id','status','order'];
+    protected $fillable = ['audio','image','correct_text','incorrect_text','chapter_id','lesson_id','exercise_id','status','order'];
 
     public function Exercise(){
         return $this->belongsTo(List_exercise::class);

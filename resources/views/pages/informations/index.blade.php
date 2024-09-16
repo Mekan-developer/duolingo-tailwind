@@ -15,7 +15,7 @@
     </div>
 
     <div class="flex gap-4">
-        <div class="flex-1 overflow-x-auto" >
+        <div class="flex-1 overflow-x-auto " >
             <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>
@@ -31,7 +31,7 @@
                 </thead>
                 <tbody class="divide-y divide-gray-200">
                     @foreach ($informations as $information)
-                    <tr>
+                    <tr >
                         <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$information->id}}</td>
                         @foreach($locales as $locale)
                             <td class="px-4 py-2 text-center text-gray-900 whitespace-nowrap">
@@ -43,7 +43,7 @@
                         <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
                             <x-form.status route="information.active" modelName="information" :id="$information->id" :currentStatus="$information->status"/>
                         </td>
-                        <td class="flex flex-row justify-center gap-2 px-4 py-2 text-center whitespace-nowrap">
+                        <td class="px-4 py-2 text-center whitespace-nowrap ">
                             <x-form.edit-delete-exercises :editRoute="route('information.edit',['information'=>$information->id])" :deleteRoute="route('information.delete', ['information' => $information->id])" />                                                              
                         </td>
                     </tr> 

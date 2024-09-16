@@ -18,7 +18,8 @@
             </div>
             <div class="mt-2">
                 @foreach ($locales as $locale)
-                    <x-form.edit-input :name="'translations_word['.$locale->locale.']'" :value="$questionWord->getTranslation('translations_word',$locale->locale)" :labelText="'Translate '. $locale->name" :errorMessage="$errors->get('translations_word.' . $locale->locale)" />
+                    <x-form.edit-input :name="'translation_correct_words['.$locale->locale.']'" :value="$questionWord->getTranslation('translation_correct_words',$locale->locale)" :labelText="'Correct '. $locale->name" :errorMessage="$errors->get('translation_correct_words.' . $locale->locale)" />
+                    <x-form.edit-input :name="'translation_incorrect_words['.$locale->locale.']'" :value="$questionWord->getTranslation('translation_incorrect_words',$locale->locale)" :labelText="'Incorrect '. $locale->name" :errorMessage="$errors->get('translation_incorrect_words.' . $locale->locale)" />
                 @endforeach
                 <x-form.order :request="$questionWords" :currentOrder="$questionWord"></x-form.order>        
                 <x-form.btn-submit name="update" />

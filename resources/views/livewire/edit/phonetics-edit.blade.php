@@ -29,25 +29,28 @@
             <div class="px-4 py-6 mt-10 bg-white rounded-sm">
                 <p class="text-black">PHONETICS PART TWO</p>
                 <div id="test" class="my-2">   
-                    @foreach ($phoneticsExamples->examples as $key => $example)
+                    @for($i = 1; $i <= 5; $i++)
                         <div class="grid grid-cols-2 gap-4 my-4">
-                            @include('includes.exerciseParts.edit.english_text',['name'=>'examples['.$loop->iteration.']','title' => 'examples','placeholder' => 'english character','value' => $example])
+                            <div class="flex flex-col">
+                                @include('includes.exerciseParts.edit.english_text',['name'=>'examples['.$i.']','title' => 'examples','placeholder' => 'english character','value' => $phonetics->translate('examples',$i)])
+                            </div>
                             <div class="flex flex-row items-end ">
-                                <div class="flex-1 ">
-                                    <x-form.include.phonetics-sound :name="'sounds['.$loop->iteration.']'"  :uniqueId="$loop->iteration" />
-                                    <input type="number"  value="{{$removeSoundNumber}}"  name="removeSoundNumber" hidden>
-                                </div>
-                                <div class="flex ">
-                                    @if($loop->iteration==1)                           
-                                        <a wire:click.prevent="addExamples" onclick="fileChoosenOrNo(456)" class="cursor-pointer text-white text-center leading-[42px] bg-[var(--bg-color-active)] h-[42px] aspect-square ml-1 focus:ring-4 font-medium rounded-sm">+</a>
-                                    @else 
-                                        <a @if($maxSoundKey <= $key) wire:click.prevent="removeExamples({{$key}})" wire:click="removeSoundCount" @endif class=" cursor-pointer text-white text-center leading-[42px] bg-[var(--bg-color-active)] h-[42px] aspect-square ml-1 focus:ring-4 font-medium rounded-sm">-</a>
-                                    @endif  
-                                </div>
+                                @include('includes.exerciseParts.create.phonetics_sound',['name' => 'sound'.$i,'title' => 'upload sound '.$i,'uniqueId' => $i])
                             </div>                                                    
                         </div>
-
-                    @endforeach
+                        <div class="grid grid-cols-2 gap-4 -mt-4">
+                            <div class="flex-1">
+                                @error('examples.'.$i)
+                                    <span class="text-xs text-red-600">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="flex-1">
+                                @error('sound'.$i)
+                                    <span class="text-xs text-red-600">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>                  
+                    @endfor
                 </div>
                 <x-form.order :request="$phoneticss" :currentOrder="$phonetics"></x-form.order>
                 <div class="flex w-full gap-4">

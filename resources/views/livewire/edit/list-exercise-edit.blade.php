@@ -14,18 +14,23 @@
                             <select id="chapters"  wire:model="selectedChapter" wire:change="selectedChapterHandle" name="chapter_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                                 @foreach ($chapters as $chapter)
                                     <option @if($chapter->id == $list_exercise->chapter_id) selected @endif value="{{$chapter->id}}">{{ $chapter->name }}</option>
-                                    {{-- <option @if($chapter->id == $list_exercise->chapter_id) selected @endif value="{{$chapter->id}}">{{ $chapter->getTranslation('title',$locales[0]['locale']) }}</option> --}}
                                 @endforeach
                             </select>
+                            @error('chapter_id')
+                                <span class="text-red-800 text-xs">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="w-full">
                             <label for="lessons" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an lesson</label>
                             <select id="lessons" name="lesson_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                    <option selected>Choose a lesson</option>
                                 @foreach ($lessons as $lesson)
                                     <option @if($lesson->id == $list_exercise->lesson_id) selected @endif value="{{$lesson->id}}">{{ $lesson->name }}</option>
-                                    {{-- <option @if($lesson->id == $list_exercise->lesson_id) selected @endif value="{{$lesson->id}}">{{ $lesson->getTranslation('title',$locales[0]['locale']) }}</option> --}}
                                 @endforeach
                             </select>
+                            @error('lesson_id')
+                                <span class="text-red-800 text-xs">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                 </div>

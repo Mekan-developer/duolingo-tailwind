@@ -9,17 +9,19 @@
             @csrf
             <div class="px-4 py-6 bg-white rounded-sm">
                 @include('includes.exerciseParts.create.options')
-                @include('includes.exerciseParts.create.english_text',['name'=>'en_text','title' => 'English word','placeholder' => 'english word']) 
+                @foreach ($locales as $locale)
+                    <x-form.input :name="'translations_word['.$locale->locale.']'" :placeholder="'Translate '. $locale->locale" :labelText="'Translate '. $locale->name" :errorMessage="$errors->get('translations_word.' . $locale->locale)" />
+                @endforeach
+               
                 <div class="mt-2">
                     @include('includes.exerciseParts.create.sound_file')
                 </div>
                 
             </div>
         
-            <div class="mt-2">
-                @foreach ($locales as $locale)
-                    <x-form.input :name="'translations_word['.$locale->locale.']'" :placeholder="'Translate '. $locale->locale" :labelText="'Translate '. $locale->name" :errorMessage="$errors->get('translations_word.' . $locale->locale)" />
-                @endforeach
+            <div class="mt-2 flex flex-col gap-4">
+                @include('includes.exerciseParts.create.english_text',['name'=>'en_correct_text','title' => 'English correct text','placeholder' => 'english correct word']) 
+                @include('includes.exerciseParts.create.english_text',['name'=>'en_incorrect_text','title' => 'English incorrect text','placeholder' => 'english incorrect word']) 
                 <x-form.btn-submit/>
             </div>
         </form>

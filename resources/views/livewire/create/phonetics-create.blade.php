@@ -34,49 +34,82 @@
             <div class="px-4 py-6 mt-10 bg-white rounded-sm">
                 <p class="text-black">PHONETICS PART TWO</p>
                 <div id="test" class="my-2">@php $loop=0 @endphp
-                    @for($i = 1; $i <= $countExamples; $i++)
+                    @for($i = 1; $i <= 5; $i++)
                         <div class="grid grid-cols-2 gap-4 my-4">
                             <div class="flex flex-col">
-                                @include('includes.exerciseParts.create.english_text_edit',['name'=>'examples['.$i.']','value' => 'examples.'.$i ,'title' => 'examples','placeholder' => 'english character'])
+                                @include('includes.exerciseParts.create.english_text_edit',['name'=>'examples['.$i.']','value' => 'examples.'.$i ,'title' => 'examples '.$i ,'placeholder' => 'english character'])
                             </div>
                             <div class="flex flex-row items-end ">
-                                <div class="flex-1 pt-1">
-                                    <x-form.include.phonetics-sound :name="'sounds['.$i.']'"  :uniqueId="$i" />
-                                </div>
-                                <div class="flex ">
-                                    @if($i==1)                           
-                                        <a wire:click.prevent="addExamples" class=" cursor-pointer text-white text-center leading-[42px] bg-[var(--bg-color-active)] h-[42px] aspect-square ml-1 focus:ring-4 font-medium rounded-sm me-2 ">+</a>
-                                    @else 
-                                        <a wire:click.prevent="removeExamples" class=" cursor-pointer text-white text-center leading-[42px] bg-[var(--bg-color-active)] h-[42px] aspect-square ml-1 focus:ring-4 font-medium rounded-sm me-2 ">-</a>
-                                    @endif 
-                                </div>  
+                                @include('includes.exerciseParts.create.phonetics_sound',['name' => 'sound'.$i,'title' => 'upload sound '.$i,'uniqueId' => $i])
                             </div>                                                    
                         </div>
-                        @if($errors->has('sounds'))
-                            <div class="grid grid-cols-2 gap-4 my-4">
-                                <div class="flex-1">
-                                    @error('examples.'.$i)
-                                        <span class="text-xs text-red-600">{{$message}}</span> 
-                                    @enderror
-                                </div>
-                                <div class="flex-1">
-                                    @error('sounds')
-                                        <span class="text-xs text-red-600">{{$message}}</span> 
-                                    @enderror
-                                </div>
+                        <div class="grid grid-cols-2 gap-4 -mt-4">
+                            <div class="flex-1">
+                                @error('examples.'.$i)
+                                    <span class="text-xs text-red-600">{{ $message }}</span>
+                                @enderror
                             </div>
-                        @else 
-                            @error('examples.'.$i)
-                                <span class="text-xs text-red-600">{{$message}}</span> 
-                            @enderror
-                        @endif                        
+                            <div class="flex-1">
+                                @error('sound'.$i)
+                                    <span class="text-xs text-red-600">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>                  
                     @endfor
                 </div>
                 <x-form.btn-submit/>
             </div>
         </form>
+
+        @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+
     </div> 
 </div>
 
 
-
+{{-- @for($i = 1; $i <= $countExamples; $i++)
+    <div class="grid grid-cols-2 gap-4 my-4">
+        <div class="flex flex-col">
+            @include('includes.exerciseParts.create.english_text_edit',['name'=>'examples['.$i.']','value' => 'examples.'.$i ,'title' => 'examples','placeholder' => 'english character'])
+        </div>
+        <div class="flex flex-row items-end ">
+            <div class="flex-1 pt-1">
+                <x-form.include.phonetics-sound :name="'sounds['.$i.']'"  :uniqueId="$i" />
+            </div>
+            <div class="flex ">
+                @if($i==1)                           
+                    <a wire:click.prevent="addExamples" class=" cursor-pointer text-white text-center leading-[42px] bg-[var(--bg-color-active)] h-[42px] aspect-square ml-1 focus:ring-4 font-medium rounded-sm me-2 ">+</a>
+                @else 
+                    <a wire:click.prevent="removeExamples" class=" cursor-pointer text-white text-center leading-[42px] bg-[var(--bg-color-active)] h-[42px] aspect-square ml-1 focus:ring-4 font-medium rounded-sm me-2 ">-</a>
+                @endif 
+            </div>  
+        </div>                                                    
+    </div>
+    @if($errors->has('sounds'))
+        <div class="grid grid-cols-2 gap-4 my-4">
+            <div class="flex-1">
+                @error('examples.'.$i)
+                    <span class="text-xs text-red-600">{{$message}}</span> 
+                @enderror
+            </div>
+            <div class="flex-1">
+                @error('sounds')
+                    <span class="text-xs text-red-600">{{$message}}</span> 
+                @enderror
+            </div>
+        </div>
+    @else 
+        @error('examples.'.$i)
+            <span class="text-xs text-red-600">{{$message}}</span> 
+        @enderror
+    @endif                        
+@endfor --}}

@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('en_text');
             $table->string('audio');
-            $table->json('translations_word');
+            $table->json('translation_correct_words');
+            $table->json('translation_incorrect_words');
             $table->unsignedBigInteger('chapter_id');
             $table->unsignedBigInteger('lesson_id');
             $table->unsignedBigInteger('exercise_id');

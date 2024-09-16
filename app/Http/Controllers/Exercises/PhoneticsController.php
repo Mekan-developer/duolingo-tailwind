@@ -30,15 +30,21 @@ class PhoneticsController extends Controller
     public function store(PhoneticsRequest $request){
 
         $data = $request->all();
-        $sounds = $request->files->get('sounds');
-        if($sounds){
-            foreach ($sounds as $key => $value) {
-                if ($value instanceof \Symfony\Component\HttpFoundation\File\UploadedFile) {
-                    $random = hexdec(uniqid());
-                    $filename = $random . '.' . $value->getClientOriginalExtension();
-                    Storage::disk('phonetics')->putFileAs('', $value, $filename);
-                    $data['sounds'][$key] = $filename;
-                }
+        for ($i = 1; $i <= 5; $i++) {
+            // Dynamically check if each sound file exists
+            if ($request->hasFile('sound'.$i)) {
+                // Get the file for the current sound
+                $file = $request->file('sound'.$i);
+                
+                // Generate a unique random filename
+                $random = hexdec(uniqid());
+                $filename = $random . '.' . $file->extension();
+                
+                // Store the file in the 'phonetics' disk with the generated filename
+                Storage::disk('phonetics')->putFileAs('', $file, $filename);
+                
+                // Save the filename in the $data array dynamically
+                $data['sound'.$i] = $filename;
             }
         }
     
@@ -48,7 +54,7 @@ class PhoneticsController extends Controller
             Storage::disk('phonetics')->putFileAs('', $request->audio,$filename);
             $data['audio'] = $filename;
         }
-
+        
         Phonetics::create($data);
         return redirect()->route('phonetics.index')->with('success','Phonetics created successfully');   
     }
@@ -65,41 +71,41 @@ class PhoneticsController extends Controller
 
         $data = $request->all();
         // start remove json specific item 
-        $sounds = $phonetics->getAttributes()['sounds']; 
-        $soundsArray = json_decode($sounds, true); 
-        $countSoundElement = count(array_keys($soundsArray));
+        // $sounds = $phonetics->getAttributes()['sounds']; 
+        // $soundsArray = json_decode($sounds, true); 
+        // $countSoundElement = count(array_keys($soundsArray));
         
-        if($request->removeSoundNumber > 0){
-            $removeLastItem = $request->removeSoundNumber;
-            while($removeLastItem > 0){
-                $phonetics->forgetTranslation('sounds', $countSoundElement);
-                $phonetics->forgetTranslation('examples', $countSoundElement);
-                $phonetics->save();
-                $removeLastItem--; $countSoundElement--;
-            }
-        }
-        $requestSounds = $request->files->get('sounds');
-        if($requestSounds){
-            $soundsJson = $phonetics->getAttributes()['sounds'];
-            $soundsArray = json_decode($soundsJson, true); 
-            foreach ($requestSounds as $key => $value) {
-                $data = $phonetics->attributesToArray();
-                if(isset($data['sounds'][$key]))
-                    $this->removeFile($data['sounds'][$key], 'phonetics');
-                if ($value instanceof \Symfony\Component\HttpFoundation\File\UploadedFile) {
-                    $random = hexdec(uniqid());
-                    $filename = $random . '.' . $value->getClientOriginalExtension();
-                    Storage::disk('phonetics')->putFileAs('', $value, $filename);
-                    $soundsArray[$key] = $filename;
-                }
-            }
-            $phonetics->sounds = $soundsArray;
-            try {
-                $phonetics->save(); 
-            } catch (\Exception $e) {
-                return redirect()->back()->with('error','There was a problem saving the phonetics.');
-            }
-        }
+        // if($request->removeSoundNumber > 0){
+        //     $removeLastItem = $request->removeSoundNumber;
+        //     while($removeLastItem > 0){
+        //         $phonetics->forgetTranslation('sounds', $countSoundElement);
+        //         $phonetics->forgetTranslation('examples', $countSoundElement);
+        //         $phonetics->save();
+        //         $removeLastItem--; $countSoundElement--;
+        //     }
+        // }
+        // $requestSounds = $request->files->get('sounds');
+        // if($requestSounds){
+        //     $soundsJson = $phonetics->getAttributes()['sounds'];
+        //     $soundsArray = json_decode($soundsJson, true); 
+        //     foreach ($requestSounds as $key => $value) {
+        //         $data = $phonetics->attributesToArray();
+        //         if(isset($data['sounds'][$key]))
+        //             $this->removeFile($data['sounds'][$key], 'phonetics');
+        //         if ($value instanceof \Symfony\Component\HttpFoundation\File\UploadedFile) {
+        //             $random = hexdec(uniqid());
+        //             $filename = $random . '.' . $value->getClientOriginalExtension();
+        //             Storage::disk('phonetics')->putFileAs('', $value, $filename);
+        //             $soundsArray[$key] = $filename;
+        //         }
+        //     }
+            // $phonetics->sounds = $soundsArray;
+        //     try {
+        //         $phonetics->save(); 
+        //     } catch (\Exception $e) {
+        //         return redirect()->back()->with('error','There was a problem saving the phonetics.');
+        //     }
+        // }
         // end removing 
 
         $requestExamples = $request->get('examples');
@@ -112,7 +118,27 @@ class PhoneticsController extends Controller
             $phonetics->examples = $examplesArray;
             $phonetics->save();
         }
-        //adding sound if admin additional add sound end
+        for ($i = 1; $i <= 5; $i++) {
+            // Check if the file exists for sound1, sound2, sound3, etc.
+            if ($request->hasFile('sound'.$i)) {
+                // Remove the old file if it exists
+                if ($phonetics->{'sound'.$i}) {
+                    $this->removeFile($phonetics->{'sound'.$i}, 'phonetics');
+                }
+        
+                // Generate a unique random filename
+                $random = hexdec(uniqid());
+                $filename = $random . '.' . $request->file('sound'.$i)->extension();
+        
+                // Store the new file in the 'phonetics' disk
+                Storage::disk('phonetics')->putFileAs('', $request->file('sound'.$i), $filename);
+        
+                // Save the new filename in the $data array
+                $data['sound'.$i] = $filename;
+            }
+        }
+
+      
 
         if ($request->hasFile('audio')) {
             if ($phonetics->audio) {
@@ -123,6 +149,7 @@ class PhoneticsController extends Controller
             Storage::disk('phonetics')->putFileAs('', $request->audio,$filename);
             $data['audio'] = $filename;
         }
+
         $phonetics->update($data);
 
         return redirect()->route('phonetics.index')->with('success','Phonetics updated successfully');   
@@ -130,9 +157,11 @@ class PhoneticsController extends Controller
     }
 
     public function destroy(Phonetics $phonetics){
-        $data = $phonetics->attributesToArray();
-        for ($i = 1; $i <= count($data['sounds']); $i++){
-            $this->removeFile($data['sounds'][$i], 'phonetics');
+        // $data = $phonetics->attributesToArray();
+        for ($i = 1; $i <= 5; $i++){
+            if ($phonetics->{'sound'.$i}) {
+                $this->removeFile($phonetics->{'sound'.$i}, 'phonetics');
+            }
         }   
         
         if ($phonetics->audio) {

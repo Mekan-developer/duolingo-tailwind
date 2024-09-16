@@ -15,7 +15,8 @@
                 </div>
 
                 <div class="flex flex-row gap-10 w-full mb-2">
-                    @include('includes.exerciseParts.create.image_file')
+                     @include('includes.exerciseParts.create.image_file', ['name'=> 'correct_image', 'message'=> 'message1', 'label' => 'label1']) 
+                    @include('includes.exerciseParts.create.image_file', ['name'=> 'incorrect_image', 'message'=> 'message2', 'label' => 'label2']) 
                     @include('includes.exerciseParts.create.sound_file')
                 </div>
                 <x-form.order :request="$testImages" :currentOrder="$testImage"></x-form.order>

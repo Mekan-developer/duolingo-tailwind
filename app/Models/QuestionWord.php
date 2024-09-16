@@ -10,9 +10,9 @@ class QuestionWord extends Model
 {
     use HasFactory,HasTranslations;
 
-    protected $fillable = ['audio','en_text','translations_word','chapter_id','lesson_id','exercise_id','status','order'];
+    protected $fillable = ['audio','en_text','translation_correct_words','translation_incorrect_words','chapter_id','lesson_id','exercise_id','status','order'];
 
-    public $translatable = ["translations_word"];
+    public $translatable = ["translation_correct_words","translation_incorrect_words"];
 
     public function Exercise(){
         return $this->belongsTo(List_exercise::class);

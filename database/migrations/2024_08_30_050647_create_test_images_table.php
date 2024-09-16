@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('test_images', function (Blueprint $table) use ( $typeId) {
             $table->id();
             $table->string('audio');
-            $table->string('image');
+            $table->string('correct_image');
+            $table->string('incorrect_image');
             $table->unsignedBigInteger('chapter_id');
             $table->unsignedBigInteger('lesson_id');
             $table->unsignedBigInteger('exercise_id');

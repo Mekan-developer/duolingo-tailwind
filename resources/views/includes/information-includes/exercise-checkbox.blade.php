@@ -1,5 +1,6 @@
 <div class="z-10 w-full bg-white rounded-md shadow ">
     <div class="p-3">
+     
       <label for="input-group-search" class="sr-only">Search</label>
       <div class="relative">
         <div class="absolute inset-y-0 flex items-center pointer-events-none start-0 ps-3">
@@ -20,8 +21,31 @@
           @endif
           <li>
             <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-              <input id="checkbox-item-{{$exercise->created_at}}" name="exercise_ids[]" wire:model="exercise_ids" type="checkbox" value="{{$exercise->id}}" class="w-4 h-4 text-[#57BE99] bg-gray-100 border-gray-300 rounded focus:ring-[#57BE99]">
-              <label for="checkbox-item-{{$exercise->created_at}}" class="w-full ms-2 text-sm font-medium text-[#57BE99] rounded dark:text-gray-300">{{ $exercise->name }}</label>
+              <div class="flex flex-row w-full">
+                <div class="flex">
+                  <input id="checkbox-item-{{$exercise->created_at}}" name="exercise_ids[]" wire:model="exercise_ids" type="checkbox" value="{{$exercise->id}}" class="w-4 h-4 text-[#57BE99] bg-gray-100 border-gray-300 rounded focus:ring-[#57BE99]">
+                  <label for="checkbox-item-{{$exercise->created_at}}" class="w-full ms-2 text-sm font-medium text-[#57BE99] rounded dark:text-gray-300">{{ $exercise->name }}</label>
+                </div>
+
+                {{-- @if ($exercise->type_id == 6)
+                  <div class="flex-1 w-full flex justify-center gap-6">
+                    <div>
+                      <input id="checkbox-item1-{{$exercise->created_at}}" name="phonetics_type" type="radio" value="1" class="w-4 h-4 text-[#57BE99] bg-gray-100 border-gray-300 rounded focus:ring-[#57BE99]">
+                      <label for="checkbox-item1-{{$exercise->created_at}}" class="w-full ms-2 text-sm font-medium text-[#57BE99] rounded dark:text-gray-300">Phonetics theory</label>
+                    </div>
+
+                    <div>
+                      <input id="checkbox-item2-{{$exercise->created_at}}" name="phonetics_type" type="radio" value="2" class="w-4 h-4 text-[#57BE99] bg-gray-100 border-gray-300 rounded focus:ring-[#57BE99]">
+                      <label for="checkbox-item2-{{$exercise->created_at}}" class="w-full ms-2 text-sm font-medium text-[#57BE99] rounded dark:text-gray-300">Phonetics practics</label>
+                    </div>
+                    
+                  </div>
+                @endif --}}
+                
+
+              </div>
+              
+             
             </div>
           </li>
         @endforeach

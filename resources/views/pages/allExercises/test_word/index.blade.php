@@ -17,16 +17,18 @@
     </div>
     @include('includes.exerciseParts.index.orderAllExercise',['route' => 'testWord.index','title' => 'Question words reverse'])
     <div class="flex gap-4 relative">
-        <div class="flex-1 overflow-x-auto overflow-hidden overflow-y-auto">
+        <div class="flex-1 overflow-x-auto overflow-hidden overflow-y-auto ">
             <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>                        
                         <th class="px-4 py-2 text-gray-900 whitespace-nowrap">id</th>
-                        <th class="px-4 py-2 text-gray-900 whitespace-nowrap">en text</th>
-                        <th class="px-4 py-2 text-gray-900 whitespace-nowrap">audio</th>
                         @foreach($locales as $locale)
                             <th class="px-4 py-2 text-gray-900 whitespace-nowrap">translations {{ $locale->locale }}</th>
                         @endforeach
+                        
+                        <th class="px-4 py-2 text-gray-900 whitespace-nowrap">audio</th>
+                        <th class="px-4 py-2 text-gray-900 whitespace-nowrap">en correct text</th>
+                        <th class="px-4 py-2 text-gray-900 whitespace-nowrap">en incorrect text</th>
                         <th class="px-4 py-2 text-gray-900 whitespace-nowrap">chapter</th>
                         <th class="px-4 py-2 text-gray-900 whitespace-nowrap">lesson</th>
                         <th class="px-4 py-2 text-gray-900 whitespace-nowrap">exercise</th>
@@ -39,7 +41,11 @@
                     @foreach ($testWords as $testWord)
                         <tr>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$testWord->id}}</td>
-                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$testWord->en_text}}</td>
+                            @foreach($locales as $locale)
+                                <td class="px-4 py-2 text-center text-gray-900 whitespace-nowrap">
+                                    {{ $testWord->getTranslation('translations_word',$locale->locale) }}
+                                </td>
+                            @endforeach
                             <td  class="px-6 py-4 ">
                                 <div data-audio-src="{{ $testWord->getAudio() }}" class="p-1 text-white rounded-lg shadow-lg audio-player w-[200px]" >
                                     <div class="flex flex-row items-center justify-between pl-1">
@@ -61,12 +67,9 @@
                                     </div>
                                 </div>
                             </td>
-                            @foreach($locales as $locale)
-                                <td class="px-4 py-2 text-center text-gray-900 whitespace-nowrap">
-                                    {{ $testWord->getTranslation('translations_word',$locale->locale) }}
-                                </td>
-                            @endforeach
-
+                            
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$testWord->en_correct_text}}</td>
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$testWord->en_incorrect_text}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$testWord->Chapter->name}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$testWord->Lesson->name}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$testWord->Exercise->name}}</td>

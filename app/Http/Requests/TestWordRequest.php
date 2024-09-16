@@ -22,7 +22,8 @@ class TestWordRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'en_text' => 'required|string|max:255',
+            'en_correct_text' => 'required|string|max:255',
+            'en_incorrect_text' => 'required|string|max:255',
             'translations_word.*' => 'required|string|max:255',
             'chapter_id' => 'required|exists:chapters,id',
             'lesson_id' => 'required|exists:lessons,id',

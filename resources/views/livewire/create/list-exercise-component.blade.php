@@ -7,7 +7,7 @@
         class="w-full mx-auto bg-[var(--bg-color-non-active)] p-6" onsubmit="disableButton()">
             @csrf
             <div class="px-4 rounded-sm">
-                <div class="flex flex-row w-full gap-6 px-2 py-6 bg-white">
+                <div class="flex flex-row w-full gap-6 px-2 py-6 ">
                     <div class="w-full">
                         <x-form.select-chapter :chapters="$chapters" :locales="$locales" />
                     </div>

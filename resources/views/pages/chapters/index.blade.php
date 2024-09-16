@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="flex gap-4">
-            <div class="flex-1 overflow-x-auto" >
+            <div class="flex-1 overflow-x-auto " >
                 <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                     <thead class="ltr:text-left rtl:text-right">
                         <tr>

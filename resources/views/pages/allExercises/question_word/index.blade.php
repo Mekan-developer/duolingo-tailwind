@@ -18,7 +18,7 @@
     @include('includes.exerciseParts.index.orderAllExercise',['route' => 'questionWord.index','title' => 'question word'])
 
     <div class="flex gap-4 relative">
-        <div class="flex-1 overflow-x-auto overflow-hidden overflow-y-auto">
+        <div class="flex-1 overflow-x-auto overflow-hidden overflow-y-auto ">
             <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>                        
@@ -26,7 +26,8 @@
                         <th class="px-4 py-2 text-gray-900 whitespace-nowrap">en text</th>
                         <th class="px-4 py-2 text-gray-900 whitespace-nowrap">audio</th>
                         @foreach($locales as $locale)
-                            <th class="px-4 py-2 text-gray-900 whitespace-nowrap">translations {{ $locale->locale }}</th>
+                            <th class="px-4 py-2 text-gray-900 whitespace-nowrap">correct translations {{ $locale->locale }}</th>
+                            <th class="px-4 py-2 text-gray-900 whitespace-nowrap">incorrect translations {{ $locale->locale }}</th>
                         @endforeach
                         <th class="px-4 py-2 text-gray-900 whitespace-nowrap">chapter</th>
                         <th class="px-4 py-2 text-gray-900 whitespace-nowrap">lesson</th>
@@ -64,7 +65,10 @@
                             </td>
                             @foreach($locales as $locale)
                                 <td class="px-4 py-2 text-center text-gray-900 whitespace-nowrap">
-                                    {{ $question->getTranslation('translations_word',$locale->locale) }}
+                                    {{ $question->getTranslation('translation_correct_words',$locale->locale) }}
+                                </td>
+                                <td class="px-4 py-2 text-center text-gray-900 whitespace-nowrap">
+                                    {{ $question->getTranslation('translation_incorrect_words',$locale->locale) }}
                                 </td>
                             @endforeach
 

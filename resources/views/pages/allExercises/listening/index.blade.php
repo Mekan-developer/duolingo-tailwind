@@ -18,7 +18,7 @@
     
     @include('includes.exerciseParts.index.orderAllExercise',['route' => 'listening.index','title' => ' Listening audio'])
     <div class="relative flex gap-4">
-        <div class="flex-1 overflow-hidden overflow-x-auto overflow-y-auto">
+        <div class="flex-1 overflow-hidden overflow-x-auto overflow-y-auto ">
            
             <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">

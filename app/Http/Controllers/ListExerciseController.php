@@ -15,7 +15,7 @@ class ListExerciseController extends Controller
         
         $locales = Language::where("status",1)->get("locale");
         
-        // for ordering start
+        // for ordering start 
         $chapters = Chapter::orderBy('order')->get(); 
         $selected_chapter_id = null;
         if($request->has('sort_by_chapter') && $request->sort_by_chapter > 0 ){
@@ -30,6 +30,7 @@ class ListExerciseController extends Controller
             $selected_lesson = $lessons->where('id',$request->sort_by_lesson)->first();
             $selected_chapter_id = $selected_lesson['chapter_id'];
             $list_exercises = List_exercise::where('lesson_id',$request->sort_by_lesson)->orderBy("order")->with('lesson')->paginate(10);
+            $lessons = Lesson::where('chapter_id',$selected_chapter_id)->orderBy("order")->with('chapter')->get();
         }
         // ordering end
 
