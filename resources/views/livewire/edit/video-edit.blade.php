@@ -1,7 +1,7 @@
 <div>
     <div class="flex flex-col gap-6 w-full p-6">
         <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
-            Add video
+            Edit video
         </div>
         <form action="{{route('video.update',['video' => $video->id])}}" method="POST" id="myForm" class="w-full mx-auto bg-[var(--bg-color-non-active)] p-6 rounded-md"  enctype="multipart/form-data">
             @csrf

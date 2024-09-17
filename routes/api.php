@@ -36,7 +36,7 @@ Route::get('/langs',[LanguageController::class,'index']);
         Route::get('translation-test1',[TasksController::class,'translationTest1']);//3
         Route::get('translation',[TasksController::class,'translation']);//4
         Route::get('question-image',[TasksController::class,'questionImage']);//5
-        Route::get('phonetics',[TasksController::class,'phonetics']);//6
+        // Route::get('phonetics',[TasksController::class,'phonetics']);//6
         Route::get('pronunciation',[TasksController::class,'pronunciation']);//7
         Route::get('grammar-theory',[TasksController::class,'grammarTeory']);//8
         Route::get('audio-question',[TasksController::class,'audioQuestion']);//9

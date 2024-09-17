@@ -6,7 +6,7 @@
 
         <div class="flex flex-row justify-between w-full">
             <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
-                Audio translations
+                Audio translations  (4. Перевод)
             </div>
             <div>
                 <div class="flex flex-row-reverse">

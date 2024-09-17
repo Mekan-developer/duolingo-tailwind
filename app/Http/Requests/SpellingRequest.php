@@ -31,8 +31,10 @@ class SpellingRequest extends FormRequest
         ];
         if(request()->isMethod("POST")) {
             $rules['image'] = 'required|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240';
+            $rules['audio'] = 'required|file|mimes:mp3|max:10240';
         }else{
             $rules['image'] = 'nullable|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240';
+            $rules['audio'] = 'nullable|file|mimes:mp3|max:10240';
         }
 
         return $rules;

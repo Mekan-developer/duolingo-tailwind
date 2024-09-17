@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('spellings', function (Blueprint $table) use ( $typeId) {
             $table->id();
             $table->string('image');
+            $table->string('audio');
             $table->string('en_text');
             $table->unsignedBigInteger('chapter_id');
             $table->unsignedBigInteger('lesson_id');

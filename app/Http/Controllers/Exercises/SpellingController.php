@@ -9,6 +9,7 @@ use App\Models\Lesson;
 use App\Models\List_exercise;
 use App\Models\Spelling;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SpellingController extends Controller
 {
@@ -24,7 +25,6 @@ class SpellingController extends Controller
         $locales = Language::where("status",1)->orderBy('order')->get();
 
         return view("pages.allExercises.spelling.create", compact("locales"));
-    
     }
 
     public function store(SpellingRequest $request) {
@@ -34,8 +34,15 @@ class SpellingController extends Controller
             $imageName = $this->uploadFile($image,'spelling',true);
             $data['image'] = $imageName;
         }
-        Spelling::create($data);
 
+        if ($request->hasFile('audio')) {
+            $random = hexdec(uniqid());
+            $filename = $random . '.' . $request->audio->extension();
+            Storage::disk('spelling_audio')->putFileAs('', $request->audio,$filename);
+            $data['audio'] = $filename;
+        }
+
+        Spelling::create($data);
         return redirect()->route('spelling.index')->with('success','spelling word with image created successfully!');
     }
 
@@ -58,11 +65,26 @@ class SpellingController extends Controller
             $imageName = $this->uploadFile($image,'spelling',true);
             $data['image'] = $imageName;
         }
+
+        if ($request->hasFile('audio')) {
+            if ($spelling->audio) 
+                $this->removeFile($spelling->audio, 'spelling/audio');
+            $random = hexdec(uniqid());
+            $filename = $random . '.' . $request->audio->extension();
+            Storage::disk('spelling_audio')->putFileAs('', $request->audio,$filename);
+            $data['audio'] = $filename;
+        }
+
+
         $spelling->update($data);
         return redirect()->route('spelling.index')->with('success','spelling word with image updated successfully!');
     }
 
     public function destroy(Spelling $spelling){ 
+        if ($spelling->audio) {
+            $this->removeFile($spelling->audio, 'spelling/audio');
+        } 
+
         if ($spelling->image) {
             $this->removeFile($spelling->image, 'spelling');
         } 

@@ -9,7 +9,7 @@ class Spelling extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['en_text','image','chapter_id','lesson_id','exercise_id','status','order'];
+    protected $fillable = ['en_text','image','audio','chapter_id','lesson_id','exercise_id','status','order'];
 
 
     public function Exercise(){
@@ -24,6 +24,13 @@ class Spelling extends Model
         return $this->belongsTo(Chapter::class);
     }
 
+    public function getAudio(){
+        if(file_exists(public_path('/storage/uploads/spelling/audio/'.$this->audio)) && !is_null($this->audio)){
+            return asset('/storage/uploads/spelling/audio/'.$this->audio);
+        }else{
+            return null;
+        }
+    }
     public function getImage(){
         if(file_exists(public_path('/storage/uploads/spelling/'.$this->image)) && !is_null($this->image)){
             return asset('/storage/uploads/spelling/'.$this->image);

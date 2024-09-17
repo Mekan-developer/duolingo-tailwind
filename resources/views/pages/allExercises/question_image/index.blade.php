@@ -6,7 +6,7 @@
         <x-form.success/>
         <div class="flex flex-row justify-between w-full">
             <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
-                questionImage Image
+                questionImage Image (5. Лексика)
             </div>
             <div>
                 <div class="flex flex-row-reverse">

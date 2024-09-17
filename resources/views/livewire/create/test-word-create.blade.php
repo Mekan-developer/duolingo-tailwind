@@ -1,7 +1,7 @@
 <div>
     <div class="flex flex-col w-full gap-6 p-6">
         <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
-            Add test words with audio
+            Add test words with audio 
         </div>
 
         <form action="{{route('testWord.store')}}" method="post" enctype="multipart/form-data"  

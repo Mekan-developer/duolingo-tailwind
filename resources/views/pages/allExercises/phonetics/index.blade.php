@@ -7,7 +7,7 @@
         <x-form.error/>
         <div class="flex flex-row justify-between w-full">
             <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
-                phonetics
+                phonetics (6. Произношение)
             </div>
             <div>
                 <div class="flex flex-row-reverse">

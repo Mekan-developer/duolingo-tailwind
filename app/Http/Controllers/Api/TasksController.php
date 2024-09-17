@@ -47,10 +47,25 @@ class TasksController extends Controller
         return response()->json($apiData,200);
     }
 
+     /**
+     * @OA\Get(
+     *      path="/exercises/translation-test1",
+     *      tags={"2.Vocabulary (2.Лексика)"},
+     *      summary="third task of exercise",
+     *      description="третье задание упражнения, Лексика",
+     *      @OA\Response(response=200,description="translation-test1 retrived successfully")
+     * )
+     */
+
+     public function translationTest1(){
+        $apiData = TranslationTestResource::collection(QuestionWord::where('status',true)->orderBy('order')->get());
+        return response()->json($apiData,200);
+    }
+
     /**
      * @OA\Get(
      *      path="/exercises/video",
-     *      tags={"3.video (2.Видео)"},
+     *      tags={"3.video (3.Видео)"},
      *      summary="second task of exercise",
      *      description="второе задание упражнения, Видео",
      *      @OA\Response(response=200,description="video retrived successfully")
@@ -59,21 +74,6 @@ class TasksController extends Controller
 
     public function video(){
         $apiData = VideoResource::collection(Video::where('status',true)->orderBy('order')->get());
-        return response()->json($apiData,200);
-    }
-
-    /**
-     * @OA\Get(
-     *      path="/exercises/translation-test1",
-     *      tags={"3.Vocabulary (3.Лексика)"},
-     *      summary="third task of exercise",
-     *      description="третье задание упражнения, Лексика",
-     *      @OA\Response(response=200,description="translation-test1 retrived successfully")
-     * )
-     */
-
-    public function translationTest1(){
-        $apiData = TranslationTestResource::collection(QuestionWord::where('status',true)->orderBy('order')->get());
         return response()->json($apiData,200);
     }
 
@@ -107,18 +107,19 @@ class TasksController extends Controller
         return response()->json($apiData,200);
     }
 
-     /**
+    
+    /**
      * @OA\Get(
-     *      path="/exercises/phonetics",
-     *      tags={"6.phonetics (6.Произношение)"},
-     *      summary="sixth task of exercise",
-     *      description="шестое задание упражнения, phonetics",
-     *      @OA\Response(response=200,description="phonetics retrived successfully")
+     *      path="/exercises/vocabulary-spelling",
+     *      tags={"6.Vocabulary with spelling, (6.Лексика с орфографией)"},
+     *      summary="eleventh task of the exercise",
+     *      description="одиннадцатое задание учения, Лексика с орфографией",
+     *      @OA\Response(response=200,description="vocabulary-spelling retrived successfully")
      * )
      */
 
-    public function phonetics(){
-        $apiData = PhoneticResource::collection(Phonetics::where('status',true)->orderBy('order')->get());
+     public function vocabularySpelling(){
+        $apiData = SpellingResource::collection(Spelling::where('status',true)->orderBy('order')->get());
         return response()->json($apiData,200);
     }
 
@@ -186,23 +187,8 @@ class TasksController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/exercises/vocabulary-spelling",
-     *      tags={"11.Vocabulary with spelling, (11.Лексика с орфографией)"},
-     *      summary="eleventh task of the exercise",
-     *      description="одиннадцатое задание учения, Лексика с орфографией",
-     *      @OA\Response(response=200,description="vocabulary-spelling retrived successfully")
-     * )
-     */
-
-    public function vocabularySpelling(){
-        $apiData = SpellingResource::collection(Spelling::where('status',true)->orderBy('order')->get());
-        return response()->json($apiData,200);
-    }
-
-    /**
-     * @OA\Get(
      *      path="/exercises/listening",
-     *      tags={"12.Listening, (12.Аудирование)"},
+     *      tags={"11.Listening, (11.Аудирование)"},
      *      summary="twelfth task of the exercise",
      *      description="двенадцатое задание упражнения, Аудирование",
      *      @OA\Response(response=200,description="listening retrived successfully")

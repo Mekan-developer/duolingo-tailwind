@@ -43,14 +43,6 @@
                                     </button>
                                 </a>
                                 <x-form.delete route="language.delete" modelName="language" :dataId="$language->id" confirmText="are you sure you want to delete?"/>
-                                {{-- <td class="flex flex-row justify-center gap-2 px-4 py-2 text-center whitespace-nowrap">
-                                    <a href="{{route('list.exercises.edit',['list_exercise'=>$list_exercise->id])}}">
-                                        <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
-                                            <i class='bx bx-edit-alt text-[22px]'></i>
-                                        </button>
-                                    </a>
-                                    <x-form.delete route="list.exercises.delete" modelName="list_exercise" :dataId="$list_exercise->id" confirmText="are you sure you want to delete?"/>                               
-                                </td> --}}
                             </td>
                         </tr> 
                     @endforeach

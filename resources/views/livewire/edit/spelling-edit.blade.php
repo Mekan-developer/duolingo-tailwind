@@ -1,7 +1,7 @@
 <div>
     <div class="flex flex-col gap-6 w-full p-6">
         <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
-            Edit Spelling word
+            Edit Spelling text 
         </div>
 
         <form action="{{route('spelling.update',['spelling' => $spelling->id])}}" method="post" enctype="multipart/form-data"  class="w-full mx-auto bg-[var(--bg-color-non-active)] p-6 rounded-md">

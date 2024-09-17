@@ -1,7 +1,7 @@
 <div>
     <div class="flex flex-col w-full gap-6 p-6">
         <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
-            Edit grammar theory and practics
+            Edit grammar theory and practics 
         </div>
         <form action="{{route('grammar.update',['grammar' => $grammar->id])}}" method="post" enctype="multipart/form-data"  
         class="w-full mx-auto bg-[var(--bg-color-non-active)] p-6 rounded-md" onsubmit="disableButton()">
