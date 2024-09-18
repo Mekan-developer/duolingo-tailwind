@@ -40,17 +40,15 @@ class QuestionsImageController extends Controller
             $imageName = $this->uploadFile($image,'question_image/image',true);
             $data['image'] = $imageName;
         }
-
         QuestionImage::create($data);
 
         return redirect()->route('questionImage.index')->with('success','question with image successfully created!');
     }
 
     public function edit(QuestionImage $questionImage){
-        $lessons = Lesson::where('chapter_id', $questionImage->chapter_id)->whereHas('listExercise')->orderBy('order')->get();
-        $exercises = List_exercise::where('lesson_id', $questionImage->lesson_id)->orderBy('order')->get();
+        $lessons = Lesson::where('chapter_id', $questionImage->chapter_id)->orderBy('order')->get();
 
-        return view("pages.allExercises.question_image.edit")->with("questionImage",$questionImage)->with("lessons",$lessons)->with("exercises", $exercises);
+        return view("pages.allExercises.question_image.edit")->with("questionImage",$questionImage)->with("lessons",$lessons);
     }
 
     public function update(QuestionImageRequest $request, QuestionImage $questionImage){

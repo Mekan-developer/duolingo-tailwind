@@ -7,11 +7,6 @@
             <div class="m-4 text-[var(--bg-color-active)] text-[22px]">
                 Exercises
             </div>
-            <div>
-                <div class="flex flex-row-reverse">
-                    {{-- <a href="{{route('list.exercises.create')}}" class="text-white bg-[var(--bg-color-active)] hover:bg-[#46b8c0] focus:ring-4 rounded-sm px-4 py-2 me-2 mb-2">+</a> --}}
-                </div>
-            </div>
         </div>
         <div class="flex gap-4">
             <div class="overflow-x-auto  flex-1 min-h-[700px] relative" >
@@ -31,10 +26,11 @@
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$exercise->id}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$exercise->name}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$exercise->order}}</td>
-                            <td class=" text-center text-gray-700 whitespace-nowrap">{{$exercise->description}}</td>
+                            <td class=" text-center text-gray-700 whitespace-nowrap">{{$exercise->description}}<br/>
+                                <a class="text-blue-800" href="{{route($gotoLinks[$exercise->id])}}">go to <i class='bx bx-link-external pt-1'></i></a>
+                            </td>
                             <td class="flex flex-row justify-center gap-2 px-4 py-2 text-center whitespace-nowrap">
-                                 {{-- <a href="{{route('exercises.edit',['exercise'=>$exercise->id])}}"> --}}
-                                <a href="#">
+                                 <a href="{{route('exercises.edit',['exercise'=>$exercise->id])}}">
                                     <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
                                         <i class='bx bx-edit-alt text-[22px]'></i>
                                     </button>

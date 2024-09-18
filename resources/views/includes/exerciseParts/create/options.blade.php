@@ -5,7 +5,6 @@
             <option selected>Choose a chapter</option>
             @foreach ($chapters as $chapter)
                 <option class="" value="{{$chapter->id}}">{{ $chapter->name }}</option>
-                {{-- <option class="" value="{{$chapter->id}}">{{ $chapter->getTranslation('title',$locales[0]['locale']) }}</option> --}}
             @endforeach
         </select>
         <x-input-error :messages="$errors->get('chapter_id')" class="mt-2" />
@@ -13,27 +12,13 @@
     <div class="w-full">
         @if($lessons != null && !$lessons->isEmpty())
             <label for="chapters" class="block mb-2 text-sm font-medium @isset($textColor) {{$textColor}} @endisset">Select an lesson</label>
-            <select wire:model="selectedLesson" wire:change="selectedLessonHandle" id="chapters" name="lesson_id" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+            <select wire:model="selectedLesson" id="chapters" name="lesson_id" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                 <option selected>Choose a lesson</option>
                 @foreach ($lessons as $lesson)
                     <option value="{{$lesson->id}}">{{ $lesson->name }}</option>
-                    {{-- <option value="{{$lesson->id}}">{{ $lesson->getTranslation('title',$locales[0]['locale']) }}</option> --}}
                 @endforeach
             </select>
             <x-input-error :messages="$errors->get('lesson_id')" class="mt-2" />
-        @endif
-    </div>
-    <div class="w-full">
-        @if($exercises != null && !$this->exercises->isEmpty())
-            <label for="chapters" class="block mb-2 text-sm font-medium @isset($textColor) {{$textColor}} @endisset">Select an exercise</label>
-            <select id="chapters" name="exercise_id" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                <option selected>Choose a exercise</option>
-                @foreach ($exercises as $exercise)
-                    <option value="{{$exercise->id}}">{{ $exercise->name }}</option>
-                    {{-- <option value="{{$exercise->id}}">{{ $exercise->getTranslation('title',$locales[0]['locale']) }}</option> --}}
-                @endforeach
-            </select>
-            <x-input-error :messages="$errors->get('exercise_id')" class="mt-2" />
-        @endif
+        @endif        
     </div>
 </div>

@@ -1,4 +1,4 @@
-<div>
+<div class="flex-1">
     @props([
         'name','labelText', 'errorMessage','value',"textColor"
     ])

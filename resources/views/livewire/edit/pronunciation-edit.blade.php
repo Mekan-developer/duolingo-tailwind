@@ -9,7 +9,6 @@
             <div class="flex flex-row w-full gap-6 mb-4">
                 <x-form.edit.chapters-option  :chapters="$chapters" :locales="$locales"/>
                 <x-form.edit.lessons-option :lessons="$lessons" :locales="$locales" :switch_lesson="$switch_lesson"/>
-                <x-form.edit.exercises-option :exercises="$exercises" :exerciseId="$exercise_id" :locales="$locales" :switch_exercise="$switch_exercise" />
             </div>
             @include('includes.exerciseParts.create.sound_file',['title' => 'Upload pronunciation'])
             <div class="mt-2">

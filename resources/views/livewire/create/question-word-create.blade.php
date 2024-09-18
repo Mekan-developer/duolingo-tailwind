@@ -15,8 +15,10 @@
             </div>
             <div class="mt-2">
                 @foreach ($locales as $locale)
-                    <x-form.input :name="'translation_correct_words['.$locale->locale.']'" :placeholder="'Translate '. $locale->locale" :labelText="'Correct '. $locale->name" :errorMessage="$errors->get('translation_correct_words.' . $locale->locale)" />
-                    <x-form.input :name="'translation_incorrect_words['.$locale->locale.']'" :placeholder="'Translate '. $locale->locale" :labelText="'Incorrect '. $locale->name" :errorMessage="$errors->get('translation_incorrect_words.' . $locale->locale)" />
+                    <div class="flex flex-row gap-6 w-full">
+                        <x-form.input :name="'translation_correct_words['.$locale->locale.']'" :placeholder="'Translate '. $locale->locale" :labelText="'Correct '. $locale->name" :errorMessage="$errors->get('translation_correct_words.' . $locale->locale)" :getOldName="'translation_correct_words.' . $locale->locale" />
+                        <x-form.input :name="'translation_incorrect_words['.$locale->locale.']'" :placeholder="'Translate '. $locale->locale" :labelText="'Incorrect '. $locale->name" :errorMessage="$errors->get('translation_incorrect_words.' . $locale->locale)" :getOldName="'translation_incorrect_words.' . $locale->locale" />
+                    </div>
                 @endforeach
                 <x-form.btn-submit/>
             </div>

@@ -29,11 +29,11 @@ class ExerciseSeeder extends Seeder
         }
 
         $names = [
-            1 => ['name' => 'Vocabulary', 'description' => 'Vocabulary| This contains Image + English text + translations + voice',  'type_id' => $typeIds[1]],
-            2 => ['name' =>'Vocabulary','description' => 'description','type_id' => $typeIds[2]],
-            3 => ['name' =>'Video','description' => 'description','type_id' => $typeIds[3]],
-            4 => ['name' =>'Translation','description' => 'description','type_id' => $typeIds[4]],
-            5 => ['name' =>'Vocabulary','description' => 'description','type_id' => $typeIds[5]],
+            1 => ['name' => 'Vocabulary', 'description' => 'Vocabulary| This vocabulary section contain image + english text with audio reading + translation text',  'type_id' => $typeIds[1]],
+            2 => ['name' =>'Vocabulary','description' => 'Vocabulary| This vocabulary section contain english text with audio reading + correct + incorrect translation text (user need choose answer)','type_id' => $typeIds[2]],
+            3 => ['name' =>'Video','description' => 'Video| This video section contain only video (user can play and stop video after run one time)','type_id' => $typeIds[3]],
+            4 => ['name' =>'Translation','description' => 'Translation| This translation section contains only English text with audio reading and translation (user can only read the text and control the audio)','type_id' => $typeIds[4]],
+            5 => ['name' =>'Vocabulary','description' => 'Vocabulary| This translation section contains only Image with audio and correct + incorrect english  text (user can only select answer by looking image)','type_id' => $typeIds[5]],
             6 => ['name' =>'Vocabulary','description' => 'description','type_id' => $typeIds[6]],
             7 => ['name' =>'Vocabulary','description' => 'description','type_id' => $typeIds[7]],
             8 => ['name' =>'Grammar','description' => 'description','type_id' => $typeIds[8]],

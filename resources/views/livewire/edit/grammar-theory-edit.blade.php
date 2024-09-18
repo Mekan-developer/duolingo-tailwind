@@ -12,7 +12,6 @@
                 <div class="flex flex-row w-full gap-6 mb-4">
                     <x-form.edit.chapters-option  :chapters="$chapters" :locales="$locales" textColor="text-white"/>
                     <x-form.edit.lessons-option :lessons="$lessons" :locales="$locales" :switch_lesson="$switch_lesson" textColor="text-white" />
-                    <x-form.edit.exercises-option :exercises="$exercises" :exerciseId="$exercise_id" :locales="$locales" :switch_exercise="$switch_exercise" textColor="text-white" />
                 </div>
                 <div class="grid grid-cols-2 gap-4" wire:ignore>
                     @foreach ($locales as $locale)
@@ -71,6 +70,28 @@
                     @endforeach
                     @include('includes.exerciseParts.create.sound_file',['name' => 'audio','label' => 'label' ,'message' => 'message'])
                 </div>
+                {{-- hint (podskazka) for grammar practics --}}
+                <div class="w-full flex justify-end my-2">   
+                    <label class="inline-flex items-center cursor-pointer">
+                        <input type="checkbox" wire:change='toggle' name='hintChecker' class="sr-only peer" @if($showDiv) checked @endif>
+                        <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                        <span class="ms-3 text-md font-medium text-gray-900 dark:text-gray-300">hint</span>
+                    </label>
+                </div>
+
+                @if($showDiv)
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        @foreach ($locales as $locale)
+                        <div class="flex flex-col w-full">
+                            <textarea name="hint[{{$locale->locale}}]" class="font-normal" cols="30" rows="4" placeholder="Hint {{$locale->name}}">{{ $grammar->translate("hint",$locale->locale) }}</textarea>
+                            @error("hint.".$locale->locale)
+                                <span class="text-xs text-red-600">{{ $locale->name }} hint is required</span>
+                            @enderror
+                        </div>
+                        @endforeach
+                    </div>
+                @endif
+                {{-- end hint --}}
                 <x-form.order :request="$grammars" :currentOrder="$grammar"></x-form.order>
                 <x-form.btn-submit name="update" />
             </div>

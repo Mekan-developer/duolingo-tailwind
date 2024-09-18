@@ -9,13 +9,17 @@ Alpine.start();
 // tinymce for textarea
 tinymce.init({
     selector: 'textarea.letter',
-    license_key: 'glpvuu4bgw2i0d17uizamjpfwjswu59kbeacaefftswsyuty',
     plugins: "emoticons autoresize",
     toolbar: "emoticons",
     height: 300,  // Set the initial height of the editor
     max_height: 320,  // Restrict the maximum height (requires autoresize plugin)
     autoresize_min_height: 300,  // Minimum height with autoresize
     autoresize_max_height: 320,  // Maximum height with autoresize
+    setup: function (editor) {
+        editor.on('change', function () {
+          tinymce.triggerSave(); // This will sync the editor content with the underlying textarea
+        });
+    }
 });
 
 

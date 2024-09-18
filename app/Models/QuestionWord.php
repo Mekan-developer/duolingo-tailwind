@@ -15,7 +15,7 @@ class QuestionWord extends Model
     public $translatable = ["translation_correct_words","translation_incorrect_words"];
 
     public function Exercise(){
-        return $this->belongsTo(List_exercise::class);
+        return $this->belongsTo(Exercise::class);
     }
 
     public function Lesson(){

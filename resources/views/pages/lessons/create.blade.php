@@ -17,13 +17,6 @@
                 <span class="text-xs text-red-600">{{ $message }}</span>
             @enderror
             <x-form.input name="name" placeholder="Lesson name" labelText="Lesson name" :errorMessage="$errors->get('name')" />
-            <div class="flex flex-row justify-between gap-2 my-2">
-                @for ($i = 1; $i < 5; $i++)
-                    <div class="flex-1">
-                        @include('includes.exerciseParts.create.image_file',['label' => 'button'.$i, 'title' => 'Upload dopamine'.$i, 'name' => 'dopamine_image'.$i,'message' => 'message'.$i ])
-                    </div>
-                @endfor
-            </div>
             <x-form.btn-submit/>
         </form>
     </div>

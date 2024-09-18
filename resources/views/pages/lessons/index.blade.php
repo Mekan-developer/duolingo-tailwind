@@ -33,10 +33,6 @@
                         <tr>
                             <th class="px-4 py-2 text-gray-900 whitespace-nowrap">id</th>
                             <th class="px-4 py-2 text-gray-900 whitespace-nowrap">name</th>
-                            <th class="px-4 py-2 text-gray-900 whitespace-nowrap">dopamine1</th>
-                            <th class="px-4 py-2 text-gray-900 whitespace-nowrap">dopamine2</th>
-                            <th class="px-4 py-2 text-gray-900 whitespace-nowrap">dopamine3</th>
-                            <th class="px-4 py-2 text-gray-900 whitespace-nowrap">dopamine4</th>
                             <th class="px-4 py-2 text-gray-900 whitespace-nowrap">parent chapter</th>
                             <th class="px-4 py-2 text-gray-900 whitespace-nowrap">order</th>
                             <th class="px-4 py-2">actions</th>
@@ -47,18 +43,6 @@
                         <tr >
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$lesson->id}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$lesson->name}}</td>
-                            <td class="px-4 py-2 text-gray-700 whitespace-nowrap">
-                                <img class="w-auto h-[36px] mx-auto" src="{{$lesson->getDopamine($lesson->dopamine_image1)}}" alt="dopamine 1">
-                            </td>
-                            <td class="px-4 py-2 text-gray-700 whitespace-nowrap">
-                                <img class="w-auto h-[36px] mx-auto" src="{{$lesson->getDopamine($lesson->dopamine_image2)}}" alt="dopamine 1">
-                            </td>
-                            <td class="px-4 py-2 text-gray-700 whitespace-nowrap">
-                                <img class="w-auto h-[36px] mx-auto" src="{{$lesson->getDopamine($lesson->dopamine_image3)}}" alt="dopamine 1">
-                            </td>
-                            <td class="px-4 py-2 text-gray-700 whitespace-nowrap">
-                                <img class="w-auto h-[36px] mx-auto" src="{{$lesson->getDopamine($lesson->dopamine_image4)}}" alt="dopamine 1">
-                            </td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $lesson->chapter->name }}</td>
                             {{-- <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $lesson->chapter->getTranslation('title',$locales[0]['locale']) }}</td> --}}
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$lesson->order}}</td>

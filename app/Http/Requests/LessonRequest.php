@@ -22,22 +22,21 @@ class LessonRequest extends FormRequest
     public function rules(): array
     {    
         $rules = [
-            // 'title.*' => 'required|string|max:255', 
             'name' => 'required|string|max:255', 
             'chapter_id' => 'required|exists:chapters,id',
         ];   
 
-        if(request()->isMethod('POST')){
-            $rules['dopamine_image1'] = "required|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240";
-            $rules['dopamine_image2'] = "required|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240";
-            $rules['dopamine_image3'] = "required|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240";
-            $rules['dopamine_image4'] = "required|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240";
-        }else{
-            $rules['dopamine_image1'] = "nullable|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240";
-            $rules['dopamine_image2'] = "nullable|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240";
-            $rules['dopamine_image3'] = "nullable|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240";
-            $rules['dopamine_image4'] = "nullable|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240";
-        }   
+        // if(request()->isMethod('POST')){
+        //     $rules['dopamine_image1'] = "required|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240";
+        //     $rules['dopamine_image2'] = "required|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240";
+        //     $rules['dopamine_image3'] = "required|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240";
+        //     $rules['dopamine_image4'] = "required|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240";
+        // }else{
+        //     $rules['dopamine_image1'] = "nullable|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240";
+        //     $rules['dopamine_image2'] = "nullable|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240";
+        //     $rules['dopamine_image3'] = "nullable|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240";
+        //     $rules['dopamine_image4'] = "nullable|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240";
+        // }   
         return $rules;
     }
 }

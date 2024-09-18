@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-<div class="bg-white p-8 rounded-sm shadow-lg w-full relative">
+<div class="bg-white p-8 rounded-sm shadow-lg w-full relative"> 
     <div class="flex justify-end  gap-4">
         <a href="{{ route('download.database') }}">
             <div class="flex items-center gap-1 p-4 hover:p-[14px] hover:m-[2px] bg-[var(--bg-color-active)] text-white rounded-sm cursor-pointer">

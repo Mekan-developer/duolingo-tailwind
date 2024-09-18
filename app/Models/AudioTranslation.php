@@ -15,7 +15,7 @@ class AudioTranslation extends Model
     public $translatable = ["translations_word"];
 
     public function Exercise(){
-        return $this->belongsTo(List_exercise::class);
+        return $this->belongsTo(Exercise::class);
     }
 
     public function Lesson(){

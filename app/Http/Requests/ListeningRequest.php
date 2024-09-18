@@ -24,7 +24,6 @@ class ListeningRequest extends FormRequest
         $rules = [
             'chapter_id'=> 'required|exists:chapters,id',
             'lesson_id' => 'required|exists:lessons,id',
-            'exercise_id' => 'required|exists:list_exercises,id',
             'status' => 'nullable',
             'order' => 'nullable|integer'
         ];

@@ -26,7 +26,6 @@ class QuestionImageRequest extends FormRequest
             'incorrect_text' => 'required|string|max:255',
             'chapter_id' => 'required|exists:chapters,id',
             'lesson_id' => 'required|exists:lessons,id',
-            'exercise_id' => 'required|exists:list_exercises,id',
             'status' => 'nullable',
             'order' => 'nullable|integer'
         ];

@@ -40,9 +40,8 @@ class VideoController extends Controller
     }
 
     public function edit(Video $video){ 
-        $lessons = Lesson::where('chapter_id', $video->chapter_id)->whereHas('listExercise')->orderBy('order')->get();
-        $exercises = List_exercise::where('lesson_id', $video->lesson_id)->orderBy('order')->get();
-        return view("pages.allExercises.video.edit")->with("video",$video)->with("lessons",$lessons)->with("exercises", $exercises);
+        $lessons = Lesson::where('chapter_id', $video->chapter_id)->orderBy('order')->get();
+        return view("pages.allExercises.video.edit")->with("video",$video)->with("lessons",$lessons);
      }
 
      public function update(VideoRequest $request, Video $video){   

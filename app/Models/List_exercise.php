@@ -36,21 +36,23 @@ class List_exercise extends Model
         return $this->hasMany(Vocabulary::class,'exercise_id','id');
     }
     public function exerciseType2(){
-        return $this->hasMany(Video::class,'exercise_id','id');
-    }
-    public function exerciseType3(){
         return $this->hasMany(QuestionWord::class,'exercise_id','id');
     }
+    public function exerciseType3(){
+        return $this->hasMany(Video::class,'exercise_id','id');
+    }
+    
     public function exerciseType4(){
         return $this->hasMany(AudioTranslation::class,'exercise_id','id');
     }
     public function exerciseType5(){
         return $this->hasMany(QuestionImage::class,'exercise_id','id');
     }
-  
+
     public function exerciseType6(){
-        return $this->hasMany(Phonetics::class,'exercise_id','id');
+        return $this->hasMany(Spelling::class,'exercise_id','id');
     }
+
     public function exerciseType7(){
         return $this->hasMany(Pronunciation::class,'exercise_id','id');
     }
@@ -64,11 +66,8 @@ class List_exercise extends Model
     public function exerciseType10(){
         return $this->hasMany(TestWord::class,'exercise_id','id');
     }
+    
     public function exerciseType11(){
-        return $this->hasMany(Spelling::class,'exercise_id','id');
-    }
-
-    public function exerciseType12(){
         return $this->hasMany(Listening::class,'exercise_id','id');
     }
     

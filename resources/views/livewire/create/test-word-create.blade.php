@@ -10,7 +10,7 @@
             <div class="px-4 py-6 bg-white rounded-sm">
                 @include('includes.exerciseParts.create.options')
                 @foreach ($locales as $locale)
-                    <x-form.input :name="'translations_word['.$locale->locale.']'" :placeholder="'Translate '. $locale->locale" :labelText="'Translate '. $locale->name" :errorMessage="$errors->get('translations_word.' . $locale->locale)" />
+                    <x-form.input :name="'translations_word['.$locale->locale.']'" :getOldName="'translations_word.' . $locale->locale " :placeholder="'Translate '. $locale->locale" :labelText="'Translate '. $locale->name" :errorMessage="$errors->get('translations_word.' . $locale->locale)" />
                 @endforeach
                
                 <div class="mt-2">
@@ -19,11 +19,11 @@
                 
             </div>
         
-            <div class="mt-2 flex flex-col gap-4">
-                @include('includes.exerciseParts.create.english_text',['name'=>'en_correct_text','title' => 'English correct text','placeholder' => 'english correct word']) 
-                @include('includes.exerciseParts.create.english_text',['name'=>'en_incorrect_text','title' => 'English incorrect text','placeholder' => 'english incorrect word']) 
-                <x-form.btn-submit/>
+            <div class="my-4 flex gap-4">
+                @include('includes.exerciseParts.create.english_text',['name'=>'en_correct_text', 'oldName' => 'en_correct_text','title' => 'English correct text','placeholder' => 'english correct word']) 
+                @include('includes.exerciseParts.create.english_text',['name'=>'en_incorrect_text', 'oldName' => 'en_incorrect_text','title' => 'English incorrect text','placeholder' => 'english incorrect word']) 
             </div>
+            <x-form.btn-submit/>
         </form>
     </div>    
 </div>

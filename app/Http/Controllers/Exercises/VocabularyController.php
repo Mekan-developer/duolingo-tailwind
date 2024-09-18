@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Exercises;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VocabularyRequest;
 use App\Models\Chapter;
+use App\Models\Exercise;
 use App\Models\Language;
 use App\Models\Lesson;
 use App\Models\List_exercise;
@@ -26,7 +27,6 @@ class VocabularyController extends Controller
         $locales = Language::where("status",1)->orderBy('order')->get();
 
         return view("pages.allExercises.vocabulary.create", compact("locales"));
-    
     }
 
     public function store(VocabularyRequest $request) {     
@@ -48,9 +48,9 @@ class VocabularyController extends Controller
     }
 
     public function edit(Vocabulary $vocabulary) {
-        $lessons = Lesson::where('chapter_id', $vocabulary->chapter_id)->whereHas('listExercise')->orderBy('order')->get();
-        $exercises = List_exercise::where('lesson_id', $vocabulary->lesson_id)->orderBy('order')->get();
-        return view("pages.allExercises.vocabulary.edit")->with("vocabulary",$vocabulary)->with("lessons",$lessons)->with("exercises", $exercises);
+        $lessons = Lesson::where('chapter_id', $vocabulary->chapter_id)->orderBy('order')->get();
+
+        return view("pages.allExercises.vocabulary.edit")->with("vocabulary",$vocabulary)->with("lessons",$lessons);
     }
 
     public function update(VocabularyRequest $request, Vocabulary $vocabulary) {  

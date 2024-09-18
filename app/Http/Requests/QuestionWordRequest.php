@@ -26,7 +26,6 @@ class QuestionWordRequest extends FormRequest
             'en_text' => 'required|string|max:255',
             'chapter_id'=> 'required|exists:chapters,id',
             'lesson_id' => 'required|exists:lessons,id',
-            'exercise_id' => 'required|exists:list_exercises,id',
             'translation_correct_words.*' => 'required|string|max:255',
             'translation_incorrect_words.*' => 'required|string|max:255',
             'status' => 'nullable',

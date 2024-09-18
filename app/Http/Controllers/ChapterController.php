@@ -42,7 +42,7 @@ class ChapterController extends Controller
 
         $chapter->update($request->all());
 
-        return redirect()->route('chapters')->with('alert','chapter updated successfully!');
+        return redirect()->route('chapters')->with('success','chapter updated successfully!');
     }
 
     public function destroy(Chapter $chapter){

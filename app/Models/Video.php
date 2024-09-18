@@ -12,7 +12,7 @@ class Video extends Model
     protected $fillable = ['video','chapter_id','lesson_id','exercise_id','type_id','status','order'];
 
     public function Exercise(){
-        return $this->belongsTo(List_exercise::class);
+        return $this->belongsTo(Exercise::class);
     }
 
     public function Lesson(){

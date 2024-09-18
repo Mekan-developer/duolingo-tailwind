@@ -75,10 +75,10 @@ class ListExerciseController extends Controller
     }
 
     public function destroy(List_exercise $list_exercise){
-        // checking has or no child exercise
-        if($list_exercise->exerciseType1()->exists() || $list_exercise->exerciseType2()->exists() || $list_exercise->exerciseType3()->exists() || $list_exercise->exerciseType4()->exists() || $list_exercise->exerciseType5()->exists() || $list_exercise->exerciseType6()->exists() || $list_exercise->exerciseType7()->exists() || $list_exercise->exerciseType8()->exists() || $list_exercise->exerciseType9()->exists() || $list_exercise->exerciseType10()->exists() || $list_exercise->exerciseType11()->exists() || $list_exercise->exerciseType12()->exists()){
-            return redirect()->route('list.exercises')->with('alert','Lesson has exercise and cannot be deleted.');
-        }
+        // // checking has or no child exercise
+        // if($list_exercise->exerciseType1()->exists() || $list_exercise->exerciseType2()->exists() || $list_exercise->exerciseType3()->exists() || $list_exercise->exerciseType4()->exists() || $list_exercise->exerciseType5()->exists() || $list_exercise->exerciseType6()->exists() || $list_exercise->exerciseType7()->exists() || $list_exercise->exerciseType8()->exists() || $list_exercise->exerciseType9()->exists() || $list_exercise->exerciseType10()->exists() || $list_exercise->exerciseType11()->exists() || $list_exercise->exerciseType12()->exists()){
+        //     return redirect()->route('list.exercises')->with('alert','Lesson has exercise and cannot be deleted.');
+        // }
         
 
         $orderDeletedRow = $list_exercise->order;

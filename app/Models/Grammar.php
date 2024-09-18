@@ -12,13 +12,13 @@ class Grammar extends Model
 
     protected $fillable =
     [
-        'grammar_theory','text','text_correct_parts','text_incorrect_parts','audio','chapter_id','lesson_id','exercise_id','status','order'
+        'grammar_theory','text','hint','text_correct_parts','text_incorrect_parts','audio','chapter_id','lesson_id','exercise_id','status','order'
     ];
 
-    public $translatable = ['grammar_theory','text','text_correct_parts','text_incorrect_parts'];
+    public $translatable = ['grammar_theory','text','hint','text_correct_parts','text_incorrect_parts'];
 
     public function Exercise(){
-        return $this->belongsTo(List_exercise::class);
+        return $this->belongsTo(Exercise::class);
     }
 
     public function Lesson(){

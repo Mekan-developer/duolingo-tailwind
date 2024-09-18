@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('content')
-<div class="relative flex flex-col w-full">
-    <x-form.success/>
+<div class="relative flex flex-col w-full h-full">
+    <x-form.success/> 
     <div class="flex flex-row justify-between w-full">
         <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
             Languages
@@ -86,9 +86,3 @@
     </div>
 </div>
 @endsection
-
-<script>
-    function disableButton() {
-        document.getElementById('submitBtn').disabled = true;
-    }
-</script>

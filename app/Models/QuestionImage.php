@@ -12,7 +12,7 @@ class QuestionImage extends Model
     protected $fillable = ['audio','image','correct_text','incorrect_text','chapter_id','lesson_id','exercise_id','status','order'];
 
     public function Exercise(){
-        return $this->belongsTo(List_exercise::class);
+        return $this->belongsTo(Exercise::class);
     }
 
     public function Lesson(){

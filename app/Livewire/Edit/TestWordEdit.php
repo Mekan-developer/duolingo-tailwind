@@ -11,22 +11,21 @@ use Livewire\Component;
 
 class TestWordEdit extends Component
 {
-    public $testWord,$lessons,$exercises,$lesson_id,$exercise_id;
+    public $testWord,$lessons,$lesson_id;
     public $selectedChapter = null,$selectedLesson = null;
-    public $switch_lesson = false, $switch_exercise = false;
+    public $switch_lesson = false;
 
-    public function mount($testWord,$lessons,$exercises)
+    public function mount($testWord,$lessons)
     {
         $this->testWord = $testWord;
         $this->selectedLesson = $testWord->lesson_id;
-        $this->exercise_id = $testWord->exercise_id;
         $this->selectedChapter = $testWord->chapter_id;
         $this->lessons = $lessons;
-        $this->exercises = $exercises;
+
     }
     public function render()
     {
-        $chapters = Chapter::whereHas('lessonOption')->orderBy("order")->get();
+        $chapters = Chapter::whereHas('lesson')->orderBy("order")->get();
         $locales = Language::orderBy("order")->get();
 
         $testWords = TestWord::orderBy("order")->get();
@@ -35,7 +34,6 @@ class TestWordEdit extends Component
             "testWords" => $testWords,
             "chapters" => $chapters,
             "lessons" => $this->lessons,
-            "exercises" =>$this->exercises,
             "locales" => $locales
         ]);
     }
@@ -45,20 +43,8 @@ class TestWordEdit extends Component
         $this->selectedLesson = null;
         $this->switch_lesson = true;
         $this->lesson_id = null;
-        $this->exercise_id = null;
-        $this->exercises = null;
-        $this->lessons = Lesson::whereHas('listExercise')->where('chapter_id',$this->selectedChapter)->orderBy('order')->get();
+        $this->lessons = Lesson::where('chapter_id',$this->selectedChapter)->orderBy('order')->get();
 
     }
- 
-    public function selectedLessonHandle(){
-        $this->switch_exercise = true;
-        $this->switch_lesson = false;
-        $this->exercise_id = null;
-        $this->exercises = null;
-        $this->exercises = List_exercise::where('lesson_id',$this->selectedLesson)->orderBy('order')->get(); 
-    }
-    public function switchExerciseChange(){
-        $this->switch_exercise = false;
-    }
+
 }

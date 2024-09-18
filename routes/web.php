@@ -64,6 +64,8 @@ Route::middleware(['auth:web','checkIsAdmin'])->group(function () {
 
     Route::group(['prefix' => 'all-exercises', 'as' => 'exercises'], function(){
         Route::get('/',[ExerciseController::class,'index']);
+        Route::get('/edit/{exercise}',[ExerciseController::class,'edit'])->name('.edit');
+        Route::patch('/update/{exercise}',[ExerciseController::class,'update'])->name('.update');
 
     });
 
@@ -109,7 +111,7 @@ Route::middleware(['auth:web','checkIsAdmin'])->group(function () {
 
         });
 
-       //QUESTION_WORD  3
+       //QUESTION_WORD  2
         Route::group(['prefix'=> 'question-word','as' => 'questionWord.'], function () {
             Route::get('/',[QuestionWordController::class,'index'])->name('index');
             Route::get('/create',[QuestionWordController::class,'create'])->name('create');

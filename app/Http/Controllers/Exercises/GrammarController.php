@@ -18,7 +18,6 @@ class GrammarController extends Controller
 
         $grammars = Grammar::orderBy('order');
         $data = $this->selectOPtionOrderExercise($request,$grammars,'grammars');
-
         $textPartCounts = DB::table('grammars')->selectRaw('MAX(JSON_LENGTH(text_correct_parts)) as max_length')->value('max_length');
 
         return view("pages.allExercises.grammar_theory.index",$data,compact('textPartCounts'));
@@ -31,6 +30,7 @@ class GrammarController extends Controller
     }
 
     public function store(GrammarRequest $request){
+        
         if ($request->hasFile('audio')) {
             $random = hexdec(uniqid());
             $filename = $random . '.' . $request->audio->extension();
@@ -38,22 +38,23 @@ class GrammarController extends Controller
             $data = $request->all();
             $data['audio'] = $filename;
         }
+
         Grammar::create($data);
         return redirect()->route('grammar.index')->with('success','grammar successfully created!');
     }
 
     public function edit(Grammar $grammar){
-        $lessons = Lesson::where('chapter_id', $grammar->chapter_id)->whereHas('listExercise')->orderBy('order')->get();
-        $exercises = List_exercise::where('lesson_id', $grammar->lesson_id)->orderBy('order')->get();
+        $lessons = Lesson::where('chapter_id', $grammar->chapter_id)->orderBy('order')->get();
 
-        return view("pages.allExercises.grammar_theory.edit")->with("grammar",$grammar)->with("lessons",$lessons)->with("exercises", $exercises);
+        return view("pages.allExercises.grammar_theory.edit")->with("grammar",$grammar)->with("lessons",$lessons);
     }
 
-    public function update(GrammarRequest $request, Grammar $grammar){
+    public function update(GrammarRequest $request, Grammar $grammar){        
         $grammars = Grammar::all();
         $this->sortItems($grammars, $grammar->order, $request->order);//for ordering elements
 
         $data = $request->all();
+        
         // removing grammar start
         $text_correct_parts = $grammar->getAttributes()['text_correct_parts']; 
         $text_correct_partsArray = json_decode($text_correct_parts, true); 
@@ -79,6 +80,11 @@ class GrammarController extends Controller
             Storage::disk('grammars')->putFileAs('', $request->audio,$filename);
             $data = $request->all();
             $data['audio'] = $filename;
+        }
+
+
+        if($request->hintChecker == null){
+            $grammar->setTranslations('hint', []);
         }
         
         try {

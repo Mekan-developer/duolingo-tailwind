@@ -16,7 +16,6 @@ class TestWordController extends Controller
     public function index(Request $request) {
 
         $testWords = TestWord::orderBy('order');
-
         $data = $this->selectOPtionOrderExercise($request,$testWords,'testWords');
         
         return view("pages.allExercises.test_word.index", $data);
@@ -42,9 +41,8 @@ class TestWordController extends Controller
     }
 
     public function edit(TestWord $testWord) {
-        $lessons = Lesson::where('chapter_id', $testWord->chapter_id)->whereHas('listExercise')->orderBy('order')->get();
-        $exercises = List_exercise::where('lesson_id', $testWord->lesson_id)->orderBy('order')->get();
-        return view("pages.allExercises.test_word.edit")->with("testWord",$testWord)->with("lessons",$lessons)->with("exercises", $exercises);
+        $lessons = Lesson::where('chapter_id', $testWord->chapter_id)->orderBy('order')->get();
+        return view("pages.allExercises.test_word.edit")->with("testWord",$testWord)->with("lessons",$lessons);
     }
 
     public function update(TestWordRequest $request,TestWord $testWord) {

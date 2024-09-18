@@ -10,27 +10,23 @@ use Livewire\Component;
 
 class ListeningCreate extends Component
 {
-    public $locales, $chapters, $lessons=null,$exercises = null;
+    public $locales, $chapters, $lessons=null;
     public $selectedChapter, $selectedLesson;
     public $selectOptionLesson = null;
 
+    public function mount(){
+        if (session()->hasOldInput('chapter_id') && old('chapter_id') > 0) {
+            $this->selectedChapter = old('chapter_id');
+            $this->selectedChapterHandle();
+        }
+        if (session()->hasOldInput('lesson_id') && old('lesson_id') > 0) {
+            $this->selectedLesson = old('lesson_id');
+        }
+    }    
 
-    // public function mount()
-    // {
-    //     dump(session()->hasOldInput('lesson_id'));
-    //     // Проверка наличия старого значения 'lesson_id' и его восстановление
-    //     if (session()->hasOldInput('lesson_id') && session('lesson_id') > 0) {
-    //         $this->selectOptionLesson = session('lesson_id');
-    //     }
-
-    //     // Если нужно сбросить другое поле, например 'lesson'
-    //     // if (session()->hasOldInput('lesson_id')) {
-    //     //     $this->reset('lesson_id');
-    //     // }
-    // }
     public function render()
     {
-        $this->chapters = Chapter::whereHas('lessonOption')->orderBy('order')->get();
+        $this->chapters = Chapter::whereHas('lesson')->orderBy('order')->get();
         $this->locales = Language::where("status",1)->orderBy('order')->get();
 
         return view('livewire.create.listening-create');
@@ -38,11 +34,6 @@ class ListeningCreate extends Component
 
     public function selectedChapterHandle()
     {
-        $this->exercises = null;
-        $this->lessons = Lesson::whereHas('listExercise')->where('chapter_id',$this->selectedChapter)->orderBy('order')->get(); 
-    }
-
-    public function selectedLessonHandle(){
-        $this->exercises = List_exercise::where('lesson_id',$this->selectedLesson)->orderBy('order')->get(); 
+        $this->lessons = Lesson::where('chapter_id',$this->selectedChapter)->orderBy('order')->get(); 
     }
 }

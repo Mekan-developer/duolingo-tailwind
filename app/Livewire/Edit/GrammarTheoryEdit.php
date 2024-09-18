@@ -12,33 +12,34 @@ use Livewire\Component;
 class GrammarTheoryEdit extends Component
 {
 
-    public $countWordParts = 1, $lessons,$exercises,$lesson_id,$exercise_id;
+    public $countWordParts = 1, $lessons,$lesson_id;
     public $selectedChapter = null,$selectedLesson = null;
-    public $switch_lesson = false, $switch_exercise = false;
+    public $switch_lesson = false,$showDiv = false;
     public $maxTextCorrectPartsKey;
     
     public $grammar, $grammarExamples , $removeInputNumber=0;
     
-    public function mount($grammar,$lessons,$exercises)
-    {      
+    public function mount($grammar,$lessons,)
+    {   
         $this->grammarExamples = json_decode($grammar);
         $this->grammar = $grammar;   
+
+        if($this->grammarExamples->hint != null){
+            $this->showDiv = true;
+        }
 
         $decode = (array) $this->grammarExamples->text_correct_parts;
         $maxKey = max(array_keys($decode));
         $this->maxTextCorrectPartsKey = $maxKey;
 
-
         $this->selectedLesson = $grammar->lesson_id;
-        $this->exercise_id = $grammar->exercise_id;
         $this->selectedChapter = $grammar->chapter_id;
         $this->lessons = $lessons;
-        $this->exercises = $exercises;
     }
     public function render()
     {
 
-        $chapters = Chapter::whereHas('lessonOption')->orderBy("order")->get();
+        $chapters = Chapter::whereHas('lesson')->orderBy("order")->get();
         $locales = Language::orderBy("order")->get();
 
         $grammars = Grammar::orderBy("order")->get();
@@ -47,7 +48,6 @@ class GrammarTheoryEdit extends Component
             "grammars" => $grammars,
             "chapters" => $chapters,
             "lessons" => $this->lessons,
-            "exercises" =>$this->exercises,
             "locales" => $locales
         ]);
     }
@@ -73,25 +73,14 @@ class GrammarTheoryEdit extends Component
         $this->selectedLesson = null;
         $this->switch_lesson = true;
         $this->lesson_id = null;
-        $this->exercise_id = null;
-        $this->exercises = null;
-        $this->lessons = Lesson::whereHas('listExercise')->where('chapter_id',$this->selectedChapter)->orderBy('order')->get();
-
+        $this->lessons = Lesson::where('chapter_id',$this->selectedChapter)->orderBy('order')->get();
     }
  
-    public function selectedLessonHandle(){
-        $this->switch_exercise = true;
-        $this->switch_lesson = false;
-        $this->exercise_id = null;
-        $this->exercises = null;
-        $this->exercises = List_exercise::where('lesson_id',$this->selectedLesson)->orderBy('order')->get(); 
-    }
-
     public function removeFieldCount(){
         $this->removeInputNumber++;
     }
 
-    public function switchExerciseChange(){
-        $this->switch_exercise = false;
+    public function toggle(){
+        $this->showDiv = !$this->showDiv;
     }
 }

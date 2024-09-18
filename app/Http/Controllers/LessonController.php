@@ -38,26 +38,26 @@ class LessonController extends Controller
             'chapter_id' => $request->chapter_id,
         ];
         
-        if ($request->hasFile('dopamine_image1')) {         
-            $image = $request->dopamine_image1;
-            $imageName = $this->uploadFile($image,'dopamine_images',true);
-            $data['dopamine_image1'] = $imageName;
-        }
-        if ($request->hasFile('dopamine_image2')) {            
-            $image = $request->dopamine_image2;
-            $imageName = $this->uploadFile($image,'dopamine_images',true);
-            $data['dopamine_image2'] = $imageName;
-        }
-        if ($request->hasFile('dopamine_image3')) {            
-            $image = $request->dopamine_image3;
-            $imageName = $this->uploadFile($image,'dopamine_images',true);
-            $data['dopamine_image3'] = $imageName;
-        }
-        if ($request->hasFile('dopamine_image4')) {            
-            $image = $request->dopamine_image4;
-            $imageName = $this->uploadFile($image,'dopamine_images',true);
-            $data['dopamine_image4'] = $imageName;
-        }
+        // if ($request->hasFile('dopamine_image1')) {         
+        //     $image = $request->dopamine_image1;
+        //     $imageName = $this->uploadFile($image,'dopamine_images',true);
+        //     $data['dopamine_image1'] = $imageName;
+        // }
+        // if ($request->hasFile('dopamine_image2')) {            
+        //     $image = $request->dopamine_image2;
+        //     $imageName = $this->uploadFile($image,'dopamine_images',true);
+        //     $data['dopamine_image2'] = $imageName;
+        // }
+        // if ($request->hasFile('dopamine_image3')) {            
+        //     $image = $request->dopamine_image3;
+        //     $imageName = $this->uploadFile($image,'dopamine_images',true);
+        //     $data['dopamine_image3'] = $imageName;
+        // }
+        // if ($request->hasFile('dopamine_image4')) {            
+        //     $image = $request->dopamine_image4;
+        //     $imageName = $this->uploadFile($image,'dopamine_images',true);
+        //     $data['dopamine_image4'] = $imageName;
+        // }
 
         Lesson::create($data);  
         return redirect()->route('lessons')->with('success','Lesson created successfully!');
@@ -77,41 +77,40 @@ class LessonController extends Controller
         $data = [
             'chapter_id' => $request->chapter_id,
             'name' => $request->name,
-            // 'title' => $request->title,
             'order' => $request->order
         ];
-        if ($request->hasFile('dopamine_image1')) { 
-            if ($lesson->dopamine_image1) {
-                $this->removeFile($lesson->dopamine_image1, 'dopamine_images');
-            }        
-            $image = $request->dopamine_image1;
-            $imageName = $this->uploadFile($image,'dopamine_images',true);
-            $data['dopamine_image1'] = $imageName;
-        }
-        if ($request->hasFile('dopamine_image2')) { 
-            if ($lesson->dopamine_image2) {
-                $this->removeFile($lesson->dopamine_image2, 'dopamine_images');
-            }       
-            $image = $request->dopamine_image2;
-            $imageName = $this->uploadFile($image,'dopamine_images',true);
-            $data['dopamine_image2'] = $imageName;
-        }
-        if ($request->hasFile('dopamine_image3')) {  
-            if ($lesson->dopamine_image3) {
-                $this->removeFile($lesson->dopamine_image3, 'dopamine_images');
-            }           
-            $image = $request->dopamine_image3;
-            $imageName = $this->uploadFile($image,'dopamine_images',true);
-            $data['dopamine_image3'] = $imageName;
-        }
-        if ($request->hasFile('dopamine_image4')) {   
-            if ($lesson->dopamine_image4) {
-                $this->removeFile($lesson->dopamine_image4, 'dopamine_images');
-            }          
-            $image = $request->dopamine_image4;
-            $imageName = $this->uploadFile($image,'dopamine_images',true);
-            $data['dopamine_image4'] = $imageName;
-        }
+        // if ($request->hasFile('dopamine_image1')) { 
+        //     if ($lesson->dopamine_image1) {
+        //         $this->removeFile($lesson->dopamine_image1, 'dopamine_images');
+        //     }        
+        //     $image = $request->dopamine_image1;
+        //     $imageName = $this->uploadFile($image,'dopamine_images',true);
+        //     $data['dopamine_image1'] = $imageName;
+        // }
+        // if ($request->hasFile('dopamine_image2')) { 
+        //     if ($lesson->dopamine_image2) {
+        //         $this->removeFile($lesson->dopamine_image2, 'dopamine_images');
+        //     }       
+        //     $image = $request->dopamine_image2;
+        //     $imageName = $this->uploadFile($image,'dopamine_images',true);
+        //     $data['dopamine_image2'] = $imageName;
+        // }
+        // if ($request->hasFile('dopamine_image3')) {  
+        //     if ($lesson->dopamine_image3) {
+        //         $this->removeFile($lesson->dopamine_image3, 'dopamine_images');
+        //     }           
+        //     $image = $request->dopamine_image3;
+        //     $imageName = $this->uploadFile($image,'dopamine_images',true);
+        //     $data['dopamine_image3'] = $imageName;
+        // }
+        // if ($request->hasFile('dopamine_image4')) {   
+        //     if ($lesson->dopamine_image4) {
+        //         $this->removeFile($lesson->dopamine_image4, 'dopamine_images');
+        //     }          
+        //     $image = $request->dopamine_image4;
+        //     $imageName = $this->uploadFile($image,'dopamine_images',true);
+        //     $data['dopamine_image4'] = $imageName;
+        // }
 
         $lessons = Lesson::all();
         $this->sortItems($lessons, $lesson->order, $request->order);
@@ -122,23 +121,24 @@ class LessonController extends Controller
 
 
     public function destroy(Lesson $lesson){
-        if($lesson->listExercise()->exists()){
+        // checking has or no child exercise
+        if($lesson->exerciseType1()->exists() || $lesson->exerciseType2()->exists() || $lesson->exerciseType3()->exists() || $lesson->exerciseType4()->exists() || $lesson->exerciseType5()->exists() || $lesson->exerciseType6()->exists() || $lesson->exerciseType7()->exists() || $lesson->exerciseType8()->exists() || $lesson->exerciseType9()->exists() || $lesson->exerciseType10()->exists() || $lesson->exerciseType11()->exists()){
             return redirect()->route('lessons')->with('alert','Lesson has exercise and cannot be deleted.');
         }
 
 
-        if ($lesson->dopamine_image1) {
-            $this->removeFile($lesson->dopamine_image1, 'dopamine_images');
-        } 
-        if ($lesson->dopamine_image2) {
-            $this->removeFile($lesson->dopamine_image2, 'dopamine_images');
-        } 
-        if ($lesson->dopamine_image3) {
-            $this->removeFile($lesson->dopamine_image3, 'dopamine_images');
-        } 
-        if ($lesson->dopamine_image4) {
-            $this->removeFile($lesson->dopamine_image4, 'dopamine_images');
-        } 
+        // if ($lesson->dopamine_image1) {
+        //     $this->removeFile($lesson->dopamine_image1, 'dopamine_images');
+        // } 
+        // if ($lesson->dopamine_image2) {
+        //     $this->removeFile($lesson->dopamine_image2, 'dopamine_images');
+        // } 
+        // if ($lesson->dopamine_image3) {
+        //     $this->removeFile($lesson->dopamine_image3, 'dopamine_images');
+        // } 
+        // if ($lesson->dopamine_image4) {
+        //     $this->removeFile($lesson->dopamine_image4, 'dopamine_images');
+        // } 
         $orderDeletedRow = $lesson->order;
         $delete_success = $lesson->delete();
 

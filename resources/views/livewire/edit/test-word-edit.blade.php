@@ -11,7 +11,6 @@
                 <div class="flex flex-row w-full gap-6 mb-4">
                     <x-form.edit.chapters-option  :chapters="$chapters" :locales="$locales"/>
                     <x-form.edit.lessons-option :lessons="$lessons" :locales="$locales" :switch_lesson="$switch_lesson"/>
-                    <x-form.edit.exercises-option :exercises="$exercises" :exerciseId="$exercise_id" :locales="$locales" :switch_exercise="$switch_exercise" />
                 </div>
                 @foreach ($locales as $locale)
                     <x-form.edit-input :name="'translations_word['.$locale->locale.']'" :value="$testWord->getTranslation('translations_word',$locale->locale)" :labelText="'Test word '. $locale->name" :errorMessage="$errors->get('translations_word.' . $locale->locale)" />
@@ -22,9 +21,11 @@
                 </div>
             </div>
         
-            <div class="mt-2">
+            <div class="my-4 flex gap-4">
                 <x-form.edit-input name="en_correct_text" :value="$testWord->en_correct_text" labelText="English correct text" :errorMessage="$errors->get('en_correct_text')" />
                 <x-form.edit-input name="en_incorrect_text" :value="$testWord->en_incorrect_text" labelText="English incorrect text" :errorMessage="$errors->get('en_incorrect_text')" />
+            </div>
+            <div class="mt-2">
                 <x-form.order :request="$testWords" :currentOrder="$testWord"></x-form.order>
                 <x-form.btn-submit name="update" />
             </div>

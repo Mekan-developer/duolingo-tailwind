@@ -47,9 +47,8 @@ class SpellingController extends Controller
     }
 
     public function edit(Spelling $spelling){
-        $lessons = Lesson::where('chapter_id', $spelling->chapter_id)->whereHas('listExercise')->orderBy('order')->get();
-        $exercises = List_exercise::where('lesson_id', $spelling->lesson_id)->orderBy('order')->get();
-        return view("pages.allExercises.spelling.edit")->with("spelling",$spelling)->with("lessons",$lessons)->with("exercises", $exercises);
+        $lessons = Lesson::where('chapter_id', $spelling->chapter_id)->orderBy('order')->get();
+        return view("pages.allExercises.spelling.edit")->with("spelling",$spelling)->with("lessons",$lessons);
     }
 
     public function update(SpellingRequest $request, Spelling $spelling) {

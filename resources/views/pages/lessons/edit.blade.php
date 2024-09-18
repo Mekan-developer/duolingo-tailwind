@@ -15,17 +15,6 @@
                     @endforeach
                 </select>
                 <x-form.edit-input name="name" :value="$lesson->name" labelText="lesson name" :errorMessage="$errors->get('name')" />
-            {{-- @foreach ($locales as $locale)
-                <x-form.edit-input :name="'title['.$locale->locale.']'" :value="$lesson->getTranslation('title',$locale->locale)" :labelText="'lesson '. $locale->name" :errorMessage="$errors->get('title.' . $locale->locale)" />
-            @endforeach --}}
-            <div class="flex flex-row justify-between gap-2 my-2">
-                @for ($i = 1; $i < 5; $i++)
-                    <div class="flex-1">
-                        @include('includes.exerciseParts.create.image_file',['label' => 'button'.$i, 'title' => 'Upload dopamine'.$i, 'name' => 'dopamine_image'.$i,'message' => 'message'.$i ])
-                        <x-input-error :messages="$errors->get('dopamine_image'.$i)" class="mt-2" />
-                    </div>
-                @endfor
-            </div>
             <x-form.order :request="$lessons" :currentOrder="$lesson"></x-form.order>
             <button type="submit" class="w-full py-4 bg-[var(--bg-color-active)] rounded-md text-white text-[18px]"> save </button>
         </form>

@@ -40,9 +40,8 @@ class ListeningController extends Controller
     }
 
     public function edit(Listening $listening){
-        $lessons = Lesson::where('chapter_id', $listening->chapter_id)->whereHas('listExercise')->orderBy('order')->get();
-        $exercises = List_exercise::where('lesson_id', $listening->lesson_id)->orderBy('order')->get();
-        return view("pages.allExercises.listening.edit")->with("listening",$listening)->with("lessons",$lessons)->with("exercises", $exercises);
+        $lessons = Lesson::where('chapter_id', $listening->chapter_id)->orderBy('order')->get();
+        return view("pages.allExercises.listening.edit")->with("listening",$listening)->with("lessons",$lessons);
     }
 
     public function update(ListeningRequest $request, Listening $listening) {
@@ -61,7 +60,6 @@ class ListeningController extends Controller
         }
         $listening->update($data);
         return redirect()->route('listening.index')->with('success','listening audio successfully updated!');
-
     }
 
     public function destroy(Listening $listening){

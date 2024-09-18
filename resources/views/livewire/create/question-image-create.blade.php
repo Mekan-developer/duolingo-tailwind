@@ -8,10 +8,12 @@
             @csrf
             <div class="px-4 py-6 mb-2 bg-white rounded-sm">
                 @include('includes.exerciseParts.create.options')
-                @include('includes.exerciseParts.create.english_text',['name'=>'correct_text','title' => 'English correct text','placeholder' => 'correct text']) 
-                @include('includes.exerciseParts.create.english_text',['name'=>'incorrect_text','title' => 'English incorrect text','placeholder' => 'incorrect text']) 
-
-                <div class="flex flex-row w-full gap-10">
+                <div class="flex flex-row gap-6 w-full">
+                    @include('includes.exerciseParts.create.english_text',['name'=>'correct_text','title' => 'English correct text','placeholder' => 'correct text']) 
+                    @include('includes.exerciseParts.create.english_text',['name'=>'incorrect_text','title' => 'English incorrect text','placeholder' => 'incorrect text'])     
+                </div>
+              
+                <div class="flex flex-row w-full gap-6">
                     @include('includes.exerciseParts.create.image_file')
                     @include('includes.exerciseParts.create.sound_file')
                 </div>

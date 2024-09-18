@@ -24,11 +24,11 @@ class GrammarRequest extends FormRequest
         $rules = [
             'grammar_theory.*' => 'required|string',
             'text.*' => 'required|string',
+            'hint.*' => 'nullable|string',
             'text_correct_parts.*' => 'required|string',
             'text_incorrect_parts.*' => 'required|string',            
             'chapter_id'=> 'required|exists:chapters,id',
             'lesson_id' => 'required|exists:lessons,id',
-            'exercise_id' => 'required|exists:list_exercises,id',
             'status' => 'nullable',
             'order' => 'nullable|integer'
         ];
