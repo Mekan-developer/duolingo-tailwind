@@ -117,25 +117,10 @@
                 }
             }
         },
-        "/exercises/video": {
-            "get": {
-                "tags": [
-                    "3.video (2.Видео)"
-                ],
-                "summary": "second task of exercise",
-                "description": "второе задание упражнения, Видео",
-                "operationId": "bf01c6ec22a668bf7d87269da9c392c4",
-                "responses": {
-                    "200": {
-                        "description": "video retrived successfully"
-                    }
-                }
-            }
-        },
         "/exercises/translation-test1": {
             "get": {
                 "tags": [
-                    "3.Vocabulary (3.Лексика)"
+                    "2.Vocabulary (2.Лексика)"
                 ],
                 "summary": "third task of exercise",
                 "description": "третье задание упражнения, Лексика",
@@ -143,6 +128,21 @@
                 "responses": {
                     "200": {
                         "description": "translation-test1 retrived successfully"
+                    }
+                }
+            }
+        },
+        "/exercises/video": {
+            "get": {
+                "tags": [
+                    "3.video (3.Видео)"
+                ],
+                "summary": "second task of exercise",
+                "description": "второе задание упражнения, Видео",
+                "operationId": "bf01c6ec22a668bf7d87269da9c392c4",
+                "responses": {
+                    "200": {
+                        "description": "video retrived successfully"
                     }
                 }
             }
@@ -177,17 +177,17 @@
                 }
             }
         },
-        "/exercises/phonetics": {
+        "/exercises/vocabulary-spelling": {
             "get": {
                 "tags": [
-                    "6.phonetics (6.Произношение)"
+                    "6.Vocabulary with spelling, (6.Лексика с орфографией)"
                 ],
-                "summary": "sixth task of exercise",
-                "description": "шестое задание упражнения, phonetics",
-                "operationId": "3bac4ddc5f53e26c93bceb9066edbbf8",
+                "summary": "eleventh task of the exercise",
+                "description": "одиннадцатое задание учения, Лексика с орфографией",
+                "operationId": "377a945a18e172a6a04f7850308cf758",
                 "responses": {
                     "200": {
-                        "description": "phonetics retrived successfully"
+                        "description": "vocabulary-spelling retrived successfully"
                     }
                 }
             }
@@ -252,25 +252,10 @@
                 }
             }
         },
-        "/exercises/vocabulary-spelling": {
-            "get": {
-                "tags": [
-                    "11.Vocabulary with spelling, (11.Лексика с орфографией)"
-                ],
-                "summary": "eleventh task of the exercise",
-                "description": "одиннадцатое задание учения, Лексика с орфографией",
-                "operationId": "377a945a18e172a6a04f7850308cf758",
-                "responses": {
-                    "200": {
-                        "description": "vocabulary-spelling retrived successfully"
-                    }
-                }
-            }
-        },
         "/exercises/listening": {
             "get": {
                 "tags": [
-                    "12.Listening, (12.Аудирование)"
+                    "11.Listening, (11.Аудирование)"
                 ],
                 "summary": "twelfth task of the exercise",
                 "description": "двенадцатое задание упражнения, Аудирование",
@@ -313,12 +298,12 @@
             "description": "1.vocabulary (1.Лексика)"
         },
         {
-            "name": "3.video (2.Видео)",
-            "description": "3.video (2.Видео)"
+            "name": "2.Vocabulary (2.Лексика)",
+            "description": "2.Vocabulary (2.Лексика)"
         },
         {
-            "name": "3.Vocabulary (3.Лексика)",
-            "description": "3.Vocabulary (3.Лексика)"
+            "name": "3.video (3.Видео)",
+            "description": "3.video (3.Видео)"
         },
         {
             "name": "4.translation (4.Перевод)",
@@ -329,8 +314,8 @@
             "description": "5.Vocabulary (5.Лексика)"
         },
         {
-            "name": "6.phonetics (6.Произношение)",
-            "description": "6.phonetics (6.Произношение)"
+            "name": "6.Vocabulary with spelling, (6.Лексика с орфографией)",
+            "description": "6.Vocabulary with spelling, (6.Лексика с орфографией)"
         },
         {
             "name": "7.Vocabulary with pronunciation, (7. Лексика с произношением)",
@@ -349,12 +334,8 @@
             "description": "10.Vocabulary, (10.Лексика)"
         },
         {
-            "name": "11.Vocabulary with spelling, (11.Лексика с орфографией)",
-            "description": "11.Vocabulary with spelling, (11.Лексика с орфографией)"
-        },
-        {
-            "name": "12.Listening, (12.Аудирование)",
-            "description": "12.Listening, (12.Аудирование)"
+            "name": "11.Listening, (11.Аудирование)",
+            "description": "11.Listening, (11.Аудирование)"
         }
     ]
 }

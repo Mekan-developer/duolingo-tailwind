@@ -23,7 +23,9 @@ class InformationController extends Controller
         $request->merge([
             'lessons' => json_encode($request->lesson_ids),
             'exercises' => json_encode($request->exercise_ids),
+            'part' => (int) $request->phonetics_type,
         ]);
+
 
         Information::create($request->all());
         return redirect()->route('information.index')->with('success','Information created successfully!');
@@ -37,6 +39,7 @@ class InformationController extends Controller
         $request->merge([
             'lessons' => json_encode($request->lesson_ids),
             'exercises' => json_encode($request->exercise_ids),
+            'part' => (int) $request->phonetics_type,
         ]);
 
         $information->update($request->all());

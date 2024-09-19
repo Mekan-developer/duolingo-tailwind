@@ -20,7 +20,6 @@ class ListeningResource extends JsonResource
             "chapter_id" => $this->chapter_id,
             "lesson_id" => $this->lesson_id,
             "exercise_id" => $this->exercise_id,
-            "type_id" => $this->type_id
         ];
     }
 }

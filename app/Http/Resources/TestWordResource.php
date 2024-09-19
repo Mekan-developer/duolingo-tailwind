@@ -16,13 +16,13 @@ class TestWordResource extends JsonResource
     {
         return [
             "id"=> $this->id,
-            "text" => $this->en_text,
-            'audio' => $this->getAudio(),
-            "translations" => $this->getTranslations('translations_word'),           
+            "question_word" => $this->getTranslations('translations_word'),
+            "correct_text" => $this->en_correct_text,
+            "incorrect_text" => $this->en_incorrect_text,
+            'audio' => $this->getAudio(),           
             "chapter_id" => $this->chapter_id,
             "lesson_id" => $this->lesson_id,
-            "exercise_id" => $this->exercise_id,
-            "type_id" => $this->type_id
+            "exercise_id" => $this->exercise_id
         ];
     }
 }

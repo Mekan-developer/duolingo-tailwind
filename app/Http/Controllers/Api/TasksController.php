@@ -49,11 +49,11 @@ class TasksController extends Controller
 
      /**
      * @OA\Get(
-     *      path="/exercises/translation-test1",
+     *      path="/exercises/translationA",
      *      tags={"2.Vocabulary (2.Лексика)"},
      *      summary="third task of exercise",
      *      description="третье задание упражнения, Лексика",
-     *      @OA\Response(response=200,description="translation-test1 retrived successfully")
+     *      @OA\Response(response=200,description="translationA retrived successfully")
      * )
      */
 
@@ -172,11 +172,11 @@ class TasksController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/exercises/translation-test2",
+     *      path="/exercises/translationB",
      *      tags={"10.Vocabulary, (10.Лексика)"},
      *      summary="tenth task of the exercise",
      *      description="десятое задание упражнения, Лексика",
-     *      @OA\Response(response=200,description="translation-test2 retrived successfully")
+     *      @OA\Response(response=200,description="translationB retrived successfully")
      * )
      */
 

@@ -10,9 +10,27 @@ class Exercise extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'type_id', 'order'
+        'name', 'type_id', 'order','image','audio'
     ];
 
+
+
+
+    public function getImage(){
+        if(file_exists(public_path('/storage/uploads/exercises/dephomine/'.$this->image)) && !is_null($this->image)){
+            return asset('storage/uploads/exercises/dephomine/'.$this->image);
+        }else{
+            return null;
+        }
+    }
+
+    public function getAudio(){
+        if(file_exists(public_path('/storage/uploads/exercises/audio/'.$this->audio)) && !is_null($this->audio)){
+            return asset('storage/uploads/exercises/audio/'.$this->audio);
+        }else{
+            return null;
+        }
+    }
 
     protected static function boot()
     {

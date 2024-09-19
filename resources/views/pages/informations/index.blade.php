@@ -23,23 +23,34 @@
                         @foreach($locales as $locale)
                             <th class="px-4 py-2 text-gray-900 whitespace-nowrap">Information {{ $locale->locale }}</th>
                         @endforeach
-                        <th class="px-4 py-2 text-gray-900 whitespace-nowrap">lesson ids</th>
+                        {{-- <th class="px-4 py-2 text-gray-900 whitespace-nowrap">lesson ids</th>
                         <th class="px-4 py-2 text-gray-900 whitespace-nowrap">exercise ids</th>
+                        <th class="px-4 py-2 text-gray-900 whitespace-nowrap">grammar part</th> --}}
                         <th class="px-4 py-2 text-gray-900 whitespace-nowrap">status</th>
                         <th class="px-4 py-2 text-gray-900 whitespace-nowrap">actions</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
                     @foreach ($informations as $information)
-                    <tr >
+                    <tr class="hover:bg-gray-50">
                         <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$information->id}}</td>
                         @foreach($locales as $locale)
                             <td class="px-4 py-2 text-center text-gray-900 whitespace-nowrap">
                                 {!! $information->translate('information', $locale->locale) !!}
                             </td>
                         @endforeach
-                        <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ implode(',',json_decode($information->lessons)) }}</td>
+                        {{-- <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ implode(',',json_decode($information->lessons)) }}</td>
                         <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ implode(',',json_decode($information->exercises)) }}</td>
+                        <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
+                            @if($information->part == 1)
+                                <span>Teory</span>
+                            @elseif($information->part == 2)
+                                <span>Practics</span>
+                            @else
+                                <span>-----</span>
+                            @endif
+                        
+                        </td> --}}
                         <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
                             <x-form.status route="information.active" modelName="information" :id="$information->id" :currentStatus="$information->status"/>
                         </td>

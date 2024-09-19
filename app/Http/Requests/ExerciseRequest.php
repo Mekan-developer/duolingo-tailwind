@@ -21,8 +21,11 @@ class ExerciseRequest extends FormRequest
      */
     public function rules(): array
     {
+        
         return [
-            'name' => 'required|string|max:255'
+            'name' => 'required|string|max:255',
+            'image' => 'nullable|file|mimes:webp,jpeg,png,jpg,gif,svg|max:10240',
+            'audio' => 'nullable|file|mimes:mp3|max:10240',
         ];
     }
 }

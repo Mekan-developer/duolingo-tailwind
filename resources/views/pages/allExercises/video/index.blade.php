@@ -22,7 +22,7 @@
         <div class="flex-1 overflow-x-auto overflow-hidden overflow-y-auto  h-[700px] " >
             <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
-                    <tr>                        
+                    <tr class="hover:bg-gray-50">                        
                         <th class="px-4 py-2 text-gray-900 whitespace-nowrap">id</th>
                         <th class="px-4 py-2 text-gray-900 whitespace-nowrap">video</th>
                         <th class="px-4 py-2 text-gray-900 whitespace-nowrap">chapter</th>

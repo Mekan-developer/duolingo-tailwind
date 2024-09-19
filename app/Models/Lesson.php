@@ -14,24 +14,10 @@ class Lesson extends Model
     protected $fillable = ['title','name','chapter_id','order'];
     public $translatable = ['title'];
 
-    public function listExercise()
-    {
-        return $this->hasMany(List_exercise::class);
-    }
-
 
     public function chapter(){
         return $this->belongsTo(Chapter::class);
     }
-
-    // public function getDopamine($image){
-    //     if(file_exists(public_path('/storage/uploads/dopamine_images/'.$image)) && !is_null($image)){
-    //         return asset('/storage/uploads/dopamine_images/'.$image);
-    //     }else{
-    //         return null;
-    //     }
-    // }
-
 
     protected static function boot()
     {

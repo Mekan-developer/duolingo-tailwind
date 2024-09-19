@@ -16,13 +16,14 @@ class QuestionImageResource extends JsonResource
     {
         return [
             "id"=> $this->id,
-            "text" => $this->en_text,
+            "correct_text" => $this->correct_text,
+            "incorrect_text" => $this->incorrect_text,
             'image' => $this->getImage(),
             'audio' => $this->getAudio(),            
             "chapter_id" => $this->chapter_id,
             "lesson_id" => $this->lesson_id,
             "exercise_id" => $this->exercise_id,
-            "type_id" => $this->type_id
+            // "type_id" => $this->type_id
         ];
     }
 }

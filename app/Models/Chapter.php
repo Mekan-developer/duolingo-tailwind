@@ -18,15 +18,10 @@ class Chapter extends Model
         return $this->hasMany(Lesson::class);
     }
 
-    public function exercise()
-    {
-        return $this->hasMany(List_exercise::class);
-    }
-    
-    public function lessonOption()
-    {
-        return $this->hasMany(Lesson::class)->whereHas('listExercise');
-    }
+    // public function exercise()
+    // {
+    //     return $this->hasMany(Exercise::class);
+    // }
 
     protected static function boot()
     {

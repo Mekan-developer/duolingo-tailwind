@@ -14,8 +14,8 @@
       @foreach ($lessons as $lesson)
         <li>
           <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-            <input id="checkbox-item-{{$lesson->created_at}}" name="lesson_ids[]" wire:model.live="lesson_ids" type="checkbox" value="{{$lesson->id}}" class="w-4 h-4 text-[#57BE99] bg-gray-100 border-gray-300 rounded focus:ring-[#57BE99]">
-            <label for="checkbox-item-{{$lesson->created_at}}" class="w-full ms-2 text-sm font-medium text-[#57BE99] rounded dark:text-gray-300">{{ $lesson->name }}</label>
+                <input id="checkbox-item-{{$lesson->created_at}}" name="lesson_ids[]" wire:model.live="lesson_ids" type="checkbox" value="{{$lesson->id}}" class="w-4 h-4 text-[#57BE99] bg-gray-100 border-gray-300 rounded focus:ring-[#57BE99]">
+                <label for="checkbox-item-{{$lesson->created_at}}" class="w-full ms-2 text-sm font-medium text-[#57BE99] rounded dark:text-gray-300">{{ $lesson->name }}</label>
           </div>
         </li>
       @endforeach

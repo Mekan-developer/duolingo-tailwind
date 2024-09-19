@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ExerciseRequest;
 use App\Models\Exercise;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ExerciseController extends Controller
 {
@@ -37,7 +38,25 @@ class ExerciseController extends Controller
         $exercises = Exercise::all();
         $this->sortItems($exercises, $exercise->order, $request->order);
 
-        $exercise->update($request->all());
+        $data = $request->all();
+        if ($request->hasFile('image')) { 
+            if ($exercise->image) 
+                $this->removeFile($exercise->image, 'exercises/dephomine');       
+            $image = $request->image;
+            $imageName = $this->uploadFile($image,'exercises/dephomine');
+            $data['image'] = $imageName;
+        }
+        if ($request->hasFile('audio')) {
+            if ($exercise->audio) 
+                $this->removeFile($exercise->audio, 'exercises/audio');
+            $random = hexdec(uniqid());
+            $filename = $random . '.' . $request->audio->extension();
+            Storage::disk('exercises_audio')->putFileAs('', $request->audio,$filename);
+            $data['audio'] = $filename;
+        }
+
+
+        $exercise->update($data);
 
         return redirect()->route('exercises')->with('success','exercise updated successfully!');
     }

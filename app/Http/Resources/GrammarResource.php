@@ -15,14 +15,14 @@ class GrammarResource extends JsonResource
     public function toArray(Request $request): array
     {
         //  'grammar_theory','text','text_correct_parts','text_incorrect_parts','audio','chapter_id','lesson_id','exercise_id','status','order'
-         
+        
         return [
             "id"=> $this->id,  
             "theory_text" => $this->getTranslations('grammar_theory'),
             "^^^^^^^^^^^" => "^^^^^^^^^^",
             "practice_text" => $this->getTranslations("text"),
-            "practice_text_correct" => $this->text_correct_parts,
-            "practice_text_incorrect" => $this->text_incorrect_parts,
+            "practice_text_correct" => json_decode($this->text_correct_parts),
+            "practice_text_incorrect" => json_decode($this->text_incorrect_parts),
             'audio' => $this->getSound(),         
             "chapter_id" => $this->chapter_id,
             "lesson_id" => $this->lesson_id,

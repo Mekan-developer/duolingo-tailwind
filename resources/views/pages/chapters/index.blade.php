@@ -26,7 +26,7 @@
                     </thead>
                     <tbody class="divide-y divide-gray-200">
                         @foreach ($chapters as $chapter)
-                        <tr>
+                        <tr class="hover:bg-gray-50">
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$chapter->id}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$chapter->name}}</td>                           
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$chapter->order}}</td>

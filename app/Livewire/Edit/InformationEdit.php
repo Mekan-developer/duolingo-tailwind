@@ -3,6 +3,7 @@
 namespace App\Livewire\Edit;
 
 use App\Models\Chapter;
+use App\Models\Exercise;
 use App\Models\Language;
 use App\Models\Lesson;
 use App\Models\List_exercise;
@@ -12,15 +13,16 @@ class InformationEdit extends Component
 {
 
     public $exercise_ids = [],$lesson_ids = [];
-    public $queryExercise, $queryLesson; 
+    public $queryExercise, $queryLesson, $exercise_grammar_part; 
 
     public $info, $exercises;
     public function mount($information){
         $this->info = $information;
         $this->lesson_ids =json_decode($information->lessons);
         $this->exercise_ids =json_decode($information->exercises);
+        $this->exercise_grammar_part = $information->part;
 
-        $this->exercises = List_exercise::whereIn("lesson_id",$this->lesson_ids)->get();
+        $this->exercises = Exercise::All();
         
         
     }
@@ -45,9 +47,9 @@ class InformationEdit extends Component
     public function updated(){
         if(!empty($this->lesson_ids)){
             if(isset($this->queryExercise)){
-                $this->exercises = List_exercise::whereIn('lesson_id',$this->lesson_ids)->where('name', 'like', '%' . $this->queryExercise . '%')->with('lesson')->orderBy('order')->get();
+                $this->exercises = Exercise::where('name', 'like', '%' . $this->queryExercise . '%')->orderBy('order')->get();
            }else{
-                $this->exercises = List_exercise::whereIn('lesson_id',$this->lesson_ids)->with('lesson')->orderBy('order')->get();
+                $this->exercises = Exercise::orderBy('order')->get();
            }
         }else{
             $this->exercises = [];

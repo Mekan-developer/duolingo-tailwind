@@ -24,7 +24,7 @@
                 </thead>
                 <tbody class="divide-y divide-gray-200">
                     @foreach ($languages as $language)
-                        <tr>
+                        <tr class="hover:bg-gray-50">
                             <td class="px-4 py-2 text-center text-gray-900 whitespace-nowrap">{{ $language->id }}</td>
                             <td class="px-4 py-2 text-center text-gray-900 whitespace-nowrap">{{ $language->name }}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $language->native }}</td>
@@ -49,7 +49,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="bg-[var(--bg-color-non-active)] p-4 rounded-sm w-auto">
+        <div class="bg-white p-4 rounded-lg w-auto">
             <form  action="{{ isset($lang['edit']) ? route('language.update') : route('language.store') }}" 
             method= "POST" class="w-full" enctype="multipart/form-data" onsubmit="disableButton()">
                 @csrf
@@ -59,22 +59,22 @@
                 @endisset
                 <div class="mb-4">
                     <label for="name" class="block mb-2 text-sm text-gray-600">name</label>
-                    <input type="text" value="{{ isset($lang['edit']) ? $lng->name : old('name') }}" id="name" name="name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="name" required>
+                    <input type="text" value="{{ isset($lang['edit']) ? $lng->name : old('name') }}" id="name" name="name" class="w-full px-4 py-2 border rounded-md bg-gray-100  focus:ring-[var(--bg-color-active)]" placeholder="name" required>
                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
                 </div>
                 <div class="mb-4">
                     <label for="native" class="block mb-2 text-sm text-gray-600">native</label>
-                    <input type="text" id="native" value="{{ isset($lang['edit']) ? $lng->native : old('native') }}"  name="native" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="native" required>
+                    <input type="text" id="native" value="{{ isset($lang['edit']) ? $lng->native : old('native') }}"  name="native" class="w-full px-4 py-2 border rounded-md bg-gray-100  focus:ring-[var(--bg-color-active)]" placeholder="native" required>
                     <x-input-error :messages="$errors->get('native')" class="mt-2" />
                 </div>
                 <div class="mb-4">
                     <label for="locale" class="block mb-2 text-sm text-gray-600">locale</label>
-                    <input type="text" id="locale" value="{{ isset($lang['edit']) ? $lng->locale : old('locale') }}" name="locale" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="ru" required>
+                    <input type="text" id="locale" value="{{ isset($lang['edit']) ? $lng->locale : old('locale') }}" name="locale" class="w-full px-4 py-2 border rounded-md bg-gray-100  focus:ring-[var(--bg-color-active)]" placeholder="ru" required>
                     <x-input-error :messages="$errors->get('locale')" class="mt-2" />
                 </div>
                 <div class="mb-4">
                     <label for="flag" class="block mb-2 text-sm text-gray-600">flag</label>
-                    <input type="file" id="flag" name="flag" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500" {{ isset($lang['edit'])? '' : `required` }} >
+                    <input type="file" id="flag" name="flag" class="w-full px-4 py-2 border rounded-md bg-gray-100  focus:ring-[var(--bg-color-active)]" {{ isset($lang['edit'])? '' : `required` }} >
                     <x-input-error :messages="$errors->get('flag')" class="mt-2" />
                 </div>
                 @isset($lang['edit']) 

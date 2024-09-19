@@ -55,6 +55,13 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'throw' => false,
         ],
+        'exercises_audio' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/uploads/exercises/audio'),
+            'url' => env('APP_URL') . '/storage/uploads/exercises/audio',
+            'visibility' => 'public',
+        ],
+
         'vocabulary_audio' => [
             'driver' => 'local',
             'root' => storage_path('app/public/uploads/vocabulary/audio'),

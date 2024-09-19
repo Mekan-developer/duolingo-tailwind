@@ -21,6 +21,9 @@ class GrammarTheoryEdit extends Component
     
     public function mount($grammar,$lessons,)
     {   
+        // $text_correct_parts = json_decode($grammarExamples->text_correct_parts,true);
+        // $text_incorrect_parts = json_decode($grammarExamples->text_incorrect_parts,true);
+        
         $this->grammarExamples = json_decode($grammar);
         $this->grammar = $grammar;   
 

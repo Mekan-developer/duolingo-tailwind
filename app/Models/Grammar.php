@@ -15,7 +15,7 @@ class Grammar extends Model
         'grammar_theory','text','hint','text_correct_parts','text_incorrect_parts','audio','chapter_id','lesson_id','exercise_id','status','order'
     ];
 
-    public $translatable = ['grammar_theory','text','hint','text_correct_parts','text_incorrect_parts'];
+    public $translatable = ['grammar_theory','text','hint'];
 
     public function Exercise(){
         return $this->belongsTo(Exercise::class);

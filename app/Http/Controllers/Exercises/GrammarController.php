@@ -20,6 +20,7 @@ class GrammarController extends Controller
         $data = $this->selectOPtionOrderExercise($request,$grammars,'grammars');
         $textPartCounts = DB::table('grammars')->selectRaw('MAX(JSON_LENGTH(text_correct_parts)) as max_length')->value('max_length');
 
+
         return view("pages.allExercises.grammar_theory.index",$data,compact('textPartCounts'));
     }
 
@@ -30,7 +31,10 @@ class GrammarController extends Controller
     }
 
     public function store(GrammarRequest $request){
-        
+        $request->merge([
+            'text_correct_parts' => json_encode($request->text_correct_parts),
+            'text_incorrect_parts' => json_encode($request->text_incorrect_parts)
+        ]);
         if ($request->hasFile('audio')) {
             $random = hexdec(uniqid());
             $filename = $random . '.' . $request->audio->extension();
@@ -45,7 +49,7 @@ class GrammarController extends Controller
 
     public function edit(Grammar $grammar){
         $lessons = Lesson::where('chapter_id', $grammar->chapter_id)->orderBy('order')->get();
-
+       
         return view("pages.allExercises.grammar_theory.edit")->with("grammar",$grammar)->with("lessons",$lessons);
     }
 
@@ -53,23 +57,41 @@ class GrammarController extends Controller
         $grammars = Grammar::all();
         $this->sortItems($grammars, $grammar->order, $request->order);//for ordering elements
 
+        $request->merge([
+            'text_correct_parts' => json_encode($request->text_correct_parts),
+            'text_incorrect_parts' => json_encode($request->text_incorrect_parts)
+        ]);
+
         $data = $request->all();
         
-        // removing grammar start
-        $text_correct_parts = $grammar->getAttributes()['text_correct_parts']; 
+        // Removing grammar start
+        $text_correct_parts = $grammar->text_correct_parts; // Assuming 'text_correct_parts' is a JSON column
         $text_correct_partsArray = json_decode($text_correct_parts, true); 
-        $countRemoveElement = count(array_keys($text_correct_partsArray));
-        
-        if($request->removeInputNumber > 0){
+        $countRemoveElement = count(array_keys($text_correct_partsArray)); 
+
+        if ($request->removeInputNumber > 0) {
             $removeLastItem = $request->removeInputNumber;
-            while($removeLastItem > 0){
-                $grammar->forgetTranslation('text_correct_parts', $countRemoveElement);
-                $grammar->forgetTranslation('text_incorrect_parts', $countRemoveElement);
-                $grammar->save();
-                $removeLastItem--; $countRemoveElement--;
+
+            while ($removeLastItem > 0 && $countRemoveElement > 0) {
+                // Remove the last item from the JSON array
+                unset($text_correct_partsArray[$countRemoveElement]);
+
+                // Repeat for 'text_incorrect_parts' if applicable
+                $text_incorrect_parts = $grammar->text_incorrect_parts;
+                $text_incorrect_partsArray = json_decode($text_incorrect_parts, true);
+                unset($text_incorrect_partsArray[$countRemoveElement]);
+
+                // Decrement counters
+                $removeLastItem--;
+                $countRemoveElement--;
             }
+
+            // Save the updated JSON arrays back to the database
+            $grammar->text_correct_parts = json_encode($text_correct_partsArray);
+            $grammar->text_incorrect_parts = json_encode($text_incorrect_partsArray);
+            $grammar->save();
         }
-        // removing grammar end
+        // Removing grammar end
 
         if ($request->hasFile('audio')) {
             if ($grammar->audio) {

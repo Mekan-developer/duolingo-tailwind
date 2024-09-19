@@ -16,11 +16,11 @@ class VideoResource extends JsonResource
     {
         return [
             "id"=> $this->id,
-            'audio' => $this->getVideo(),
+            'video' => $this->getVideo(),
             "chapter_id" => $this->chapter_id,
             "lesson_id" => $this->lesson_id,
             "exercise_id" => $this->exercise_id,
-            "type_id" => $this->type_id            
+            // "type_id" => $this->type_id            
         ];
     }
 }

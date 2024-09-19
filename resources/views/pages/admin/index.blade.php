@@ -20,7 +20,7 @@
                 </thead>
                 <tbody class="divide-y divide-gray-200">
                     @foreach ($users as $use)
-                    <tr>
+                    <tr class="hover:bg-gray-50">
                         <td class="px-4 py-2 text-center text-gray-900 whitespace-nowrap">{{ $use->id }}</td>
                         <td class="px-4 py-2 text-center text-gray-900 whitespace-nowrap">{{ $use->name }}</td>
                         <td class="px-4 py-2 text-center text-gray-900 whitespace-nowrap">{{ $use->email }}</td>

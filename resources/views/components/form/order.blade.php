@@ -3,7 +3,7 @@
         'currentOrder'
     ])
 
-<div>
+<div class="my-2">
     <div class="flex justify-end w-full mb-2">
         <div class="flex gap-2 items-center w-[100px]">
             <span>order</span>

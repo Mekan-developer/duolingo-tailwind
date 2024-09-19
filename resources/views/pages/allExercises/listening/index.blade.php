@@ -19,7 +19,6 @@
     @include('includes.exerciseParts.index.orderAllExercise',['route' => 'listening.index','title' => ' Listening audio'])
     <div class="relative flex gap-4">
         <div class="flex-1 overflow-hidden overflow-x-auto overflow-y-auto ">
-           
             <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
                     <tr>                        
@@ -35,28 +34,10 @@
                 </thead>
                 <tbody class="divide-y divide-gray-200">
                     @foreach ($listenings as $listening)
-                        <tr>
+                        <tr class="hover:bg-gray-50">
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$listening->id}}</td>
                             <td  class="px-6 py-4 ">
-                                <div data-audio-src="{{ $listening->getAudio() }}" class="p-1 text-white rounded-lg shadow-lg audio-player w-[200px]" >
-                                    <div class="flex flex-row items-center justify-between pl-1">
-                                            <div class="flex items-center justify-center p-3 text-gray-800 bg-cover rounded-sm playPauseBtn hover:text-[var(--bg-color-active)] focus:outline-none">
-                                               <span class="hidden pauseIcon">
-                                                    <i class='bx bx-pause text-[28px]'></i>
-                                                </span> 
-                                                <span class="playIcon">
-                                                    <i class='bx bx-play-circle text-[28px] opacity-60'></i>
-                                                </span>
-                                            </div>
-                                        <div class="items-start flex-1 pl-4">
-                                            <p class="text-sm text-gray-400 text-nowrap">test</p>
-                                            <div class="relative text-gray-400">
-                                                <input type="range" min="0" max="100" value="0" class="w-full h-2 bg-gray-400 rounded-lg appearance-none cursor-pointer progressBar">
-                                                <span class="currentTime">00:00</span> / <span class="duration">00:00</span> 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <x-admin.audio :getAudio="$listening->getAudio()"/>
                             </td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$listening->Chapter->name}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$listening->Lesson->name}}</td>
@@ -72,13 +53,11 @@
                     @endforeach
                 </tbody>
             </table>
-           
         </div>
         <div class="absolute w-full mt-2 top-full">
             {{$listenings->links()}}
            
         </div>
     </div>
-
 </div>
 @endsection

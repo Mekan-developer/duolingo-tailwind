@@ -61,7 +61,7 @@
                     </thead>
                     <tbody class="divide-y divide-gray-200">
                         @foreach ($list_exercises as $list_exercise)
-                        <tr>
+                        <tr class="hover:bg-gray-50">
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$list_exercise->id}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$list_exercise->name}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ $list_exercise->chapter->name }}</td>

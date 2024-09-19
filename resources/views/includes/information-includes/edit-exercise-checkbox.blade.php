@@ -12,16 +12,29 @@
     </div>
     <ul class="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200 scroll-container" >
       @if(isset($exercises) && $exercises != "")
-        @php $noRepeat=0; @endphp
         @foreach ($exercises as $exercise)
-          @if($exercise->lesson_id != $noRepeat)
-              <div class="text-[#57BE99] w-full text-center">{{$exercise->lesson->name}}</div>
-              @php $noRepeat = $exercise->lesson_id; @endphp
-          @endif
           <li>
             <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-              <input id="checkbox-item-{{$exercise->created_at}}" name="exercise_ids[]" wire:model="exercise_ids" type="checkbox" value="{{$exercise->id}}" class="w-4 h-4 text-[#57BE99] bg-gray-100 border-gray-300 rounded focus:ring-[#57BE99]">
-              <label for="checkbox-item-{{$exercise->created_at}}" class="w-full ms-2 text-sm font-medium text-[#57BE99] rounded dark:text-gray-300">{{ $exercise->name }}</label>
+              <div class="flex flex-row w-full">
+                <div class="flex">
+                  <input id="checkbox-item-{{$exercise->type_id}}" name="exercise_ids[]" wire:model.live="exercise_ids" type="checkbox" value="{{$exercise->id}}" class="w-4 h-4 text-[#57BE99] bg-gray-100 border-gray-300 rounded focus:ring-[#57BE99]">
+                  <label for="checkbox-item-{{$exercise->type_id}}" class="w-full ms-2 text-sm font-medium text-[#57BE99] rounded dark:text-gray-300">{{ $exercise->name }}</label>
+                </div>
+                @if ($exercise->type_id == 8 && in_array(8, $exercise_ids))
+                  <div class="flex-1 w-full flex justify-start gap-6 ml-4">
+                    <div>
+                      <input id="checkbox-item1-{{$exercise->type_id}}" name="phonetics_type" type="radio" value="1" @if($exercise_grammar_part == 1) checked @endif class="w-4 h-4 text-[#57BE99] bg-gray-100 border-gray-300 rounded focus:ring-[#57BE99]">
+                      <label for="checkbox-item1-{{$exercise->type_id}}" class="w-full ms-2 text-sm font-medium text-[#57BE99] rounded dark:text-gray-300">theory</label>
+                    </div>
+
+                    <div>
+                      <input id="checkbox-item2-{{$exercise->type_id}}" name="phonetics_type" type="radio" value="2" @if($exercise_grammar_part == 2) checked @endif class="w-4 h-4 text-[#57BE99] bg-gray-100 border-gray-300 rounded focus:ring-[#57BE99]">
+                      <label for="checkbox-item2-{{$exercise->type_id}}" class="w-full ms-2 text-sm font-medium text-[#57BE99] rounded dark:text-gray-300">practics</label>
+                    </div>
+                  </div>
+                @endif
+            </div>
+            
             </div>
           </li>
         @endforeach
