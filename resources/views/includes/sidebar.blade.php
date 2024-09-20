@@ -27,7 +27,7 @@
 
       <li>
         <a href="{{route('exercises')}}" class="{{ Request::is('all-exercises*') ? 'bg-[var(--bg-color-non-active)]  text-black' : '' }} block rounded-sm  px-4 py-2 text-sm font-medium hover:bg-gray-100 hover:text-gray-700">
-          Exercises
+          Exercise types
         </a>
       </li>
 

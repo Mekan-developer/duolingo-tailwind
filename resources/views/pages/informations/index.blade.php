@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('content')
 
-<div class="flex flex-col w-full relative">
+<div class="flex flex-col w-full relative h-full">
     <x-form.success/>
     <div class="flex flex-row justify-between w-full">
         <div class="m-4 text-[var(--bg-color-active)] font-bold text-[22px]">
@@ -14,7 +14,7 @@
         </div>
     </div>
 
-    <div class="flex gap-4">
+    <div class="flex flex-col justify-between h-full">
         <div class="flex-1 overflow-x-auto " >
             <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                 <thead class="ltr:text-left rtl:text-right">
@@ -23,9 +23,6 @@
                         @foreach($locales as $locale)
                             <th class="px-4 py-2 text-gray-900 whitespace-nowrap">Information {{ $locale->locale }}</th>
                         @endforeach
-                        {{-- <th class="px-4 py-2 text-gray-900 whitespace-nowrap">lesson ids</th>
-                        <th class="px-4 py-2 text-gray-900 whitespace-nowrap">exercise ids</th>
-                        <th class="px-4 py-2 text-gray-900 whitespace-nowrap">grammar part</th> --}}
                         <th class="px-4 py-2 text-gray-900 whitespace-nowrap">status</th>
                         <th class="px-4 py-2 text-gray-900 whitespace-nowrap">actions</th>
                     </tr>
@@ -39,18 +36,6 @@
                                 {!! $information->translate('information', $locale->locale) !!}
                             </td>
                         @endforeach
-                        {{-- <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ implode(',',json_decode($information->lessons)) }}</td>
-                        <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{ implode(',',json_decode($information->exercises)) }}</td>
-                        <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
-                            @if($information->part == 1)
-                                <span>Teory</span>
-                            @elseif($information->part == 2)
-                                <span>Practics</span>
-                            @else
-                                <span>-----</span>
-                            @endif
-                        
-                        </td> --}}
                         <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
                             <x-form.status route="information.active" modelName="information" :id="$information->id" :currentStatus="$information->status"/>
                         </td>
@@ -61,6 +46,9 @@
                 @endforeach
                 </tbody>
             </table>
+        </div>
+        <div class=" w-full my-2">
+            {{$informations->links()}}
         </div>
     </div>
 </div>

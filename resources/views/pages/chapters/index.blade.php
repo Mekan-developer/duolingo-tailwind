@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-    <div class="relative flex flex-col w-full">
+    <div class="relative flex flex-col w-full h-full">
         <x-form.success/>
         <x-alert/>
         <div class="flex flex-row justify-between w-full">
@@ -13,8 +13,8 @@
                 </div>
             </div>
         </div>
-        <div class="flex gap-4">
-            <div class="flex-1 overflow-x-auto " >
+        <div class="flex flex-col justify-between h-full">
+            <div class="flex-1  overflow-x-auto">
                 <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200">
                     <thead class="ltr:text-left rtl:text-right">
                         <tr>
@@ -43,6 +43,10 @@
                     </tbody>
                 </table>
             </div>
+            <div class="top-full w-full my-2 ">
+                {{$chapters->links()}}
+            </div>
         </div>
+
     </div>
 @endsection

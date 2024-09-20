@@ -7,10 +7,7 @@ use App\Http\Controllers\Api\ExerciseTypeController;
 use App\Http\Controllers\Api\InformationController;
 use App\Http\Controllers\Api\LanguageController;
 use App\Http\Controllers\Api\LessonController;
-use App\Http\Controllers\Api\ListExerciseController;
 use App\Http\Controllers\api\TasksController;
-use App\Http\Middleware\AuthenticateOnceWithBasicAuth;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 

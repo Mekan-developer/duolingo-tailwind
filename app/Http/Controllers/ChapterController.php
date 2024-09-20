@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class ChapterController extends Controller
 {
     public function index(){
-        $chapters = Chapter::orderBy("order")->get();
+        $chapters = Chapter::orderBy("order")->paginate(10);
         $locales = Language::where("status",1)->get("locale");
 
         return view("pages.chapters.index", compact("chapters","locales"));

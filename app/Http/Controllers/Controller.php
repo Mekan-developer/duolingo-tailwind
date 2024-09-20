@@ -13,7 +13,7 @@ use Intervention\Image\ImageManager;
 use OpenApi\Attributes as OA;
 #[
     OA\Info(version:"1.0.0", description:"Fusion Center Documentation", title:"Documentation"),
-    OA\Server(url:'http://127.0.0.1:8000/api',description:"local server"),
+    OA\Server(url:'http://192.168.0.114:8000/api',description:"local server"),
 ]
 // swagger
 abstract class Controller
@@ -23,25 +23,26 @@ abstract class Controller
         // create image manager with desired driver
         $manager = new ImageManager(new Driver());
         $random = hexdec(uniqid());
-        // $filename = $random . '.' . $file->extension();
-        $webpFilename = $random . '.webp';
+        $filename = $random . '.' . $file->extension();
+        // $webpFilename = $random . '.webp';
         $img = $manager->read($file);
 
-        if($icon)
-            $web_image_width = 100;
-        else
-            $web_image_width = 420;
+        // if($icon)
+        //     $web_image_width = 100;
+        // else
+        //     $web_image_width = 420;
         
 
-        $height = $img->height();
-        $width = $img->width();
-        $scale = $height / $width;
-        $web_image_height = $scale * $web_image_width;
+        // $height = $img->height();
+        // $width = $img->width();
+        // $scale = $height / $width;
+        // $web_image_height = $scale * $web_image_width;
 
         create_folder($path);
-        $web_img = $img->resize($web_image_width, $web_image_height);
-        $web_img->toWebp(90)->save(storage_path('app/public/uploads/'. $path .'/' . $webpFilename));
-        return $webpFilename;
+        // $web_img = $img->resize($web_image_width, $web_image_height);
+        $img->save(storage_path('app/public/uploads/'. $path .'/' . $filename));
+        // $web_img->toWebp(90)->save(storage_path('app/public/uploads/'. $path .'/' . $webpFilename));
+        return $filename;
     }
 
     protected function removeFile($file, $path)

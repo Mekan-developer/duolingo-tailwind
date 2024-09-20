@@ -106,7 +106,7 @@ class GrammarController extends Controller
 
 
         if($request->hintChecker == null){
-            $grammar->setTranslations('hint', []);
+            $grammar->forgetTranslations('hint', true);
         }
         
         try {

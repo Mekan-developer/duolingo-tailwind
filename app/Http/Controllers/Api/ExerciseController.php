@@ -11,8 +11,8 @@ class ExerciseController extends Controller
 {
      /**
      * @OA\Get(
-     *      path="/list-exercise",
-     *      tags={"list-exercise"},
+     *      path="/exercises",
+     *      tags={"exercises"},
      *      summary="Get all list-exercise",
      *      description="Получение всех список-упражнение",
      *      @OA\Response(response=200,description="list-exercise retrived successfully")

@@ -29,6 +29,7 @@
                             <th class="px-4 py-2 text-gray-900 whitespace-nowrap">text correct part {{$i}}</th>
                             <th class="px-4 py-2 text-gray-900 whitespace-nowrap">text incorrect part {{$i}}</th>
                         @endfor
+                        <th class="px-4 py-2 text-gray-900 whitespace-nowrap">hint</th>
                         <th class="px-4 py-2 text-gray-900 whitespace-nowrap">chapter</th>
                         <th class="px-4 py-2 text-gray-900 whitespace-nowrap">lesson</th>
                         <th class="px-4 py-2 text-gray-900 whitespace-nowrap">exercise</th>
@@ -60,6 +61,13 @@
                                 @else --- @endif
                             </td>
                             @endfor
+                            <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">
+                                @if($grammar->translate('hint',$locales[0]['locale']))
+                                    <span>yes</span>
+                                @else
+                                    <span>no</span>
+                                @endif
+                            </td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$grammar->Chapter->name}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$grammar->Lesson->name}}</td>
                             <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap">{{$grammar->Exercise->name}}</td>

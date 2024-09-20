@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\GrammarResource;
 use App\Http\Resources\ListeningResource;
-use App\Http\Resources\PhoneticResource;
 use App\Http\Resources\PronunciationResource;
 use App\Http\Resources\QuestionImageResource;
 use App\Http\Resources\SpellingResource;
@@ -18,7 +17,6 @@ use App\Http\Resources\VocabularyResource;
 use App\Models\AudioTranslation;
 use App\Models\Grammar;
 use App\Models\Listening;
-use App\Models\Phonetics;
 use App\Models\Pronunciation;
 use App\Models\QuestionImage;
 use App\Models\QuestionWord;
@@ -33,7 +31,7 @@ class TasksController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/exercises/vocabulary",
+     *      path="/exercise/vocabulary",
      *      tags={"1.vocabulary (1.Лексика)"},
      *      summary="first task of exercise",
      *      description="первое задание по упражнению",
@@ -49,7 +47,7 @@ class TasksController extends Controller
 
      /**
      * @OA\Get(
-     *      path="/exercises/translationA",
+     *      path="/exercise/translationA",
      *      tags={"2.Vocabulary (2.Лексика)"},
      *      summary="third task of exercise",
      *      description="третье задание упражнения, Лексика",
@@ -64,7 +62,7 @@ class TasksController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/exercises/video",
+     *      path="/exercise/video",
      *      tags={"3.video (3.Видео)"},
      *      summary="second task of exercise",
      *      description="второе задание упражнения, Видео",
@@ -79,7 +77,7 @@ class TasksController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/exercises/translation",
+     *      path="/exercise/translation",
      *      tags={"4.translation (4.Перевод)"},
      *      summary="fourth task of exercise",
      *      description="четвертый задание упражнения, Перевод",
@@ -94,7 +92,7 @@ class TasksController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/exercises/question-image",
+     *      path="/exercise/question-image",
      *      tags={"5.Vocabulary (5.Лексика)"},
      *      summary="fifth task of exercise",
      *      description="пятое задание упражнения, Лексика",
@@ -110,7 +108,7 @@ class TasksController extends Controller
     
     /**
      * @OA\Get(
-     *      path="/exercises/vocabulary-spelling",
+     *      path="/exercise/vocabulary-spelling",
      *      tags={"6.Vocabulary with spelling, (6.Лексика с орфографией)"},
      *      summary="eleventh task of the exercise",
      *      description="одиннадцатое задание учения, Лексика с орфографией",
@@ -126,7 +124,7 @@ class TasksController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/exercises/pronunciation",
+     *      path="/exercise/pronunciation",
      *      tags={"7.Vocabulary with pronunciation, (7. Лексика с произношением)"},
      *      summary="seventh task of exercise",
      *      description="седьмое задание упражнения,Лексика с произношением",
@@ -140,7 +138,7 @@ class TasksController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/exercises/grammar-theory",
+     *      path="/exercise/grammar-theory",
      *      tags={"8.grammar theory with practics, (8. теория грамматики с практикой)"},
      *      summary="eighth task of the exercise",
      *      description="восьмое задание упражнения, теория грамматики с практикой",
@@ -156,7 +154,7 @@ class TasksController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/exercises/audio-question",
+     *      path="/exercise/audio-question",
      *      tags={"9.Vocabulary, (9.Лексика)"},
      *      summary="ninth task of the exercise",
      *      description="девятое задание учения, Лексика",
@@ -172,7 +170,7 @@ class TasksController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/exercises/translationB",
+     *      path="/exercise/translationB",
      *      tags={"10.Vocabulary, (10.Лексика)"},
      *      summary="tenth task of the exercise",
      *      description="десятое задание упражнения, Лексика",
@@ -187,7 +185,7 @@ class TasksController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/exercises/listening",
+     *      path="/exercise/listening",
      *      tags={"11.Listening, (11.Аудирование)"},
      *      summary="twelfth task of the exercise",
      *      description="двенадцатое задание упражнения, Аудирование",

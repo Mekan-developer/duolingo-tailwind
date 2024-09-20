@@ -17,7 +17,6 @@ class ChapterResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name
-            // 'title' => $this->getTranslations('title')
         ];
     }
 }

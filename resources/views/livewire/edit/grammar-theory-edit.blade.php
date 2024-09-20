@@ -39,7 +39,7 @@
                             </div>
                         @endforeach
                     </div>
-                    @foreach ($grammarExamples->text_correct_parts as $key => $value)
+                    @foreach ($text_correct_parts as $key => $value)
                         <div class="grid grid-cols-2 gap-4 my-2 " wire:ignore>
                             <div class="flex flex-col w-full mb-2">
                                 {{-- @include('includes.exerciseParts.create.english_text',['name'=>'text_correct_parts[' . $i . ']','title' => 'text correct part '.($i),'placeholder' => 'text correct parts '.$i]) --}}
@@ -50,17 +50,17 @@
                             </div>
                             <div class="flex flex-row items-end mb-2 ">
                                 <div class="flex flex-col flex-1">
-                                    @include('includes.exerciseParts.edit.english_text',['name'=>'text_incorrect_parts['.$loop->iteration.']','title' => 'text_incorrect_parts','placeholder' => 'Text incorrect parts','value' => $grammarExamples->text_incorrect_parts->{$key}])
+                                    @include('includes.exerciseParts.edit.english_text',['name'=>'text_incorrect_parts['.$loop->iteration.']','title' => 'text_incorrect_parts','placeholder' => 'Text incorrect parts','value' => $text_incorrect_parts[$key]])
                                     
                                     @error("text_incorrect_parts.".$loop->iteration)
                                         <span class="-mt-4 text-xs text-red-600">text for incorrect words field is required</span>
                                     @enderror
                                 </div>  
-                                <div class="flex flex-col justify-end">
+                                <div class="flex flex-col justify-end cursor-pointer">
                                     @if($loop->iteration==1)                           
-                                        <a href="{{route('grammar.create')}}" wire:click.prevent="addTextField" class="text-white bg-[var(--bg-color-active)] ml-1 h-[42px] focus:ring-4 font-medium rounded-sm px-4 py-2 me-2 ">+</a>
+                                        <a wire:click.prevent="addTextField" class="transform active:scale-95 text-white bg-[var(--bg-color-active)] ml-1 h-[42px] focus:ring-4 font-medium rounded-sm px-4 py-2 me-2 ">+</a>
                                     @else 
-                                        <a href="{{route('grammar.create')}}" @if($maxTextCorrectPartsKey <= $key)  wire:click="removeFieldCount" wire:click.prevent="removeTextField({{$key}})" @endif  class="text-white bg-[var(--bg-color-active)] ml-1 h-[42px] focus:ring-4 font-medium rounded-sm px-4 py-2 me-2 ">-</a>
+                                        <a @if($maxTextCorrectPartsKey > 1) wire:click="removeFieldCount" wire:click.prevent="removeTextField({{$key}})" @endif  class="transform active:scale-95 text-white bg-[var(--bg-color-active)] ml-1 h-[42px] focus:ring-4 font-medium rounded-sm px-4 py-2 me-2 ">-</a>
                                     @endif
                                 </div>                          
                                 
@@ -73,7 +73,7 @@
                 {{-- hint (podskazka) for grammar practics --}}
                 <div class="w-full flex justify-end my-2">   
                     <label class="inline-flex items-center cursor-pointer">
-                        <input type="checkbox" wire:change='toggle' name='hintChecker' class="sr-only peer" @if($showDiv) checked @endif>
+                        <input type="checkbox" wire:change='toggle' name='hintChecker' class="sr-only peer fixed" @if($showDiv) checked @endif>
                         <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                         <span class="ms-3 text-md font-medium text-gray-900 dark:text-gray-300">hint</span>
                     </label>

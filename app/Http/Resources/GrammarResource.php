@@ -23,11 +23,12 @@ class GrammarResource extends JsonResource
             "practice_text" => $this->getTranslations("text"),
             "practice_text_correct" => json_decode($this->text_correct_parts),
             "practice_text_incorrect" => json_decode($this->text_incorrect_parts),
+            "hint" => json_decode($this->hint),
             'audio' => $this->getSound(),         
             "chapter_id" => $this->chapter_id,
             "lesson_id" => $this->lesson_id,
             "exercise_id" => $this->exercise_id,
-            "type_id" => $this->type_id
+            // "type_id" => $this->type_id
         ];
     }
 }

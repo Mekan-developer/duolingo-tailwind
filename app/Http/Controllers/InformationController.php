@@ -10,8 +10,8 @@ use Illuminate\Http\Request;
 class InformationController extends Controller
 {
     public function index(){
-        $informations = Information::all();
-        $locales = Language::all();
+        $informations = Information::paginate(10);
+        $locales = Language::orderBy('order')->get();
         return view("pages.informations.index",compact('informations','locales'));
     }
 

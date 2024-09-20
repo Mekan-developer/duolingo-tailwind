@@ -2,7 +2,7 @@
 <html lang="en">
     <x-admin.header title="duolingo" />
 <body>
-    <div class="flex w-full">
+    <div class="flex w-full h-full">
         <div>
             @include("includes.sidebar")
         </div>

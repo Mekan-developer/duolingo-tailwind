@@ -10,7 +10,7 @@
             </div>
             <div>
                 <div class="flex flex-row-reverse">
-                    <a href="{{route('video.create')}}" class="text-white bg-[var(--bg-color-active)] hover:bg-[#46b8c0] focus:ring-4 rounded-sm px-4 py-2 me-2 mb-2">+</a>
+                    <a href="{{route('video.create')}}" class="transform active:scale-95 text-white bg-[var(--bg-color-active)] hover:bg-[#46b8c0] focus:ring-4 rounded-sm px-4 py-2 me-2 mb-2">+</a>
                 </div>
             </div>
         </div>

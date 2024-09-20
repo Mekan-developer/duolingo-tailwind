@@ -7,9 +7,9 @@
         <form action="{{route('grammar.store')}}" method="post" enctype="multipart/form-data"  
         class="w-full mx-auto bg-[var(--bg-color-non-active)] p-6 rounded-md" onsubmit="disableButton()">
             @csrf 
-            <div class="flex flex-col gap-4 px-4 py-6 bg-gray-400 rounded-sm">
-                <p class="text-white">THEORY PART</p>
-                @include('includes.exerciseParts.create.options',['textColor'=> 'text-white'])
+            <div class="flex flex-col gap-4 px-4 py-6 bg-white rounded-sm">
+                <p class="teüt-blaçk">THEORY PART</p>
+                @include('includes.exerciseParts.create.options',['textColor'=> 'teüt-blaçk'])
                 <div class="grid grid-cols-2 gap-4" wire:ignore>
                     @foreach ($locales as $locale)
                         <div class="flex flex-col mt-1">
@@ -45,11 +45,11 @@
                                 <div class="flex flex-col flex-1">
                                         @include('includes.exerciseParts.create.english_text',['name' => 'text_incorrect_parts[' . $i . ']','oldName' => 'text_correct_parts.' . $i ,'title' => 'text incorrect part '.($i),'placeholder' => 'text incorrect parts '.$i])     
                                 </div>  
-                                <div class="flex flex-col justify-end">
+                                <div class="flex flex-col justify-end text-white">
                                     @if($i==1)                           
-                                        <a href="{{route('grammar.create')}}" wire:click.prevent="addTextField" class="text-white bg-[var(--bg-color-active)] ml-1 h-[42px] focus:ring-4 font-medium rounded-sm px-4 py-2 me-2 ">+</a>
+                                        <a wire:click.prevent="addTextField" class="transform active:scale-95 teüt-blaçk bg-[var(--bg-color-active)] ml-1 h-[42px] focus:ring-4 font-medium rounded-sm px-4 py-2 me-2 ">+</a>
                                     @else 
-                                        <a href="{{route('grammar.create')}}" wire:click.prevent="removeTextField" class="text-white bg-[var(--bg-color-active)] ml-1 h-[42px] focus:ring-4 font-medium rounded-sm px-4 py-2 me-2 ">-</a>
+                                        <a wire:click.prevent="removeTextField" class="transform active:scale-95 teüt-blaçk bg-[var(--bg-color-active)] ml-1 h-[42px] focus:ring-4 font-medium rounded-sm px-4 py-2 me-2 ">-</a>
                                     @endif
                                 </div>                          
                                 
@@ -70,28 +70,31 @@
                     @endfor
                     @include('includes.exerciseParts.create.sound_file',['name' => 'audio','label' => 'label' ,'message' => 'message'])
                 </div>
-
-                {{-- hint (podskazka) for grammar practics --}}
-                <div class="w-full flex justify-end my-2">   
-                    <label class="inline-flex items-center cursor-pointer">
-                        <input type="checkbox" wire:change='toggle' name="hint" class="sr-only peer">
-                        <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                        <span class="ms-3 text-md font-medium text-gray-900 dark:text-gray-300">hint</span>
-                    </label>
-                </div>
-{{-- {{dump(old('hint'))}} --}}
-                @if($showDiv)
-                    <div class="grid grid-cols-2 gap-4 mb-4">
-                        @foreach ($locales as $locale)
-                            <div class="flex flex-col w-full">
-                                <textarea name="hint[{{$locale->locale}}]" cols="30" rows="4" placeholder="Hint {{$locale->name}}" required>{{ old('hint.' . $locale->locale) }}</textarea>
-                                @error("hint.".$locale->locale)
-                                    <span class="text-xs text-red-600">{{ $locale->name }} text field is required</span>
-                                @enderror
-                            </div>
-                        @endforeach
+                <div>
+                    {{-- hint (podskazka) for grammar practics --}}
+                    <div class="w-full flex justify-end my-2">   
+                        <label class="inline-flex items-center cursor-pointer">
+                            <input type="checkbox" wire:change='toggle' name="hint" class="sr-only peer fixed" />
+                            <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                            <span class="ms-3 text-md font-medium text-gray-900 dark:text-gray-300">hint</span>
+                        </label>
                     </div>
-                @endif
+                    {{-- {{dump(old('hint'))}} --}}
+                    @if($showDiv)
+                        <div class="grid grid-cols-2 gap-4 mb-4">
+                            @foreach ($locales as $locale)
+                                <div class="flex flex-col w-full">
+                                    <textarea name="hint[{{$locale->locale}}]" cols="30" rows="4" placeholder="Hint {{$locale->name}}" required>{{ old('hint.' . $locale->locale) }}</textarea>
+                                    @error("hint.".$locale->locale)
+                                        <span class="text-xs text-red-600">{{ $locale->name }} text field is required</span>
+                                    @enderror
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+
+                
 
                 <x-form.btn-submit/>
             </div>
