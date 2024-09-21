@@ -14,7 +14,6 @@
             <x-admin.card icon="bx bx-world" route="language.index" title="languages" count="{{$languages}} languages" text="In this section you can manage all the Languages such as creating, deleting, editing and ordering:" />
         </div> 
     </div>
-    
 </div>
     
 @endsection

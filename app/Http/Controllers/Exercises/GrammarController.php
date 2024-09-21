@@ -53,7 +53,7 @@ class GrammarController extends Controller
         return view("pages.allExercises.grammar_theory.edit")->with("grammar",$grammar)->with("lessons",$lessons);
     }
 
-    public function update(GrammarRequest $request, Grammar $grammar){        
+    public function update(GrammarRequest $request, Grammar $grammar){       
         $grammars = Grammar::all();
         $this->sortItems($grammars, $grammar->order, $request->order);//for ordering elements
 

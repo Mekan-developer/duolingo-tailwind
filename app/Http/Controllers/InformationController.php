@@ -41,6 +41,11 @@ class InformationController extends Controller
             'exercises' => json_encode($request->exercise_ids),
             'part' => (int) $request->phonetics_type,
         ]);
+        if($request->part == 0){
+            $request->merge([
+                'part' => NULL
+            ]);
+        }
 
         $information->update($request->all());
 

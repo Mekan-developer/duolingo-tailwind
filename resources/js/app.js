@@ -15,6 +15,7 @@ tinymce.init({
     max_height: 320,  // Restrict the maximum height (requires autoresize plugin)
     autoresize_min_height: 300,  // Minimum height with autoresize
     autoresize_max_height: 320,  // Maximum height with autoresize
+    content_style: "body { background-color: #f0f0f0; }",
     setup: function (editor) {
         editor.on('change', function () {
           tinymce.triggerSave(); // This will sync the editor content with the underlying textarea

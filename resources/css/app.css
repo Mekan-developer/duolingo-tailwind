@@ -22,6 +22,11 @@ html, body{
 }
 
 
+.mceCostamizeColor { 
+  background: #e60000; 
+  color:#000;
+}
+
 /* scrolling design for overflows start */
 
 .scroll-container::-webkit-scrollbar {

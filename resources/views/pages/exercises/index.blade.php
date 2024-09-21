@@ -40,7 +40,7 @@
                             </td>
                             <td class="gap-2 px-4 py-2 text-center whitespace-nowrap">
                                  <a href="{{route('exercises.edit',['exercise'=>$exercise->id])}}">
-                                    <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] ">
+                                    <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-[text-color-active] mx-auto">
                                         <i class='bx bx-edit-alt text-[22px]'></i>
                                     </button>
                                 </a>

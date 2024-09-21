@@ -23,7 +23,7 @@
                 @if ($exercise->type_id == 8 && in_array(8, $exercise_ids))
                   <div class="flex-1 w-full flex justify-start gap-6 ml-4">
                     <div>
-                      <input id="checkbox-item1-{{$exercise->type_id}}" name="phonetics_type" type="radio" value="1" @if($exercise_grammar_part == 1) checked @endif class="w-4 h-4 text-[#57BE99] bg-gray-100 border-gray-300 rounded focus:ring-[#57BE99]">
+                      <input id="checkbox-item1-{{$exercise->type_id}}" name="phonetics_type" type="radio" value="1" @if($exercise_grammar_part != 2) checked @endif class="w-4 h-4 text-[#57BE99] bg-gray-100 border-gray-300 rounded focus:ring-[#57BE99]">
                       <label for="checkbox-item1-{{$exercise->type_id}}" class="w-full ms-2 text-sm font-medium text-[#57BE99] rounded dark:text-gray-300">theory</label>
                     </div>
 

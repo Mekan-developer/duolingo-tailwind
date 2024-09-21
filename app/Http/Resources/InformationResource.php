@@ -20,7 +20,9 @@ class InformationResource extends JsonResource
             "id"=> $this->id,
             "lessons" => $this->lessons,           
             "exercises" => $this->exercises, 
-            "informations" => $this->getTranslations('information')
+            "informations" => $this->getTranslations('information'),
+            "part" => $this->part, 
+
         ];
     }
 }

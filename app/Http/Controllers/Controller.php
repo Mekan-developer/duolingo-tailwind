@@ -14,6 +14,7 @@ use OpenApi\Attributes as OA;
 #[
     OA\Info(version:"1.0.0", description:"Fusion Center Documentation", title:"Documentation"),
     OA\Server(url:'http://192.168.0.114:8000/api',description:"local server"),
+    OA\Server(url:'http://127.0.0.1:8000/api',description:"artisan serve"),
 ]
 // swagger
 abstract class Controller
